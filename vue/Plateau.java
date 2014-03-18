@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package london;
+package vue;
 import java.awt.*;
 import javax.swing.*;
 
