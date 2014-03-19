@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -16,30 +17,27 @@ public class test {
 		try {
 				
 			/* Récupération du classeur Excel (en lecture) */
-			Workbook workbook = Workbook.getWorkbook(new File("F:/workspace/LectureExcel/src/fichier/Carte.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File("F:/workspace/ProjetLondon/src/fichier/Carte.xls"));
 			
 			/* Un fichier excel est composé de plusieurs feuilles, on y accède de la manière suivante*/
 			Sheet sheet = workbook.getSheet(0);
-			
-			/* On accède aux cellules avec la méthode getCell(indiceColonne, indiceLigne) */
-			Cell a1 = sheet.getCell(0,0); 
-			
-			/* On peut également le faire avec getCell(nomCellule) */
-			Cell c5 = sheet.getCell("A2");
-			
-			/* On peut récupérer le contenu d'une cellule en utilisant la méthode getContents() */
-			String contenuA1= a1.getContents();
-			String contenuC5 = c5.getContents();
-			
-			//System.out.println(contenuA1);
-			//System.out.println(contenuC5);
+			Cell a1,a2,a3;
+			ArrayList<Carte> test = new ArrayList<Carte>();
 			for(int i=2;i<21;i++){
-				for( int j=0;j<=12;j++){
-					a1 = sheet.getCell(j,i);
-					contenuA1= a1.getContents();
-					System.out.print(contenuA1+" " );
-				}
-				System.out.println("");
+				test.add(new Constructible(
+						sheet.getCell(0,i).getContents(),
+						sheet.getCell(1,i).getContents(),
+						sheet.getCell(2,i).getContents(),
+						Integer.parseInt(sheet.getCell(3,i).getContents()),
+						new String[]{sheet.getCell(5,i).getContents(),sheet.getCell(6,i).getContents()},
+						Integer.parseInt(sheet.getCell(4,i).getContents()),
+						new int[]{Integer.parseInt(sheet.getCell(7,i).getContents()),Integer.parseInt(sheet.getCell(8,i).getContents()),Integer.parseInt(sheet.getCell(9,i).getContents())},
+						sheet.getCell(10,i).getContents(),
+						sheet.getCell(11,i).getContents(),
+						Boolean.parseBoolean(sheet.getCell(12,i).getContents()),
+						Boolean.parseBoolean(sheet.getCell(13,i).getContents())
+						));
+				System.out.println(test.get(i-2));
 			}
 			
 		} catch (FileNotFoundException e) {
