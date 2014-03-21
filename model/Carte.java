@@ -3,7 +3,7 @@ package model;
 public abstract class Carte {
 
 	private String nom; //nom de la carte
-	private String couleur; //couleur de la carte {bleu,marron,rose ou grise}
+	private String couleur; //couleur de la carte {bleue, marron,rose ou grise}
 	private String categorie; //catégorie de la carte {A,B ou C}
 
 	//Constructor
