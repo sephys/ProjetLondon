@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
@@ -26,7 +27,7 @@ public class Main {
 	 * de cartes, le joueur va piocher 6 cartes dans le Deck. 
 	 * @param d	Deck dans lequel le joueur va piocher 6 cartes.
 	 */
-	public Main(Deck d){
+	public Main(ArrayDeque<Carte> d){
 		this.cartesBleues = new ArrayList<Carte>();
 		this.cartesRoses = new ArrayList<Carte>();
 		this.cartesBrunes = new ArrayList<Carte>();
@@ -47,7 +48,7 @@ public class Main {
 	 * @throws ColourNotFoundException	Exception déclenchée si la couleur demandée 
 	 * 									n'existe pas.
 	 */
-	public void piocher(Deck d) throws ColourNotFoundException{
+	public void piocher(ArrayDeque<Carte> d) throws ColourNotFoundException{
 		Carte c = d.pollFirst();				// Récupération de la première carte du Deck
 		String couleur = c.getCouleur();			// Récupération de la couleur de cette carte
 		if(couleur.compareTo("bleue") == 0){			// Ajout dans la bonne liste
