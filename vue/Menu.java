@@ -38,7 +38,7 @@ public class Menu extends JPanel{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Fichier pas trouvé !");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
     }
     
