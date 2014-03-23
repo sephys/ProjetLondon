@@ -6,17 +6,17 @@ import java.util.HashMap;
 public class Joueur {
 
 	private String nom;
-	private Main main;
+	private ArrayList<Carte> main;
 	private HashMap<String,Integer> pouvoir;
 	private int pointVictoire;
 	private int pointPauvrete;
 	private int argent;
 	private int nbPret; 
-	
-	
+
+
 	public Joueur(String nom){
 		this.nom=nom;
-		this.main=new Main();
+		this.main=new ArrayList <Carte>();
 		this.pouvoir=new HashMap<String,Integer>();
 		this.pointVictoire=0;
 		this.argent= 5;
@@ -35,12 +35,12 @@ public class Joueur {
 	}
 
 
-	public Main getMain() {
+	public ArrayList<Carte> getMain() {
 		return main;
 	}
 
 
-	public void setMain(Main main) {
+	public void setMain(ArrayList<Carte> main) {
 		this.main = main;
 	}
 
@@ -93,8 +93,30 @@ public class Joueur {
 	public void setNbPret(int nbPret) {
 		this.nbPret = nbPret;
 	}
-	
+
 	public void piocheCarte(Deck d){
-		this.main.addCarte(d.poll());
+		Carte e =d.poll();
+		if(main.isEmpty()){
+			this.main.add(e);
+		}else{
+			Carte temp;
+			int i=0;
+			boolean arret=false;
+			while(i<this.main.size()&&!arret){
+				temp=this.main.get(i);
+				if(temp.getCouleur().compareTo(e.getCouleur())==0){
+					if(i<this.main.size()-1){
+						this.main.add(i+1,e);
+					}else{
+						this.main.add(e);
+					}
+					arret=true;
+				}
+				i++;
+			}
+			if(!arret){
+				this.main.add(e);
+			}
+		}
 	}
 }

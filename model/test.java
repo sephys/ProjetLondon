@@ -21,11 +21,12 @@ public class test {
 
 
 		//Initialisation des zones
-		String zonesAdjacentes[] = { "Hackey", "Bethnal Green", "Southwark", "St. Pancras", "St. Marylebone", "Islington" };
+		/*String zonesAdjacentes[] = { "Hackey", "Bethnal Green", "Southwark", "St. Pancras", "St. Marylebone", "Islington" };
 		Zone z = new Zone("City", 8, 4, 6, true, true, false, zonesAdjacentes);
 		System.out.println("Zone :");
-		System.out.println(z);	
+		System.out.println(z);	*/
 		initialisationJeu(d);
+		System.out.println("fin");
 	}
 
 	private static LinkedList<Joueur> initialisationJeu(Deck d) {
@@ -34,22 +35,21 @@ public class test {
 		int nb=sc.nextInt();
 		Joueur [] t= new Joueur[nb];
 		String nom="toto";
-		Carte tmpCarte;
-		for(int i=0;i<nb*6;i++){
-			tmpCarte=d.poll();
+		int fin=nb*6;
+		System.out.println(fin);
+		for(int i=0;i<fin;i++){
 			switch(i%nb){
 			case 0 :
 				if(t [0]==null){
 					System.out.println("Entrer le nom du premier Joueur");
 					nom=sc.next();
 					t[0]=new Joueur(nom);
-
 				}
 				t[0].piocheCarte(d);
 				break;
 			case 1:
 				if(t [1]==null){
-					System.out.println("Entrer le nom du premier Joueur");
+					System.out.println("Entrer le nom du second Joueur");
 					nom=sc.next();
 					t[1]=new Joueur(nom);
 
@@ -59,16 +59,16 @@ public class test {
 
 			case 2:
 				if(t [2]==null){
-					System.out.println("Entrer le nom du premier Joueur");
+					System.out.println("Entrer le nom du troisième Joueur");
 					nom=sc.next();
-					t[1]=new Joueur(nom);
+					t[2]=new Joueur(nom);
 
 				}
 				t[2].piocheCarte(d);
 				break;
 			case 3:
 				if(t [3]==null){
-					System.out.println("Entrer le nom du premier Joueur");
+					System.out.println("Entrer le nom du dernier Joueur");
 					nom=sc.next();
 					t[3]=new Joueur(nom);
 
@@ -77,12 +77,15 @@ public class test {
 				break;
 			}
 		}
-		LinkedList <Joueur> lJoueur = new LinkedList<Joueur>();
+		for(int i=0;i<nb;i++){
+			System.out.println(t[i].getMain());
+		}
+		/*LinkedList <Joueur> lJoueur = new LinkedList<Joueur>();
 		//choix hasard premier joueur
 		int indice=(int) (Math.random()*(nb-1)); //borne [0.. nbjoueur-1]
 		for(int i=0;i<nb;i++){
 			//implementer structure cyclique
-		}
+		}*/
 		return null;
 		// TODO Auto-generated method stub
 
