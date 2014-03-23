@@ -32,6 +32,7 @@ public class Plateau extends JPanel implements MouseListener {
         estZoome=false;
         updateImageSizeDezoom();
         this.addMouseListener(this);
+       
     }
  
     public void setZoom() {
@@ -68,14 +69,15 @@ public class Plateau extends JPanel implements MouseListener {
         return new Dimension(imageWidth, imageHeight);
     }
  
-        public void paint(Graphics g) {
-        super.paint(g);
+    @Override
+        public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         g.drawImage(image, 0, 0, imageWidth, imageHeight, this);
     }
- 
+    // main inutile je fais des test avec  
     public static void main(String[] args) {
  
- 
+            
         
             /*JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

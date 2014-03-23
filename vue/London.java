@@ -13,10 +13,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -41,12 +43,12 @@ public class London {
  
             JTabbedPane panel = new JTabbedPane();
             
-            Plateau imagePanel=null;
+            Plateau plateau=null;
             try
             {
                URL uri = Menu.class.getResource("../img/plateau.png");
                Image image = ImageIO.read(uri);
-               imagePanel = new Plateau(image);
+               plateau = new Plateau(image);
 
             }
             catch (IOException e1) {
@@ -54,10 +56,17 @@ public class London {
             e1.printStackTrace();
             }
             // ajout d'un onglet :
-            panel.addTab("plateau",new JScrollPane(imagePanel));
             
+            
+            panel.addTab("plateau",new JScrollPane(plateau));
+            
+            // ajout bouton :
+            plateau.setLayout(null);
+            JButton jb=new JButton("plop");
+            jb.setBounds(300, 150, 50, 50);
+            plateau.add(jb);
  
-            frame.add(panel);
+            frame.setContentPane(panel);
  
  
             frame.setSize(820,820);
