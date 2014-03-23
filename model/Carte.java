@@ -33,5 +33,7 @@ public abstract class Carte {
 	}
 	public abstract void jouerCarte();
 
-
+	public String toString(){
+		return new String(this.nom);
+	}
 }

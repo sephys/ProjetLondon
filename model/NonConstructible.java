@@ -6,7 +6,7 @@ public class NonConstructible extends Carte {
 
 	public NonConstructible(String nom, String couleur, String categorie, String pouvoir) {
 		super(nom, couleur, categorie);
-		this.pouvoir=pouvoir;
+		this.setPouvoir(pouvoir);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -14,6 +14,14 @@ public class NonConstructible extends Carte {
 	public void jouerCarte() {
 		// TODO Auto-generated method stub
 		//a faire plus tard.
+	}
+
+	public String getPouvoir() {
+		return pouvoir;
+	}
+
+	public void setPouvoir(String pouvoir) {
+		this.pouvoir = pouvoir;
 	}
 
 }
