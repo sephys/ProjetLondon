@@ -25,11 +25,10 @@ public class test {
 		Zone z = new Zone("City", 8, 4, 6, true, true, false, zonesAdjacentes);
 		System.out.println("Zone :");
 		System.out.println(z);	*/
-		initialisationJeu(d);
-		System.out.println("fin");
+		TourJoueur tj =initialisationJeu(d);
 	}
 
-	private static LinkedList<Joueur> initialisationJeu(Deck d) {
+	private static TourJoueur initialisationJeu(Deck d) {
 		System.out.println("Combien de joueur ?");
 		Scanner sc= new Scanner(System.in);
 		int nb=sc.nextInt();
@@ -78,15 +77,63 @@ public class test {
 			}
 		}
 		for(int i=0;i<nb;i++){
-			System.out.println(t[i].getMain());
+			ArrayList<Carte> temp=t[i].getMain();
+			for(Carte a : temp){
+				System.out.print(a.getCouleur()+", ");
+			}
+			System.out.println("");
 		}
-		/*LinkedList <Joueur> lJoueur = new LinkedList<Joueur>();
 		//choix hasard premier joueur
 		int indice=(int) (Math.random()*(nb-1)); //borne [0.. nbjoueur-1]
+		System.out.println(indice);
+		TourJoueur first = null;
+		TourJoueur tmp=null;
 		for(int i=0;i<nb;i++){
 			//implementer structure cyclique
-		}*/
-		return null;
+			TourJoueur current;
+			switch((indice+i)%nb){
+			case 0 :
+				current=new TourJoueur(t[0]);
+				if(tmp!=null){
+					tmp.setSuivant(current);
+				}else{
+					first=current;
+				}
+				tmp=current;
+				break;
+			case 1:
+				current=new TourJoueur(t[1]);
+				if(tmp!=null){
+					tmp.setSuivant(current);
+				}else{
+					first=current;
+				}
+				tmp=current;
+				break;
+
+			case 2:
+				current=new TourJoueur(t[2]);
+				if(tmp!=null){
+					tmp.setSuivant(current);
+				}else{
+					first=current;
+				}
+				tmp=current;
+				break;
+			case 3:
+				current=new TourJoueur(t[3]);
+				if(tmp!=null){
+					tmp.setSuivant(current);
+				}else{
+					first=current;
+				}
+				tmp=current;
+				break;
+			}
+			
+		}
+		tmp.setSuivant(first);
+		return first;
 		// TODO Auto-generated method stub
 
 	}
