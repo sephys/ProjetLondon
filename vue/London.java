@@ -7,6 +7,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -31,13 +33,14 @@ public class London {
             
     }
     
+    // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
             JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
-            JPanel panel = new JPanel();
-            panel.setLayout(new BorderLayout());
+            JTabbedPane panel = new JTabbedPane();
+            
             Plateau imagePanel=null;
             try
             {
@@ -50,11 +53,11 @@ public class London {
             // TODO Auto-generated catch block
             e1.printStackTrace();
             }
-            panel.add(new JScrollPane(imagePanel), BorderLayout.CENTER);
+            // ajout d'un onglet :
+            panel.addTab("plateau",new JScrollPane(imagePanel));
+            
  
-         
- 
-            frame.setContentPane(panel);
+            frame.add(panel);
  
  
             frame.setSize(820,820);

@@ -76,8 +76,8 @@ public class Plateau extends JPanel implements MouseListener {
     public static void main(String[] args) {
  
  
-        try {
-            JFrame frame = new JFrame();
+        
+            /*JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
             JPanel panel = new JPanel();
@@ -94,11 +94,15 @@ public class Plateau extends JPanel implements MouseListener {
             frame.setSize(820,820);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
- 
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+            */
+            JFrame f=new JFrame();
+            JTabbedPane pt=new JTabbedPane();
+            pt.addTab("plp", new JPanel());
+            pt.addTab("plop",new JPanel());
+            f.add(pt);
+            f.setVisible(true);
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            
  
  
     }
