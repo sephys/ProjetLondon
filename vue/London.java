@@ -7,8 +7,10 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -39,7 +41,9 @@ public class London {
             Plateau imagePanel=null;
             try
             {
-               imagePanel = new Plateau(ImageIO.read(new File("./../img/plateau.png")));
+               URL uri = Menu.class.getResource("../img/plateau.png");
+               Image image = ImageIO.read(uri);
+               imagePanel = new Plateau(image);
 
             }
             catch (IOException e1) {

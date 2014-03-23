@@ -22,12 +22,12 @@ import javax.swing.*;
  */
 public class Plateau extends JPanel implements MouseListener {
  
-    private BufferedImage image;
+    private Image image;
     private int imageWidth;
     private int imageHeight;
     private boolean estZoome;
  
-    public Plateau(BufferedImage image) {
+    public Plateau(Image image) {
         this.image=image;
         estZoome=false;
         updateImageSizeDezoom();
