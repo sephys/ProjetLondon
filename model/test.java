@@ -21,6 +21,7 @@ public class test {
                 Etalage e = new Etalage(5);
                 e.addCarte(d.poll());
                 for(int i=0;i<5;i++){
+                    System.out.println("bla");
                     if(e.getLigne1()[i]!=null){
                         System.out.println(e.getLigne1()[i]);
                     }

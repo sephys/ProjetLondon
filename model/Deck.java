@@ -1,5 +1,6 @@
 package model;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,29 +13,29 @@ import jxl.read.biff.BiffException;
 
 public class Deck extends ArrayDeque<Carte> {
 	
-	//Constructeur du deck qui va récuperer l'ensemble des information dans un fichier .xls
+	//Constructeur du deck qui va rï¿½cuperer l'ensemble des information dans un fichier .xls
 	public Deck(){
 		try {
-			/* Récupération du classeur Excel (en lecture) */
+			/* Rï¿½cupï¿½ration du classeur Excel (en lecture) */
 			Workbook workbook = Workbook.getWorkbook(new File("../ProjetLondon/src/fichier/Carte.xls"));
 
-			/* Un fichier excel est composé de plusieurs feuilles, on récupère la première, celle qui nous intéresse*/
+			/* Un fichier excel est composï¿½ de plusieurs feuilles, on rï¿½cupï¿½re la premiï¿½re, celle qui nous intï¿½resse*/
 			Sheet sheet = workbook.getSheet(0);
 
 			
-			ArrayList<Carte> carteA= new ArrayList<Carte>(); 	//création de la première ArrayList qui va contenir les cartes de catégorieA
-			ArrayList<Carte> carteB= new ArrayList<Carte>();	//création de la seconde ArrayList qui va contenir les cartes de catégorieB
-			ArrayList<Carte> carteC= new ArrayList<Carte>();	//création de la dernière ArrayList qui va contenir les cartes de catégorieC
+			ArrayList<Carte> carteA= new ArrayList<Carte>(); 	//crï¿½ation de la premiï¿½re ArrayList qui va contenir les cartes de catï¿½gorieA
+			ArrayList<Carte> carteB= new ArrayList<Carte>();	//crï¿½ation de la seconde ArrayList qui va contenir les cartes de catï¿½gorieB
+			ArrayList<Carte> carteC= new ArrayList<Carte>();	//crï¿½ation de la derniï¿½re ArrayList qui va contenir les cartes de catï¿½gorieC
 			
 			//Parcour du fichier
 			for(int i=2;i<78;i++){
 				
-				int nb=Integer.parseInt(sheet.getCell(14,i).getContents());	//on récupère le nombre de carte semblable (exemple il y a deux carte Water works dans le jeu)
-				String type=sheet.getCell(15,i).getContents();				//on récupère le "type" de la carte (C : constructible N : Non Constructible)
+				int nb=Integer.parseInt(sheet.getCell(14,i).getContents());	//on rï¿½cupï¿½re le nombre de carte semblable (exemple il y a deux carte Water works dans le jeu)
+				String type=sheet.getCell(15,i).getContents();				//on rï¿½cupï¿½re le "type" de la carte (C : constructible N : Non Constructible)
 				Carte c = null;
-				for (int j=1;j<=nb;j++){									//On créer ensuite autant de carte de même nom
+				for (int j=1;j<=nb;j++){									//On crï¿½er ensuite autant de carte de mï¿½me nom
 					switch(type){											//on switch dans le type correspondant pour construire la carte avec le bon constructeur
-					case "C" :												//construction de la carte avec tout les paramètres nécessaire
+					case "C" :												//construction de la carte avec tout les paramï¿½tres nï¿½cessaire
 						c=new Constructible(
 								sheet.getCell(0,i).getContents(),
 								sheet.getCell(1,i).getContents(),
@@ -51,7 +52,7 @@ public class Deck extends ArrayDeque<Carte> {
 
 								break;
 						case "N" :
-							c=new NonConstructible(							//construction de la carte avec tout les paramètres nécessaire
+							c=new NonConstructible(							//construction de la carte avec tout les paramï¿½tres nï¿½cessaire
 									sheet.getCell(0,i).getContents(),
 									sheet.getCell(1,i).getContents(),
 									sheet.getCell(2,i).getContents(),
@@ -74,12 +75,12 @@ public class Deck extends ArrayDeque<Carte> {
 				}
 				
 			}
-				//création du deck final					
+				//crï¿½ation du deck final					
 				int indice;
 				while(!carteA.isEmpty()){ 								//tant que l'ArrayList n'est pas vite
-					indice=(int) (Math.random()*carteA.size()-1);		//on détermine un indice aléatoire entre [0;carteA.size()-1]
-					this.add(carteA.get(indice));						//on récupère la carte et on l'ajoute a la fin de ce deck
-					carteA.remove(indice);								//on retire l'élément de la liste
+					indice=(int) (Math.random()*carteA.size()-1);		//on dï¿½termine un indice alï¿½atoire entre [0;carteA.size()-1]
+					this.add(carteA.get(indice));						//on rï¿½cupï¿½re la carte et on l'ajoute a la fin de ce deck
+					carteA.remove(indice);								//on retire l'ï¿½lï¿½ment de la liste
 				}
 				while(!carteB.isEmpty()){
 					indice=(int) (Math.random()*carteB.size()-1);
@@ -104,3 +105,4 @@ public class Deck extends ArrayDeque<Carte> {
 	}
 
 }
+
