@@ -18,16 +18,23 @@ public class test {
 		//mï¿½lange du deck;
 		System.out.println(d.size());
 
-
+                Etalage e = new Etalage(5);
+                e.addCarte(d.poll());
+                for(int i=0;i<5;i++){
+                    if(e.getLigne1()[i]!=null){
+                        System.out.println(e.getLigne1()[i]);
+                    }
+                }
 
 		//Initialisation des zones
+                
 		/*String zonesAdjacentes[] = { "Hackey", "Bethnal Green", "Southwark", "St. Pancras", "St. Marylebone", "Islington" };
 		Zone z = new Zone("City", 8, 4, 6, true, true, false, zonesAdjacentes);
 		System.out.println("Zone :");
 		System.out.println(z);	*/
-		TourJoueur tj =initialisationJeu(d);
+		/*TourJoueur tj =initialisationJeu(d);*/
 	}
-
+            
 	private static TourJoueur initialisationJeu(Deck d) {
 		System.out.println("Combien de joueur ?");
 		Scanner sc= new Scanner(System.in);
@@ -58,7 +65,7 @@ public class test {
 
 			case 2:
 				if(t [2]==null){
-					System.out.println("Entrer le nom du troisième Joueur");
+					System.out.println("Entrer le nom du troisiï¿½me Joueur");
 					nom=sc.next();
 					t[2]=new Joueur(nom);
 
