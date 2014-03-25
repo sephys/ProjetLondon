@@ -94,28 +94,28 @@ public class Joueur {
 		this.nbPret = nbPret;
 	}
 
-	public void piocheCarte(Deck d){
-		Carte e =d.poll();
-		if(main.isEmpty()){
-			this.main.add(e);
+	public void piocheCarte(Deck d){ 	//pioche et ajout de la carte dans la main
+		Carte e =d.poll(); 				//on récupère la première carte du deck
+		if(main.isEmpty()){ 
+			this.main.add(e);			//si lamain est vide on ajoute la carte directement
 		}else{
-			Carte temp;
+			Carte temp;					
 			int i=0;
 			boolean arret=false;
-			while(i<this.main.size()&&!arret){
+			while(i<this.main.size()&&!arret){ //sinon on parcour la main
 				temp=this.main.get(i);
-				if(temp.getCouleur().compareTo(e.getCouleur())==0){
-					if(i<this.main.size()-1){
+				if(temp.getCouleur().compareTo(e.getCouleur())==0){ //dès que l'on trouve une carte de la même couleur
+					if(i<this.main.size()-1){ //si on est pas à la fin de la main, on ajoute la carte pioché après la carte courante
 						this.main.add(i+1,e);
 					}else{
-						this.main.add(e);
+						this.main.add(e); //sinon on ajoute la carte a la fin
 					}
-					arret=true;
+					arret=true; //on sort de la boucle
 				}
 				i++;
 			}
-			if(!arret){
-				this.main.add(e);
+			if(!arret){ //dans le cas ou on n'as trouvé aucune carte dans la main de la même couleur qe la carte pioché
+				this.main.add(e); //on ajoute la carte a la fin
 			}
 		}
 	}
