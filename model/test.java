@@ -19,13 +19,31 @@ public class test {
 		System.out.println(d.size());
 
                 Etalage e = new Etalage(5);
+                
+                //Ajout de 11 cartes
                 e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                e.addCarte(d.poll());
+                
                 for(int i=0;i<5;i++){
                     if(e.getLigne1()[i]!=null){
-                        System.out.println(e.getLigne1()[i]);
+                        System.out.println("Ligne 1 : "+e.getLigne1()[i]);
                     }
                 }
-
+                    
+                for(int i=0;i<5;i++){
+                    if(e.getLigne1()[i]!=null){
+                        System.out.println("Ligne 2 : "+e.getLigne2()[i]);
+                    }
+                }
 		//Initialisation des zones
                 
 		/*String zonesAdjacentes[] = { "Hackey", "Bethnal Green", "Southwark", "St. Pancras", "St. Marylebone", "Islington" };

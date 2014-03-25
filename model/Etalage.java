@@ -39,15 +39,19 @@ public class Etalage {
         if(this.isFull(this.ligne1)){
             if(this.isFull(this.ligne2)){
                   this.ligne1 = this.ligne2.clone();
+                  this.ligne2 = new Carte[this.ligne2.length];
                   this.ligne2[0] = carte;
             }
             else{
                 int i=0;
                 boolean array=false;
-                while(i<this.ligne2.length && array==true){
-                    if(this.ligne2[i] != null)
+                while(i<this.ligne2.length && array==false){
+                    if(this.ligne2[i] == null){
                         array=true;
-                    i++;
+                    }
+                    else{
+                        i++;
+                    }
                 }
                 this.ligne2[i] = carte;
             }
@@ -55,10 +59,13 @@ public class Etalage {
         else{
             int i=0;
             boolean array=false;
-              while(i<this.ligne1.length && array==true){
-                    if(this.ligne1[i] != null)
+              while(i<this.ligne1.length && array==false){
+                    if(this.ligne1[i] == null){
                         array=true;
-                    i++;
+                    }
+                    else{
+                        i++;
+                    }
                 }
             this.ligne1[i] = carte;
         }
@@ -68,8 +75,9 @@ public class Etalage {
        boolean res=true;
        int i=0;
        while(i<tab.length && res==true){
-           if(tab[i]==null)
-           res=false;
+           if(tab[i]==null){
+                res=false;
+           }
             i++;
         }
        return res;
