@@ -6,7 +6,6 @@
 
 package model;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -90,19 +89,6 @@ public class Etalage {
             i++;
         }
        return res;
-    }
-    public String toString(){
-    	StringBuffer tmpStr=new StringBuffer();
-    	for(int i=0;i<this.ligne1.length;i++){
-    		tmpStr.append(ligne1[i]);
-    		tmpStr.append(" ");
-    	}
-    	for(int i=0;i<this.ligne2.length;i++){
-    		tmpStr.append(ligne2[i]);
-    		tmpStr.append(" ");
-    	}
-		return new String(tmpStr);
-    	
     }
     
 }

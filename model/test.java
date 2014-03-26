@@ -158,6 +158,7 @@ public class test {
 			
 		}
 		tmp.setSuivant(first);
+		sc.close();
 		return first;
 		// TODO Auto-generated method stub
 

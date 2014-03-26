@@ -33,6 +33,7 @@ public class TestEtalage {
 		Scanner sc =new Scanner(System.in);
 		int nb=sc.nextInt();
 		et=new Etalage(nb);
+		sc.close();
 	}
 
 	@After
@@ -47,11 +48,6 @@ public class TestEtalage {
 			et.addCarte(d.poll());
 		}
 		assertEquals(true, et.isFull(et.getLigne1()));
-		assertEquals(false, et.isFull(et.getLigne2()));
-		for(int i=0;i<et.getLigne2().length;i++){
-			et.addCarte(d.poll());
-		}
-		assertEquals(true, et.isFull(et.getLigne2()));
 	}
 	
 	@Test
