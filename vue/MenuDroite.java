@@ -9,6 +9,8 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 /**
@@ -41,6 +43,17 @@ public class MenuDroite extends JPanel{
         main.add(new JButton("Restaurer la ville"));
         main.add(new JButton("Investir"));
         main.add(new JButton("Prendre trois cartes"));
+        JButton jb = new JButton("Piocher");
+        jb.addMouseListener(new MouseAdapter(){
+
+            @Override
+            public void mouseClicked(MouseEvent e) {                
+                JPMain.ajoutCarte();
+                System.out.println("connard");
+            }
+            
+        });
+        main.add(jb);
         this.add(main,BorderLayout.NORTH);
         
         JPZoom zoom=new JPZoom();
