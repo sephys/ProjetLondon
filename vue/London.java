@@ -6,19 +6,16 @@
 
 package vue;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Image;
-import java.io.File;
+
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
+import javax.swing.*;
+
 
 /**
  *
@@ -29,8 +26,10 @@ public class London {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
-       
+    
+    static JFrame frame;
+    public static void main(String[] args)  {
+      
         start();
             
     }
@@ -38,7 +37,7 @@ public class London {
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
-            JFrame frame = new JFrame();
+             frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
             JTabbedPane panel = new JTabbedPane();
@@ -46,32 +45,61 @@ public class London {
             Plateau plateau=null;
             try
             {
-               URL uri = Menu.class.getResource("../img/plateau.png");
+               URL uri = London.class.getResource("../img/plateau.png");
                Image image = ImageIO.read(uri);
                plateau = new Plateau(image);
 
             }
             catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            
             }
+            
+            
             // ajout d'un onglet :
             
-            
             panel.addTab("plateau",new JScrollPane(plateau));
+            panel.addTab("plop",new JPanel());
             
             // ajout bouton :
             plateau.setLayout(null);
             JButton jb=new JButton("plop");
-            jb.setBounds(300, 150, 50, 50);
+            
+            //listener test enter
+            jb.addMouseListener(new MouseAdapter(){
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    JPZoom.setImg("../img/plateau.png");
+                    
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    JPZoom.setImg("../img/cartes/LePauvre.png");
+                    
+                }
+                
+            }
+            );
+        
+    
+            
+            
+            jb.setBounds(900, 400, 50, 50);
             plateau.add(jb);
  
-            frame.setContentPane(panel);
+            frame.add(panel);
+            
+            MenuDroite menudroite=new MenuDroite();
+            
+            frame.add(menudroite,BorderLayout.EAST);
  
- 
-            frame.setSize(820,820);
+            frame.setSize(1000,820);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+            
+        
     }
     
 }
+
