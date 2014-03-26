@@ -59,6 +59,7 @@ public class London {
             
             
             panel.addTab("plateau",new JScrollPane(plateau));
+            panel.addTab("Main", new JPMain());
             
             // ajout bouton :
             plateau.setLayout(null);
