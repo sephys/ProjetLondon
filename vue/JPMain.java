@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -23,13 +24,7 @@ public class JPMain extends JPanel {
     private JPanel main;
     
     public JPMain(){
-        super();
-        JSPMain = new JScrollPane();
-        main = new JPanel(new FlowLayout(20));
-        main.setBackground(Color.red);
-        this.setPreferredSize(new Dimension(820, 308));
-        JSPMain.add(main);
-        this.add(JSPMain, BorderLayout.NORTH);
+       
     }
     
     
