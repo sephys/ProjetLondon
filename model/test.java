@@ -10,47 +10,16 @@ public class test {
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
-		//cr�ation du deck
+		//création du deck
 		Deck d=new Deck();
-		for(Carte a: d){
-			System.out.println("Categorie : "+a.getCategorie()+" Nom : "+a.getNom());
-		}
-		//m�lange du deck;
-		System.out.println(d.size());
-
-                Etalage e = new Etalage(5);
-                
-                //Ajout de 11 cartes
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                
-                for(int i=0;i<5;i++){
-                    if(e.getLigne1()[i]!=null){
-                        System.out.println("Ligne 1 : "+e.getLigne1()[i]);
-                    }
-                }
-                    
-                for(int i=0;i<5;i++){
-                    if(e.getLigne1()[i]!=null){
-                        System.out.println("Ligne 2 : "+e.getLigne2()[i]);
-                    }
-                }
+		TourJoueur tj =initialisationJeu(d);
 		//Initialisation des zones
                 
 		/*String zonesAdjacentes[] = { "Hackey", "Bethnal Green", "Southwark", "St. Pancras", "St. Marylebone", "Islington" };
 		Zone z = new Zone("City", 8, 4, 6, true, true, false, zonesAdjacentes);
 		System.out.println("Zone :");
 		System.out.println(z);	*/
-		/*TourJoueur tj =initialisationJeu(d);*/
+		
 	}
             
 	private static TourJoueur initialisationJeu(Deck d) {
@@ -60,7 +29,6 @@ public class test {
 		Joueur [] t= new Joueur[nb];
 		String nom="toto";
 		int fin=nb*6;
-		System.out.println(fin);
 		for(int i=0;i<fin;i++){
 			switch(i%nb){
 			case 0 :
@@ -158,7 +126,6 @@ public class test {
 			
 		}
 		tmp.setSuivant(first);
-		sc.close();
 		return first;
 		// TODO Auto-generated method stub
 

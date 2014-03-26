@@ -103,8 +103,8 @@ public class Joueur {
 			boolean arret=false;
 			while(i<this.main.size()&&!arret){ //sinon on parcour la main
 				temp=this.main.get(i);
-				if(temp.getCouleur().compareTo(e.getCouleur())==0){ //dès que l'on trouve une carte de la même couleur
-					if(i<this.main.size()-1){ //si on est pas à la fin de la main, on ajoute la carte pioché après la carte courante
+				if(temp.getCouleur().compareTo(e.getCouleur())==0){ //dï¿½s que l'on trouve une carte de la mï¿½me couleur
+					if(i<this.main.size()-1){ //si on est pas ï¿½ la fin de la main, on ajoute la carte piochï¿½ aprï¿½s la carte courante
 						this.main.add(i+1,e);
 					}else{
 						this.main.add(e); //sinon on ajoute la carte a la fin
@@ -113,9 +113,26 @@ public class Joueur {
 				}
 				i++;
 			}
-			if(!arret){ //dans le cas ou on n'as trouvé aucune carte dans la main de la même couleur qe la carte pioché
+			if(!arret){ //dans le cas ou on n'as trouvï¿½ aucune carte dans la main de la mï¿½me couleur qe la carte piochï¿½
 				this.main.add(e); //on ajoute la carte a la fin
 			}
 		}
+	}
+	
+	public boolean peutInvestir(Zone z){
+		boolean res=true;
+		if(this.argent<z.getPrix()){
+			res=false;
+		}
+		return res;
+	}
+	public boolean acheterZone(Zone z){
+		boolean res=peutInvestir(z);
+		if(res){
+			z.setProprietaire(this);
+			this.setArgent(this.getArgent()-z.getPrix());
+			this.setPointVictoire(this.getPointVictoire()+z.getPointsVictoire());
+		}
+		return res;
 	}
 }

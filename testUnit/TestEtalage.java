@@ -33,7 +33,7 @@ public class TestEtalage {
 		Scanner sc =new Scanner(System.in);
 		int nb=sc.nextInt();
 		et=new Etalage(nb);
-		sc.close();
+		//sc.close();
 	}
 
 	@After
