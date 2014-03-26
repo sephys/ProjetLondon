@@ -6,6 +6,8 @@
 
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author FT
@@ -14,25 +16,32 @@ public class Etalage {
     private Carte[] ligne1;
     private Carte[] ligne2;
 
-    public Etalage(int nbcartes) {
-        this.ligne1 = new Carte[nbcartes];
-        this.ligne2 = new Carte[nbcartes];
+    public Etalage(int nbcolonne) {
+        this.ligne1 = new Carte[nbcolonne];
+        this.ligne2 = new Carte[nbcolonne];
     }
 
     public Carte[] getLigne1() {
         return ligne1;
     }
 
-    public void setLigne1(Carte[] ligne1) {
-        this.ligne1 = ligne1;
-    }
-
     public Carte[] getLigne2() {
         return ligne2;
     }
-
-    public void setLigne2(Carte[] ligne2) {
-        this.ligne2 = ligne2;
+    
+    public Carte piocheCarte(int ligne,int indice){
+    	Carte res=null;
+    	switch(ligne){
+    	case 1:
+    		res=ligne1[indice];
+    		ligne1[indice]=null;
+    		break;
+    	case 2:
+    		res= ligne2[indice];
+    		ligne2[indice]=null;
+    		break;
+    	}
+    	return res;
     }
 
     public void addCarte(Carte carte){        
@@ -81,6 +90,19 @@ public class Etalage {
             i++;
         }
        return res;
+    }
+    public String toString(){
+    	StringBuffer tmpStr=new StringBuffer();
+    	for(int i=0;i<this.ligne1.length;i++){
+    		tmpStr.append(ligne1[i]);
+    		tmpStr.append(" ");
+    	}
+    	for(int i=0;i<this.ligne2.length;i++){
+    		tmpStr.append(ligne2[i]);
+    		tmpStr.append(" ");
+    	}
+		return new String(tmpStr);
+    	
     }
     
 }

@@ -69,7 +69,7 @@ public class test {
 					nom=sc.next();
 					t[0]=new Joueur(nom);
 				}
-				t[0].piocheCarte(d);
+				t[0].piocheCarte(d.poll());
 				break;
 			case 1:
 				if(t [1]==null){
@@ -78,7 +78,7 @@ public class test {
 					t[1]=new Joueur(nom);
 
 				}
-				t[1].piocheCarte(d);
+				t[1].piocheCarte(d.poll());
 				break;
 
 			case 2:
@@ -88,7 +88,7 @@ public class test {
 					t[2]=new Joueur(nom);
 
 				}
-				t[2].piocheCarte(d);
+				t[2].piocheCarte(d.poll());
 				break;
 			case 3:
 				if(t [3]==null){
@@ -97,7 +97,7 @@ public class test {
 					t[3]=new Joueur(nom);
 
 				}
-				t[3].piocheCarte(d);
+				t[3].piocheCarte(d.poll());
 				break;
 			}
 		}

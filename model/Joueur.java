@@ -94,8 +94,7 @@ public class Joueur {
 		this.nbPret = nbPret;
 	}
 
-	public void piocheCarte(Deck d){ 	//pioche et ajout de la carte dans la main
-		Carte e =d.poll(); 				//on récupère la première carte du deck
+	public void piocheCarte(Carte e){ 	//ajout de la carte dans la main
 		if(main.isEmpty()){ 
 			this.main.add(e);			//si lamain est vide on ajoute la carte directement
 		}else{
