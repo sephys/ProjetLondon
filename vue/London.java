@@ -58,7 +58,11 @@ public class London {
             // ajout d'un onglet :
             
             panel.addTab("plateau",new JScrollPane(plateau));
+
             panel.addTab("plop",new JPanel());
+
+            panel.addTab("Main", new JPMain());
+
             
             // ajout bouton :
             plateau.setLayout(null);
