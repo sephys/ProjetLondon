@@ -9,6 +9,7 @@ package vue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -22,6 +23,7 @@ public class JBCarte extends JButton implements ActionListener{
 
     public JBCarte(Image image) {
         this.image = image;
+        this.setIcon(new ImageIcon(image));
     }
     
         
