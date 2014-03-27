@@ -1,28 +1,34 @@
 package model;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 
 public class test {
-
+	
+	private Deck deck;
+	private TourJoueur lJoueur;
+	private Etalage defausse;
+	private HashMap <String,Zone> plateau;
+	
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
 		//création du deck
 		Deck d=new Deck();
-		TourJoueur tj =initialisationJeu(d);
-		//Initialisation des zones
-                
-		/*String zonesAdjacentes[] = { "Hackey", "Bethnal Green", "Southwark", "St. Pancras", "St. Marylebone", "Islington" };
-		Zone z = new Zone("City", 8, 4, 6, true, true, false, zonesAdjacentes);
-		System.out.println("Zone :");
-		System.out.println(z);	*/
+		//création de toutes les zones
+		Plateau plateau=new Plateau();
+		//initialisation structure cyclique joueur;
+		TourJoueur tj =initialisationJoueur(d);
+		//initialisation Etalage
+		Etalage etalage=new Etalage(tj.getNbJoueur()+1);
 		
 	}
             
-	private static TourJoueur initialisationJeu(Deck d) {
+	private static TourJoueur initialisationJoueur(Deck d) {
 		System.out.println("Combien de joueur ?");
 		Scanner sc= new Scanner(System.in);
 		int nb=sc.nextInt();

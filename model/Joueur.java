@@ -126,6 +126,7 @@ public class Joueur {
 		}
 		return res;
 	}
+	
 	public boolean acheterZone(Zone z){
 		boolean res=peutInvestir(z);
 		if(res){
