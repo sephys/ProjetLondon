@@ -19,7 +19,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import sun.awt.image.ImageAccessException;
 
 /**
  *
@@ -53,6 +52,7 @@ public class JPMain extends JPanel {
 
     }
     
+    // ajout d'une carte dans le panel
     public static void ajoutCarte(){
         try {
             URL uri = JPMain.class.getResource("../img/cartes/LePauvre.png");

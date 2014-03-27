@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 /**
  *
  * @author Joke
+ * panel contenant le zoom de la carte
  */
 public class JPZoom extends JPanel{
     

@@ -15,6 +15,7 @@ import javax.swing.JButton;
 /**
  *
  * @author Anh-Djuy
+ * Bouton représentant une carte
  */
 public class JBCarte extends JButton implements ActionListener{
 

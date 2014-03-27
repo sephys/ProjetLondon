@@ -13,6 +13,6 @@ import javax.swing.*;
  * @Vue
  * Représentage l'étalage
  */
-public class Etalage extends JFrame{
+public class Etalage extends JPanel{
     
 }

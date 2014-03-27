@@ -50,16 +50,11 @@ public class Plateau extends JPanel implements MouseListener {
     }
  
     private void updateImageSizeZoom() {
-        /*
-        imageWidth=(int) (image.getWidth()*zoom);
-        imageHeight=(int) (image.getHeight()*zoom);
-        */
         imageWidth=1200;
         imageHeight=1073;
     }
     
-    private void updateImageSizeDezoom() {
-        
+    private void updateImageSizeDezoom() {   
         imageWidth=675;
         imageHeight=588;
     }
@@ -74,41 +69,7 @@ public class Plateau extends JPanel implements MouseListener {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, imageWidth, imageHeight, this);
     }
-    // main inutile je fais des test avec  
-    public static void main(String[] args) {
- 
-            
         
-            /*JFrame frame = new JFrame();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-            JPanel panel = new JPanel();
-            panel.setLayout(new BorderLayout());
- 
-            Plateau imagePanel = new Plateau(ImageIO.read(new File("/Users/Joke/NetBeansProjects/London/src/london/img/plateau.png")));
-            panel.add(new JScrollPane(imagePanel), BorderLayout.CENTER);
- 
-         
- 
-            frame.setContentPane(panel);
- 
- 
-            frame.setSize(820,820);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-            */
-            JFrame f=new JFrame();
-            JTabbedPane pt=new JTabbedPane();
-            pt.addTab("plp", new JPanel());
-            pt.addTab("plop",new JPanel());
-            f.add(pt);
-            f.setVisible(true);
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            
- 
- 
-    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getClickCount()==2)
