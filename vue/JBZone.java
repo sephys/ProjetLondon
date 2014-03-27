@@ -14,7 +14,7 @@ import javax.swing.*;
 /**
  *
  * @author Joke
- * Boutton disponible sur le plateau pour chaque zones.
+ * Boutton disponible sur le plateau pour chaque zone.
  */
 public class JBZone extends JButton implements ActionListener{
     

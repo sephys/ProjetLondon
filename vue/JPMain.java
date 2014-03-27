@@ -23,6 +23,7 @@ import javax.swing.JScrollPane;
 /**
  *
  * @author Anh-Djuy
+ * 
  */
 public class JPMain extends JPanel {
     
