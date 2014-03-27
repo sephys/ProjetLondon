@@ -35,7 +35,6 @@ public class JPMain extends JPanel {
         super(new BorderLayout());
         main = new JPanel(new FlowLayout());
         main.setBackground(Color.red);
-        main.setPreferredSize(new Dimension(820,290));
         JSPMain = new JScrollPane(main);
         JSPMain.setPreferredSize(new Dimension(820,308));
         this.add(JSPMain, BorderLayout.NORTH);
@@ -51,6 +50,7 @@ public class JPMain extends JPanel {
             Logger.getLogger(JPMain.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+
     }
     
     public static void ajoutCarte(){
@@ -58,6 +58,7 @@ public class JPMain extends JPanel {
             URL uri = JPMain.class.getResource("../img/cartes/LePauvre.png");
             Image image = ImageIO.read(uri);
             main.add(new JBCarte(image));
+            main.revalidate();
         } catch (IOException ex) {
             Logger.getLogger(JPMain.class.getName()).log(Level.SEVERE, null, ex);
         }

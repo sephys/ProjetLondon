@@ -49,7 +49,6 @@ public class MenuDroite extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {                
                 JPMain.ajoutCarte();
-                System.out.println("connard");
             }
             
         });

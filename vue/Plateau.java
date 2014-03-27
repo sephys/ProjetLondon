@@ -55,13 +55,13 @@ public class Plateau extends JPanel implements MouseListener {
         imageHeight=(int) (image.getHeight()*zoom);
         */
         imageWidth=1200;
-        imageHeight=1200;
+        imageHeight=1073;
     }
     
     private void updateImageSizeDezoom() {
         
-        imageWidth=800;
-        imageHeight=800;
+        imageWidth=675;
+        imageHeight=588;
     }
  
     @Override

@@ -22,25 +22,19 @@ import javax.swing.*;
  * @author Joke
  */
 public class London {
-
-    /**
-     * @param args the command line arguments
-     */
     
-    static JFrame frame;
+    static JFrame frame; // fenêtre principale
     public static void main(String[] args)  {
-      
-        start();
-            
+        start();   
     }
     
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
-             frame = new JFrame();
+            frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
-            JTabbedPane panel = new JTabbedPane();
+            JTabbedPane panelOnglet = new JTabbedPane();
             
             Plateau plateau=null;
             try
@@ -48,20 +42,17 @@ public class London {
                URL uri = London.class.getResource("../img/plateau.png");
                Image image = ImageIO.read(uri);
                plateau = new Plateau(image);
-
             }
             catch (IOException e1) {
-            
             }
             
             
             // ajout d'un onglet :
-            
-            panel.addTab("plateau",new JScrollPane(plateau));
+            panelOnglet.addTab("plateau",new JScrollPane(plateau));
 
-            panel.addTab("plop",new JPanel());
+            panelOnglet.addTab("plop",new JPanel());
 
-            panel.addTab("Main", new JPMain());
+            panelOnglet.addTab("Main", new JPMain());
 
             
             // ajout bouton :
@@ -92,13 +83,20 @@ public class London {
             jb.setBounds(900, 400, 50, 50);
             plateau.add(jb);
  
-            frame.add(panel);
+            JPanel p=new JPanel(new BorderLayout());
+            JPanel south=new JPanel();
+            south.setBackground(Color.blue);
+            south.setPreferredSize(new Dimension(1000,150));
+            p.add(panelOnglet,BorderLayout.CENTER);
+            p.add(south,BorderLayout.SOUTH);
+            
+            frame.add(p);
             
             MenuDroite menudroite=new MenuDroite();
             
             frame.add(menudroite,BorderLayout.EAST);
  
-            frame.setSize(1000,820);
+            frame.setSize(1000,810);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
             
