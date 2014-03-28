@@ -77,5 +77,9 @@ public class TestEtalage {
 		assertEquals(et.getLigne1()[1],et.piocheCarte(1, 1));
 		assertEquals(et.getLigne2()[0],et.piocheCarte(2, 0));
 	}
+        
+        public static void main(String args[]){
+            
+        }
 
 }
