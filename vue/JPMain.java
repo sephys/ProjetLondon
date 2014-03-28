@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  *  
@@ -38,7 +39,9 @@ public class JPMain extends JPanel {
         main = new JPanel(new FlowLayout());
         main.setBackground(Color.red);
         JSPMain = new JScrollPane(main);
-        JSPMain.setPreferredSize(new Dimension(675,131));
+        JSPMain.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        JSPMain.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JSPMain.setPreferredSize(new Dimension(675,140));
         this.add(JSPMain, BorderLayout.NORTH);
     }
     
