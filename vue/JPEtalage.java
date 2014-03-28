@@ -8,6 +8,8 @@ package vue;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -36,6 +38,7 @@ public class JPEtalage extends JPanel{
         }
         this.setLayout(null);
         initEtalage(5);
+        
            
     }
     
@@ -54,13 +57,19 @@ public class JPEtalage extends JPanel{
         {
             JPanel eta1=new JPanel(); // panel haut
             eta1.setBounds(26+134*i, 13, 90, 138);
-            eta1.setBackground(Color.red);
+            
             this.add(eta1);
+            // D&D
+            DropTarget dropTarget1 = new DropTarget(eta1, DnDConstants.ACTION_MOVE, 
+                London.dndListener);
             
             JPanel eta2=new JPanel(); // panel bas
             eta2.setBounds(26+134*i, 181, 90, 138);
-            eta2.setBackground(Color.red);
+            
             this.add(eta2);
+            // D&D
+            DropTarget dropTarget2 = new DropTarget(eta2, DnDConstants.ACTION_MOVE, 
+                London.dndListener);
         }
         
     }

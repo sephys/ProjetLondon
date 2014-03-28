@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -40,6 +42,9 @@ public class JPMain extends JPanel {
         JSPMain = new JScrollPane(main);
         JSPMain.setPreferredSize(new Dimension(675,131));
         this.add(JSPMain, BorderLayout.NORTH);
+        //// D&D
+        DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
+                London.dndListener);
     }
     
     // ajout d'une carte dans le panel

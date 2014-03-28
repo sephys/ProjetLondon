@@ -8,6 +8,7 @@ package vue;
 
 
 import java.awt.*;
+import java.awt.dnd.DragSource;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -24,7 +25,16 @@ import javax.swing.*;
 public class London {
     
     static JFrame frame; // fenêtre principale
+    
+    // pour le drag & drop
+    static DragDrop dndListener;
+    static DragSource dragSource;
     public static void main(String[] args)  {
+       
+       // D&D 
+       dndListener = new DragDrop();
+       dragSource=new DragSource();
+       
         start();   
     }
     
