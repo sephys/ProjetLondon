@@ -1,12 +1,13 @@
 package model;
 
 public class TourJoueur {
-	
+	private static int nbJoueur=0;
 	private Joueur joueur;
 	private TourJoueur suivant;
 	
 	
 	public TourJoueur(Joueur joueur) {
+		nbJoueur++;
 		this.joueur = joueur;
 	}
 
@@ -30,4 +31,14 @@ public class TourJoueur {
 		this.suivant = suivant;
 	}
 
+
+	public static int getNbJoueur() {
+		return nbJoueur;
+	}
+
+
+	public static void setNbJoueur(int nbJoueur) {
+		TourJoueur.nbJoueur = nbJoueur;
+	}
+	
 }

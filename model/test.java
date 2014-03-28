@@ -1,66 +1,40 @@
 package model;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 
 public class test {
-
+	
+	private Deck deck;
+	private TourJoueur lJoueur;
+	private Etalage defausse;
+	private HashMap <String,Zone> plateau;
+	
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
-		//cr�ation du deck
+		//création du deck
 		Deck d=new Deck();
-		for(Carte a: d){
-			System.out.println("Categorie : "+a.getCategorie()+" Nom : "+a.getNom());
-		}
-		//m�lange du deck;
-		System.out.println(d.size());
-
-                Etalage e = new Etalage(5);
-                
-                //Ajout de 11 cartes
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                e.addCarte(d.poll());
-                
-                for(int i=0;i<5;i++){
-                    if(e.getLigne1()[i]!=null){
-                        System.out.println("Ligne 1 : "+e.getLigne1()[i]);
-                    }
-                }
-                    
-                for(int i=0;i<5;i++){
-                    if(e.getLigne1()[i]!=null){
-                        System.out.println("Ligne 2 : "+e.getLigne2()[i]);
-                    }
-                }
-		//Initialisation des zones
-                
-		/*String zonesAdjacentes[] = { "Hackey", "Bethnal Green", "Southwark", "St. Pancras", "St. Marylebone", "Islington" };
-		Zone z = new Zone("City", 8, 4, 6, true, true, false, zonesAdjacentes);
-		System.out.println("Zone :");
-		System.out.println(z);	*/
-		/*TourJoueur tj =initialisationJeu(d);*/
+		//création de toutes les zones
+		Plateau plateau=new Plateau();
+		//initialisation structure cyclique joueur;
+		TourJoueur tj =initialisationJoueur(d);
+		//initialisation Etalage
+		Etalage etalage=new Etalage(tj.getNbJoueur()+1);
+		
 	}
             
-	private static TourJoueur initialisationJeu(Deck d) {
+	private static TourJoueur initialisationJoueur(Deck d) {
 		System.out.println("Combien de joueur ?");
 		Scanner sc= new Scanner(System.in);
 		int nb=sc.nextInt();
 		Joueur [] t= new Joueur[nb];
 		String nom="toto";
 		int fin=nb*6;
-		System.out.println(fin);
 		for(int i=0;i<fin;i++){
 			switch(i%nb){
 			case 0 :
@@ -69,7 +43,7 @@ public class test {
 					nom=sc.next();
 					t[0]=new Joueur(nom);
 				}
-				t[0].piocheCarte(d);
+				t[0].piocheCarte(d.poll());
 				break;
 			case 1:
 				if(t [1]==null){
@@ -78,7 +52,7 @@ public class test {
 					t[1]=new Joueur(nom);
 
 				}
-				t[1].piocheCarte(d);
+				t[1].piocheCarte(d.poll());
 				break;
 
 			case 2:
@@ -88,7 +62,7 @@ public class test {
 					t[2]=new Joueur(nom);
 
 				}
-				t[2].piocheCarte(d);
+				t[2].piocheCarte(d.poll());
 				break;
 			case 3:
 				if(t [3]==null){
@@ -97,7 +71,7 @@ public class test {
 					t[3]=new Joueur(nom);
 
 				}
-				t[3].piocheCarte(d);
+				t[3].piocheCarte(d.poll());
 				break;
 			}
 		}

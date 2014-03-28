@@ -6,9 +6,7 @@
 
 package model;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,10 +21,13 @@ public class Zone {
     private boolean zoneRouge;
     private boolean adjacentTamise;
     private boolean dessousTamise;
-    private Set<Zone> zonesAdjacentes;
+    private ArrayList<String> zonesAdjacentes;
+    private Joueur proprietaire;
 
     
-    public Zone(String nom, int prix, int nbCartes, int pointsVictoire, boolean zoneRouge, boolean adjacentTamise, boolean dessousTamise, String[] zonesAdjacentes) {
+   
+
+	public Zone(String nom, int prix, int nbCartes, int pointsVictoire, boolean zoneRouge, boolean adjacentTamise, boolean dessousTamise, ArrayList <String> zonesAdjacentes) {
         this.nom = nom;
         this.prix = prix;
         this.nbCartes = nbCartes;
@@ -34,7 +35,8 @@ public class Zone {
         this.zoneRouge = zoneRouge;
         this.adjacentTamise = adjacentTamise;
         this.dessousTamise = dessousTamise;
-        this.zonesAdjacentes = new HashSet(Arrays.asList(zonesAdjacentes));
+        this.zonesAdjacentes = zonesAdjacentes;
+        this.proprietaire=null;
     }
 
     public String getNom() {
@@ -93,14 +95,22 @@ public class Zone {
         this.dessousTamise = dessousTamise;
     }
 
-    public Set<Zone> getZonesAdjacentes() {
-        return zonesAdjacentes;
-    }
+     
+    public ArrayList<String> getZonesAdjacentes() {
+		return zonesAdjacentes;
+	}
 
-    public void setZonesAdjacentes(Set<Zone> zonesAdjacentes) {
-        this.zonesAdjacentes = zonesAdjacentes;
-    }
-    
+	public void setZonesAdjacentes(ArrayList<String> zonesAdjacentes) {
+		this.zonesAdjacentes = zonesAdjacentes;
+	}
+
+	public Joueur getProprietaire() {
+		return proprietaire;
+	}
+
+	public void setProprietaire(Joueur proprietaire) {
+		this.proprietaire = proprietaire;
+	}
     @Override
     public String toString(){
         return this.nom+" [prix : "+this.prix+", nbCartes : "+this.nbCartes+", pointsVictoire : "+this.pointsVictoire+", ";
