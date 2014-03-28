@@ -105,10 +105,5 @@ public class Zone {
     public String toString(){
         return this.nom+" [prix : "+this.prix+", nbCartes : "+this.nbCartes+", pointsVictoire : "+this.pointsVictoire+", ";
     }
-
-
-    
-
-
-    
+ 
 }
