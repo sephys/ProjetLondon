@@ -84,9 +84,10 @@ public class London {
             plateau.add(jb);
  
             JPanel p=new JPanel(new BorderLayout());
-            JPanel south=new JPanel();
+            JPanel south=new JPMain();
             south.setBackground(Color.blue);
-            south.setPreferredSize(new Dimension(1000,150));
+            //south.setPreferredSize(new Dimension(1000,150));
+            //south.add(new JPMain());
             p.add(panelOnglet,BorderLayout.CENTER);
             p.add(south,BorderLayout.SOUTH);
             
