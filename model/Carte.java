@@ -4,13 +4,15 @@ public abstract class Carte {
 
 	private String nom; //nom de la carte
 	private String couleur; //couleur de la carte {bleue, marron,rose ou grise}
-	private String categorie; //catégorie de la carte {A,B ou C}
+	private String categorie; //catï¿½gorie de la carte {A,B ou C}
+        private String path;
 
 	//Constructor
-	public Carte(String nom, String couleur, String categorie) {
+	public Carte(String nom, String couleur, String categorie, String path) {
 		this.nom = nom;
 		this.couleur = couleur;
 		this.categorie = categorie;
+                this.path = path;
 	}
 
 	public String getNom() {
@@ -36,4 +38,10 @@ public abstract class Carte {
 	public String toString(){
 		return new String(this.nom);
 	}
+        public String getPath(){
+            return this.path;
+        }
+        public void setPath(String path){
+            this.path = path;
+        }
 }

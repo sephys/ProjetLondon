@@ -9,6 +9,11 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -22,7 +27,19 @@ public class Menu extends JPanel{
 
     public Menu(){
         this.setLayout(new BorderLayout());
-        image = getToolkit().getImage("/Users/Joke/NetBeansProjects/London/src/london/img/menu.png");
+        //image = getToolkit().getImage("../img/menu.png");
+        try {
+			URL uri = Menu.class.getResource("../img/menu.png");
+			image = ImageIO.read(uri);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Pas bonne URL !");
+			//e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Fichier pas trouv� !");
+			//e.printStackTrace();
+		}
     }
     
     @Override

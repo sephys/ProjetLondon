@@ -26,6 +26,7 @@ public class test {
 		//initialisation Etalage
 		Etalage etalage=new Etalage(tj.getNbJoueur()+1);
 		
+
 	}
             
 	private static TourJoueur initialisationJoueur(Deck d) {

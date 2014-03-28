@@ -2,6 +2,11 @@ package vue;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /*
@@ -27,10 +32,15 @@ public class Frame extends JFrame{
         this.setVisible(true);
     }
     
-    public void start(){
-        
-        this.setContentPane(new Plateau());
-        this.setVisible(true);
+    public void start() throws IOException{
+        /*
+        JPanel panel=new JPanel(new BorderLayout());
+        ZoomTest p=new ZoomTest(ImageIO.read(new File("/Users/Joke/NetBeansProjects/London/src/london/img/plateau.png")));
+        panel.add(new JScrollPane(p), BorderLayout.CENTER);
+        this.setContentPane(panel);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);*/
+                
     }
     
     public void getMenu(){
@@ -42,7 +52,11 @@ public class Frame extends JFrame{
         jb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                start();
+                try {
+                    start();
+                } catch (IOException ex) {
+                    Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         

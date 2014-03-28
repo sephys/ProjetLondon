@@ -14,16 +14,16 @@ public class Constructible extends Carte {
 	//gains lors de l'activation de la carte :
 	//[1] gain en argent >=0
 	//[2] gain en points de victoire >=0
-	//[3] gain en points de pauvreté
+	//[3] gain en points de pauvretï¿½
 	private int [] gainAcivation= new int[3];
 
 	private String pouvoirIlli; //pouvoir persisatant de la carte
 	private String pouvoirActiv;//pouvoir lors de l'activation de la carte
-	private boolean aRetourne; //true si la carte est a retourné après activation sinon false
-	private boolean activable ;//true si la carte peu être activé sinon false
+	private boolean aRetourne; //true si la carte est a retournï¿½ aprï¿½s activation sinon false
+	private boolean activable ;//true si la carte peu ï¿½tre activï¿½ sinon false
 
 	public Constructible(String nom, String couleur, String categorie) {
-		super(nom, couleur, categorie);
+		super(nom, couleur, categorie,"");
 
 		// TODO Auto-generated constructor stub
 	}
@@ -32,7 +32,7 @@ public class Constructible extends Carte {
 			int coutPose, String[] coutActivation, int pointsVictoirePose,
 			int[] gainAcivation, String pouvoirIlli, String pouvoirActiv,
 			boolean aRetourne, boolean activable) {
-		super(nom, couleur, categorie);
+		super(nom, couleur, categorie,"");
 		this.coutPose = coutPose;
 		this.coutActivation = coutActivation;
 		this.pointsVictoirePose = pointsVictoirePose;
