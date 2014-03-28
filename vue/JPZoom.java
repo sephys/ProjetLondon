@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 public class JPZoom extends JPanel{
     
     private static Image img; // image de fond = une carte
+   
     
     
     public JPZoom() 
@@ -37,6 +38,7 @@ public class JPZoom extends JPanel{
 
     public Image getImg() {
         return img;
+        
     }
 
     public static void setImg(String url)  {
