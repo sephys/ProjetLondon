@@ -5,6 +5,7 @@
  */
 
 package vue;
+import model.TourJoueur;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+
 /**
  *
  * @author Joke
@@ -26,6 +28,7 @@ import javax.swing.*;
 public class JPEtalage extends JPanel{
     
     private Image img; // image de l'étalage
+ 
     
     public JPEtalage()
     {   
@@ -37,7 +40,8 @@ public class JPEtalage extends JPanel{
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setLayout(null);
-        initEtalage(5);
+        
+        initEtalage(TourJoueur.getNbJoueur());
         
            
     }
@@ -53,11 +57,16 @@ public class JPEtalage extends JPanel{
     public void initEtalage(int nbJoueur)
     {
         
+            
         for(int i=0;i<5;i++)
         {
-            JPanel eta1=new JPanel(); // panel haut
+            JPanel eta1=new JPanel();
+          
+             // panel haut
+        
             eta1.setBounds(26+134*i, 13, 90, 138);
             
+            eta1.setOpaque(false); // transparance
             this.add(eta1);
             // D&D
             DropTarget dropTarget1 = new DropTarget(eta1, DnDConstants.ACTION_MOVE, 
@@ -65,6 +74,7 @@ public class JPEtalage extends JPanel{
             
             JPanel eta2=new JPanel(); // panel bas
             eta2.setBounds(26+134*i, 181, 90, 138);
+            eta2.setOpaque(false); // transparance
             
             this.add(eta2);
             // D&D
