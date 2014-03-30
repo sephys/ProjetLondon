@@ -49,13 +49,10 @@ public class JPMain extends JPanel {
     
     // ajout d'une carte dans le panel
     public static void ajoutCarte(){
-        try {
-            URL uri = JPMain.class.getResource("../img/cartes/CoventGarden.png");
-            Image image = ImageIO.read(uri);
-            main.add(new JBCarte(image));
+       
+            
+            main.add(new JBCarte("../img/cartes/CoventGarden.png"));
             main.revalidate();
-        } catch (IOException ex) {
-            Logger.getLogger(JPMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
     }
 }
