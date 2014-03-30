@@ -31,8 +31,10 @@ import javax.swing.JButton;
 public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     private Image image;
+    private String imagePath;
 
     public JBCarte(String imagePath) {
+        this.imagePath=imagePath;
         URL uri = JBCarte.class.getResource(imagePath); 
         try {
             image = ImageIO.read(uri);
@@ -43,6 +45,8 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
         this.setPreferredSize(new Dimension(77, 118));
         // D&D
         DragGestureRecognizer dragRecognizer1 = London.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, London.dndListener);
+        
+        this.addMouseListener(this);
     }
 
     @Override
@@ -88,7 +92,7 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        JPZoom.setImg("../img/cartes/LePauvre.png");
+        JPZoom.setImg(this.imagePath);
 
     }
 }

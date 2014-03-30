@@ -33,7 +33,7 @@ public class JPZoom extends JPanel{
     @Override
         public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this), this);
+        g.drawImage(img, 0, 0, 300, 400, this);
     }
 
     public Image getImg() {

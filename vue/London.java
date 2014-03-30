@@ -69,23 +69,7 @@ public class London {
             plateau.setLayout(null);
             JButton jb=new JButton("plop");
             
-            //listener test enter
-            jb.addMouseListener(new MouseAdapter(){
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    JPZoom.setImg("../img/plateau.png");
-                    
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    JPZoom.setImg("../img/cartes/LePauvre.png");
-                    
-                }
-                
-            }
-            );
+            
         
     
             
