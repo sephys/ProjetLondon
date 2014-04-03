@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,6 +9,7 @@ public class Joueur {
 	private String nom;
 	private ArrayList<Carte> main;
 	private HashMap<String,Integer> pouvoir;
+	private ArrayList<ArrayDeque<Carte>>listeChantier;
 	private int pointVictoire;
 	private int pointPauvrete;
 	private int argent;
@@ -22,6 +24,7 @@ public class Joueur {
 		this.argent= 5;
 		this.pointPauvrete=5;
 		this.nbPret=0;
+		this.listeChantier=new ArrayList(new ArrayDeque<Carte>());
 	}
 
 

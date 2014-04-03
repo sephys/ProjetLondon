@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -32,13 +34,13 @@ public class Plateau extends HashMap<String,Zone> {
 					tmpL.add(t[j]);
 				}
 				Zone tmpZ=new Zone(sheet.getCell(0,i).getContents(),
-									Integer.parseInt(sheet.getCell(1,i).getContents()),
-									Integer.parseInt(sheet.getCell(2,i).getContents()),
-									Integer.parseInt(sheet.getCell(3,i).getContents()),
-									Boolean.parseBoolean(sheet.getCell(4,i).getContents()),
-									Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
-									Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
-									tmpL);
+						Integer.parseInt(sheet.getCell(1,i).getContents()),
+						Integer.parseInt(sheet.getCell(2,i).getContents()),
+						Integer.parseInt(sheet.getCell(3,i).getContents()),
+						Boolean.parseBoolean(sheet.getCell(4,i).getContents()),
+						Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
+						Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
+						tmpL);
 				this.put(sheet.getCell(0,i).getContents(),tmpZ);
 			}
 
@@ -56,4 +58,16 @@ public class Plateau extends HashMap<String,Zone> {
 		}
 	}
 
+	public HashSet<String> zoneInvest(){
+		HashSet <String> res=new HashSet<String>();
+		Collection zone=this.values();
+		Zone currZ;
+			for(Object curr : zone){
+				currZ=(Zone)curr;
+				if(currZ.isActivable()&&currZ.getProprietaire()==null){
+					res.add(currZ.getNom());
+				}
+			}
+		return null;
+	}
 }
