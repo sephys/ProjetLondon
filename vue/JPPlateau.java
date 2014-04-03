@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vue;
-
+import model.Plateau;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -20,19 +19,27 @@ import javax.swing.*;
  *
  * @author Joke
  */
-public class Plateau extends JPanel implements MouseListener {
+public class JPPlateau extends JPanel implements MouseListener {
  
     private Image image;
     private int imageWidth;
     private int imageHeight;
     private boolean estZoome;
  
-    public Plateau(Image image) {
+    public JPPlateau(Image image) {
+        this.setLayout(null);
         this.image=image;
         estZoome=false;
         updateImageSizeDezoom();
         this.addMouseListener(this);
        
+    }
+    
+    public void initBouton(){
+        // ajout bouton :   
+        JButton jb=new JButton("plop");
+        jb.setBounds(900, 400, 50, 50);
+        this.add(jb);
     }
  
     public void setZoom() {
@@ -40,10 +47,12 @@ public class Plateau extends JPanel implements MouseListener {
         {
           updateImageSizeZoom();  
           estZoome=true;
+          initBouton();
         }
         else{
           updateImageSizeDezoom();  
           estZoome=false;
+          //enlever boutons
         }
         
         revalidate();
