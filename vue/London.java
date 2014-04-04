@@ -5,7 +5,7 @@
  */
 
 package vue;
-
+import model.Plateau;
 
 import java.awt.*;
 import java.awt.dnd.DragSource;
@@ -52,9 +52,11 @@ public class London {
                URL uri = London.class.getResource("../img/plateau.png");
                Image image = ImageIO.read(uri);
                plateau = new JPPlateau(image);
+              
             }
             catch (IOException e1) {
             }
+            
             
             
             // ajout d'un onglet :
