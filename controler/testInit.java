@@ -36,6 +36,7 @@ public class testInit {
 		System.out.println(lJoueur.getJoueur().getNom()+ "vous êtes le premier a jouer");
 		while(!finJeu){
 			Joueur currJ=lJoueur.getJoueur();
+			System.out.println(currJ.getNom());
 			currJ.piocheCarte(deck.poll());
 			menu();
 			int choix=sc.nextInt();
@@ -73,8 +74,12 @@ public class testInit {
 			case 3:
 				break;
 			case 4:
+				int i=3;
+				//while
 				break;
 			}
+			//currJ.finirTour();
+			lJoueur=lJoueur.getSuivant();
 		}
 
 	}
