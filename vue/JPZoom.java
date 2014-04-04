@@ -27,7 +27,7 @@ public class JPZoom extends JPanel{
     public JPZoom() 
     {
         super();
-        setImg("../img/plateau.png");
+        setImg("../img/cartes/Background.png");
     }
     
     @Override
