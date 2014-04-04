@@ -22,9 +22,9 @@ public class testInit {
 	public static void main(String[] args) {
 
 		// TODO Auto-generated method stub
-		//création du deck
+		//crÃ©ation du deck
 		deck=new Deck();
-		//création de toutes les zones
+		//crÃ©ation de toutes les zones
 		plateau=new Plateau();
 		//initialisation structure cyclique joueur;
 		lJoueur =initialisationJoueur(deck);
@@ -33,7 +33,7 @@ public class testInit {
 		Scanner sc=new Scanner(System.in);
 		boolean finJeu=false;
 		System.out.println("le jeu va commencer");
-		System.out.println(lJoueur.getJoueur().getNom()+ "vous ête le premier a jouer");
+		System.out.println(lJoueur.getJoueur().getNom()+ "vous êtes le premier a jouer");
 		while(!finJeu){
 			Joueur currJ=lJoueur.getJoueur();
 			currJ.piocheCarte(deck.poll());
@@ -44,10 +44,28 @@ public class testInit {
 				affichageZoneDispo();
 				System.out.println("Saisir le nom de la zone");
 				String z=sc.nextLine();
-				Zone invest=plateau.get(z);
-				while(!currJ.acheterZone(invest)){
+				z=sc.nextLine();
+				boolean annuler=false;
+				while(!currJ.acheterZone(z,plateau)&&!annuler){
 					System.out.println("Vous ne possedez pas assez d'argent");
+					System.out.println("Faire un prêt?");
+					String a=sc.nextLine();
+					switch(a){
+					case "oui" :
+						currJ.emprunt(10);
+						break;
+					case "non" :
+						annuler=true;
+						break;
+					}
 				}
+				if (annuler){
+					System.out.println("vous n'avez pas investi");
+				}else{
+					System.out.println("investissement réussi");
+					System.out.println(currJ);
+				}
+
 				break;
 			case 2:
 				break;
@@ -89,7 +107,7 @@ public class testInit {
 
 			case 2:
 				if(t [2]==null){
-					System.out.println("Entrer le nom du troisi�me Joueur");
+					System.out.println("Entrer le nom du troisiï¿½me Joueur");
 					nom=sc.next();
 					t[2]=new Joueur(nom);
 
@@ -183,4 +201,5 @@ public class testInit {
 			System.out.println(plateau.get(tmp));
 		}
 	}
+
 }

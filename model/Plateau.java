@@ -68,6 +68,6 @@ public class Plateau extends HashMap<String,Zone> {
 					res.add(currZ.getNom());
 				}
 			}
-		return null;
+		return res;
 	}
 }

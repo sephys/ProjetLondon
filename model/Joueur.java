@@ -129,15 +129,44 @@ public class Joueur {
 		}
 		return res;
 	}
-	
-	public boolean acheterZone(Zone z){
+
+	public boolean acheterZone(String zo, Plateau plateau) {
+		// TODO Auto-generated method stub
+		Zone z=plateau.get(zo);
 		boolean res=peutInvestir(z);
 		if(res){
 			z.setProprietaire(this);
 			this.setArgent(this.getArgent()-z.getPrix());
 			this.setPointVictoire(this.getPointVictoire()+z.getPointsVictoire());
 		}
+		for(String tmpZ : z.getZonesAdjacentes()){
+			System.out.println(tmpZ);
+			try{
+				plateau.get(tmpZ).setActivable(true);
+			}catch(NullPointerException e){
+				System.out.println("zone inexistante");
+			}
+		}
 		return res;
 	}
+
+	public void emprunt(int i) {
+		// TODO Auto-generated method stub
+		this.setNbPret(i%10);
+		this.setArgent(this.getArgent()+i);
+	}
         
+	public String toString(){
+		String res;
+		StringBuffer tmpRes=new StringBuffer("Joueur :");
+		tmpRes.append("\n"+this.getNom());
+		tmpRes.append("\n"+this.getMain());
+		tmpRes.append("\n"+this.getNbPret());
+		tmpRes.append("\n"+this.getArgent());
+		res=new String(tmpRes);
+		return res;
+	}
+
+
+	
 }
