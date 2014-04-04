@@ -46,6 +46,7 @@ public class testInit {
 				String z=sc.nextLine();
 				z=sc.nextLine();
 				boolean annuler=false;
+				System.out.println(plateau.keySet());
 				while(!currJ.acheterZone(z,plateau)&&!annuler){
 					System.out.println("Vous ne possedez pas assez d'argent");
 					System.out.println("Faire un prêt?");

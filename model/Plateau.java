@@ -27,7 +27,7 @@ public class Plateau extends HashMap<String,Zone> {
 			//Parcour du fichier
 			for(int i=1;i<21;i++){
 
-				String listZ=sheet.getCell(6,i).getContents();
+				String listZ=sheet.getCell(7,i).getContents();
 				String[] t=listZ.split(";");
 				ArrayList<String> tmpL = new ArrayList<String>();
 				for(int j=0;j<t.length;j++){

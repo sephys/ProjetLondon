@@ -121,7 +121,7 @@ public class Joueur {
 			}
 		}
 	}
-	
+
 	public boolean peutInvestir(Zone z){
 		boolean res=true;
 		if(this.argent<z.getPrix()){
@@ -138,13 +138,14 @@ public class Joueur {
 			z.setProprietaire(this);
 			this.setArgent(this.getArgent()-z.getPrix());
 			this.setPointVictoire(this.getPointVictoire()+z.getPointsVictoire());
-		}
-		for(String tmpZ : z.getZonesAdjacentes()){
-			System.out.println(tmpZ);
-			try{
-				plateau.get(tmpZ).setActivable(true);
-			}catch(NullPointerException e){
-				System.out.println("zone inexistante");
+			ArrayList <String> zoneAdjacente=z.getZonesAdjacentes();
+			System.out.println("Liste zone"+zoneAdjacente);
+			for(String tmpZ : zoneAdjacente){
+				try{
+					plateau.get(tmpZ).setActivable(true);
+				}catch(NullPointerException e){
+					System.out.println("zone inexistante");
+				}
 			}
 		}
 		return res;
@@ -155,7 +156,7 @@ public class Joueur {
 		this.setNbPret(i%10);
 		this.setArgent(this.getArgent()+i);
 	}
-        
+
 	public String toString(){
 		String res;
 		StringBuffer tmpRes=new StringBuffer("Joueur :");
@@ -168,5 +169,5 @@ public class Joueur {
 	}
 
 
-	
+
 }
