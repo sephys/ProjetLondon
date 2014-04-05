@@ -39,7 +39,7 @@ public abstract class Carte {
 	public void setPath(String path){
 		this.path = path;
 	}
-	public abstract void jouerCarte();
+	public abstract void jouerCarte(Joueur currJ, int jCarte);
 
 	public String toString(){
 		StringBuffer tmpStr=new StringBuffer("\n Nom : "+this.getNom());
@@ -47,5 +47,6 @@ public abstract class Carte {
 		tmpStr.append("\n Couleur : "+this.getCouleur());
 		return new String(tmpStr);
 	}
+
 
 }

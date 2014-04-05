@@ -162,6 +162,9 @@ public class Joueur {
 		this.setArgent(this.getArgent()+i);
 	}
 
+ 	public Carte getCarteMain(int index){
+ 		return this.main.get(index);
+ 	}
 	public String toString(){
 		String res;
 		StringBuffer tmpRes=new StringBuffer("Joueur :");

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 import model.Carte;
+import model.Constructible;
 import model.Deck;
 import model.Etalage;
 import model.Joueur;
@@ -72,6 +73,22 @@ public class testInit {
 				break;
 			case 2:
 				System.out.println(currJ.getMain());
+				boolean jouer=true;
+				while(jouer){
+					System.out.println("Quelle carte voulez vous jouez");
+					int jCarte=sc.nextInt();
+					jCarte=sc.nextInt();
+					Carte tmpCarte=currJ.getCarteMain(jCarte);
+					if(tmpCarte.getClass().equals(Constructible.class)){
+						afficherChantier();
+						System.out.println("sur quelle chantier?");
+						jCarte=sc.nextInt();
+						tmpCarte.jouerCarte(currJ,jCarte);
+					}else{
+						tmpCarte.jouerCarte(currJ, jCarte);
+					}
+				}
+				
 				break;
 			case 3:
 				break;
@@ -110,6 +127,11 @@ public class testInit {
 			lJoueur=finirTour(lJoueur);
 		}
 
+	}
+
+	private static void afficherChantier() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static TourJoueur finirTour(TourJoueur lJoueur2) {
