@@ -46,12 +46,12 @@ public class London {
  
             JTabbedPane panelOnglet = new JTabbedPane();
             
-            Plateau plateau=null;
+            JPPlateau plateau=null;
             try
             {
                URL uri = London.class.getResource("../img/plateau.png");
                Image image = ImageIO.read(uri);
-               plateau = new Plateau(image);
+               plateau = new JPPlateau(image);
             }
             catch (IOException e1) {
             }
@@ -62,20 +62,7 @@ public class London {
 
             panelOnglet.addTab("Etalage",new JPEtalage());
 
-            
-
-            
-            // ajout bouton :
-            plateau.setLayout(null);
-            JButton jb=new JButton("plop");
-            
-            
-        
-    
-            
-            
-            jb.setBounds(900, 400, 50, 50);
-            plateau.add(jb);
+          
  
             JPanel p=new JPanel(new BorderLayout());
             JPanel south=new JPMain();
