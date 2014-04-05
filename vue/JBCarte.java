@@ -86,7 +86,7 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        JPZoom.setImg("../img/plateau.png");
+        JPZoom.setImg("../img/cartes/Background.png");
 
     }
 

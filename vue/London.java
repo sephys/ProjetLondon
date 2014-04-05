@@ -5,10 +5,11 @@
  */
 
 package vue;
-
+import model.Plateau;
 
 import java.awt.*;
 import java.awt.dnd.DragSource;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 
 /**
@@ -29,21 +31,25 @@ public class London {
     // pour le drag & drop
     static DragDrop dndListener;
     static DragSource dragSource;
+    static JFrame acc;
     public static void main(String[] args)  {
        
        // D&D 
        dndListener = new DragDrop();
        dragSource=new DragSource();
        
-        start();   
+        menu();   
     }
     
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
-            frame = new JFrame();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
+           
+           acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+           acc.dispose();
+           frame=new JFrame();
+          
+           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             JTabbedPane panelOnglet = new JTabbedPane();
             
             JPPlateau plateau=null;
@@ -52,9 +58,11 @@ public class London {
                URL uri = London.class.getResource("../img/plateau.png");
                Image image = ImageIO.read(uri);
                plateau = new JPPlateau(image);
+              
             }
             catch (IOException e1) {
             }
+            
             
             
             // ajout d'un onglet :
@@ -78,11 +86,31 @@ public class London {
             
             frame.add(menudroite,BorderLayout.EAST);
  
-            frame.setSize(1000,810);
+            frame.setSize(1114,810);
+            
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
             
         
+    }
+    
+    // methode qui affiche le menu quand on lance l'application
+    public static void menu()
+    {
+        acc=new JFrame();
+  
+        acc.setTitle("London");
+        acc.setSize(570,810);
+        acc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        acc.setLayout(new BorderLayout());
+      
+        acc.setContentPane(new JPAccueil());
+
+       
+        acc.setLocationRelativeTo(null);
+        acc.setVisible(true);
+       
     }
     
 }

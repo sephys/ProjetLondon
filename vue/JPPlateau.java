@@ -37,9 +37,46 @@ public class JPPlateau extends JPanel implements MouseListener {
     
     public void initBouton(){
         // ajout bouton :   
-        JButton jb=new JButton("plop");
-        jb.setBounds(900, 400, 50, 50);
-        this.add(jb);
+        
+        JButton jb1=new JButton("investir");
+        jb1.setBounds(875, 405, 80, 30);
+        this.add(jb1);
+        
+                JButton jb2=new JButton("investir");
+        jb2.setBounds(625, 420, 80, 30);
+        this.add(jb2);
+        
+                JButton jb3=new JButton("investir");
+        jb3.setBounds(800, 200, 80, 30);
+        this.add(jb3);
+        
+                JButton jb4=new JButton("investir");
+        jb4.setBounds(590, 200, 80, 30);
+        this.add(jb4);
+        
+                JButton jb5=new JButton("investir");
+        jb5.setBounds(450, 305, 80, 30);
+        this.add(jb5);
+        
+                JButton jb6=new JButton("investir");
+        jb6.setBounds(275, 215, 80, 30);
+        this.add(jb6);
+        
+                JButton jb7=new JButton("investir");
+        jb7.setBounds(355, 390, 80, 30);
+        this.add(jb7);
+        
+                JButton jb8=new JButton("investir");
+        jb8.setBounds(625, 420, 80, 30);
+        this.add(jb8);
+        
+                JButton jb9=new JButton("investir");
+        jb9.setBounds(625, 420, 80, 30);
+        this.add(jb9);
+        
+                JButton jb10=new JButton("investir");
+        jb10.setBounds(625, 420, 80, 30);
+        this.add(jb10);
     }
  
     public void setZoom() {
