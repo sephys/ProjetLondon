@@ -34,6 +34,7 @@ public class testInit {
 		boolean finJeu=false;
 		System.out.println("le jeu va commencer");
 		System.out.println(lJoueur.getJoueur().getNom()+ "vous êtes le premier a jouer");
+		
 		while(!finJeu){
 			Joueur currJ=lJoueur.getJoueur();
 			System.out.println(currJ.getNom());
@@ -70,18 +71,61 @@ public class testInit {
 
 				break;
 			case 2:
+				System.out.println(currJ.getMain());
 				break;
 			case 3:
 				break;
 			case 4:
-				int i=3;
-				//while
+				int i=0;
+				while(i<3){
+					System.out.println("Dans quelle zone voulez vous piochez une carte?");
+					System.out.println("1 : Etalage");
+					System.out.println("2 : Deck");
+					int choixPioche=sc.nextInt();
+					boolean annule=false;
+					switch(choixPioche){
+						case 1 :
+							annule=defausse.isEmpty();
+							if(!annule){
+								System.out.println(defausse);
+								System.out.println("choix carte");
+								int lCarte=sc.nextInt();
+								int cCarte=sc.nextInt();
+								currJ.piocheCarte(defausse.piocheCarte(lCarte,cCarte));
+							}else{
+								System.out.println("il n'y a aucune carte dans l'etalage");
+							}
+							break;
+						case 2 :
+							currJ.piocheCarte(deck.poll());
+							break;
+					}
+					if(!annule){
+						i++;
+					}
+					
+				}
 				break;
 			}
-			//currJ.finirTour();
-			lJoueur=lJoueur.getSuivant();
+			lJoueur=finirTour(lJoueur);
 		}
 
+	}
+
+	private static TourJoueur finirTour(TourJoueur lJoueur2) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		Joueur tmpJ=lJoueur2.getJoueur();
+		while(tmpJ.getMain().size()>9){
+			System.out.println("Vous ne devez pas avoir plus de 9 cartes dans votre main");
+			System.out.println("Quelle carte voulez vous jeter dans l'étalage");
+			System.out.println(tmpJ.getMain());
+			int lCarte=sc.nextInt();
+			Carte cJeter=tmpJ.getMain().get(lCarte);
+			tmpJ.getMain().remove(cJeter);
+			defausse.addCarte(cJeter);
+		}
+		return lJoueur2.getSuivant();
 	}
 
 	private static TourJoueur initialisationJoueur(Deck d) {
@@ -130,13 +174,6 @@ public class testInit {
 				t[3].piocheCarte(d.poll());
 				break;
 			}
-		}
-		for(int i=0;i<nb;i++){
-			ArrayList<Carte> temp=t[i].getMain();
-			for(Carte a : temp){
-				System.out.print(a.getCouleur()+", ");
-			}
-			System.out.println("");
 		}
 		//choix hasard premier joueur
 		int indice=(int) (Math.random()*(nb-1)); //borne [0.. nbjoueur-1]

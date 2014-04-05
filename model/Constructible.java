@@ -113,4 +113,10 @@ public class Constructible extends Carte {
 
 	}
 
+	public String toString(){
+		StringBuffer tmpStr=new StringBuffer(super.toString());
+		tmpStr.append("\n Cout : "+this.getCoutPose());
+		tmpStr.append("\n Pouvoir : "+this.getPouvoirIlli()+"\n");
+		return new String(tmpStr);
+	}
 }

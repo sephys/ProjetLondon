@@ -23,5 +23,9 @@ public class NonConstructible extends Carte {
 	public void setPouvoir(String pouvoir) {
 		this.pouvoir = pouvoir;
 	}
+	
+	public String toString(){
+		return new String(super.toString()+"\n Pouvoir : "+this.getPouvoir()+"\n");
+	}
 
 }

@@ -9,7 +9,7 @@ public class Joueur {
 	private String nom;
 	private ArrayList<Carte> main;
 	private HashMap<String,Integer> pouvoir;
-	private ArrayList<ArrayDeque<Carte>>listeChantier;
+	private ArrayList<ArrayDeque<Constructible>>listeChantier;
 	private int pointVictoire;
 	private int pointPauvrete;
 	private int argent;
@@ -24,7 +24,7 @@ public class Joueur {
 		this.argent= 5;
 		this.pointPauvrete=5;
 		this.nbPret=0;
-		this.listeChantier=new ArrayList(new ArrayDeque<Carte>());
+		this.listeChantier=new ArrayList(new ArrayDeque<Constructible>());
 	}
 
 
@@ -122,7 +122,7 @@ public class Joueur {
 		}
 	}
 
-	public boolean peutInvestir(Zone z){
+	public boolean peutInvestir(Zone z){ //verification si le joueur possde assez d'argent
 		boolean res=true;
 		if(this.argent<z.getPrix()){
 			res=false;
@@ -130,7 +130,7 @@ public class Joueur {
 		return res;
 	}
 
-	public boolean acheterZone(String zo, Plateau plateau) {
+	public boolean acheterZone(String zo, Plateau plateau) { // a vérifier petit pb
 		// TODO Auto-generated method stub
 		Zone z=plateau.get(zo);
 		boolean res=peutInvestir(z);
@@ -151,7 +151,12 @@ public class Joueur {
 		return res;
 	}
 
-	public void emprunt(int i) {
+	public void nouveauChantier(){ //ajoute un nouveau chantier
+		this.listeChantier.add(new ArrayDeque<Constructible>());
+	}
+	
+	
+ 	public void emprunt(int i) {
 		// TODO Auto-generated method stub
 		this.setNbPret(i%10);
 		this.setArgent(this.getArgent()+i);
@@ -168,6 +173,5 @@ public class Joueur {
 		return res;
 	}
 
-
-
 }
+
