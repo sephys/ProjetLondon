@@ -18,7 +18,6 @@ public class testInit {
 	private static Deck deck;
 	private static TourJoueur lJoueur;
 	private static Etalage defausse;
-	private static Plateau plateau;
 
 	public static void main(String[] args) {
 
@@ -26,7 +25,6 @@ public class testInit {
 		//crÃ©ation du deck
 		deck=new Deck();
 		//crÃ©ation de toutes les zones
-		plateau=new Plateau();
 		//initialisation structure cyclique joueur;
 		lJoueur =initialisationJoueur(deck);
 		//initialisation Etalage

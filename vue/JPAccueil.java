@@ -22,7 +22,6 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import model.Deck;
 import model.Etalage;
 import model.Joueur;
-import model.Plateau;
 import model.TourJoueur;
 
 
@@ -42,8 +41,6 @@ public class JPAccueil extends JPanel {
 		//deck
 		London.setDeck(new Deck());
 		
-		//plateau
-		London.setPlateau(new Plateau());
 		
 
 		// image de fond

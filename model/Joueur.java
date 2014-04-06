@@ -151,26 +151,6 @@ public class Joueur {
 		return res;
 	}
 
-	public boolean acheterZone(String zo, Plateau plateau) { // a vérifier petit pb
-		// TODO Auto-generated method stub
-		Zone z=plateau.get(zo);
-		boolean res=peutInvestir(z);
-		if(res){
-			z.setProprietaire(this);
-			this.setArgent(this.getArgent()-z.getPrix());
-			this.setPointVictoire(this.getPointVictoire()+z.getPointsVictoire());
-			ArrayList <String> zoneAdjacente=z.getZonesAdjacentes();
-			System.out.println("Liste zone"+zoneAdjacente);
-			for(String tmpZ : zoneAdjacente){
-				try{
-					plateau.get(tmpZ).setActivable(true);
-				}catch(NullPointerException e){
-					System.out.println("zone inexistante");
-				}
-			}
-		}
-		return res;
-	}
 
 	public void nouveauChantier(){ //ajoute un nouveau chantier
 		this.listeChantier.add(new ArrayDeque<Constructible>());
