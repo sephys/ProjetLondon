@@ -32,63 +32,110 @@ public class JPPlateau extends JPanel implements MouseListener {
         estZoome=false;
         updateImageSizeDezoom();
         this.addMouseListener(this);
+        initBouton();
     }
     
     public void initBouton(){
         // ajout bouton :   
         
-        JButton jb1=new JButton("investir");
-        jb1.setBounds(875, 405, 80, 30);
-        this.add(jb1);
+        JButton jb_berthnal=new JButton("investir");
+        jb_berthnal.setBounds(875, 405, 80, 30);
+        this.add(jb_berthnal);
         
-                JButton jb2=new JButton("investir");
-        jb2.setBounds(625, 420, 80, 30);
-        this.add(jb2);
+                JButton jb_city=new JButton("investir");
+        jb_city.setBounds(625, 420, 80, 30);
+        this.add(jb_city);
         
-                JButton jb3=new JButton("investir");
-        jb3.setBounds(800, 200, 80, 30);
-        this.add(jb3);
+                JButton jb_hackney=new JButton("investir");
+        jb_hackney.setBounds(800, 200, 80, 30);
+        this.add(jb_hackney);
         
-                JButton jb4=new JButton("investir");
-        jb4.setBounds(590, 200, 80, 30);
-        this.add(jb4);
+                JButton jb_islington=new JButton("investir");
+        jb_islington.setBounds(590, 200, 80, 30);
+        this.add(jb_islington);
         
-                JButton jb5=new JButton("investir");
-        jb5.setBounds(450, 305, 80, 30);
-        this.add(jb5);
+                JButton jb_pancras=new JButton("investir");
+        jb_pancras.setBounds(450, 305, 80, 30);
+        this.add(jb_pancras);
         
-                JButton jb6=new JButton("investir");
-        jb6.setBounds(275, 215, 80, 30);
-        this.add(jb6);
+                JButton jb_hampstead=new JButton("investir");
+        jb_hampstead.setBounds(275, 215, 80, 30);
+        this.add(jb_hampstead);
         
-                JButton jb7=new JButton("investir");
-        jb7.setBounds(355, 390, 80, 30);
-        this.add(jb7);
+                JButton jb_marylebone=new JButton("investir");
+        jb_marylebone.setBounds(355, 390, 80, 30);
+        this.add(jb_marylebone);
         
-                JButton jb8=new JButton("investir");
-        jb8.setBounds(625, 420, 80, 30);
-        this.add(jb8);
+                JButton jb_paddington=new JButton("investir");
+        jb_paddington.setBounds(220, 355, 80, 30);
+        this.add(jb_paddington);
         
-                JButton jb9=new JButton("investir");
-        jb9.setBounds(625, 420, 80, 30);
-        this.add(jb9);
+                JButton jb_kensington=new JButton("investir");
+        jb_kensington.setBounds(230, 565, 80, 30);
+        this.add(jb_kensington);
         
-                JButton jb10=new JButton("investir");
-        jb10.setBounds(625, 420, 80, 30);
-        this.add(jb10);
+                JButton jb_hammersmith=new JButton("investir");
+        jb_hammersmith.setBounds(65, 545, 80, 30);
+        this.add(jb_hammersmith);
+        
+                JButton jb_fulham=new JButton("investir");
+        jb_fulham.setBounds(200, 745, 80, 30);
+        this.add(jb_fulham);
+        
+                JButton jb_wandsworth=new JButton("investir");
+        jb_wandsworth.setBounds(100, 850, 80, 30);
+        this.add(jb_wandsworth);
+        
+                JButton jb_buttersea=new JButton("investir");
+        jb_buttersea.setBounds(370, 790, 80, 30);
+        this.add(jb_buttersea);
+        
+                JButton jb_lambeth=new JButton("investir");
+        jb_lambeth.setBounds(570, 830, 80, 30);
+        this.add(jb_lambeth);
+        
+                        JButton jb_camberwell=new JButton("investir");
+        jb_camberwell.setBounds(740, 800, 80, 30);
+        this.add(jb_camberwell);
+        
+                        JButton jb_depford=new JButton("investir");
+        jb_depford.setBounds(865, 630, 80, 30);
+        this.add(jb_depford);
+        
+                        JButton jb_lewisham=new JButton("investir");
+        jb_lewisham.setBounds(975, 930, 80, 30);
+        this.add(jb_lewisham);
+        
+                        JButton jb_greenwich=new JButton("investir");
+        jb_greenwich.setBounds(1095, 685, 80, 30);
+        this.add(jb_greenwich);
+        
+                        JButton jb_southwark=new JButton("investir");
+        jb_southwark.setBounds(660, 600, 80, 30);
+        this.add(jb_southwark);
+        
+                        JButton jb_westminster=new JButton("investir");
+        jb_westminster.setBounds(435, 550, 80, 30);
+        this.add(jb_westminster);
     }
+    
+public void hide_buttons(){
+}
+
+public void show_buttons(){
+}
  
     public void setZoom() {
         if(!estZoome)
         {
           updateImageSizeZoom();  
           estZoome=true;
-          initBouton();
         }
         else{
           updateImageSizeDezoom();  
           estZoome=false;
           //enlever boutons
+          
         }
         
         revalidate();
