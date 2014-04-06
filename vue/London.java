@@ -34,6 +34,7 @@ public class London {
 	private static Deck deck;
 	private static Etalage etalage;
 	private static Plateau plateau;
+        private static JPMain[] tabJPMain;
     
     static JFrame frame; // fenêtre principale
     
@@ -82,7 +83,7 @@ public class London {
           
  
             JPanel p=new JPanel(new BorderLayout());
-            JPanel south=new JPMain();
+            JPanel south=new JPMain(Joueur.getTabJoueur()[0]);
             south.setBackground(Color.blue);
             //south.setPreferredSize(new Dimension(1000,150));
             //south.add(new JPMain());
@@ -154,6 +155,15 @@ public class London {
 		// TODO Auto-generated method stub
 		etalage=etalage2;
 	}
+        
+        public void initTabJPMain()
+        {
+            tabJPMain=new JPMain[Joueur.getNbJoueur()];
+            for(int i=0;i<Joueur.getNbJoueur();i++)
+            {
+                tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
+            }
+        }
     
 }
 

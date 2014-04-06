@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import model.Carte;
 
 /**
  *
@@ -32,8 +33,10 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     private Image image;
     private String imagePath;
+    private Carte carte;
 
-    public JBCarte(String imagePath) {
+    public JBCarte(Carte carte) {
+        
         this.imagePath=imagePath;
         URL uri = JBCarte.class.getResource(imagePath); 
         try {
