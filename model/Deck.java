@@ -1,15 +1,19 @@
 package model;
 
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import vue.JPMain;
 
 public class Deck extends ArrayDeque<Carte> {
 	
@@ -17,7 +21,11 @@ public class Deck extends ArrayDeque<Carte> {
 	public Deck(){
 		try {
 			/* R�cup�ration du classeur Excel (en lecture) */
-			Workbook workbook = Workbook.getWorkbook(new File("../ProjetLondon/src/fichier/Carte.xls"));
+                    URL uri = Deck.class.getResource("../fichier/Carte.xls");
+                
+            
+			Workbook workbook = Workbook.getWorkbook(new File(uri.getPath()));
+                        
 
 			/* Un fichier excel est compos� de plusieurs feuilles, on r�cup�re la premi�re, celle qui nous int�resse*/
 			Sheet sheet = workbook.getSheet(0);

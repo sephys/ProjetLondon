@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,7 +18,8 @@ public class Plateau extends HashMap<String,Zone> {
 	public Plateau(){
 		try {
 			/* R�cup�ration du classeur Excel (en lecture) */
-			Workbook workbook = Workbook.getWorkbook(new File("../ProjetLondon/src/fichier/ZonePlateau.xls"));
+                        URL uri = Deck.class.getResource("../fichier/Carte.xls");
+			Workbook workbook = Workbook.getWorkbook(new File(uri.getPath()));
 
 			/* Un fichier excel est compos� de plusieurs feuilles, on r�cup�re la premi�re, celle qui nous int�resse*/
 			Sheet sheet = workbook.getSheet(0);
