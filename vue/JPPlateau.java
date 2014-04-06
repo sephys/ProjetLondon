@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package vue;
-import model.Plateau;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

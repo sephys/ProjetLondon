@@ -8,7 +8,6 @@ package vue;
 import model.Deck;
 import model.Etalage;
 import model.Joueur;
-import model.Plateau;
 import model.TourJoueur;
 
 import java.awt.*;
@@ -33,8 +32,7 @@ public class London {
 	private static TourJoueur lJoueur;
 	private static Deck deck;
 	private static Etalage etalage;
-	private static Plateau plateau;
-        private static JPMain[] tabJPMain;
+    private static JPMain[] tabJPMain;
     
     static JFrame frame; // fenêtre principale
     
@@ -107,7 +105,6 @@ public class London {
             System.out.println(deck);
             System.out.println(etalage);
             System.out.println(plateau);
-            
 
     }
     
@@ -130,44 +127,40 @@ public class London {
         
     }
 
+
 	public static void setDeck(Deck deck2) {
 		// TODO Auto-generated method stub
 		deck=deck2;
 	}
 
-	public static void setPlateau(Plateau plateau2) {
-		// TODO Auto-generated method stub
-		plateau=plateau2;
-	}
+public static Deck getDeck() {
+	// TODO Auto-generated method stub
+	return deck;
+}
 
-	public static Deck getDeck() {
-		// TODO Auto-generated method stub
-		return deck;
-	}
+public static TourJoueur getListeJoueur() {
+	// TODO Auto-generated method stub
+	return lJoueur;
+}
 
-	public static TourJoueur getListeJoueur() {
-		// TODO Auto-generated method stub
-		return lJoueur;
-	}
+public static void setListeJoueur(TourJoueur initialisationJoueur) {
+	// TODO Auto-generated method stub
+	lJoueur=initialisationJoueur;
+}
 
-	public static void setListeJoueur(TourJoueur initialisationJoueur) {
-		// TODO Auto-generated method stub
-		lJoueur=initialisationJoueur;
-	}
+public static void setEtalage(Etalage etalage2) {
+	// TODO Auto-generated method stub
+	etalage=etalage2;
+}
 
-	public static void setEtalage(Etalage etalage2) {
-		// TODO Auto-generated method stub
-		etalage=etalage2;
+public void initTabJPMain()
+{
+	tabJPMain=new JPMain[Joueur.getNbJoueur()];
+	for(int i=0;i<Joueur.getNbJoueur();i++)
+	{
+		tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
 	}
-        
-        public void initTabJPMain()
-        {
-            tabJPMain=new JPMain[Joueur.getNbJoueur()];
-            for(int i=0;i<Joueur.getNbJoueur();i++)
-            {
-                tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
-            }
-        }
-    
+}
+
 }
 
