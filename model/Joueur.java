@@ -14,6 +14,7 @@ public class Joueur {
 	private int pointPauvrete;
 	private int argent;
 	private int nbPret; 
+        private static int nbJoueur;
 
 
 	public Joueur(String nom){
@@ -26,6 +27,15 @@ public class Joueur {
 		this.nbPret=0;
 		this.listeChantier=new ArrayList(new ArrayDeque<Constructible>());
 	}
+
+        public static int getNbJoueur() {
+            return nbJoueur;
+        }
+
+        public static void setNbJoueur(int nbJoueur) {
+            Joueur.nbJoueur = nbJoueur;
+        }
+        
 
 
 	public String getNom() {

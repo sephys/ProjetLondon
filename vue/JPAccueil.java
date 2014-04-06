@@ -82,7 +82,7 @@ public class JPAccueil extends JPanel {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JPAccueil.setNbJoueur(2);
+						Joueur.setNbJoueur(2);
 					}
 				});
 
@@ -90,7 +90,7 @@ public class JPAccueil extends JPanel {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JPAccueil.setNbJoueur(3);
+						Joueur.setNbJoueur(3);
 					}
 				});
 
@@ -98,7 +98,7 @@ public class JPAccueil extends JPanel {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JPAccueil.setNbJoueur(4);
+						Joueur.setNbJoueur(4);
 					}
 				});
 
