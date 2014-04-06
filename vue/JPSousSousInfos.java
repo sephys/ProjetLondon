@@ -7,6 +7,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +33,8 @@ public class JPSousSousInfos extends JPanel{
     int nombre;
     
     public JPSousSousInfos(String imagePath, int nombre){
+       // this.setPreferredSize(new Dimension(50,50));
+        
         this.nombre = nombre;
         this.setLayout(new BorderLayout());
         URL uri = JBCarte.class.getResource(imagePath);
@@ -48,6 +51,7 @@ public class JPSousSousInfos extends JPanel{
         } catch (IOException ex) {
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
+        haut.setPreferredSize(new Dimension(50,50));
     }
     
     /**public void centrerTexte(){

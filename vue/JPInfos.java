@@ -7,6 +7,7 @@
 package vue;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
@@ -39,16 +40,16 @@ public class JPInfos extends JPanel{
     
     public JPInfos(){
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new GridLayout(4,1,50,80));
         aljpsi = new ArrayList<JPSousInfos>();
         String listeJoueurs[] = {"Jean", "Baptiste", "Darin", "Allan"};
         for(int i = 0; i < listeJoueurs.length; i++){
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi.add(jps);
             this.add(jps);
-            if(i != listeJoueurs.length-1){
+            if(i != listeJoueurs.length){
                 JSeparator separateur = new JSeparator();
-                separateur.setPreferredSize(new Dimension(1, 10));
+                separateur.setPreferredSize(new Dimension(20, 20));
                 this.add(separateur);
             }
 
