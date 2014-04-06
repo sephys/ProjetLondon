@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import model.Joueur;
 
 /**
  *  
@@ -47,11 +48,30 @@ public class JPMain extends JPanel {
                 London.dndListener);
     }
     
+    public JPMain(Joueur j)
+    {
+        super(new BorderLayout());
+        main = new JPanel(new FlowLayout());
+        main.setBackground(Color.red);
+        JSPMain = new JScrollPane(main);
+        JSPMain.setPreferredSize(new Dimension(675,131));
+        this.add(JSPMain, BorderLayout.NORTH);
+        //// D&D
+        DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
+                London.dndListener);
+        
+        for(int i=0;i<j.getMain().size();i++)
+        {
+            main.add(new JBCarte(j.getCarteMain(i)));
+        }
+        
+    }
+    
     // ajout d'une carte dans le panel
     public static void ajoutCarte(){
        
             
-            main.add(new JBCarte("../img/cartes/CoventGarden.png"));
+            //main.add(new JBCarte("../img/cartes/CoventGarden.png"));
             main.revalidate();
       
     }

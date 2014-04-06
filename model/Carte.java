@@ -5,7 +5,7 @@ public abstract class Carte {
 	private String nom; //nom de la carte
 	private String couleur; //couleur de la carte {bleue, marron,rose ou grise}
 	private String categorie; //catégorie de la carte {A,B ou C}
-	private String path;
+	private String path; // chemin de l'image
 
 	//Constructor
 	public Carte(String nom, String couleur, String categorie, String path) {
