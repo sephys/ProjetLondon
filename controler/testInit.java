@@ -77,7 +77,6 @@ public class testInit {
 				while(jouer){
 					System.out.println("Quelle carte voulez vous jouez");
 					int jCarte=sc.nextInt();
-					jCarte=sc.nextInt();
 					Carte tmpCarte=currJ.getCarteMain(jCarte);
 					if(tmpCarte.getClass().equals(Constructible.class)){
 						afficherChantier();

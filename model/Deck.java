@@ -17,7 +17,7 @@ public class Deck extends ArrayDeque<Carte> {
 	public Deck(){
 		try {
 			/* R�cup�ration du classeur Excel (en lecture) */
-			Workbook workbook = Workbook.getWorkbook(new File("../ProjetLondon/src/fichier/Carte.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File("../fichier/Carte.xls"));
 
 			/* Un fichier excel est compos� de plusieurs feuilles, on r�cup�re la premi�re, celle qui nous int�resse*/
 			Sheet sheet = workbook.getSheet(0);
