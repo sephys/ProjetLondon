@@ -242,7 +242,5 @@ public class JPAccueil extends JPanel {
 		// TODO Auto-generated method stub
 
 	}
-	public static void setNbJoueur(int i){
-		testNb=i;
-	}
+	
 }
