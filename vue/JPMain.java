@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import model.Carte;
 import model.Joueur;
 
 /**
@@ -68,10 +70,8 @@ public class JPMain extends JPanel {
     }
     
     // ajout d'une carte dans le panel
-    public static void ajoutCarte(){
-       
-            
-            //main.add(new JBCarte("../img/cartes/CoventGarden.png"));
+    public static void ajoutCarte(Carte e){
+            main.add(new JBCarte(e));
             main.revalidate();
       
     }

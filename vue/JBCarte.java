@@ -32,14 +32,12 @@ import model.Carte;
 public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     private Image image;
-    private String imagePath;
     private Carte carte;
 
     public JBCarte(Carte carte) {
-        
-        this.imagePath=imagePath;
-        System.out.println(imagePath);
-        URL uri = JBCarte.class.getResource(imagePath); 
+        this.carte=carte;
+        System.out.println(carte.getPath());
+        URL uri = JBCarte.class.getResource(carte.getPath()); 
         try {
             image = ImageIO.read(uri);
         } catch (IOException ex) {
@@ -96,7 +94,7 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        JPZoom.setImg(this.imagePath);
+        JPZoom.setImg(carte.getPath());
 
     }
 }

@@ -162,7 +162,7 @@ public class JPAccueil extends JPanel {
 					Joueur.getTabJoueur()[1]=new Joueur("j2");
 
 				}
-				Joueur.getTabJoueur()[0].piocheCarte(d.poll());
+				Joueur.getTabJoueur()[1].piocheCarte(d.poll());
 				break;
 
 			case 2:
