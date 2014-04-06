@@ -31,6 +31,9 @@ public class Menu extends JPanel{
         try {
 			URL uri = Menu.class.getResource("../img/menu.png");
 			image = ImageIO.read(uri);
+			JButton test=new JButton("Jouer");
+			test.setBounds(500,500,50,50);
+			this.add(test,BorderLayout.SOUTH);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Pas bonne URL !");

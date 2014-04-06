@@ -28,11 +28,11 @@ public class Constructible extends Carte {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Constructible(String nom, String couleur, String categorie,
+	public Constructible(String nom, String couleur, String categorie,String path,
 			int coutPose, String[] coutActivation, int pointsVictoirePose,
 			int[] gainAcivation, String pouvoirIlli, String pouvoirActiv,
 			boolean aRetourne, boolean activable) {
-		super(nom, couleur, categorie,"");
+		super(nom, couleur, categorie,path);
 		this.coutPose = coutPose;
 		this.coutActivation = coutActivation;
 		this.pointsVictoirePose = pointsVictoirePose;
@@ -107,10 +107,17 @@ public class Constructible extends Carte {
 		this.activable = activable;
 	}
 
-	@Override
-	public void jouerCarte() {
-		// TODO Auto-generated method stub
 
+	public String toString(){
+		StringBuffer tmpStr=new StringBuffer(super.toString());
+		tmpStr.append("\n Cout : "+this.getCoutPose());
+		tmpStr.append("\n Pouvoir : "+this.getPouvoirIlli()+"\n");
+		return new String(tmpStr);
 	}
 
+	@Override
+	public void jouerCarte(Joueur currJ, int jCarte) {
+		// TODO Auto-generated method stub
+		
+	}
 }

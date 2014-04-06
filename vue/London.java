@@ -5,18 +5,23 @@
 */
 
 package vue;
+import model.Deck;
+import model.Etalage;
+import model.Joueur;
 import model.Plateau;
+import model.TourJoueur;
 
 import java.awt.*;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 
@@ -25,6 +30,11 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Joke
  */
 public class London {
+    private static TourJoueur lJoueur;
+    private static Deck deck;
+    private static Etalage etalage;
+    private static Plateau plateau;
+    private static JPMain[] tabJPMain;
     
     static JFrame frame; // fenêtre principale
     
@@ -73,7 +83,7 @@ public class London {
         
         
         JPanel p=new JPanel(new BorderLayout());
-        JPanel south=new JPMain();
+        JPanel south=new JPMain(Joueur.getTabJoueur()[0]);
         south.setBackground(Color.blue);
         //south.setPreferredSize(new Dimension(1000,150));
         //south.add(new JPMain());
@@ -90,7 +100,10 @@ public class London {
         
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        
+        System.out.println(lJoueur);
+        System.out.println(deck);
+        System.out.println(etalage);
+        System.out.println(plateau);
         
     }
     
@@ -111,6 +124,45 @@ public class London {
         acc.setLocationRelativeTo(null);
         acc.setVisible(true);
         
+    }
+    
+    public static void setDeck(Deck deck2) {
+        // TODO Auto-generated method stub
+        deck=deck2;
+    }
+    
+    public static void setPlateau(Plateau plateau2) {
+        // TODO Auto-generated method stub
+        plateau=plateau2;
+    }
+    
+    public static Deck getDeck() {
+        // TODO Auto-generated method stub
+        return deck;
+    }
+    
+    public static TourJoueur getListeJoueur() {
+        // TODO Auto-generated method stub
+        return lJoueur;
+    }
+    
+    public static void setListeJoueur(TourJoueur initialisationJoueur) {
+        // TODO Auto-generated method stub
+        lJoueur=initialisationJoueur;
+    }
+    
+    public static void setEtalage(Etalage etalage2) {
+        // TODO Auto-generated method stub
+        etalage=etalage2;
+    }
+    
+    public void initTabJPMain()
+    {
+        tabJPMain=new JPMain[Joueur.getNbJoueur()];
+        for(int i=0;i<Joueur.getNbJoueur();i++)
+        {
+            tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
+        }
     }
     
 }

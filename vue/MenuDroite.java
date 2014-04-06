@@ -47,8 +47,9 @@ public class MenuDroite extends JPanel{
         jb.addMouseListener(new MouseAdapter(){
 
             @Override
-            public void mouseClicked(MouseEvent e) {                
-                JPMain.ajoutCarte();
+            public void mouseClicked(MouseEvent e) {  
+            	London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
+                JPMain.ajoutCarte(London.getDeck().poll());
             }
             
         });

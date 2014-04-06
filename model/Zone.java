@@ -23,6 +23,7 @@ public class Zone {
     private boolean dessousTamise;
     private ArrayList<String> zonesAdjacentes;
     private Joueur proprietaire;
+    private boolean activable;
 
     
    
@@ -37,6 +38,11 @@ public class Zone {
         this.dessousTamise = dessousTamise;
         this.zonesAdjacentes = zonesAdjacentes;
         this.proprietaire=null;
+        if(zoneRouge){
+        	this.activable=true;
+        }else{
+        	this.activable=false;
+        }
     }
 
     public String getNom() {
@@ -111,9 +117,22 @@ public class Zone {
 	public void setProprietaire(Joueur proprietaire) {
 		this.proprietaire = proprietaire;
 	}
+	
+	
     @Override
     public String toString(){
         return this.nom+" [prix : "+this.prix+", nbCartes : "+this.nbCartes+", pointsVictoire : "+this.pointsVictoire+", ";
     }
+
+	public boolean isActivable() {
+		// TODO Auto-generated method stub
+		return activable;
+	}
+
+	public void setActivable(boolean b) {
+		// TODO Auto-generated method stub
+		this.activable=b;
+		
+	}
  
 }

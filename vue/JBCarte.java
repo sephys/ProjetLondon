@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import model.Carte;
 
 /**
  *
@@ -31,11 +32,12 @@ import javax.swing.JButton;
 public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     private Image image;
-    private String imagePath;
+    private Carte carte;
 
-    public JBCarte(String imagePath) {
-        this.imagePath=imagePath;
-        URL uri = JBCarte.class.getResource(imagePath); 
+    public JBCarte(Carte carte) {
+        this.carte=carte;
+        System.out.println(carte.getPath());
+        URL uri = JBCarte.class.getResource(carte.getPath()); 
         try {
             image = ImageIO.read(uri);
         } catch (IOException ex) {
@@ -92,7 +94,7 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        JPZoom.setImg(this.imagePath);
+        JPZoom.setImg(carte.getPath());
 
     }
 }

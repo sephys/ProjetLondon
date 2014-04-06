@@ -91,4 +91,15 @@ public class Etalage {
        return res;
     }
     
+    public boolean isEmpty(){
+    	boolean res=true;
+    	int i=0;
+    	while(i<this.ligne1.length&&res){
+    		if(ligne1[i]!=null||ligne2[i]!=null){
+    			res=false;
+    		}
+    		i++;
+    	}
+    	return res;
+    }
 }

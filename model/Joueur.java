@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,10 +9,14 @@ public class Joueur {
 	private String nom;
 	private ArrayList<Carte> main;
 	private HashMap<String,Integer> pouvoir;
+	private ArrayList<ArrayDeque<Constructible>>listeChantier;
 	private int pointVictoire;
 	private int pointPauvrete;
 	private int argent;
 	private int nbPret; 
+    private static int nbJoueur;
+    private static Joueur [] tabJoueur;
+
 
 
 	public Joueur(String nom){
@@ -22,7 +27,17 @@ public class Joueur {
 		this.argent= 5;
 		this.pointPauvrete=5;
 		this.nbPret=0;
+		this.listeChantier=new ArrayList(new ArrayDeque<Constructible>());
 	}
+
+        public static int getNbJoueur() {
+            return nbJoueur;
+        }
+
+        public static void setNbJoueur(int nbJoueur) {
+            Joueur.nbJoueur = nbJoueur;
+        }
+        
 
 
 	public String getNom() {
@@ -94,6 +109,15 @@ public class Joueur {
 		this.nbPret = nbPret;
 	}
 
+	public static Joueur[] getTabJoueur() {
+		return tabJoueur;
+	}
+
+	public static void setTabJoueur(Joueur[] tabJoueur) {
+		Joueur.tabJoueur = tabJoueur;
+	}
+
+	
 	public void piocheCarte(Carte e){ 	//ajout de la carte dans la main
 		if(main.isEmpty()){ 
 			this.main.add(e);			//si lamain est vide on ajoute la carte directement
@@ -118,23 +142,60 @@ public class Joueur {
 			}
 		}
 	}
-	
-	public boolean peutInvestir(Zone z){
+
+	public boolean peutInvestir(Zone z){ //verification si le joueur possde assez d'argent
 		boolean res=true;
 		if(this.argent<z.getPrix()){
 			res=false;
 		}
 		return res;
 	}
-	
-	public boolean acheterZone(Zone z){
+
+	public boolean acheterZone(String zo, Plateau plateau) { // a vérifier petit pb
+		// TODO Auto-generated method stub
+		Zone z=plateau.get(zo);
 		boolean res=peutInvestir(z);
 		if(res){
 			z.setProprietaire(this);
 			this.setArgent(this.getArgent()-z.getPrix());
 			this.setPointVictoire(this.getPointVictoire()+z.getPointsVictoire());
+			ArrayList <String> zoneAdjacente=z.getZonesAdjacentes();
+			System.out.println("Liste zone"+zoneAdjacente);
+			for(String tmpZ : zoneAdjacente){
+				try{
+					plateau.get(tmpZ).setActivable(true);
+				}catch(NullPointerException e){
+					System.out.println("zone inexistante");
+				}
+			}
 		}
 		return res;
 	}
-        
+
+	public void nouveauChantier(){ //ajoute un nouveau chantier
+		this.listeChantier.add(new ArrayDeque<Constructible>());
+	}
+	
+	
+ 	public void emprunt(int i) {
+		// TODO Auto-generated method stub
+		this.setNbPret(i%10);
+		this.setArgent(this.getArgent()+i);
+	}
+
+ 	public Carte getCarteMain(int index){
+ 		return this.main.get(index);
+ 	}
+	public String toString(){
+		String res;
+		StringBuffer tmpRes=new StringBuffer("Joueur :");
+		tmpRes.append("\n"+this.getNom());
+		tmpRes.append("\n"+this.getMain());
+		tmpRes.append("\n"+this.getNbPret());
+		tmpRes.append("\n"+this.getArgent());
+		res=new String(tmpRes);
+		return res;
+	}
+
 }
+

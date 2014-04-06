@@ -15,6 +15,9 @@ import java.awt.dnd.DropTarget;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import model.Carte;
+import model.Joueur;
+
 /**
  *  
  * @author Anh-Djuy
@@ -41,11 +44,28 @@ public class JPMain extends JPanel {
                 London.dndListener);
     }
     
+    public JPMain(Joueur j)
+    {
+        super(new BorderLayout());
+        main = new JPanel(new FlowLayout());
+        main.setBackground(Color.red);
+        JSPMain = new JScrollPane(main);
+        JSPMain.setPreferredSize(new Dimension(675,131));
+        this.add(JSPMain, BorderLayout.NORTH);
+        //// D&D
+        DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
+                London.dndListener);
+        
+        for(int i=0;i<j.getMain().size();i++)
+        {
+            main.add(new JBCarte(j.getCarteMain(i)));
+        }
+        
+    }
+    
     // ajout d'une carte dans le panel
-    public static void ajoutCarte(){
-       
-            
-            main.add(new JBCarte("../img/cartes/CoventGarden.png"));
+    public static void ajoutCarte(Carte e){
+            main.add(new JBCarte(e));
             main.revalidate();
       
     }
