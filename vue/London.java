@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 package vue;
 import model.Deck;
@@ -43,17 +43,18 @@ public class London {
     static DragSource dragSource;
     static JFrame acc;
     public static void main(String[] args)  {
-       
-       // D&D 
-       dndListener = new DragDrop();
-       dragSource=new DragSource();
-       
-        menu();   
+        
+        // D&D
+        dndListener = new DragDrop();
+        dragSource=new DragSource();
+        
+        menu();
     }
     
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
+
            
            acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
            acc.dispose();
@@ -83,6 +84,7 @@ public class London {
           
  
             JPanel p=new JPanel(new BorderLayout());
+           
             JPanel south=new JPMain(Joueur.getTabJoueur()[0]);
             south.setBackground(Color.blue);
             //south.setPreferredSize(new Dimension(1000,150));
@@ -106,25 +108,26 @@ public class London {
             System.out.println(etalage);
             System.out.println(plateau);
             
+
     }
     
     // methode qui affiche le menu quand on lance l'application
     public static void menu()
     {
         acc=new JFrame();
-  
+        
         acc.setTitle("London");
         acc.setSize(570,810);
         acc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         acc.setLayout(new BorderLayout());
-      
+        
         acc.setContentPane(new JPAccueil());
-
-       
+        
+        
         acc.setLocationRelativeTo(null);
         acc.setVisible(true);
-       
+        
     }
 
 	public static void setDeck(Deck deck2) {
