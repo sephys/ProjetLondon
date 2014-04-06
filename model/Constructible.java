@@ -28,11 +28,11 @@ public class Constructible extends Carte {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Constructible(String nom, String couleur, String categorie,
+	public Constructible(String nom, String couleur, String categorie,String path,
 			int coutPose, String[] coutActivation, int pointsVictoirePose,
 			int[] gainAcivation, String pouvoirIlli, String pouvoirActiv,
 			boolean aRetourne, boolean activable) {
-		super(nom, couleur, categorie,"");
+		super(nom, couleur, categorie,path);
 		this.coutPose = coutPose;
 		this.coutActivation = coutActivation;
 		this.pointsVictoirePose = pointsVictoirePose;

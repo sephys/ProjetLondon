@@ -4,8 +4,8 @@ public class NonConstructible extends Carte {
 	
 	private String pouvoir;
 
-	public NonConstructible(String nom, String couleur, String categorie, String pouvoir) {
-		super(nom, couleur, categorie,"");
+	public NonConstructible(String nom, String couleur, String categorie,String path, String pouvoir) {
+		super(nom, couleur, categorie,path);
 		this.setPouvoir(pouvoir);
 		// TODO Auto-generated constructor stub
 	}

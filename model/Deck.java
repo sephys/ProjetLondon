@@ -40,6 +40,7 @@ public class Deck extends ArrayDeque<Carte> {
 								sheet.getCell(0,i).getContents(),
 								sheet.getCell(1,i).getContents(),
 								sheet.getCell(2,i).getContents(),
+								sheet.getCell(14,i).getContents(),
 								Integer.parseInt(sheet.getCell(3,i).getContents()),
 								new String[]{sheet.getCell(5,i).getContents(),sheet.getCell(6,i).getContents()},
 								Integer.parseInt(sheet.getCell(4,i).getContents()),
@@ -56,6 +57,7 @@ public class Deck extends ArrayDeque<Carte> {
 									sheet.getCell(0,i).getContents(),
 									sheet.getCell(1,i).getContents(),
 									sheet.getCell(2,i).getContents(),
+									sheet.getCell(14,i).getContents(),
 									sheet.getCell(10,i).getContents()
 									);
 							break;
