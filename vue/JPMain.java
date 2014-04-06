@@ -51,6 +51,7 @@ public class JPMain extends JPanel {
         main.setBackground(Color.red);
         JSPMain = new JScrollPane(main);
         JSPMain.setPreferredSize(new Dimension(675,131));
+        JSPMain.setWheelScrollingEnabled(true);
         this.add(JSPMain, BorderLayout.NORTH);
         //// D&D
         DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
