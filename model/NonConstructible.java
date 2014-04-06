@@ -10,11 +10,6 @@ public class NonConstructible extends Carte {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void jouerCarte() {
-		// TODO Auto-generated method stub
-		//a faire plus tard.
-	}
 
 	public String getPouvoir() {
 		return pouvoir;
@@ -26,6 +21,13 @@ public class NonConstructible extends Carte {
 	
 	public String toString(){
 		return new String(super.toString()+"\n Pouvoir : "+this.getPouvoir()+"\n");
+	}
+
+
+	@Override
+	public void jouerCarte(Joueur currJ, int jCarte) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

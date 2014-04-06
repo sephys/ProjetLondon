@@ -107,16 +107,17 @@ public class Constructible extends Carte {
 		this.activable = activable;
 	}
 
-	@Override
-	public void jouerCarte() {
-		// TODO Auto-generated method stub
-
-	}
 
 	public String toString(){
 		StringBuffer tmpStr=new StringBuffer(super.toString());
 		tmpStr.append("\n Cout : "+this.getCoutPose());
 		tmpStr.append("\n Pouvoir : "+this.getPouvoirIlli()+"\n");
 		return new String(tmpStr);
+	}
+
+	@Override
+	public void jouerCarte(Joueur currJ, int jCarte) {
+		// TODO Auto-generated method stub
+		
 	}
 }

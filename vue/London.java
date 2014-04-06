@@ -5,18 +5,22 @@
  */
 
 package vue;
+import model.Deck;
+import model.Etalage;
 import model.Plateau;
+import model.TourJoueur;
 
 import java.awt.*;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 
@@ -25,6 +29,10 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Joke
  */
 public class London {
+	private static TourJoueur lJoueur;
+	private static Deck deck;
+	private static Etalage etalage;
+	private static Plateau plateau;
     
     static JFrame frame; // fenêtre principale
     
