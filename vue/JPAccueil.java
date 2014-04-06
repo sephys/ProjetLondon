@@ -34,19 +34,16 @@ import model.TourJoueur;
 public class JPAccueil extends JPanel {
 
 	private Image img; // image de fond
-	private TourJoueur lJoueur;
-	private Deck deck;
-	private Etalage etalage;
-	private Plateau plateau;
 	private static int testNb;
 	
 	public JPAccueil()
 	{
 		super();
 		//deck
-		deck=new Deck();
+		London.setDeck(new Deck());
+		
 		//plateau
-		plateau=new Plateau();
+		London.setPlateau(new Plateau());
 		
 
 		// image de fond
@@ -119,14 +116,8 @@ public class JPAccueil extends JPanel {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						nbJoueur.dispose();
-						lJoueur=initialisationJoueur( deck,testNb);
-						etalage=new Etalage(lJoueur.getNbJoueur()+1);
-						for(int i=0;i<lJoueur.getNbJoueur();i++){
-							Joueur j=lJoueur.getJoueur();
-							System.out.println(j.getNom());
-							System.out.println(j.getMain());
-							lJoueur=lJoueur.getSuivant();
-						}
+						London.setListeJoueur(initialisationJoueur(London.getDeck()));
+						London.setEtalage(new Etalage(London.getListeJoueur().getNbJoueur()+1));
 						London.start();
 					}
 				});
@@ -153,38 +144,40 @@ public class JPAccueil extends JPanel {
 	}
 
 
-	private static TourJoueur initialisationJoueur(Deck d,int nb) {
-		Joueur [] t= new Joueur[nb];
+	private static TourJoueur initialisationJoueur(Deck d) {
+		int nb=Joueur.getNbJoueur();
+		Joueur.setTabJoueur(new Joueur[nb]);
 		int fin=nb*6;
 		for(int i=0;i<fin;i++){
 			switch(i%nb){
 			case 0 :
-				if(t [0]==null){
-					t[0]=new Joueur("j1");
+				if(Joueur.getTabJoueur()[0]==null){
+					Joueur.getTabJoueur()[0]=new Joueur("j1");
+					
 				}
-				t[0].piocheCarte(d.poll());
+				Joueur.getTabJoueur()[0].piocheCarte(d.poll());
 				break;
 			case 1:
-				if(t [1]==null){
-					t[1]=new Joueur("j2");
+				if(Joueur.getTabJoueur()[1]==null){
+					Joueur.getTabJoueur()[1]=new Joueur("j2");
 
 				}
-				t[1].piocheCarte(d.poll());
+				Joueur.getTabJoueur()[0].piocheCarte(d.poll());
 				break;
 
 			case 2:
-				if(t [2]==null){
-					t[2]=new Joueur("j3");
+				if(Joueur.getTabJoueur()[2]==null){
+					Joueur.getTabJoueur()[2]=new Joueur("j3");
 
 				}
-				t[2].piocheCarte(d.poll());
+				Joueur.getTabJoueur()[2].piocheCarte(d.poll());
 				break;
 			case 3:
-				if(t [3]==null){
-					t[3]=new Joueur("j4");
+				if(Joueur.getTabJoueur()[3]==null){
+					Joueur.getTabJoueur()[3]=new Joueur("j4");
 
 				}
-				t[3].piocheCarte(d.poll());
+				Joueur.getTabJoueur()[3].piocheCarte(d.poll());
 				break;
 			}
 		}
@@ -198,7 +191,7 @@ public class JPAccueil extends JPanel {
 			TourJoueur current;
 			switch((indice+i)%nb){
 			case 0 :
-				current=new TourJoueur(t[0]);
+				current=new TourJoueur(Joueur.getTabJoueur()[0]);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -207,7 +200,7 @@ public class JPAccueil extends JPanel {
 				tmp=current;
 				break;
 			case 1:
-				current=new TourJoueur(t[1]);
+				current=new TourJoueur(Joueur.getTabJoueur()[1]);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -217,7 +210,7 @@ public class JPAccueil extends JPanel {
 				break;
 
 			case 2:
-				current=new TourJoueur(t[2]);
+				current=new TourJoueur(Joueur.getTabJoueur()[2]);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -226,7 +219,7 @@ public class JPAccueil extends JPanel {
 				tmp=current;
 				break;
 			case 3:
-				current=new TourJoueur(t[3]);
+				current=new TourJoueur(Joueur.getTabJoueur()[3]);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{

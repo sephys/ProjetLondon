@@ -14,7 +14,9 @@ public class Joueur {
 	private int pointPauvrete;
 	private int argent;
 	private int nbPret; 
-        private static int nbJoueur;
+    private static int nbJoueur;
+    private static Joueur [] tabJoueur;
+
 
 
 	public Joueur(String nom){
@@ -107,6 +109,15 @@ public class Joueur {
 		this.nbPret = nbPret;
 	}
 
+	public static Joueur[] getTabJoueur() {
+		return tabJoueur;
+	}
+
+	public static void setTabJoueur(Joueur[] tabJoueur) {
+		Joueur.tabJoueur = tabJoueur;
+	}
+
+	
 	public void piocheCarte(Carte e){ 	//ajout de la carte dans la main
 		if(main.isEmpty()){ 
 			this.main.add(e);			//si lamain est vide on ajoute la carte directement
