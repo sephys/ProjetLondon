@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 package vue;
 import model.Plateau;
@@ -33,64 +33,64 @@ public class London {
     static DragSource dragSource;
     static JFrame acc;
     public static void main(String[] args)  {
-       
-       // D&D 
-       dndListener = new DragDrop();
-       dragSource=new DragSource();
-       
-        menu();   
+        
+        // D&D
+        dndListener = new DragDrop();
+        dragSource=new DragSource();
+        
+        menu();
     }
     
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
-           
-           acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-           acc.dispose();
-           frame=new JFrame();
-          
-           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            JTabbedPane panelOnglet = new JTabbedPane();
+        
+        acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        acc.dispose();
+        frame=new JFrame();
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JTabbedPane panelOnglet = new JTabbedPane();
+        
+        JPPlateau plateau=null;
+        try
+        {
+            URL uri = London.class.getResource("../img/plateau.png");
+            Image image = ImageIO.read(uri);
+            plateau = new JPPlateau(image);
             
-            JPPlateau plateau=null;
-            try
-            {
-               URL uri = London.class.getResource("../img/plateau.png");
-               Image image = ImageIO.read(uri);
-               plateau = new JPPlateau(image);
-              
-            }
-            catch (IOException e1) {
-            }
-            
-            
-            
-            // ajout d'un onglet :
-            panelOnglet.addTab("Plateau",new JScrollPane(plateau));
-
-            panelOnglet.addTab("Etalage",new JPEtalage());
-
-          
- 
-            JPanel p=new JPanel(new BorderLayout());
-            JPanel south=new JPMain();
-            south.setBackground(Color.blue);
-            //south.setPreferredSize(new Dimension(1000,150));
-            //south.add(new JPMain());
-            p.add(panelOnglet,BorderLayout.CENTER);
-            p.add(south,BorderLayout.SOUTH);
-            
-            frame.add(p);
-            
-            MenuDroite menudroite=new MenuDroite();
-            
-            frame.add(menudroite,BorderLayout.EAST);
- 
-            frame.setSize(1114,810);
-            
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-            
+        }
+        catch (IOException e1) {
+        }
+        
+        
+        
+        // ajout d'un onglet :
+        panelOnglet.addTab("Plateau",new JScrollPane(plateau));
+        
+        panelOnglet.addTab("Etalage",new JPEtalage());
+        
+        
+        
+        JPanel p=new JPanel(new BorderLayout());
+        JPanel south=new JPMain();
+        south.setBackground(Color.blue);
+        //south.setPreferredSize(new Dimension(1000,150));
+        //south.add(new JPMain());
+        p.add(panelOnglet,BorderLayout.CENTER);
+        p.add(south,BorderLayout.SOUTH);
+        
+        frame.add(p);
+        
+        MenuDroite menudroite=new MenuDroite();
+        
+        frame.add(menudroite,BorderLayout.EAST);
+        
+        frame.setSize(1114,810);
+        
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
         
     }
     
@@ -98,19 +98,19 @@ public class London {
     public static void menu()
     {
         acc=new JFrame();
-  
+        
         acc.setTitle("London");
         acc.setSize(570,810);
         acc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         acc.setLayout(new BorderLayout());
-      
+        
         acc.setContentPane(new JPAccueil());
-
-       
+        
+        
         acc.setLocationRelativeTo(null);
         acc.setVisible(true);
-       
+        
     }
     
 }
