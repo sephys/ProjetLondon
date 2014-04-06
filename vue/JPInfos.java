@@ -5,6 +5,7 @@
  */
 
 package vue;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class JPInfos extends JPanel{
             this.add(this.pieces);
             this.add(this.pauvrete);
             this.add(this.emprunts);
+            this.setPreferredSize(new Dimension(330,810));
         } catch (IOException ex) {
             Logger.getLogger(JPInfos.class.getName()).log(Level.SEVERE, null, ex);
         }
