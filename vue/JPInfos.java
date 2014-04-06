@@ -38,6 +38,7 @@ public class JPInfos extends JPanel{
     ArrayList<JPSousInfos> aljpsi;
     
     public JPInfos(){
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         aljpsi = new ArrayList<JPSousInfos>();
         String listeJoueurs[] = {"Jean", "Baptiste", "Darin", "Allan"};
@@ -50,7 +51,9 @@ public class JPInfos extends JPanel{
                 separateur.setPreferredSize(new Dimension(1, 10));
                 this.add(separateur);
             }
+
         }
+        this.setPreferredSize(new Dimension(330,810) );
     }
     
     public static void main(String[] args){

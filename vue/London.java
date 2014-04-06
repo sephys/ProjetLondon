@@ -8,7 +8,6 @@ package vue;
 import model.Deck;
 import model.Etalage;
 import model.Joueur;
-import model.Plateau;
 import model.TourJoueur;
 
 import java.awt.*;
@@ -33,8 +32,7 @@ public class London {
 	private static TourJoueur lJoueur;
 	private static Deck deck;
 	private static Etalage etalage;
-	private static Plateau plateau;
-        private static JPMain[] tabJPMain;
+    private static JPMain[] tabJPMain;
     
     static JFrame frame; // fenêtre principale
     
@@ -54,6 +52,10 @@ public class London {
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1e181876ab91d0861d1ab5180b6c44eabcb7a49b
            
            acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
            acc.dispose();
@@ -83,6 +85,7 @@ public class London {
           
  
             JPanel p=new JPanel(new BorderLayout());
+           
             JPanel south=new JPMain(Joueur.getTabJoueur()[0]);
             south.setBackground(Color.blue);
             //south.setPreferredSize(new Dimension(1000,150));
@@ -95,8 +98,9 @@ public class London {
             MenuDroite menudroite=new MenuDroite();
             
             frame.add(menudroite,BorderLayout.EAST);
+            frame.add(new JPInfos(),BorderLayout.WEST);
  
-            frame.setSize(1114,810);
+            frame.setSize(1444,810);
             
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
@@ -105,6 +109,10 @@ public class London {
             System.out.println(etalage);
             System.out.println(plateau);
             
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1e181876ab91d0861d1ab5180b6c44eabcb7a49b
     }
     
     // methode qui affiche le menu quand on lance l'application
@@ -125,6 +133,7 @@ public class London {
         acc.setVisible(true);
         
     }
+<<<<<<< HEAD
     
     public static void setDeck(Deck deck2) {
         // TODO Auto-generated method stub
@@ -164,5 +173,42 @@ public class London {
         }
     }
     
+=======
+
+	public static void setDeck(Deck deck2) {
+		// TODO Auto-generated method stub
+		deck=deck2;
+	}
+
+public static Deck getDeck() {
+	// TODO Auto-generated method stub
+	return deck;
+}
+
+public static TourJoueur getListeJoueur() {
+	// TODO Auto-generated method stub
+	return lJoueur;
+}
+
+public static void setListeJoueur(TourJoueur initialisationJoueur) {
+	// TODO Auto-generated method stub
+	lJoueur=initialisationJoueur;
+}
+
+public static void setEtalage(Etalage etalage2) {
+	// TODO Auto-generated method stub
+	etalage=etalage2;
+}
+
+public void initTabJPMain()
+{
+	tabJPMain=new JPMain[Joueur.getNbJoueur()];
+	for(int i=0;i<Joueur.getNbJoueur();i++)
+	{
+		tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
+	}
+}
+
+>>>>>>> 1e181876ab91d0861d1ab5180b6c44eabcb7a49b
 }
 

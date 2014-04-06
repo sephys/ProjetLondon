@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package vue;
-import model.Plateau;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -32,6 +31,8 @@ public class JPPlateau extends JPanel implements MouseListener {
         estZoome=false;
         updateImageSizeDezoom();
         this.addMouseListener(this);
+        this.setPreferredSize(new Dimension(5,588));
+        this.setBackground(Color.blue);
        
     }
     
