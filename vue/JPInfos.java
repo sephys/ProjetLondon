@@ -46,6 +46,8 @@ public class JPInfos extends JPanel{
             aljpsi.add(jps);
             this.add(jps);
             if(i != listeJoueurs.length-1){
+                JSeparator separateur = new JSeparator();
+                separateur.setPreferredSize(new Dimension(1, 10));
                 this.add(new JSeparator());
             }
         }

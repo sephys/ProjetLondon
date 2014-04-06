@@ -32,7 +32,6 @@ public class JPPlateau extends JPanel implements MouseListener {
         estZoome=false;
         updateImageSizeDezoom();
         this.addMouseListener(this);
-       
     }
     
     public void initBouton(){
