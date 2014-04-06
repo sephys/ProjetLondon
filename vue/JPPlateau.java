@@ -31,6 +31,8 @@ public class JPPlateau extends JPanel implements MouseListener {
         estZoome=false;
         updateImageSizeDezoom();
         this.addMouseListener(this);
+        this.setPreferredSize(new Dimension(5,588));
+        this.setBackground(Color.blue);
        
     }
     
