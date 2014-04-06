@@ -51,7 +51,7 @@ public class JPInfos extends JPanel{
             }
 
         }
-        this.setPreferredSize(new Dimension(330,810) );
+        this.setPreferredSize(new Dimension(430,810) );
     }
     
     public static void main(String[] args){
