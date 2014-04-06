@@ -7,6 +7,7 @@
 package vue;
 import model.Deck;
 import model.Etalage;
+import model.Joueur;
 import model.Plateau;
 import model.TourJoueur;
 
@@ -98,8 +99,11 @@ public class London {
             
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+            System.out.println(lJoueur);
+            System.out.println(deck);
+            System.out.println(etalage);
+            System.out.println(plateau);
             
-        
     }
     
     // methode qui affiche le menu quand on lance l'application
@@ -120,6 +124,36 @@ public class London {
         acc.setVisible(true);
        
     }
+
+	public static void setDeck(Deck deck2) {
+		// TODO Auto-generated method stub
+		deck=deck2;
+	}
+
+	public static void setPlateau(Plateau plateau2) {
+		// TODO Auto-generated method stub
+		plateau=plateau2;
+	}
+
+	public static Deck getDeck() {
+		// TODO Auto-generated method stub
+		return deck;
+	}
+
+	public static TourJoueur getListeJoueur() {
+		// TODO Auto-generated method stub
+		return lJoueur;
+	}
+
+	public static void setListeJoueur(TourJoueur initialisationJoueur) {
+		// TODO Auto-generated method stub
+		lJoueur=initialisationJoueur;
+	}
+
+	public static void setEtalage(Etalage etalage2) {
+		// TODO Auto-generated method stub
+		etalage=etalage2;
+	}
     
 }
 
