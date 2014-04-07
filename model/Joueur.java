@@ -16,8 +16,10 @@ public class Joueur {
 	private int nbPret; 
     private static int nbJoueur;
     private static Joueur [] tabJoueur;
+    private int placeJoueur;
 
 
+	
 
 	public Joueur(String nom){
 		this.nom=nom;
@@ -115,6 +117,21 @@ public class Joueur {
 
 	public static void setTabJoueur(Joueur[] tabJoueur) {
 		Joueur.tabJoueur = tabJoueur;
+	}
+	public ArrayList<ArrayDeque<Constructible>> getListeChantier() {
+		return listeChantier;
+	}
+
+	public void setListeChantier(ArrayList<ArrayDeque<Constructible>> listeChantier) {
+		this.listeChantier = listeChantier;
+	}
+
+	public int getPlaceJoueur() {
+		return placeJoueur;
+	}
+
+	public void setPlaceJoueur(int placeJoueur) {
+		this.placeJoueur = placeJoueur;
 	}
 
 	

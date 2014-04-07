@@ -189,6 +189,7 @@ public class JPAccueil extends JPanel {
 			switch((indice+i)%nb){
 			case 0 :
 				current=new TourJoueur(Joueur.getTabJoueur()[0]);
+				Joueur.getTabJoueur()[0].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -198,6 +199,7 @@ public class JPAccueil extends JPanel {
 				break;
 			case 1:
 				current=new TourJoueur(Joueur.getTabJoueur()[1]);
+				Joueur.getTabJoueur()[1].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -208,6 +210,7 @@ public class JPAccueil extends JPanel {
 
 			case 2:
 				current=new TourJoueur(Joueur.getTabJoueur()[2]);
+				Joueur.getTabJoueur()[2].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -217,6 +220,7 @@ public class JPAccueil extends JPanel {
 				break;
 			case 3:
 				current=new TourJoueur(Joueur.getTabJoueur()[3]);
+				Joueur.getTabJoueur()[3].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
