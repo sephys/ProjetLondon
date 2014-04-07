@@ -44,7 +44,7 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setIcon(new ImageIcon(JBCarte.scaleImage(image, 67, 103)));
-        this.setPreferredSize(new Dimension(67, 103));
+        this.setPreferredSize(new Dimension(79, 121));
         // D&D
         DragGestureRecognizer dragRecognizer1 = London.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, London.dndListener);
         

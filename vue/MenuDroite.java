@@ -30,7 +30,7 @@ public class MenuDroite extends JPanel{
         main.setLayout(new BoxLayout(main,BoxLayout.PAGE_AXIS));
         
         // 1er attribut : largeur
-        Dimension d=new Dimension(420,260);
+        Dimension d=new Dimension(310,260);
         
         main.setPreferredSize(d);
         main.setBackground(Color.yellow);
