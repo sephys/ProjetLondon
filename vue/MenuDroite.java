@@ -43,8 +43,8 @@ public class MenuDroite extends JPanel{
         main.add(new JButton("Restaurer la ville"));
         main.add(new JButton("Investir"));
         main.add(new JButton("Prendre trois cartes"));
-        JButton jb = new JButton("Piocher");
-        jb.addMouseListener(new MouseAdapter(){
+        JButton jbPiocher = new JButton("Piocher");
+        jbPiocher.addMouseListener(new MouseAdapter(){
 
             @Override
             public void mouseClicked(MouseEvent e) {  
@@ -53,7 +53,26 @@ public class MenuDroite extends JPanel{
             }
             
         });
-        main.add(jb);
+        
+        JButton jbFinTour=new JButton("Fin du Tour");
+        jbFinTour.addMouseListener(new MouseAdapter(){
+
+            @Override
+            public void mouseClicked(MouseEvent e) 
+            {  
+                London.p.remove(London.south);
+                London.setListeJoueur(London.getListeJoueur().getSuivant());
+                London.p.add(London.getTabJPMain()[1],BorderLayout.SOUTH);
+               // London.frame.repaint();
+                London.frame.revalidate();
+                //London.p.revalidate();
+                
+            }
+            
+        });
+        
+        main.add(jbPiocher);
+        main.add(jbFinTour);
         this.add(main,BorderLayout.NORTH);
         
         JPZoom zoom=new JPZoom();
