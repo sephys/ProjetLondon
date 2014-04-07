@@ -29,9 +29,9 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Joke
  */
 public class London {
-	private static TourJoueur lJoueur;
-	private static Deck deck;
-	private static Etalage etalage;
+    private static TourJoueur lJoueur;
+    private static Deck deck;
+    private static Etalage etalage;
     private static JPMain[] tabJPMain;
     
     static JFrame frame; // fenêtre principale
@@ -52,67 +52,57 @@ public class London {
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> 1e181876ab91d0861d1ab5180b6c44eabcb7a49b
-           
-           acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-           acc.dispose();
-           frame=new JFrame();
-          
-           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            JTabbedPane panelOnglet = new JTabbedPane();
+        acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        acc.dispose();
+        frame=new JFrame();
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JTabbedPane panelOnglet = new JTabbedPane();
+        
+        JPPlateau plateau=null;
+        try
+        {
+            URL uri = London.class.getResource("../img/plateau.png");
+            Image image = ImageIO.read(uri);
+            plateau = new JPPlateau(image);
             
-            JPPlateau plateau=null;
-            try
-            {
-               URL uri = London.class.getResource("../img/plateau.png");
-               Image image = ImageIO.read(uri);
-               plateau = new JPPlateau(image);
-              
-            }
-            catch (IOException e1) {
-            }
-            
-            
-            
-            // ajout d'un onglet :
-            panelOnglet.addTab("Plateau",new JScrollPane(plateau));
-
-            panelOnglet.addTab("Etalage",new JPEtalage());
-
-          
- 
-            JPanel p=new JPanel(new BorderLayout());
-           
-            JPanel south=new JPMain(Joueur.getTabJoueur()[0]);
-            south.setBackground(Color.blue);
-            //south.setPreferredSize(new Dimension(1000,150));
-            //south.add(new JPMain());
-            p.add(panelOnglet,BorderLayout.CENTER);
-            p.add(south,BorderLayout.SOUTH);
-            
-            frame.add(p);
-            
-            MenuDroite menudroite=new MenuDroite();
-            
-            frame.add(menudroite,BorderLayout.EAST);
-            frame.add(new JPInfos(),BorderLayout.WEST);
- 
-            frame.setSize(1444,810);
-            
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-            System.out.println(lJoueur);
-            System.out.println(deck);
-            System.out.println(etalage);
-            System.out.println(plateau);
-            
-<<<<<<< HEAD
-=======
-
->>>>>>> 1e181876ab91d0861d1ab5180b6c44eabcb7a49b
+        }
+        catch (IOException e1) {
+        }
+        
+        
+        
+        // ajout d'un onglet :
+        panelOnglet.addTab("Plateau",new JScrollPane(plateau));
+        
+        panelOnglet.addTab("Etalage",new JPEtalage());
+        
+        
+        
+        JPanel p=new JPanel(new BorderLayout());
+        
+        JPanel south=new JPMain(Joueur.getTabJoueur()[0]);
+        south.setBackground(Color.blue);
+        //south.setPreferredSize(new Dimension(1000,150));
+        //south.add(new JPMain());
+        p.add(panelOnglet,BorderLayout.CENTER);
+        p.add(south,BorderLayout.SOUTH);
+        
+        frame.add(p);
+        
+        MenuDroite menudroite=new MenuDroite();
+        
+        frame.add(menudroite,BorderLayout.EAST);
+        frame.add(new JPInfos(),BorderLayout.WEST);
+        
+        frame.setSize(1444,810);
+        
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        System.out.println(lJoueur);
+        System.out.println(deck);
+        System.out.println(etalage);
+        System.out.println(plateau);
     }
     
     // methode qui affiche le menu quand on lance l'application
@@ -133,16 +123,10 @@ public class London {
         acc.setVisible(true);
         
     }
-<<<<<<< HEAD
     
     public static void setDeck(Deck deck2) {
         // TODO Auto-generated method stub
         deck=deck2;
-    }
-    
-    public static void setPlateau(Plateau plateau2) {
-        // TODO Auto-generated method stub
-        plateau=plateau2;
     }
     
     public static Deck getDeck() {
@@ -171,44 +155,5 @@ public class London {
         {
             tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
         }
-    }
-    
-=======
-
-	public static void setDeck(Deck deck2) {
-		// TODO Auto-generated method stub
-		deck=deck2;
-	}
-
-public static Deck getDeck() {
-	// TODO Auto-generated method stub
-	return deck;
+    }    
 }
-
-public static TourJoueur getListeJoueur() {
-	// TODO Auto-generated method stub
-	return lJoueur;
-}
-
-public static void setListeJoueur(TourJoueur initialisationJoueur) {
-	// TODO Auto-generated method stub
-	lJoueur=initialisationJoueur;
-}
-
-public static void setEtalage(Etalage etalage2) {
-	// TODO Auto-generated method stub
-	etalage=etalage2;
-}
-
-public void initTabJPMain()
-{
-	tabJPMain=new JPMain[Joueur.getNbJoueur()];
-	for(int i=0;i<Joueur.getNbJoueur();i++)
-	{
-		tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
-	}
-}
-
->>>>>>> 1e181876ab91d0861d1ab5180b6c44eabcb7a49b
-}
-
