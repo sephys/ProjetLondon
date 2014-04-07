@@ -39,8 +39,8 @@ public class JPPlateau extends JPanel implements MouseListener {
     public void initBouton(){
         // ajout bouton :   
         
-        JButton jb1=new JButton("investir");
-        jb1.setBounds(875, 405, 80, 30);
+        JButton jb1=new JButton("atar");
+        jb1.setBounds(870, 328, 86, 38);
         this.add(jb1);
         
                 JButton jb2=new JButton("investir");
