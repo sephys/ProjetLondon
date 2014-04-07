@@ -29,10 +29,12 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Joke
  */
 public class London {
-	private static TourJoueur lJoueur;
-	private static Deck deck;
-	private static Etalage etalage;
+    private static TourJoueur lJoueur;
+    private static Deck deck;
+    private static Etalage etalage;
     private static JPMain[] tabJPMain;
+    static JPanel south; // panel contenant la main des joueurs
+    static JPanel p;
     
     static JFrame frame; // fenêtre principale
     
@@ -53,7 +55,7 @@ public class London {
     public static void start()
     {
 
-           
+           initTabJPMain();
            acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
            acc.dispose();
            frame=new JFrame();
@@ -81,12 +83,11 @@ public class London {
 
           
  
-            JPanel p=new JPanel(new BorderLayout());
+            p=new JPanel(new BorderLayout());
            
-            JPanel south=new JPMain(Joueur.getTabJoueur()[0]);
+            south=new JPMain(Joueur.getTabJoueur()[0]);
             south.setBackground(Color.blue);
-            //south.setPreferredSize(new Dimension(1000,150));
-            //south.add(new JPMain());
+            
             p.add(panelOnglet,BorderLayout.CENTER);
             p.add(south,BorderLayout.SOUTH);
             
@@ -119,6 +120,7 @@ public class London {
         
         acc.setLayout(new BorderLayout());
         
+        // intialisation de tous les elements
         acc.setContentPane(new JPAccueil());
         
         
@@ -153,7 +155,17 @@ public static void setEtalage(Etalage etalage2) {
 	etalage=etalage2;
 }
 
-public void initTabJPMain()
+    public static JPMain[] getTabJPMain() {
+        return tabJPMain;
+    }
+
+    public static void setTabJPMain(JPMain[] tabJPMain) {
+        London.tabJPMain = tabJPMain;
+    }
+
+
+
+public static void initTabJPMain()
 {
 	tabJPMain=new JPMain[Joueur.getNbJoueur()];
 	for(int i=0;i<Joueur.getNbJoueur();i++)
