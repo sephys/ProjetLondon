@@ -49,7 +49,7 @@ public class MenuDroite extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {  
             	London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
-                JPMain.ajoutCarte(London.getDeck().poll());
+                London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
             }
             
         });
