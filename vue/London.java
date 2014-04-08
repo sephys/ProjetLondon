@@ -32,7 +32,7 @@ public class London {
     private static Deck deck;
     private static Etalage etalage;
     private static JPMain[] tabJPMain;
-    static JPanel south; // panel contenant la main des joueurs
+    static JPMain south; // panel contenant la main des joueurs
     static JPanel central;
     
     static JFrame frame; // fenêtre principale
@@ -79,7 +79,7 @@ public class London {
            
             // south contient la main du Joueur et contient celle du premier joueur en premier
             south=new JPMain(getTabJoueur()[0]);
-            
+            tabJPMain[0]=south;
             
             central.add(panelOnglet,BorderLayout.CENTER);
             central.add(south,BorderLayout.SOUTH);
@@ -99,6 +99,7 @@ public class London {
             //System.out.println(deck);
             //System.out.println(etalage);
             //System.out.println(plateau);
+            acc.dispose();
 
     }
     
@@ -120,6 +121,7 @@ public class London {
         acc.dispose();
         acc.setLocationRelativeTo(null);
         acc.setVisible(true);
+        
         
     }
 

@@ -163,6 +163,7 @@ public class JPAccueil extends JPanel {
                                                 {
                                                     London.setListeJoueur(initialisationJoueur(London.getDeck()));
                                                     London.setEtalage(new Etalage(Joueur.getNbJoueur()+1));
+                                                    
                                                     London.start();     
                                                 }
 					}

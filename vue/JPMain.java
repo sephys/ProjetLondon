@@ -30,7 +30,7 @@ import model.Joueur;
 public class JPMain extends JPanel {
     
     private JScrollPane JSPMain;
-    private static JPanel main;
+    private JPanel main;
     
     public JPMain(){
         super(new BorderLayout());
@@ -70,7 +70,7 @@ public class JPMain extends JPanel {
     }
     
     // ajout d'une carte dans le panel
-    public static void ajoutCarte(Carte e){
+    public  void ajoutCarte(Carte e){
             main.add(new JBCarte(e));
             main.revalidate();
       
