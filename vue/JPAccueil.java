@@ -143,38 +143,38 @@ public class JPAccueil extends JPanel {
 
 	private static TourJoueur initialisationJoueur(Deck d) {
 		int nb=Joueur.getNbJoueur();
-		Joueur.setTabJoueur(new Joueur[nb]);
+		London.setTabJoueur(new Joueur[nb]);
 		int fin=nb*6;
 		for(int i=0;i<fin;i++){
 			switch(i%nb){
 			case 0 :
-				if(Joueur.getTabJoueur()[0]==null){
-					Joueur.getTabJoueur()[0]=new Joueur("j1");
+				if(London.getTabJoueur()[0]==null){
+					London.getTabJoueur()[0]=new Joueur("j1");
 					
 				}
-				Joueur.getTabJoueur()[0].piocheCarte(d.poll());
+				London.getTabJoueur()[0].piocheCarte(d.poll());
 				break;
 			case 1:
-				if(Joueur.getTabJoueur()[1]==null){
-					Joueur.getTabJoueur()[1]=new Joueur("j2");
+				if(London.getTabJoueur()[1]==null){
+					London.getTabJoueur()[1]=new Joueur("j2");
 
 				}
-				Joueur.getTabJoueur()[1].piocheCarte(d.poll());
+				London.getTabJoueur()[1].piocheCarte(d.poll());
 				break;
 
 			case 2:
-				if(Joueur.getTabJoueur()[2]==null){
-					Joueur.getTabJoueur()[2]=new Joueur("j3");
+				if(London.getTabJoueur()[2]==null){
+					London.getTabJoueur()[2]=new Joueur("j3");
 
 				}
-				Joueur.getTabJoueur()[2].piocheCarte(d.poll());
+				London.getTabJoueur()[2].piocheCarte(d.poll());
 				break;
 			case 3:
-				if(Joueur.getTabJoueur()[3]==null){
-					Joueur.getTabJoueur()[3]=new Joueur("j4");
+				if(London.getTabJoueur()[3]==null){
+					London.getTabJoueur()[3]=new Joueur("j4");
 
 				}
-				Joueur.getTabJoueur()[3].piocheCarte(d.poll());
+				London.getTabJoueur()[3].piocheCarte(d.poll());
 				break;
 			}
 		}
@@ -188,8 +188,8 @@ public class JPAccueil extends JPanel {
 			TourJoueur current;
 			switch((indice+i)%nb){
 			case 0 :
-				current=new TourJoueur(Joueur.getTabJoueur()[0]);
-				Joueur.getTabJoueur()[0].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[0]);
+				London.getTabJoueur()[0].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -198,8 +198,8 @@ public class JPAccueil extends JPanel {
 				tmp=current;
 				break;
 			case 1:
-				current=new TourJoueur(Joueur.getTabJoueur()[1]);
-				Joueur.getTabJoueur()[1].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[1]);
+				London.getTabJoueur()[1].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -209,8 +209,8 @@ public class JPAccueil extends JPanel {
 				break;
 
 			case 2:
-				current=new TourJoueur(Joueur.getTabJoueur()[2]);
-				Joueur.getTabJoueur()[2].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[2]);
+				London.getTabJoueur()[2].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -219,8 +219,8 @@ public class JPAccueil extends JPanel {
 				tmp=current;
 				break;
 			case 3:
-				current=new TourJoueur(Joueur.getTabJoueur()[3]);
-				Joueur.getTabJoueur()[3].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[3]);
+				London.getTabJoueur()[3].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{

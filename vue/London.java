@@ -45,6 +45,7 @@ public class London {
     static DragSource dragSource;
     static JFrame acc;
     public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
+    private static Joueur[] tabJoueur;
     public static void main(String[] args)  {
         
         // D&D
@@ -88,7 +89,7 @@ public class London {
  
             p=new JPanel(new BorderLayout());
            
-            south=new JPMain(Joueur.getTabJoueur()[0]);
+            south=new JPMain(getTabJoueur()[0]);
             south.setBackground(Color.blue);
             
             p.add(panelOnglet,BorderLayout.CENTER);
@@ -173,8 +174,16 @@ public static void initTabJPMain()
 	tabJPMain=new JPMain[Joueur.getNbJoueur()];
 	for(int i=0;i<Joueur.getNbJoueur();i++)
 	{
-		tabJPMain[i]=new JPMain(Joueur.getTabJoueur()[i]);
+		tabJPMain[i]=new JPMain(getTabJoueur()[i]);
 	}
 }
+
+    public static Joueur[] getTabJoueur() {
+        return London.tabJoueur;
+    }
+
+    public static void setTabJoueur(Joueur[] tabJoueur) {
+        London.tabJoueur = tabJoueur;
+    }
 
 }
