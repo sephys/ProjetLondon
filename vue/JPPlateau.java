@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -25,9 +26,16 @@ public class JPPlateau extends JPanel implements MouseListener {
     private int imageHeight;
     private boolean estZoome;
  
-    public JPPlateau(Image image) {
+    public JPPlateau() {
         this.setLayout(null);
-        this.image=image;
+        try{
+           URL uri = London.class.getResource("../img/plateau.png");
+           image = ImageIO.read(uri); 
+        }
+        catch (IOException e1) {
+            System.out.println("image du plateau introuvable");
+            }
+        
         estZoome=false;
         updateImageSizeDezoom();
         this.addMouseListener(this);

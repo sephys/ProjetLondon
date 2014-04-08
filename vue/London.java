@@ -12,9 +12,6 @@ import model.TourJoueur;
 
 import java.awt.*;
 import java.awt.dnd.DragSource;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -36,7 +33,7 @@ public class London {
     private static Etalage etalage;
     private static JPMain[] tabJPMain;
     static JPanel south; // panel contenant la main des joueurs
-    static JPanel p;
+    static JPanel central;
     
     static JFrame frame; // fenêtre principale
     
@@ -58,44 +55,36 @@ public class London {
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public static void start()
     {
-
-           initTabJPMain();
-           acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-           acc.dispose();
-           frame=new JFrame();
+            
+           initTabJPMain(); // initialisation des panel contenant les mains des joueurs
+           
+           frame=new JFrame(); // frame contenant le jeu
           
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            JTabbedPane panelOnglet = new JTabbedPane();
+           
+           // panel contenant les différents onglets
+           JTabbedPane panelOnglet = new JTabbedPane();
             
-            JPPlateau plateau=null;
-            try
-            {
-               URL uri = London.class.getResource("../img/plateau.png");
-               Image image = ImageIO.read(uri);
-               plateau = new JPPlateau(image);
-              
-            }
-            catch (IOException e1) {
-            }
+           JPPlateau plateau=new JPPlateau();
             
-            
-            
-            // ajout d'un onglet :
+
+            // ajout des onglet :
             panelOnglet.addTab("Plateau",new JScrollPane(plateau));
 
             panelOnglet.addTab("Etalage",new JPEtalage());
 
           
- 
-            p=new JPanel(new BorderLayout());
+            // panel central contenant le plateau et la main du joueur
+            central=new JPanel(new BorderLayout());
            
+            // south contient la main du Joueur et contient celle du premier joueur en premier
             south=new JPMain(getTabJoueur()[0]);
-            south.setBackground(Color.blue);
             
-            p.add(panelOnglet,BorderLayout.CENTER);
-            p.add(south,BorderLayout.SOUTH);
             
-            frame.add(p);
+            central.add(panelOnglet,BorderLayout.CENTER);
+            central.add(south,BorderLayout.SOUTH);
+            
+            frame.add(central);
             
             MenuDroite menudroite=new MenuDroite();
             
@@ -116,7 +105,7 @@ public class London {
     // methode qui affiche le menu quand on lance l'application
     public static void menu()
     {
-        acc=new JFrame();
+        acc=new JFrame(); // JFrame d'accueil
         
         acc.setTitle("London");
         acc.setSize(570,810);
@@ -127,7 +116,8 @@ public class London {
         // intialisation de tous les elements
         acc.setContentPane(new JPAccueil());
         
-        
+        acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        acc.dispose();
         acc.setLocationRelativeTo(null);
         acc.setVisible(true);
         
