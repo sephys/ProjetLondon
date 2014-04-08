@@ -41,7 +41,7 @@ public class JPAccueil extends JPanel {
 		super();
 		//deck
 		London.setDeck(new Deck());
-		
+		Zone.initZone();
 		
 
 		// image de fond
@@ -116,7 +116,7 @@ public class JPAccueil extends JPanel {
 						nbJoueur.dispose();
 						London.setListeJoueur(initialisationJoueur(London.getDeck()));
 						London.setEtalage(new Etalage(London.getListeJoueur().getNbJoueur()+1));
-						Zone.initZone();
+						
 						London.start();
 					}
 				});
