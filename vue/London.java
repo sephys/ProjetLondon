@@ -89,6 +89,7 @@ public class London {
             MenuDroite menudroite=new MenuDroite();
             
             frame.add(menudroite,BorderLayout.EAST);
+            //frame.add(new JPInfos(),BorderLayout.WEST);
             frame.add(new JPInfos(),BorderLayout.WEST);
  
             frame.setSize(1444,810);

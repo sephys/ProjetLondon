@@ -23,7 +23,7 @@ public class JBZone extends JButton implements ActionListener{
     
     public JBZone(Zone zone){
         this.zone=zone;
-        this.setText(zone.getNom());
+        //this.setText(zone.getNom());
     }
 
     public Zone getZone() {
