@@ -95,10 +95,10 @@ public class London {
             
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
-            System.out.println(lJoueur);
-            System.out.println(deck);
-            System.out.println(etalage);
-            System.out.println(plateau);
+            //System.out.println(lJoueur);
+            //System.out.println(deck);
+            //System.out.println(etalage);
+            //System.out.println(plateau);
 
     }
     

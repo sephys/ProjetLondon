@@ -23,6 +23,7 @@ import model.Deck;
 import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
+import model.Zone;
 
 
 
@@ -41,7 +42,7 @@ public class JPAccueil extends JPanel {
 		super();
 		//deck
 		London.setDeck(new Deck());
-		
+		Zone.initZone();
 		
 
 		// image de fond
@@ -140,6 +141,7 @@ public class JPAccueil extends JPanel {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						nbJoueur.dispose();
+
 						
                                                 
                                                 // affichage des nom des joueurs
@@ -229,7 +231,6 @@ public class JPAccueil extends JPanel {
 		}
 		//choix hasard premier joueur
 		int indice=(int) (Math.random()*(nb-1)); //borne [0.. nbjoueur-1]
-		System.out.println(indice);
 		TourJoueur first = null;
 		TourJoueur tmp=null;
 		for(int i=0;i<nb;i++){
