@@ -18,6 +18,7 @@ import java.util.HashSet;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import vue.London;
 
 /**
  *
@@ -35,7 +36,6 @@ public class Zone {
     private ArrayList<String> zonesAdjacentes;
     private Joueur proprietaire;
     private boolean activable;
-    private static HashMap<String,Zone> zones;
     
    
 
@@ -147,7 +147,7 @@ public class Zone {
 	}
  
 	public static void initZone(){
-		zones=new HashMap<String,Zone>();
+		London.zones=new HashMap<String,Zone>();
 		try {
 			/* R�cup�ration du classeur Excel (en lecture) */
 			URL uri = Deck.class.getResource("../fichier/ZonePlateau.xls");
@@ -175,7 +175,7 @@ public class Zone {
 						Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
 						Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
 						tmpL);
-				zones.put(sheet.getCell(0,i).getContents(),tmpZ);
+				London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
 			}
 
 
@@ -193,7 +193,7 @@ public class Zone {
 	}
 	public HashSet<String> zoneInvest(){
 		HashSet <String> res=new HashSet<String>();
-		Collection zone=zones.values();
+		Collection zone=London.zones.values();
 		Zone currZ;
 		for(Object curr : zone){
 			currZ=(Zone)curr;

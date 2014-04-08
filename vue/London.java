@@ -17,11 +17,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import model.Zone;
 
 
 /**
@@ -42,6 +44,7 @@ public class London {
     static DragDrop dndListener;
     static DragSource dragSource;
     static JFrame acc;
+    public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
     public static void main(String[] args)  {
         
         // D&D

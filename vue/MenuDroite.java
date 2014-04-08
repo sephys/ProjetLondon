@@ -60,12 +60,9 @@ public class MenuDroite extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) 
             {  
-                London.p.remove(London.south);
-                London.setListeJoueur(London.getListeJoueur().getSuivant());
-                London.p.add(London.getTabJPMain()[1],BorderLayout.SOUTH);
-               // London.frame.repaint();
-                London.frame.revalidate();
-                //London.p.revalidate();
+                
+                actualiserMain();
+               
                 
             }
             
@@ -81,6 +78,24 @@ public class MenuDroite extends JPanel{
         this.add(zoom,BorderLayout.SOUTH);
         
         
+    }
+    
+    public void actualiserMain()
+    {
+                // sauvegarde de la main dans le tableau
+                London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=(JPMain) London.south;
+                // on enleve la main
+                London.p.remove(London.south);
+                // on passe au joueur suivant
+                London.setListeJoueur(London.getListeJoueur().getSuivant());
+                // on remplace le panel par celui du nouveau joueur
+                London.south=London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()];
+                // on ajoute le panel
+                London.p.add(London.south,BorderLayout.SOUTH);
+                
+                // actualiser la fenêtre
+                London.frame.repaint();
+                London.p.revalidate();
     }
     
 }
