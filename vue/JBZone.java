@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import model.Zone;
 
 /**
  *
@@ -18,25 +19,23 @@ import javax.swing.*;
  */
 public class JBZone extends JButton implements ActionListener{
     
-    private String nom; // nom du bouton et de la zone
+    private Zone zone; // nom du bouton et de la zone
     
-    public JBZone(String nom){
-        this.nom=nom;
+    public JBZone(Zone zone){
+        this.zone=zone;
+        this.setText(zone.getNom());
     }
 
-    public String getNom() {
-        return nom;
+    public Zone getZone() {
+        return this.zone;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }    
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JFrame jfzone=new JFrame();
-        jfzone.setTitle(getNom());
-        
+        System.out.println("T'as tapé sur " + this.zone.getNom());
     }
-    
 }

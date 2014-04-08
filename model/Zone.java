@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 package model;
 
@@ -37,9 +37,9 @@ public class Zone {
     private Joueur proprietaire;
     private boolean activable;
     
-   
-
-	public Zone(String nom, int prix, int nbCartes, int pointsVictoire, boolean zoneRouge, boolean adjacentTamise, boolean dessousTamise, ArrayList <String> zonesAdjacentes) {
+    
+    
+    public Zone(String nom, int prix, int nbCartes, int pointsVictoire, boolean zoneRouge, boolean adjacentTamise, boolean dessousTamise, ArrayList <String> zonesAdjacentes) {
         this.nom = nom;
         this.prix = prix;
         this.nbCartes = nbCartes;
@@ -50,157 +50,154 @@ public class Zone {
         this.zonesAdjacentes = zonesAdjacentes;
         this.proprietaire=null;
         if(zoneRouge){
-        	this.activable=true;
+            this.activable=true;
         }else{
-        	this.activable=false;
+            this.activable=false;
         }
     }
-
+    
     public String getNom() {
         return nom;
     }
-
+    
     public void setNom(String nom) {
         this.nom = nom;
     }
-
+    
     public int getPrix() {
         return prix;
     }
-
+    
     public void setPrix(int prix) {
         this.prix = prix;
     }
-
+    
     public int getNbCartes() {
         return nbCartes;
     }
-
+    
     public void setNbCartes(int nbCartes) {
         this.nbCartes = nbCartes;
     }
-
+    
     public int getPointsVictoire() {
         return pointsVictoire;
     }
-
+    
     public void setPointsVictoire(int pointsVictoire) {
         this.pointsVictoire = pointsVictoire;
     }
-
+    
     public boolean isZoneRouge() {
         return zoneRouge;
     }
-
+    
     public void setZoneRouge(boolean zoneRouge) {
         this.zoneRouge = zoneRouge;
     }
-
+    
     public boolean isAdjacentTamise() {
         return adjacentTamise;
     }
-
+    
     public void setAdjacentTamise(boolean adjacentTamise) {
         this.adjacentTamise = adjacentTamise;
     }
-
+    
     public boolean isDessousTamise() {
         return dessousTamise;
     }
-
+    
     public void setDessousTamise(boolean dessousTamise) {
         this.dessousTamise = dessousTamise;
     }
-
-     
+    
+    
     public ArrayList<String> getZonesAdjacentes() {
-		return zonesAdjacentes;
-	}
-
-	public void setZonesAdjacentes(ArrayList<String> zonesAdjacentes) {
-		this.zonesAdjacentes = zonesAdjacentes;
-	}
-
-	public Joueur getProprietaire() {
-		return proprietaire;
-	}
-
-	public void setProprietaire(Joueur proprietaire) {
-		this.proprietaire = proprietaire;
-	}
-	
-	
+        return zonesAdjacentes;
+    }
+    
+    public void setZonesAdjacentes(ArrayList<String> zonesAdjacentes) {
+        this.zonesAdjacentes = zonesAdjacentes;
+    }
+    
+    public Joueur getProprietaire() {
+        return proprietaire;
+    }
+    
+    public void setProprietaire(Joueur proprietaire) {
+        this.proprietaire = proprietaire;
+    }
+    
+    
     @Override
     public String toString(){
         return this.nom+" [prix : "+this.prix+", nbCartes : "+this.nbCartes+", pointsVictoire : "+this.pointsVictoire+", ";
     }
-
-	public boolean isActivable() {
-		// TODO Auto-generated method stub
-		return activable;
-	}
-
-	public void setActivable(boolean b) {
-		// TODO Auto-generated method stub
-		this.activable=b;
-		
-	}
- 
-	public static void initZone(){
-		London.zones=new HashMap<String,Zone>();
-		try {
-			/* R�cup�ration du classeur Excel (en lecture) */
-			URL uri = Deck.class.getResource("../fichier/ZonePlateau.xls");
-			Workbook workbook = Workbook.getWorkbook(new File(uri.getPath()));
-
-			/* Un fichier excel est compos� de plusieurs feuilles, on r�cup�re la premi�re, celle qui nous int�resse*/
-			Sheet sheet = workbook.getSheet(0);
-
-
-
-			//Parcour du fichier
-			for(int i=1;i<21;i++){
-
-				String listZ=sheet.getCell(7,i).getContents();
-				String[] t=listZ.split(";");
-				ArrayList<String> tmpL = new ArrayList<String>();
-				for(int j=0;j<t.length;j++){
-					tmpL.add(t[j]);
-				}
-				Zone tmpZ=new Zone(sheet.getCell(0,i).getContents(),
-						Integer.parseInt(sheet.getCell(1,i).getContents()),
-						Integer.parseInt(sheet.getCell(2,i).getContents()),
-						Integer.parseInt(sheet.getCell(3,i).getContents()),
-						Boolean.parseBoolean(sheet.getCell(4,i).getContents()),
-						Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
-						Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
-						tmpL);
-				London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
-			}
-
-
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BiffException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public HashSet<String> zoneInvest(){
-		HashSet <String> res=new HashSet<String>();
-		Collection zone=London.zones.values();
-		Zone currZ;
-		for(Object curr : zone){
-			currZ=(Zone)curr;
-			if(currZ.isActivable()&&currZ.getProprietaire()==null){
-				res.add(currZ.getNom());
-			}
-		}
-		return res;
-	}
+    
+    public boolean isActivable() {
+        // TODO Auto-generated method stub
+        return activable;
+    }
+    
+    public void setActivable(boolean b) {
+        // TODO Auto-generated method stub
+        this.activable=b;
+        
+    }
+    
+    public static void initZone(){
+        London.zones=new HashMap<String,Zone>();
+        try {
+            /* R�cup�ration du classeur Excel (en lecture) */
+            URL uri = Deck.class.getResource("../fichier/ZonePlateau.xls");
+            Workbook workbook = Workbook.getWorkbook(new File(uri.getPath()));
+            
+            /* Un fichier excel est compos� de plusieurs feuilles, on r�cup�re la premi�re, celle qui nous int�resse*/
+            Sheet sheet = workbook.getSheet(0);
+            
+            
+            
+            //Parcour du fichier
+            for(int i=1;i<21;i++){
+                
+                String listZ=sheet.getCell(7,i).getContents();
+                String[] t=listZ.split(";");
+                ArrayList<String> tmpL = new ArrayList<String>();
+                for(int j=0;j<t.length;j++){
+                    tmpL.add(t[j]);
+                }
+                Zone tmpZ=new Zone(sheet.getCell(0,i).getContents(),
+                        Integer.parseInt(sheet.getCell(1,i).getContents()),
+                        Integer.parseInt(sheet.getCell(2,i).getContents()),
+                        Integer.parseInt(sheet.getCell(3,i).getContents()),
+                        Boolean.parseBoolean(sheet.getCell(4,i).getContents()),
+                        Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
+                        Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
+                        tmpL);
+                London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
+            }            
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (BiffException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public HashSet<String> zoneInvest(){
+        HashSet <String> res=new HashSet<String>();
+        Collection zone=London.zones.values();
+        Zone currZ;
+        for(Object curr : zone){
+            currZ=(Zone)curr;
+            if(currZ.isActivable()&&currZ.getProprietaire()==null){
+                res.add(currZ.getNom());
+            }
+        }
+        return res;
+    }
 }
