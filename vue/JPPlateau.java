@@ -50,50 +50,95 @@ public class JPPlateau extends JPanel implements MouseListener {
         // ajout bouton :
         
         //JButton jb1=new JButton("Bethnal Green, Stepney&Poplar");
-        JBZone jb1=new JBZone(London.zones.get("Bethnal Green, Stepney&Poplar"));
+        JBZone jb1=new JBZone(London.zones.get("Bethnal Green, Stepney & Poplar"));
         jb1.setBounds(870, 328, 86, 38);
         this.add(jb1);
         
-        JButton jb2=new JButton("City");
-        // JBZone jb2=new JBZone(London.zones.get("City"));
+        //JButton jb2=new JButton("City");
+        JBZone jb2=new JBZone(London.zones.get("City"));
         jb2.setBounds(620, 342, 88, 38);
         this.add(jb2);
         
-        JButton jb3=new JButton("Hackney");
-        // JBZone jb3=new JBZone(London.zones.get("Hackney"));
+        // JButton jb3=new JButton("Hackney");
+        JBZone jb3=new JBZone(London.zones.get("Hackney"));
         jb3.setBounds(793, 122, 88, 38);
         this.add(jb3);
         
-        JButton jb4=new JButton("Islington&Stoke Newington");
-        // JBZone jb4=new JBZone(London.zones.get("Islington&Stoke Newington"));
+        //JButton jb4=new JButton("Islington&Stoke Newington");
+        JBZone jb4=new JBZone(London.zones.get("Islington & Stoke Newington"));
         jb4.setBounds(582, 122, 88, 38);
         this.add(jb4);
         
-        JButton jb5=new JButton("Saint Pancras");
-        // JBZone jb5=new JBZone(London.zones.get("Saint Pancras"));
+        //JButton jb5=new JButton("Saint Pancras");
+        JBZone jb5=new JBZone(London.zones.get("St.Pancras"));
         jb5.setBounds(447, 225, 88, 38);
         this.add(jb5);
         
-        JButton jb6=new JButton("Hampstead");
-        // JBZone jb5=new JBZone(London.zones.get("Hampstead"));
+        //JButton jb6=new JButton("Hampstead");
+        JBZone jb6=new JBZone(London.zones.get("Hampstead"));
         jb6.setBounds(271, 139, 88, 38);
         this.add(jb6);
         
-        JButton jb7=new JButton("investir");
-        jb7.setBounds(355, 390, 80, 30);
+        //JButton jb7=new JButton("St. Marylebone");
+        JBZone jb7=new JBZone(London.zones.get("St. Marylebone"));
+        jb7.setBounds(333, 313, 88, 38);
         this.add(jb7);
         
-        JButton jb8=new JButton("investir");
-        jb8.setBounds(625, 420, 80, 30);
+        JBZone jb8=new JBZone(London.zones.get("Paddington"));
+        jb8.setBounds(242, 389, 88, 38);
         this.add(jb8);
         
-        JButton jb9=new JButton("investir");
-        jb9.setBounds(625, 420, 80, 30);
+        JBZone jb9=new JBZone(London.zones.get("Kensington"));
+        jb9.setBounds(186, 486, 88, 38);
         this.add(jb9);
         
-        JButton jb10=new JButton("investir");
-        jb10.setBounds(625, 420, 80, 30);
+        JBZone jb10=new JBZone(London.zones.get("Hammersmith"));
+        jb10.setBounds(60, 467, 88, 38);
         this.add(jb10);
+        
+        JBZone jb11=new JBZone(London.zones.get("Westminster"));
+        jb11.setBounds(432, 462, 88, 38);
+        this.add(jb11);
+        
+        JBZone jb12=new JBZone(London.zones.get("Southwark & Bernmondsey"));
+        jb12.setBounds(657, 511, 88, 38);
+        this.add(jb12);
+        
+        JBZone jb13=new JBZone(London.zones.get("Lambeth"));
+        jb13.setBounds(579, 740, 88, 38);
+        this.add(jb13);
+        
+        JBZone jb14=new JBZone(London.zones.get("Camberwell"));
+        jb14.setBounds(736, 712, 88, 38);
+        this.add(jb14);
+        
+        JBZone jb15=new JBZone(London.zones.get("Deptford"));
+        jb15.setBounds(885, 665, 88, 38);
+        this.add(jb15);
+        
+        JBZone jb16=new JBZone(London.zones.get("Lewisham"));
+        jb16.setBounds(972, 842, 88, 38);
+        this.add(jb16);
+        
+        JBZone jb17=new JBZone(London.zones.get("Greenwich"));
+        jb17.setBounds(1091, 611, 88, 38);
+        this.add(jb17);
+        
+        JBZone jb18=new JBZone(London.zones.get("Fulham & Chelsea"));
+        jb18.setBounds(181, 659, 88, 38);
+        this.add(jb18);
+        
+        JBZone jb19=new JBZone(London.zones.get("Wandsworth"));
+        jb19.setBounds(207, 843, 88, 38);
+        this.add(jb19);
+        
+        JBZone jb20=new JBZone(London.zones.get("Battersea"));
+        jb20.setBounds(366, 711, 88, 38);
+        this.add(jb20);
+        
+        JBZone jb21=new JBZone(London.zones.get("Southwark & Bernmondsey"));
+        jb21.setBounds(242, 389, 88, 38);
+        this.add(jb21);
     }
     
     public void setZoom() {

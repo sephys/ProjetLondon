@@ -176,6 +176,7 @@ public class Zone {
                         Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
                         tmpL);
                 London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
+                System.out.println(tmpZ.getNom());
             }            
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
