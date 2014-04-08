@@ -23,6 +23,7 @@ import model.Deck;
 import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
+import model.Zone;
 
 
 
@@ -115,6 +116,7 @@ public class JPAccueil extends JPanel {
 						nbJoueur.dispose();
 						London.setListeJoueur(initialisationJoueur(London.getDeck()));
 						London.setEtalage(new Etalage(London.getListeJoueur().getNbJoueur()+1));
+						Zone.initZone();
 						London.start();
 					}
 				});
