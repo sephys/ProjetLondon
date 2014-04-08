@@ -182,7 +182,6 @@ public class JPAccueil extends JPanel {
 		}
 		//choix hasard premier joueur
 		int indice=(int) (Math.random()*(nb-1)); //borne [0.. nbjoueur-1]
-		System.out.println(indice);
 		TourJoueur first = null;
 		TourJoueur tmp=null;
 		for(int i=0;i<nb;i++){
