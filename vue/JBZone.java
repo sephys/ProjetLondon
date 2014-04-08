@@ -27,8 +27,7 @@ public class JBZone extends JButton implements ActionListener{
         f = new Font(Font.DIALOG, Font.BOLD, 9);
         this.setFont(f);
         this.zone=zone;
-        String nomZone = zone.getNom();
-        this.setText(split(nomZone));
+        this.setText(split(zone.getNom()));
     }
     
     public Zone getZone() {

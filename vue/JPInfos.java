@@ -47,14 +47,9 @@ public class JPInfos extends JPanel{
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi.add(jps);
             this.add(jps);
-            if(i != listeJoueurs.length){
-                JSeparator separateur = new JSeparator();
-                separateur.setPreferredSize(new Dimension(20, 20));
-                this.add(separateur);
-            }
 
         }
-        this.setPreferredSize(new Dimension(430,810) );
+        this.setPreferredSize(new Dimension(300,810) );
     }
     
     public static void main(String[] args){
