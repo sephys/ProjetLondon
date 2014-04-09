@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import model.Joueur;
 
 
 /**
@@ -56,24 +57,24 @@ public class JPEtalage extends JPanel{
     
     public void initEtalage(int nbJoueur)
     {
+       
         
-            
-        for(int i=0;i<5;i++)
+        int nbEtalage=Joueur.getNbJoueur()+1;
+        for(int i=0;i<nbEtalage;i++)
         {
-            JPanel eta1=new JPanel();
+            JPTest eta1=new JPTest();
           
              // panel haut
         
-            eta1.setBounds(26+134*i, 13, 90, 138);
-            
+            eta1.setBounds(23+161*i, 13, 122, 168);
             eta1.setOpaque(false); // transparance
             this.add(eta1);
             // D&D
             DropTarget dropTarget1 = new DropTarget(eta1, DnDConstants.ACTION_MOVE, 
                 London.dndListener);
             
-            JPanel eta2=new JPanel(); // panel bas
-            eta2.setBounds(26+134*i, 181, 90, 138);
+            JPTest eta2=new JPTest(); // panel bas
+            eta2.setBounds(23+161*i, 216, 122, 168);
             eta2.setOpaque(false); // transparance
             
             this.add(eta2);
