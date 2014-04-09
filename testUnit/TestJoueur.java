@@ -2,8 +2,9 @@ package testUnit;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayDeque;
+
 import model.Carte;
-import model.Deck;
 import model.Joueur;
 
 import org.junit.After;
@@ -12,9 +13,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import vue.London;
+
 public class TestJoueur {
 	Joueur test;
-	Deck d;
+	ArrayDeque<Carte> d;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -26,7 +29,8 @@ public class TestJoueur {
 	@Before
 	public void setUp() throws Exception {
 		this.test=new Joueur("j1");
-		d=new Deck();
+		Carte.initDeck();
+		d=London.getDeck();
 	}
 
 	@After
