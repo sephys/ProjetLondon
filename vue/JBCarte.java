@@ -29,7 +29,7 @@ import model.Carte;
  *
  * @author Anh-Djuy Bouton représentant une carte
  */
-public class JBCarte extends JButton implements ActionListener, MouseListener {
+public class JBCarte extends JButton implements  MouseListener {
 
     private Image image;
     private Carte carte;
@@ -51,10 +51,15 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
         this.addMouseListener(this);
     }
 
+   
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mouseClicked(MouseEvent e) {
+        if(e.getClickCount()==2)
+        {
+           
+        }
     }
+    
 
     /**
      * Code repris de http://www.developpez.net permettant de redimensionner une
@@ -72,10 +77,6 @@ public class JBCarte extends JButton implements ActionListener, MouseListener {
         g.drawImage(source, 0, 0, width, height, null);
         g.dispose();
         return img;
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
     }
 
     @Override

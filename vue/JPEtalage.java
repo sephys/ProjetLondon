@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import model.Carte;
 import model.Joueur;
 
 
@@ -29,6 +30,10 @@ import model.Joueur;
 public class JPEtalage extends JPanel{
     
     private Image img; // image de l'étalage
+    private JPanel[] tab1;
+    private JPanel[] tab2;
+    
+    
  
     
     public JPEtalage()
@@ -60,6 +65,8 @@ public class JPEtalage extends JPanel{
        
         
         int nbEtalage=Joueur.getNbJoueur()+1;
+        tab1=new JPanel[nbEtalage];
+        tab2=new JPanel[nbEtalage];
         for(int i=0;i<nbEtalage;i++)
         {
             JPTest eta1=new JPTest();
@@ -68,7 +75,9 @@ public class JPEtalage extends JPanel{
         
             eta1.setBounds(23+161*i, 13, 122, 168);
             eta1.setOpaque(false); // transparance
+            
             this.add(eta1);
+            tab1[i]=eta1;
             // D&D
             DropTarget dropTarget1 = new DropTarget(eta1, DnDConstants.ACTION_MOVE, 
                 London.dndListener);
@@ -78,10 +87,20 @@ public class JPEtalage extends JPanel{
             eta2.setOpaque(false); // transparance
             
             this.add(eta2);
+            tab2[i]=eta2;
             // D&D
             DropTarget dropTarget2 = new DropTarget(eta2, DnDConstants.ACTION_MOVE, 
                 London.dndListener);
         }
         
+    }
+    
+    public void actualiser(Carte[] tab1,Carte[] tab2)
+    {
+        for(int i=0;i<tab1.length;i++)
+        {
+            this.tab1[i].add(new JBCarte(tab1[i]));
+            this.tab2[i].add(new JBCarte(tab2[i]));
+        }
     }
 }
