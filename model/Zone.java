@@ -150,7 +150,7 @@ public class Zone {
         London.zones=new HashMap<String,Zone>();
         try {
             /* R�cup�ration du classeur Excel (en lecture) */
-            URL uri = Deck.class.getResource("../fichier/ZonePlateau.xls");
+            URL uri = Joueur.class.getResource("../fichier/ZonePlateau.xls");
             Workbook workbook = Workbook.getWorkbook(new File(uri.getPath()));
             
             /* Un fichier excel est compos� de plusieurs feuilles, on r�cup�re la premi�re, celle qui nous int�resse*/

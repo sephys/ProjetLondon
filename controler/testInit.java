@@ -7,14 +7,12 @@ import java.util.Scanner;
 
 import model.Carte;
 import model.Constructible;
-import model.Deck;
 import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
 import model.Zone;
 
 public class testInit {
-	private static Deck deck;
 	private static TourJoueur lJoueur;
 	private static Etalage defausse;
 

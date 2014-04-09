@@ -2,10 +2,10 @@ package testUnit;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayDeque;
 import java.util.Scanner;
 
 import model.Carte;
-import model.Deck;
 import model.Etalage;
 
 import org.junit.After;
@@ -14,8 +14,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import vue.London;
+
 public class TestEtalage {
-	Deck d;
+	ArrayDeque<Carte> d;
 	Etalage et;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -28,7 +30,8 @@ public class TestEtalage {
 
 	@Before
 	public void setUp() throws Exception {
-		d=new Deck();
+		Carte.initDeck();
+		d=London.getDeck();
 		System.out.println("nbJoueur?");
 		Scanner sc =new Scanner(System.in);
 		int nb=sc.nextInt();

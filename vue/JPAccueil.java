@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import model.Deck;
+import model.Carte;
 import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
@@ -41,7 +42,7 @@ public class JPAccueil extends JPanel {
 	{
 		super();
 		//deck
-		London.setDeck(new Deck());
+		Carte.initDeck();
 		Zone.initZone();
 		
 
@@ -193,7 +194,7 @@ public class JPAccueil extends JPanel {
 	}
 
 
-	private  TourJoueur initialisationJoueur(Deck d) {
+	private  TourJoueur initialisationJoueur(ArrayDeque<Carte> arrayDeque) {
 		int nb=Joueur.getNbJoueur();
 		London.setTabJoueur(new Joueur[nb]);
 		int fin=nb*6;
@@ -204,14 +205,14 @@ public class JPAccueil extends JPanel {
 					London.getTabJoueur()[0]=new Joueur(nomJoueurs[0]);
 					
 				}
-				London.getTabJoueur()[0].piocheCarte(d.poll());
+				London.getTabJoueur()[0].piocheCarte(arrayDeque.poll());
 				break;
 			case 1:
 				if(London.getTabJoueur()[1]==null){
 					London.getTabJoueur()[1]=new Joueur(nomJoueurs[1]);
 
 				}
-				London.getTabJoueur()[1].piocheCarte(d.poll());
+				London.getTabJoueur()[1].piocheCarte(arrayDeque.poll());
 				break;
 
 			case 2:
@@ -219,14 +220,14 @@ public class JPAccueil extends JPanel {
 					London.getTabJoueur()[2]=new Joueur(nomJoueurs[2]);
 
 				}
-				London.getTabJoueur()[2].piocheCarte(d.poll());
+				London.getTabJoueur()[2].piocheCarte(arrayDeque.poll());
 				break;
 			case 3:
 				if(London.getTabJoueur()[3]==null){
 					London.getTabJoueur()[3]=new Joueur(nomJoueurs[3]);
 
 				}
-				London.getTabJoueur()[3].piocheCarte(d.poll());
+				London.getTabJoueur()[3].piocheCarte(arrayDeque.poll());
 				break;
 			}
 		}
