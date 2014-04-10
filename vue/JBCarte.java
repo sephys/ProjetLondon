@@ -54,9 +54,12 @@ public class JBCarte extends JButton implements  MouseListener {
    
     @Override
     public void mouseClicked(MouseEvent e) {
+        JBCarte jb=(JBCarte) e.getComponent();
         if(e.getClickCount()==2)
         {
-           
+           System.out.println("test double clique");
+           London.getEtalage().addCarte(jb.getCarte());
+           London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
         }
     }
     
@@ -98,4 +101,15 @@ public class JBCarte extends JButton implements  MouseListener {
         JPZoom.setImg(carte.getPath());
 
     }
+
+    public Carte getCarte() {
+        return carte;
+    }
+
+    public void setCarte(Carte carte) {
+        this.carte = carte;
+    }
+    
+    
+    
 }
