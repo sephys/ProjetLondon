@@ -15,7 +15,6 @@ public class Joueur {
 	private int argent;
 	private int nbPret; 
     private static int nbJoueur;
-    private static Joueur [] tabJoueur;
     private int placeJoueur;
 
 
@@ -109,14 +108,6 @@ public class Joueur {
 
 	public void setNbPret(int nbPret) {
 		this.nbPret = nbPret;
-	}
-
-	public static Joueur[] getTabJoueur() {
-		return tabJoueur;
-	}
-
-	public static void setTabJoueur(Joueur[] tabJoueur) {
-		Joueur.tabJoueur = tabJoueur;
 	}
 	public ArrayList<ArrayDeque<Constructible>> getListeChantier() {
 		return listeChantier;

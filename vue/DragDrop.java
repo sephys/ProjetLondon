@@ -17,6 +17,7 @@ import java.awt.dnd.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class DragDrop implements DragGestureListener, DragSourceListener,
         DropTargetListener, Transferable {
@@ -99,6 +100,12 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
             oldContainer.repaint();
             container.validate();
             container.repaint();
+            System.out.println("wuuuuuuuuut");
+            
+           if(((DropTarget) target).getComponent() instanceof JPTest) 
+           {
+               System.out.println("youhou");
+           }
         } 
         catch (Exception ex) {
             ex.printStackTrace();

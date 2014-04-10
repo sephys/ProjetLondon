@@ -19,7 +19,7 @@ import javax.swing.*;
  */
 public class MenuDroite extends JPanel{
     
-    private JLabel joueur; // indique quel joueur joue
+    private JLabel labelJoueur; // indique quel joueur joue
     private JPanel main;
     
     
@@ -36,9 +36,9 @@ public class MenuDroite extends JPanel{
         main.setBackground(Color.yellow);
         
         // a changer : dynamique
-        joueur=new JLabel("Joueur 1");
+        labelJoueur=new JLabel(London.getListeJoueur().getJoueur().getNom());
         
-        main.add(joueur);
+        main.add(labelJoueur);
         main.add(new JButton("Jouer des cartes"));
         main.add(new JButton("Restaurer la ville"));
         main.add(new JButton("Investir"));
@@ -49,7 +49,7 @@ public class MenuDroite extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {  
             	London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
-                JPMain.ajoutCarte(London.getDeck().poll());
+                London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
             }
             
         });
@@ -60,12 +60,9 @@ public class MenuDroite extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) 
             {  
-                London.p.remove(London.south);
-                London.setListeJoueur(London.getListeJoueur().getSuivant());
-                London.p.add(London.getTabJPMain()[1],BorderLayout.SOUTH);
-               // London.frame.repaint();
-                London.frame.revalidate();
-                //London.p.revalidate();
+                
+                actualiserMain();
+               
                 
             }
             
@@ -82,5 +79,33 @@ public class MenuDroite extends JPanel{
         
         
     }
+    
+    public void actualiserMain()
+    {
+        
+                
+                
+                // sauvegarde de la main dans le tableau
+                London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=(JPMain) London.south;
+                // on enleve la main
+                London.central.remove(London.south);
+                // on passe au joueur suivant
+                London.setListeJoueur(London.getListeJoueur().getSuivant());
+                // change le label nomJoeuur
+                labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
+                // on remplace le panel par celui du nouveau joueur
+                London.south=London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()];
+                // on ajoute le panel
+                London.central.add(London.south,BorderLayout.SOUTH);
+                
+                // actualiser la fenêtre
+                London.frame.repaint();
+                London.central.revalidate();
+    }
+
+   
+   
+    
+    
     
 }

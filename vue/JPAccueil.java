@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +20,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import model.Deck;
+import model.Carte;
 import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
+import model.Zone;
 
 
 
@@ -33,14 +35,15 @@ import model.TourJoueur;
 public class JPAccueil extends JPanel {
 
 	private Image img; // image de fond
-	private static int testNb;
+	private boolean lancer=false; // savoir si on peut démarrer le jeu
+        private  String[] nomJoueurs; // tableau de noms permettant l'initialisation
 	
 	public JPAccueil()
 	{
 		super();
 		//deck
-		London.setDeck(new Deck());
-		
+		Carte.initDeck();
+		Zone.initZone();
 		
 
 		// image de fond
@@ -51,9 +54,35 @@ public class JPAccueil extends JPanel {
 			Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		// premier bouton play
-		JButton play =new JButton("play");
-		play.addActionListener(new ActionListener(){
+		// --- BOUTON DEBUG A SUPPRIMER A LA FIN 
+		JButton jbDebug =new JButton("Debug");
+		jbDebug.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+                                                Joueur.setNbJoueur(4);
+                                                nomJoueurs=new String[4];
+                                                nomJoueurs[0]="Joueur 1";
+                                                nomJoueurs[1]="Joueur 2";
+                                                nomJoueurs[2]="Joueur 3";
+                                                nomJoueurs[3]="Joueur 4";
+						London.setListeJoueur(initialisationJoueur(London.getDeck()));
+						London.setEtalage(new Etalage(London.getListeJoueur().getNbJoueur()+1));
+						London.start();
+					}
+				});
+			
+
+
+
+		
+		
+
+		this.add(jbDebug);
+                // --- FIN BOUTON DEBUG A SUPPRIMER A LA FIN 
+                JButton play=new JButton("Jouer");
+                play.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -113,9 +142,31 @@ public class JPAccueil extends JPanel {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						nbJoueur.dispose();
-						London.setListeJoueur(initialisationJoueur(London.getDeck()));
-						London.setEtalage(new Etalage(London.getListeJoueur().getNbJoueur()+1));
-						London.start();
+
+						
+                                                
+                                                // affichage des nom des joueurs
+                                                nomJoueurs=new String[Joueur.getNbJoueur()];
+                                                int i;
+                                                for(i=0;i<Joueur.getNbJoueur();i++)
+                                                {
+                                                   String nom=JOptionPane.showInputDialog("Nom du joueur "+(i+1));
+                                                   // on a appuyer sur la croix ou cancel
+                                                   if(nom==null)
+                                                   {
+                                                        break;
+                                                   }
+                                                   nomJoueurs[i]=nom;
+                                                }
+                                                System.out.println("i : "+i);
+                                                System.out.println("nb joeuur "+Joueur.getNbJoueur());
+                                                if(i==Joueur.getNbJoueur()) // on a bien rentrer tous les noms
+                                                {
+                                                    London.setListeJoueur(initialisationJoueur(London.getDeck()));
+                                                    London.setEtalage(new Etalage(Joueur.getNbJoueur()+1));
+                                                    
+                                                    London.start();     
+                                                }
 					}
 				});
 				nbJoueur.add(p);
@@ -128,9 +179,11 @@ public class JPAccueil extends JPanel {
 			}
 
 		});
-		play.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-		this.add(play);
+                this.add(play);
+                if(lancer)
+                {
+                    
+                }
 
 	}
 
@@ -141,46 +194,45 @@ public class JPAccueil extends JPanel {
 	}
 
 
-	private static TourJoueur initialisationJoueur(Deck d) {
+	private  TourJoueur initialisationJoueur(ArrayDeque<Carte> arrayDeque) {
 		int nb=Joueur.getNbJoueur();
-		Joueur.setTabJoueur(new Joueur[nb]);
+		London.setTabJoueur(new Joueur[nb]);
 		int fin=nb*6;
 		for(int i=0;i<fin;i++){
 			switch(i%nb){
 			case 0 :
-				if(Joueur.getTabJoueur()[0]==null){
-					Joueur.getTabJoueur()[0]=new Joueur("j1");
+				if(London.getTabJoueur()[0]==null){
+					London.getTabJoueur()[0]=new Joueur(nomJoueurs[0]);
 					
 				}
-				Joueur.getTabJoueur()[0].piocheCarte(d.poll());
+				London.getTabJoueur()[0].piocheCarte(arrayDeque.poll());
 				break;
 			case 1:
-				if(Joueur.getTabJoueur()[1]==null){
-					Joueur.getTabJoueur()[1]=new Joueur("j2");
+				if(London.getTabJoueur()[1]==null){
+					London.getTabJoueur()[1]=new Joueur(nomJoueurs[1]);
 
 				}
-				Joueur.getTabJoueur()[1].piocheCarte(d.poll());
+				London.getTabJoueur()[1].piocheCarte(arrayDeque.poll());
 				break;
 
 			case 2:
-				if(Joueur.getTabJoueur()[2]==null){
-					Joueur.getTabJoueur()[2]=new Joueur("j3");
+				if(London.getTabJoueur()[2]==null){
+					London.getTabJoueur()[2]=new Joueur(nomJoueurs[2]);
 
 				}
-				Joueur.getTabJoueur()[2].piocheCarte(d.poll());
+				London.getTabJoueur()[2].piocheCarte(arrayDeque.poll());
 				break;
 			case 3:
-				if(Joueur.getTabJoueur()[3]==null){
-					Joueur.getTabJoueur()[3]=new Joueur("j4");
+				if(London.getTabJoueur()[3]==null){
+					London.getTabJoueur()[3]=new Joueur(nomJoueurs[3]);
 
 				}
-				Joueur.getTabJoueur()[3].piocheCarte(d.poll());
+				London.getTabJoueur()[3].piocheCarte(arrayDeque.poll());
 				break;
 			}
 		}
 		//choix hasard premier joueur
 		int indice=(int) (Math.random()*(nb-1)); //borne [0.. nbjoueur-1]
-		System.out.println(indice);
 		TourJoueur first = null;
 		TourJoueur tmp=null;
 		for(int i=0;i<nb;i++){
@@ -188,8 +240,8 @@ public class JPAccueil extends JPanel {
 			TourJoueur current;
 			switch((indice+i)%nb){
 			case 0 :
-				current=new TourJoueur(Joueur.getTabJoueur()[0]);
-				Joueur.getTabJoueur()[0].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[0]);
+				London.getTabJoueur()[0].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -198,8 +250,8 @@ public class JPAccueil extends JPanel {
 				tmp=current;
 				break;
 			case 1:
-				current=new TourJoueur(Joueur.getTabJoueur()[1]);
-				Joueur.getTabJoueur()[1].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[1]);
+				London.getTabJoueur()[1].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -209,8 +261,8 @@ public class JPAccueil extends JPanel {
 				break;
 
 			case 2:
-				current=new TourJoueur(Joueur.getTabJoueur()[2]);
-				Joueur.getTabJoueur()[2].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[2]);
+				London.getTabJoueur()[2].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{
@@ -219,8 +271,8 @@ public class JPAccueil extends JPanel {
 				tmp=current;
 				break;
 			case 3:
-				current=new TourJoueur(Joueur.getTabJoueur()[3]);
-				Joueur.getTabJoueur()[3].setPlaceJoueur(i);
+				current=new TourJoueur(London.getTabJoueur()[3]);
+				London.getTabJoueur()[3].setPlaceJoueur(i);
 				if(tmp!=null){
 					tmp.setSuivant(current);
 				}else{

@@ -7,20 +7,17 @@ import java.util.Scanner;
 
 import model.Carte;
 import model.Constructible;
-import model.Deck;
 import model.Etalage;
 import model.Joueur;
-import model.Plateau;
 import model.TourJoueur;
 import model.Zone;
 
 public class testInit {
-	private static Deck deck;
 	private static TourJoueur lJoueur;
 	private static Etalage defausse;
 
 	public static void main(String[] args) {
-
+		/*
 		// TODO Auto-generated method stub
 		//crÃ©ation du deck
 		deck=new Deck();
@@ -261,7 +258,6 @@ public class testInit {
 		HashSet<String> zDispo=plateau.zoneInvest();
 		for(String tmp : zDispo){
 			System.out.println(plateau.get(tmp));
-		}
+		}*/
 	}
-
 }
