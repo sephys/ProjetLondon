@@ -31,6 +31,7 @@ public class JPMain extends JPanel {
     
     private JScrollPane JSPMain;
     private JPanel main;
+    private boolean goEtalage; // est-ce que le joueur peut poser une carte sur l'etalage
     
     public JPMain(){
         super(new BorderLayout());
