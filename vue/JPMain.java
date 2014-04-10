@@ -75,4 +75,20 @@ public class JPMain extends JPanel {
             main.revalidate();
       
     }
+    
+    public void removeCarte(Carte e)
+    {
+        JBCarte c=new JBCarte(e);
+
+        for(int i=0;i<main.getComponentCount();i++)
+        {
+            if(((JBCarte) main.getComponent(i)).equals(c))
+            {
+                main.remove(main.getComponent(i));
+            }
+        }
+        
+        main.revalidate();
+        
+    }
 }

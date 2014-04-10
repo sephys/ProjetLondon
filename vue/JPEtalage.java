@@ -97,10 +97,37 @@ public class JPEtalage extends JPanel{
     
     public void actualiser(Carte[] tab1,Carte[] tab2)
     {
+        
+        // on vide l'etalage
         for(int i=0;i<tab1.length;i++)
         {
-            this.tab1[i].add(new JBCarte(tab1[i]));
-            this.tab2[i].add(new JBCarte(tab2[i]));
+            if(this.tab1[i].getComponentCount()!=0)
+            {
+                this.tab1[i].remove(0);
+            }
+            
+            if(this.tab2[i].getComponentCount()!=0)
+            {
+                this.tab2[i].remove(0);
+            }
         }
+        
+        // on remplit l'etalage
+        for(int i=0;i<tab1.length;i++)
+        {
+            if(tab1[i]!=null)
+            {
+              this.tab1[i].add(new JBCarte(tab1[i]));
+            } 
+            if(tab2[i]!=null)
+            {
+              this.tab2[i].add(new JBCarte(tab2[i]));  
+            }
+        
+            
+        }
+        
+        this.repaint();
+        this.revalidate();
     }
 }

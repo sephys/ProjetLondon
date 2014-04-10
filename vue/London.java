@@ -72,8 +72,8 @@ public class London {
 
 		// ajout des onglet :
 		panelOnglet.addTab("Plateau",new JScrollPane(plateau));
-                
-		panelOnglet.addTab("Etalage",new JPEtalage());
+                jpEtalage=new JPEtalage();
+		panelOnglet.addTab("Etalage",jpEtalage);
 
 
 		// panel central contenant le plateau et la main du joueur
