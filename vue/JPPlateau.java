@@ -30,7 +30,7 @@ public class JPPlateau extends JPanel implements MouseListener {
 
  
     public JPPlateau() {
-        this.tableauZone = new JBZone[21];
+        this.tableauZone = new JBZone[20];
         this.setLayout(null);
         try{
            URL uri = London.class.getResource("../img/plateau.png");
@@ -46,7 +46,6 @@ public class JPPlateau extends JPanel implements MouseListener {
         this.setPreferredSize(new Dimension(5,568));
         this.setBackground(Color.blue);
         initBouton();
-        
     }
     
     public void initBouton(){
@@ -56,115 +55,129 @@ public class JPPlateau extends JPanel implements MouseListener {
         JBZone jb1=new JBZone(London.zones.get("Bethnal Green, Stepney & Poplar"));
         jb1.setBounds(870, 328, 86, 38);
         jb1.setVisible(false);
+        jb1.setEnabled(false);
         this.add(jb1);
         
         //JButton jb2=new JButton("City");
         JBZone jb2=new JBZone(London.zones.get("City"));
         jb2.setBounds(620, 342, 88, 38);
         jb2.setVisible(false);
+        jb2.setEnabled(false);
         this.add(jb2);
         
         // JButton jb3=new JButton("Hackney");
         JBZone jb3=new JBZone(London.zones.get("Hackney"));
         jb3.setBounds(793, 122, 88, 38);
         jb3.setVisible(false);
+        jb3.setEnabled(false);
         this.add(jb3);
         
         //JButton jb4=new JButton("Islington&Stoke Newington");
         JBZone jb4=new JBZone(London.zones.get("Islington & Stoke Newington"));
         jb4.setBounds(582, 122, 88, 38);
         jb4.setVisible(false);
+        jb4.setEnabled(false);
         this.add(jb4);
         
         //JButton jb5=new JButton("Saint Pancras");
-        JBZone jb5=new JBZone(London.zones.get("St.Pancras"));
+        JBZone jb5=new JBZone(London.zones.get("St. Pancras"));
         jb5.setBounds(447, 225, 88, 38);
         jb5.setVisible(false);
+        jb5.setEnabled(false);
         this.add(jb5);
         
         //JButton jb6=new JButton("Hampstead");
         JBZone jb6=new JBZone(London.zones.get("Hampstead"));
         jb6.setBounds(271, 139, 88, 38);
         jb6.setVisible(false);
+        jb6.setEnabled(false);        
         this.add(jb6);
         
         //JButton jb7=new JButton("St. Marylebone");
         JBZone jb7=new JBZone(London.zones.get("St. Marylebone"));
         jb7.setBounds(333, 313, 88, 38);
         jb7.setVisible(false);
+        jb7.setEnabled(false);
         this.add(jb7);
         
         JBZone jb8=new JBZone(London.zones.get("Paddington"));
         jb8.setBounds(242, 389, 88, 38);
         jb8.setVisible(false);
+        jb8.setEnabled(false);
         this.add(jb8);
         
         JBZone jb9=new JBZone(London.zones.get("Kensington"));
         jb9.setBounds(186, 486, 88, 38);
         jb9.setVisible(false);
+        jb9.setEnabled(false);
         this.add(jb9);
         
         JBZone jb10=new JBZone(London.zones.get("Hammersmith"));
         jb10.setBounds(60, 467, 88, 38);
         jb10.setVisible(false);
+        jb10.setEnabled(false);
         this.add(jb10);
         
         JBZone jb11=new JBZone(London.zones.get("Westminster"));
         jb11.setBounds(432, 462, 88, 38);
         jb11.setVisible(false);
+        jb11.setEnabled(false);
         this.add(jb11);
         
-        JBZone jb12=new JBZone(London.zones.get("Southwark & Bernmondsey"));
+        JBZone jb12=new JBZone(London.zones.get("Southwark & Bermondsey"));
         jb12.setBounds(657, 511, 88, 38);
         jb12.setVisible(false);
+        jb12.setEnabled(false);
         this.add(jb12);
         
         JBZone jb13=new JBZone(London.zones.get("Lambeth"));
         jb13.setBounds(579, 740, 88, 38);
         jb13.setVisible(false);
+        jb13.setEnabled(false);
         this.add(jb13);
         
         JBZone jb14=new JBZone(London.zones.get("Camberwell"));
         jb14.setBounds(736, 712, 88, 38);
         jb14.setVisible(false);
+        jb14.setEnabled(false);
         this.add(jb14);
         
         JBZone jb15=new JBZone(London.zones.get("Deptford"));
         jb15.setBounds(885, 665, 88, 38);
         jb15.setVisible(false);
+        jb15.setEnabled(false);
         this.add(jb15);
         
         JBZone jb16=new JBZone(London.zones.get("Lewisham"));
         jb16.setBounds(972, 842, 88, 38);
         jb16.setVisible(false);
+        jb16.setEnabled(false);
         this.add(jb16);
         
         JBZone jb17=new JBZone(London.zones.get("Greenwich"));
         jb17.setBounds(1091, 611, 88, 38);
         jb17.setVisible(false);
+        jb17.setEnabled(false);
         this.add(jb17);
         
         JBZone jb18=new JBZone(London.zones.get("Fulham & Chelsea"));
         jb18.setBounds(181, 659, 88, 38);
         jb18.setVisible(false);
+        jb18.setEnabled(false);
         this.add(jb18);
         
         JBZone jb19=new JBZone(London.zones.get("Wandsworth"));
         jb19.setBounds(207, 843, 88, 38);
         jb19.setVisible(false);
+        jb19.setEnabled(false);
         this.add(jb19);
         
         JBZone jb20=new JBZone(London.zones.get("Battersea"));
         jb20.setBounds(366, 711, 88, 38);
         jb20.setVisible(false);
+        jb20.setEnabled(false);
         this.add(jb20);
         
-        JBZone jb21=new JBZone(London.zones.get("Southwark & Bernmondsey"));
-        jb21.setBounds(242, 389, 88, 38);
-        jb21.setVisible(false);
-        this.add(jb21);
-        
-        tableauZone = new JBZone[21];
         tableauZone[0] = jb1;
         tableauZone[1] = jb2;
         tableauZone[2] = jb3;
@@ -185,7 +198,27 @@ public class JPPlateau extends JPanel implements MouseListener {
         tableauZone[17] = jb18;
         tableauZone[18] = jb19;
         tableauZone[19] = jb20;
-        tableauZone[20] = jb21;
+    }
+
+    public static void activerZonesInvestissables() {
+        for(int i = 0; i < tableauZone.length; i++){
+            JBZone courrant = tableauZone[i];
+            if(courrant.getZone().isActivable()){
+                courrant.setEnabled(true);
+            }
+        }
+    }
+    
+    public static int indiceZone(String nom){
+        int z = -1;
+        for(int i = 0; i < tableauZone.length; i++){
+            JBZone zone = tableauZone[i];
+            if(zone.getZone().getNom().equals(nom)){
+                z = i;
+                System.out.println("J'ai trouve " + nom);
+            }
+        }
+        return z;
     }
     
     public void setZoom() {
@@ -254,4 +287,9 @@ public class JPPlateau extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
     }
     
+    public static void desactiveZones(){
+        for(int i = 0; i < tableauZone.length; i++){
+            tableauZone[i].setEnabled(false);
+        }
+    }
 }

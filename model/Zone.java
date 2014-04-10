@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import vue.JPPlateau;
 import vue.London;
 
 /**
@@ -39,21 +41,16 @@ public class Zone {
     
     
     
-    public Zone(String nom, int prix, int nbCartes, int pointsVictoire, boolean zoneRouge, boolean adjacentTamise, boolean dessousTamise, ArrayList <String> zonesAdjacentes) {
+    public Zone(String nom, int prix, int nbCartes, int pointsVictoire, boolean activable, boolean adjacentTamise, boolean dessousTamise, ArrayList <String> zonesAdjacentes) {
         this.nom = nom;
         this.prix = prix;
         this.nbCartes = nbCartes;
         this.pointsVictoire = pointsVictoire;
-        this.zoneRouge = zoneRouge;
         this.adjacentTamise = adjacentTamise;
         this.dessousTamise = dessousTamise;
         this.zonesAdjacentes = zonesAdjacentes;
         this.proprietaire=null;
-        if(zoneRouge){
-            this.activable=true;
-        }else{
-            this.activable=false;
-        }
+        this.activable = activable;
     }
     
     public String getNom() {
@@ -135,6 +132,10 @@ public class Zone {
         return this.nom+" [prix : "+this.prix+", nbCartes : "+this.nbCartes+", pointsVictoire : "+this.pointsVictoire+", ";
     }
     
+    public String tranadToString(){
+        return this.nom + " " + this.activable;
+    }
+    
     public boolean isActivable() {
         // TODO Auto-generated method stub
         return activable;
@@ -176,7 +177,8 @@ public class Zone {
                         Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
                         tmpL);
                 London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
-            }            
+            }
+            activationZonesVoisines();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -188,6 +190,24 @@ public class Zone {
             e.printStackTrace();
         }
     }
+    
+    private static void activationZonesVoisines() {
+        Zone City = London.zones.get("City");
+        Zone Southwark = London.zones.get("Southwark & Bermondsey");
+        Zone Westminster = London.zones.get("Westminster");
+        for(String s : City.getZonesAdjacentes()){
+            System.out.println(s);
+            London.zones.get(s).setActivable(true);
+        }
+        for(String s : Southwark.getZonesAdjacentes()){
+            London.zones.get(s).setActivable(true);
+        }
+        for(String s : Westminster.getZonesAdjacentes()){
+            London.zones.get(s).setActivable(true);
+        }       
+    }
+    
+    
     public HashSet<String> zoneInvest(){
         HashSet <String> res=new HashSet<String>();
         Collection zone=London.zones.values();
@@ -199,5 +219,14 @@ public class Zone {
             }
         }
         return res;
+    }
+    
+    public void investir(Joueur j){
+        JPPlateau.tableauZone[JPPlateau.indiceZone(this.getNom())].getZone().setActivable(true);
+        this.setProprietaire(j);
+        for(String s : zonesAdjacentes){
+            System.out.println(s);
+            JPPlateau.tableauZone[JPPlateau.indiceZone(s)].getZone().setActivable(true);
+        }
     }
 }
