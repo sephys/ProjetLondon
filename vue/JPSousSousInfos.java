@@ -67,11 +67,13 @@ public class JPSousSousInfos extends JPanel{
     
     public void ajoutNombre(int nombre){
         this.nombre += nombre;
-        bas.setText(new String(new StringBuilder(nombre)));
+        bas.setText(String.valueOf(nombre));
+        //bas.setText(new String(new StringBuilder(nombre)));
     }
     
     public void setNombre(int nombre){
         this.nombre = nombre;
-        bas.setText(new String(new StringBuilder(nombre)));
+        bas.setText(String.valueOf(nombre));
+        //bas.setText(new String(new StringBuilder(nombre)));
     }
 }

@@ -43,6 +43,7 @@ public class London {
 	static DragDrop dndListener;
 	static DragSource dragSource;
 	static JFrame acc;
+        static JPInfos infos;
 	public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
 	private static Joueur[] tabJoueur;
 	public static void main(String[] args)  {
@@ -92,13 +93,8 @@ public class London {
 
 		frame.add(menudroite,BorderLayout.EAST);
                 
-                String listeJoueurs[] = new String[London.getTabJoueur().length];
-                   
-                for(int i=0;i<London.tabJoueur.length;i++){
-                    Joueur j = London.tabJoueur[i];
-                    listeJoueurs[i] = j.getNom();
-                }
-		frame.add(new JPInfos(listeJoueurs),BorderLayout.WEST);
+                London.infos = new JPInfos(London.getTabJoueur());
+		frame.add(London.infos,BorderLayout.WEST);
 
 		frame.setSize(1444,810);
 

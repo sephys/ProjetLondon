@@ -28,6 +28,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import model.Joueur;
 
 /**
  *  Penser à ajouter un gridlayout
@@ -61,7 +62,6 @@ public class JPSousInfos extends JPanel{
         this.setBackground(Color.LIGHT_GRAY);
         
     }
-    
     
     public void addPieces(int pieces){
         this.piece.ajoutNombre(pieces);

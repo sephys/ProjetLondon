@@ -31,6 +31,7 @@ import javax.swing.text.JTextComponent;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import model.Joueur;
 
 /**
  *
@@ -38,29 +39,36 @@ import javax.swing.text.StyledDocument;
  */
 public class JPInfos extends JPanel{
     
-    //JComboBox joueurs;
-    ArrayList<JPSousInfos> aljpsi;
+    JPSousInfos[] aljpsi;
     
-    public JPInfos(String listeJoueurs[]){
+    public JPInfos(Joueur listeJoueurs[]){
+        aljpsi = new JPSousInfos[Joueur.getNbJoueur()];
         this.setPreferredSize(new Dimension(250,810));
         this.setLayout(new GridLayout(4,1,0,20));
-        aljpsi = new ArrayList<JPSousInfos>();
         for(int i = 0; i < listeJoueurs.length; i++){
-            JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
-            aljpsi.add(jps);
+            JPSousInfos jps = new JPSousInfos(listeJoueurs[i].getNom());
+            aljpsi[i] = jps;
             this.add(jps);
-            /*
-           if(i != listeJoueurs.length){
-                JSeparator separateur = new JSeparator();
-                separateur.setPreferredSize(new Dimension(5, 1));
-                this.add(separateur);
-            }*/
+
+        }
+    }
+    
+    public void maj_infos(){
+        Joueur j = London.getListeJoueur().getJoueur();
+        for(int i = 0; i < aljpsi.length; i++){
+            if(aljpsi[i].nomJoueur.getText().equals(j.getNom())){
+                aljpsi[i].setEmprunt(j.getNbPret());
+                aljpsi[i].setPieces(j.getArgent());
+                aljpsi[i].setPauvrete(j.getPointPauvrete());
+                aljpsi[i].setVictoire(j.getPointVictoire());
+                //LE NOMBRE DE METRO NE SE MET PAS A JOUR DANS CETTE FONCTION CAR INEXISTANT DANS LA CLASSE JOUEUR
+            }
         }
     }
     
     public static void main(String[] args){
         Frame f = new Frame();
-        String liste[]={"Darin", "jean"};
+        Joueur liste[]=null;
         f.add(new JPInfos(liste));
         f.pack();
         f.setVisible(true);

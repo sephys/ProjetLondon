@@ -23,7 +23,7 @@ public class MenuDroite extends JPanel{
     
     private JLabel labelJoueur; // indique quel joueur joue
     private JPanel main;
-    public static JButton jouer, restaurer, investir, piocher3, piocher, finTour;
+    public static JButton jouer, restaurer, investir, emprunter, piocher3, piocher, finTour;
     public static boolean invest;
     
     
@@ -45,6 +45,7 @@ public class MenuDroite extends JPanel{
         jouer = new JButton("Jouer des cartes");
         restaurer = new JButton("Restaurer la ville");
         investir = new JButton("Investir");
+        emprunter = new JButton("Emprunter (10£)");
         this.invest = false;
         piocher3 = new JButton("Prendre trois cartes");
         
@@ -52,7 +53,25 @@ public class MenuDroite extends JPanel{
         main.add(jouer);
         main.add(restaurer);
         main.add(investir);
+        main.add(emprunter);
         main.add(piocher3);
+        
+        
+        emprunter.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                 int rep = JOptionPane.showConfirmDialog(London.acc,
+                        "Êtes-vous sûr de vouloir emprunter 10£ à la banque ?",
+                        "Emprunter",
+                        JOptionPane.YES_NO_OPTION);
+                if (rep == JOptionPane.YES_OPTION){
+                    London.getListeJoueur().getJoueur().setNbPret(London.getListeJoueur().getJoueur().getNbPret()+1);
+                    London.getListeJoueur().getJoueur().setArgent(London.getListeJoueur().getJoueur().getArgent()+10);
+                    London.infos.maj_infos();
+                }
+            }
+        });
+        
         this.piocher = new JButton("Piocher");
         piocher.addMouseListener(new MouseAdapter(){
             
@@ -108,6 +127,7 @@ public class MenuDroite extends JPanel{
                     investir.setEnabled(false);
                     piocher3.setEnabled(false);
                     piocher.setEnabled(false);
+                    emprunter.setEnabled(false);
                     finTour.setEnabled(false);
                     JPPlateau.activerZonesInvestissables();
                     invest = true;
