@@ -33,6 +33,7 @@ public class London {
 	private static ArrayDeque<Carte> deck;
 	private static Etalage etalage;
 	private static JPMain[] tabJPMain;
+        private static JPEtalage jpEtalage;
 	static JPMain south; // panel contenant la main des joueurs
 	static JPanel central;
 
@@ -71,8 +72,8 @@ public class London {
 
 		// ajout des onglet :
 		panelOnglet.addTab("Plateau",new JScrollPane(plateau));
-
-		panelOnglet.addTab("Etalage",new JPEtalage());
+                jpEtalage=new JPEtalage();
+		panelOnglet.addTab("Etalage",jpEtalage);
 
 
 		// panel central contenant le plateau et la main du joueur
@@ -124,6 +125,15 @@ public class London {
 
 	}
 
+        public static JPEtalage getJpEtalage() {
+            return jpEtalage;
+        }
+
+        public static void setJpEtalage(JPEtalage jpEtalage) {
+            London.jpEtalage = jpEtalage;
+        }
+        
+
 
 	public static TourJoueur getListeJoueur() {
 		// TODO Auto-generated method stub
@@ -139,6 +149,12 @@ public class London {
 		// TODO Auto-generated method stub
 		etalage=etalage2;
 	}
+
+        public static Etalage getEtalage() {
+        return etalage;
+        }
+        
+        
 
 	public static JPMain[] getTabJPMain() {
 		return tabJPMain;

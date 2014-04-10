@@ -40,16 +40,21 @@ public class JPInfos extends JPanel{
     
     public JPInfos(){
 
-        this.setLayout(new GridLayout(4,1,50,80));
+        this.setLayout(new GridLayout(4,1,50,30));
         aljpsi = new ArrayList<JPSousInfos>();
         String listeJoueurs[] = {"Jean", "Baptiste", "Darin", "Allan"};
         for(int i = 0; i < listeJoueurs.length; i++){
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi.add(jps);
             this.add(jps);
+           /* if(i != listeJoueurs.length){
+                JSeparator separateur = new JSeparator();
+                separateur.setPreferredSize(new Dimension(20, 20));
+                this.add(separateur);
+            }*/
 
         }
-        this.setPreferredSize(new Dimension(300,810) );
+        this.setPreferredSize(new Dimension(250,810) );
     }
     
     public static void main(String[] args){
