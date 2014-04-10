@@ -215,7 +215,6 @@ public class JPPlateau extends JPanel implements MouseListener {
             JBZone zone = tableauZone[i];
             if(zone.getZone().getNom().equals(nom)){
                 z = i;
-                System.out.println("J'ai trouve " + nom);
             }
         }
         return z;

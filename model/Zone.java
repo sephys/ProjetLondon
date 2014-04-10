@@ -225,7 +225,6 @@ public class Zone {
         JPPlateau.tableauZone[JPPlateau.indiceZone(this.getNom())].getZone().setActivable(true);
         this.setProprietaire(j);
         for(String s : zonesAdjacentes){
-            System.out.println(s);
             JPPlateau.tableauZone[JPPlateau.indiceZone(s)].getZone().setActivable(true);
         }
     }
