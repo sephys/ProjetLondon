@@ -51,7 +51,7 @@ public class JPSousSousInfos extends JPanel{
         } catch (IOException ex) {
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
-        haut.setPreferredSize(new Dimension(50,50));
+        haut.setPreferredSize(new Dimension(60,60));
     }
     
     /**public void centrerTexte(){

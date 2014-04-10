@@ -5,6 +5,7 @@
 */
 
 package vue;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -23,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Style;
@@ -38,11 +41,10 @@ public class JPInfos extends JPanel{
     //JComboBox joueurs;
     ArrayList<JPSousInfos> aljpsi;
     
-    public JPInfos(){
+    public JPInfos(String listeJoueurs[]){
 
         this.setLayout(new GridLayout(4,1,50,30));
         aljpsi = new ArrayList<JPSousInfos>();
-        String listeJoueurs[] = {"Jean", "Baptiste", "Darin", "Allan"};
         for(int i = 0; i < listeJoueurs.length; i++){
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi.add(jps);
@@ -52,14 +54,15 @@ public class JPInfos extends JPanel{
                 separateur.setPreferredSize(new Dimension(20, 20));
                 this.add(separateur);
             }*/
-
+            this.setBackground(Color.LIGHT_GRAY);
         }
-        this.setPreferredSize(new Dimension(250,810) );
+        this.setPreferredSize(new Dimension(250,810));
     }
     
     public static void main(String[] args){
         Frame f = new Frame();
-        f.add(new JPInfos());
+        String liste[]={"mulot", "jean"};
+        f.add(new JPInfos(liste));
         f.setVisible(true);
     }
 }
