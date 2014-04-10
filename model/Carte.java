@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import vue.London;
 
@@ -27,6 +28,38 @@ public abstract class Carte {
 		this.categorie = categorie;
 		this.path = path;
 	}
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Carte other = (Carte) obj;
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        if (!Objects.equals(this.couleur, other.couleur)) {
+            return false;
+        }
+        if (!Objects.equals(this.categorie, other.categorie)) {
+            return false;
+        }
+        if (!Objects.equals(this.path, other.path)) {
+            return false;
+        }
+        return true;
+    }
+        
+        
 
 	public String getNom() {
 		return nom;
