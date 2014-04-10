@@ -140,6 +140,12 @@ public class London {
 		etalage=etalage2;
 	}
 
+        public static Etalage getEtalage() {
+        return etalage;
+        }
+        
+        
+
 	public static JPMain[] getTabJPMain() {
 		return tabJPMain;
 	}
