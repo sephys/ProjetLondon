@@ -43,7 +43,7 @@ public class JPInfos extends JPanel{
     
     public JPInfos(Joueur listeJoueurs[]){
         aljpsi = new JPSousInfos[Joueur.getNbJoueur()];
-        this.setPreferredSize(new Dimension(250,810));
+        this.setPreferredSize(new Dimension(280,810));
         this.setLayout(new GridLayout(4,1,0,20));
         for(int i = 0; i < listeJoueurs.length; i++){
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i].getNom());
