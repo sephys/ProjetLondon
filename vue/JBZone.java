@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import model.Joueur;
 import model.Zone;
 
 /**
@@ -21,6 +22,7 @@ public class JBZone extends JButton implements ActionListener{
     
     private Zone zone; // nom du bouton et de la zone
     
+    
     public JBZone(Zone zone){
         this.setMargin(new Insets(0, 0, 0, 0)); //A revoir, pour diminuer la taille des marges
         Font f = this.getFont();
@@ -28,6 +30,7 @@ public class JBZone extends JButton implements ActionListener{
         this.setFont(f);
         this.zone=zone;
         this.setText(split(zone.getNom()));
+        this.addActionListener(this);
     }
     
     public Zone getZone() {
@@ -38,9 +41,33 @@ public class JBZone extends JButton implements ActionListener{
         this.zone = zone;
     }
     
-    @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("T'as tapé sur " + this.zone.getNom());
+        int rep = JOptionPane.showConfirmDialog(London.acc,
+                "Voulez-vous investir dans " + this.zone.getNom()+ " ?",
+                "Investir",
+                JOptionPane.YES_NO_OPTION);
+        if (rep == JOptionPane.YES_OPTION){
+            Joueur courrant = London.getListeJoueur().getJoueur();
+            if(zone.getPrix() > courrant.getArgent()){
+                rep = JOptionPane.showConfirmDialog(London.acc,
+                        "La zone dans laquelle vous voulez investir coûte " + this.zone.getPrix() +
+                                " et vous ne possédez que " + courrant.getArgent() + ". Voulez vous faire un emprunt ?",
+                        "Emprunt",
+                        JOptionPane.YES_NO_OPTION);
+                if (rep == JOptionPane.YES_OPTION){
+                    courrant.setNbPret(courrant.getNbPret() + 1);
+                    this.zone.setProprietaire(courrant);
+                    this.setBackground(Color.YELLOW);
+                }else{
+                    JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
+                }
+            }else{
+                this.zone.setProprietaire(courrant);
+                this.setBackground(Color.YELLOW);
+            }
+        }else{
+            JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
+        }
     }
     
     private String split(String nomZone) {

@@ -30,7 +30,7 @@ public class JPPlateau extends JPanel implements MouseListener {
 
  
     public JPPlateau() {
-        this.tableauZone = new JBZone[21];
+        this.tableauZone = new JBZone[20];
         this.setLayout(null);
         try{
            URL uri = London.class.getResource("../img/plateau.png");
@@ -159,10 +159,6 @@ public class JPPlateau extends JPanel implements MouseListener {
         jb20.setVisible(false);
         this.add(jb20);
         
-        JBZone jb21=new JBZone(London.zones.get("Southwark & Bernmondsey"));
-        jb21.setBounds(242, 389, 88, 38);
-        jb21.setVisible(false);
-        this.add(jb21);
         
         tableauZone = new JBZone[21];
         tableauZone[0] = jb1;
@@ -185,7 +181,6 @@ public class JPPlateau extends JPanel implements MouseListener {
         tableauZone[17] = jb18;
         tableauZone[18] = jb19;
         tableauZone[19] = jb20;
-        tableauZone[20] = jb21;
     }
     
     public void setZoom() {
