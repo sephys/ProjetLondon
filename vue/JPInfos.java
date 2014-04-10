@@ -5,6 +5,7 @@
 */
 
 package vue;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -23,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Style;
@@ -38,28 +41,28 @@ public class JPInfos extends JPanel{
     //JComboBox joueurs;
     ArrayList<JPSousInfos> aljpsi;
     
-    public JPInfos(){
-
-        this.setLayout(new GridLayout(4,1,50,30));
+    public JPInfos(String listeJoueurs[]){
+        this.setPreferredSize(new Dimension(250,810));
+        this.setLayout(new GridLayout(4,1,0,20));
         aljpsi = new ArrayList<JPSousInfos>();
-        String listeJoueurs[] = {"Jean", "Baptiste", "Darin", "Allan"};
         for(int i = 0; i < listeJoueurs.length; i++){
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi.add(jps);
             this.add(jps);
-           /* if(i != listeJoueurs.length){
+            /*
+           if(i != listeJoueurs.length){
                 JSeparator separateur = new JSeparator();
-                separateur.setPreferredSize(new Dimension(20, 20));
+                separateur.setPreferredSize(new Dimension(5, 1));
                 this.add(separateur);
             }*/
-
         }
-        this.setPreferredSize(new Dimension(250,810) );
     }
     
     public static void main(String[] args){
         Frame f = new Frame();
-        f.add(new JPInfos());
+        String liste[]={"Darin", "jean"};
+        f.add(new JPInfos(liste));
+        f.pack();
         f.setVisible(true);
     }
 }
