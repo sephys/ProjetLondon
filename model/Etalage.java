@@ -28,20 +28,19 @@ public class Etalage {
         return ligne2;
     }
     
-    public Carte piocheCarte(int ligne,int indice){
-    	Carte res=null;
-    	switch(ligne){
-    	case 1:
-    		res=ligne1[indice];
-    		ligne1[indice]=null;
-    		break;
-    	case 2:
-    		res= ligne2[indice];
-    		ligne2[indice]=null;
-    		break;
+    public void piocheCarte(Carte e){
+    	for(int i=0;i<this.ligne1.length;i++){
+    		if(ligne1[i].equals(e)){
+    			ligne1[i]=null;
+    		}
     	}
-    	return res;
+    	for(int i=0;i<this.ligne1.length;i++){
+    		if(ligne2[i].equals(e)){
+    			ligne2[i]=null;
+    		}
+    	}
     }
+    	
 
     public void addCarte(Carte carte){        
         if(this.isFull(this.ligne1)){
