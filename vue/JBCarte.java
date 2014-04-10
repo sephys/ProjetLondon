@@ -36,7 +36,6 @@ public class JBCarte extends JButton implements  MouseListener {
 
     public JBCarte(Carte carte) {
         this.carte=carte;
-        System.out.println(carte.getPath());
         URL uri = JBCarte.class.getResource(carte.getPath()); 
         try {
             image = ImageIO.read(uri);

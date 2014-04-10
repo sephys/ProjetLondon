@@ -42,31 +42,41 @@ public class JBZone extends JButton implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e) {
-        int rep = JOptionPane.showConfirmDialog(London.acc,
-                "Voulez-vous investir dans " + this.zone.getNom()+ " ?",
-                "Investir",
-                JOptionPane.YES_NO_OPTION);
-        if (rep == JOptionPane.YES_OPTION){
-            Joueur courrant = London.getListeJoueur().getJoueur();
-            if(zone.getPrix() > courrant.getArgent()){
-                rep = JOptionPane.showConfirmDialog(London.acc,
-                        "La zone dans laquelle vous voulez investir coûte " + this.zone.getPrix() +
-                                " et vous ne possédez que " + courrant.getArgent() + ". Voulez vous faire un emprunt ?",
-                        "Emprunt",
-                        JOptionPane.YES_NO_OPTION);
-                if (rep == JOptionPane.YES_OPTION){
-                    courrant.setNbPret(courrant.getNbPret() + 1);
-                    this.zone.setProprietaire(courrant);
-                    this.setBackground(Color.YELLOW);
+        if(MenuDroite.invest){
+            int rep = JOptionPane.showConfirmDialog(London.acc,
+                    "Voulez-vous investir dans " + this.zone.getNom()+ " ?",
+                    "Investir",
+                    JOptionPane.YES_NO_OPTION);
+            if (rep == JOptionPane.YES_OPTION){
+                Joueur courrant = London.getListeJoueur().getJoueur();
+                if(zone.getPrix() > courrant.getArgent()){
+                    rep = JOptionPane.showConfirmDialog(London.acc,
+                            "La zone dans laquelle vous voulez investir coûte " + this.zone.getPrix() +
+                                    " et vous ne possédez que " + courrant.getArgent() + ". Voulez vous faire un emprunt ?",
+                            "Emprunt",
+                            JOptionPane.YES_NO_OPTION);
+                    if (rep == JOptionPane.YES_OPTION){
+                        courrant.setNbPret(courrant.getNbPret() + 1);
+                        this.zone.investir(courrant);
+                        this.setBackground(Color.YELLOW);
+                        MenuDroite.finTour.setEnabled(true);
+                        JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
+                        JPPlateau.desactiveZones();
+                        // Gérer les cartes en trop en main.
+                    }else{
+                        JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
+                    }
                 }else{
-                    JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
+                    this.zone.investir(courrant);
+                    this.setBackground(Color.YELLOW);
+                    MenuDroite.finTour.setEnabled(true);                    
+                    JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
+                    JPPlateau.desactiveZones();
+                    // Gérer les cartes en trop en main
                 }
             }else{
-                this.zone.setProprietaire(courrant);
-                this.setBackground(Color.YELLOW);
+                JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
             }
-        }else{
-            JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
         }
     }
     
