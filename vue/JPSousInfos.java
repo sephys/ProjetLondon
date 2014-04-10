@@ -7,6 +7,7 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -33,28 +35,31 @@ import javax.swing.text.StyledDocument;
  */
 public class JPSousInfos extends JPanel{
     
-    //JComboBox joueurs;
+    private Image img;
     GridLayout gl;
     JLabel nomJoueur;
     JPSousSousInfos piece, pauvrete, emprunt, victoire, metro;
     
     public JPSousInfos(String nomJoueur){
         this.setLayout(new GridLayout(2, 3));
-        //joueurs = new JComboBox(listeJoueurs);
+        
         this.nomJoueur = new JLabel(nomJoueur);
         this.nomJoueur.setHorizontalAlignment(JLabel.CENTER);
         this.nomJoueur.setVerticalAlignment(JLabel.CENTER);
+        this.nomJoueur.setFont(this.nomJoueur.getFont ().deriveFont (16.0f));
         piece = new JPSousSousInfos("../img/jetons/Piece1.png", 5);
         pauvrete = new JPSousSousInfos("../img/jetons/PointPauvrete.png", 5);
-        emprunt = new JPSousSousInfos("../img/jetons/10LivreEmprunt.png", 5);
-        victoire = new JPSousSousInfos("../img/jetons/PointVictoire.png", 5);
-        metro = new JPSousSousInfos("../img/jetons/JetonMetro.png", 5);
+        emprunt = new JPSousSousInfos("../img/jetons/10LivreEmprunt.png", 0);
+        victoire = new JPSousSousInfos("../img/jetons/PointVictoire.png", 0);
+        metro = new JPSousSousInfos("../img/jetons/JetonMetro.png", 0);
         this.add(this.nomJoueur);
         this.add(this.piece);
         this.add(this.pauvrete);
         this.add(this.emprunt);
         this.add(this.victoire);
         this.add(this.metro);
+        this.setBackground(Color.LIGHT_GRAY);
+        
     }
     
     
@@ -97,6 +102,8 @@ public class JPSousInfos extends JPanel{
     public void setMetro(int metro){
         this.metro.setNombre(metro);
     }
+    
+    
     /**
      * Fonction pour insérer une image dans un JTextPane avec du texte
      * reprise de developpez.net

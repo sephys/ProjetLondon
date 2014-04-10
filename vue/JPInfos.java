@@ -42,27 +42,27 @@ public class JPInfos extends JPanel{
     ArrayList<JPSousInfos> aljpsi;
     
     public JPInfos(String listeJoueurs[]){
-
-        this.setLayout(new GridLayout(4,1,50,30));
+        this.setPreferredSize(new Dimension(250,810));
+        this.setLayout(new GridLayout(4,1,0,20));
         aljpsi = new ArrayList<JPSousInfos>();
         for(int i = 0; i < listeJoueurs.length; i++){
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi.add(jps);
             this.add(jps);
-           /* if(i != listeJoueurs.length){
+            /*
+           if(i != listeJoueurs.length){
                 JSeparator separateur = new JSeparator();
-                separateur.setPreferredSize(new Dimension(20, 20));
+                separateur.setPreferredSize(new Dimension(5, 1));
                 this.add(separateur);
             }*/
-            this.setBackground(Color.LIGHT_GRAY);
         }
-        this.setPreferredSize(new Dimension(250,810));
     }
     
     public static void main(String[] args){
         Frame f = new Frame();
-        String liste[]={"mulot", "jean"};
+        String liste[]={"Darin", "jean"};
         f.add(new JPInfos(liste));
+        f.pack();
         f.setVisible(true);
     }
 }

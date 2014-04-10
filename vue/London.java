@@ -91,9 +91,14 @@ public class London {
 		MenuDroite menudroite=new MenuDroite();
 
 		frame.add(menudroite,BorderLayout.EAST);
-
-                String liste[]={"mulot", "jean"};
-		frame.add(new JPInfos(liste),BorderLayout.WEST);
+                
+                String listeJoueurs[] = new String[London.getTabJoueur().length];
+                   
+                for(int i=0;i<London.tabJoueur.length;i++){
+                    Joueur j = London.tabJoueur[i];
+                    listeJoueurs[i] = j.getNom();
+                }
+		frame.add(new JPInfos(listeJoueurs),BorderLayout.WEST);
 
 		frame.setSize(1444,810);
 
