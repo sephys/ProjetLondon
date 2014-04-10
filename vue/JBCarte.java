@@ -18,12 +18,15 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import model.Carte;
+import model.Constructible;
+import model.Etalage;
 
 /**
  *
@@ -36,7 +39,6 @@ public class JBCarte extends JButton implements  MouseListener {
 
     public JBCarte(Carte carte) {
         this.carte=carte;
-        System.out.println(carte.getPath());
         URL uri = JBCarte.class.getResource(carte.getPath()); 
         try {
             image = ImageIO.read(uri);
@@ -51,15 +53,39 @@ public class JBCarte extends JButton implements  MouseListener {
         this.addMouseListener(this);
     }
 
-   
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final JBCarte other = (JBCarte) obj;
+        if (!Objects.equals(this.carte, other.carte)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+
+   // pour poser une carte sur l'etalage
     @Override
     public void mouseClicked(MouseEvent e) {
         JBCarte jb=(JBCarte) e.getComponent();
         if(e.getClickCount()==2)
         {
-           System.out.println("test double clique");
            London.getEtalage().addCarte(jb.getCarte());
            London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+           
+           London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(jb.carte);
         }
     }
     

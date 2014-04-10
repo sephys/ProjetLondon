@@ -6,6 +6,7 @@
 
 package vue;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class JPSousInfos extends JPanel{
     JPSousSousInfos piece, pauvrete, emprunt, victoire, metro;
     
     public JPSousInfos(String nomJoueur){
-        this.setLayout(new GridLayout(2, 3, 3, 0));
+        this.setLayout(new GridLayout(2, 3));
         //joueurs = new JComboBox(listeJoueurs);
         this.nomJoueur = new JLabel(nomJoueur);
         this.nomJoueur.setHorizontalAlignment(JLabel.CENTER);
