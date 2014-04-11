@@ -23,8 +23,8 @@ public class MenuDroite extends JPanel{
     
     private JLabel labelJoueur; // indique quel joueur joue
     private JPanel main;
-    public static JButton jouer, restaurer, investir, emprunter, piocher3, piocher, finTour;
-    public static boolean invest;
+    private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, finTour;
+    public static boolean invest; // a virer !
     
     
     public MenuDroite()
@@ -129,7 +129,7 @@ public class MenuDroite extends JPanel{
                     piocher.setEnabled(false);
                     emprunter.setEnabled(false);
                     finTour.setEnabled(false);
-                    JPPlateau.activerZonesInvestissables();
+                    London.getPlateau().activerZonesInvestissables();
                     invest = true;
                 }
             }
@@ -158,6 +158,35 @@ public class MenuDroite extends JPanel{
         London.frame.repaint();
         London.central.revalidate();
     }
+
+    public JButton getJouer() {
+        return jouer;
+    }
+
+    public JButton getRestaurer() {
+        return restaurer;
+    }
+
+    public JButton getInvestir() {
+        return investir;
+    }
+
+    public JButton getEmprunter() {
+        return emprunter;
+    }
+
+    public JButton getPiocher3() {
+        return piocher3;
+    }
+
+    public JButton getPiocher() {
+        return piocher;
+    }
+
+    public JButton getFinTour() {
+        return finTour;
+    }
+    
 
     
     

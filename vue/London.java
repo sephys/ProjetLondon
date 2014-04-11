@@ -36,6 +36,8 @@ public class London {
         private static JPEtalage jpEtalage;
 	static JPMain south; // panel contenant la main des joueurs
 	static JPanel central;
+        private static MenuDroite menudroite;
+        private static JPPlateau plateau;
 
 	static JFrame frame; // fenêtre principale
 
@@ -68,7 +70,7 @@ public class London {
 		// panel contenant les différents onglets
 		JTabbedPane panelOnglet = new JTabbedPane();
 
-		JPPlateau plateau=new JPPlateau();
+		plateau=new JPPlateau();
 
 
 		// ajout des onglet :
@@ -89,7 +91,7 @@ public class London {
 
 		frame.add(central);
 
-		MenuDroite menudroite=new MenuDroite();
+		London.menudroite=new MenuDroite();
 
 		frame.add(menudroite,BorderLayout.EAST);
                 
@@ -127,6 +129,18 @@ public class London {
 
 	}
 
+    public static MenuDroite getMenudroite() {
+        return menudroite;
+    }
+
+    public static JPPlateau getPlateau() {
+        return plateau;
+    }
+    
+    
+
+        
+        
         public static JPEtalage getJpEtalage() {
             return jpEtalage;
         }

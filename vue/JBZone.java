@@ -59,9 +59,9 @@ public class JBZone extends JButton implements ActionListener{
                         courrant.setNbPret(courrant.getNbPret() + 1);
                         this.zone.investir(courrant);
                         this.setBackground(Color.YELLOW);
-                        MenuDroite.finTour.setEnabled(true);
+                        London.getMenudroite().getFinTour().setEnabled(true);
                         JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
-                        JPPlateau.desactiveZones();
+                        London.getPlateau().desactiveZones();
                         // Gérer les cartes en trop en main.
                     }else{
                         JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
@@ -69,9 +69,9 @@ public class JBZone extends JButton implements ActionListener{
                 }else{
                     this.zone.investir(courrant);
                     this.setBackground(Color.YELLOW);
-                    MenuDroite.finTour.setEnabled(true);                    
+                    London.getMenudroite().getFinTour().setEnabled(true);                    
                     JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
-                    JPPlateau.desactiveZones();
+                    London.getPlateau().desactiveZones();
                     // Gérer les cartes en trop en main
                 }
             }else{
