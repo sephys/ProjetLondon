@@ -106,18 +106,23 @@ public class MenuDroite extends JPanel{
                 // check trop grand nombre de cartes dans la main
                 if(London.getListeJoueur().getJoueur().getMain().size()>9)
                 {
+                   System.out.println(London.getListeJoueur().getJoueur().getMain().size());
+                   JBCarte.setDoubleClick(true);
                    JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
+                   London.getListeJoueur().getJoueur().setDefausse(London.getListeJoueur().getJoueur().getMain().size()-9);
                    disableAll();
+                   finTour.setEnabled(true);
+                   
+                }
+                else
+                {
+                    actualiserMain();
+                    enableAll();
+                    invest = false;
                 }
                 
                 
-                actualiserMain();
-                jouer.setEnabled(true);
-                restaurer.setEnabled(true);
-                investir.setEnabled(true);
-                piocher3.setEnabled(true);
-                piocher.setEnabled(true);
-                invest = false;
+                
                 
                 
             }
@@ -182,9 +187,20 @@ public class MenuDroite extends JPanel{
                     piocher3.setEnabled(false);
                     piocher.setEnabled(false);
                     emprunter.setEnabled(false);
-                    finTour.setEnabled(false);
-        
+                    finTour.setEnabled(false);    
     }
+    
+    public void enableAll()
+    {
+                    jouer.setEnabled(true);
+                    restaurer.setEnabled(true);
+                    investir.setEnabled(true);
+                    piocher3.setEnabled(true);
+                    piocher.setEnabled(true);
+                    emprunter.setEnabled(true);
+                    finTour.setEnabled(true);
+    }
+    
     
 
     public JButton getJouer() {

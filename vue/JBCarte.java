@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import model.Carte;
 import model.Constructible;
 import model.Etalage;
@@ -36,6 +37,7 @@ public class JBCarte extends JButton implements  MouseListener {
 
     private Image image;
     private Carte carte;
+    private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
 
     public JBCarte(Carte carte) {
         this.carte=carte;
@@ -81,13 +83,31 @@ public class JBCarte extends JButton implements  MouseListener {
    // pour poser une carte sur l'etalage
     @Override
     public void mouseClicked(MouseEvent e) {
-        JBCarte jb=(JBCarte) e.getComponent();
+        JBCarte jb=(JBCarte) e.getComponent(); // jb =bout
         if(e.getClickCount()==2)
         {
-           London.getEtalage().addCarte(jb.getCarte());
-           London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+           if(doubleClick)
+           {
+               // ajout de la carte dans l'etalage
+               London.getEtalage().addCarte(jb.getCarte());
+               // on rafrachit l'etalage
+               London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+               // on enleve la carte de la main du joueur ( graphiquement )
+               London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(jb.carte);
+               //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
+               // j'aimerai supprmer la carte de la main du joeuur , mais ca ne fonctionne pas, il me supprime rien.
+               London.getListeJoueur().getJoueur().getMain().remove(((JBCarte) e.getComponent()).carte);
+               //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
+               London.getListeJoueur().getJoueur().defausseMoins();
+               
+               
+           }
+           else
+           {
+               JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+
+           }
            
-           London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(jb.carte);
         }
     }
     
@@ -137,6 +157,16 @@ public class JBCarte extends JButton implements  MouseListener {
     public void setCarte(Carte carte) {
         this.carte = carte;
     }
+
+    public static boolean isDoubleClick() {
+        return doubleClick;
+    }
+
+    public static void setDoubleClick(boolean doubleClick) {
+        JBCarte.doubleClick = doubleClick;
+    }
+    
+    
     
     
     

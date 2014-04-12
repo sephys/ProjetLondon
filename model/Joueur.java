@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
+import vue.JBCarte;
 
 public class Joueur {
 
@@ -90,6 +91,25 @@ public class Joueur {
 	public void setPointPauvrete(int pointPauvrete) {
 		this.pointPauvrete = pointPauvrete;
 	}
+
+        public int getDefausse() {
+            return defausse;
+        }
+
+        public void setDefausse(int defausse) {
+            this.defausse = defausse;
+        }
+        
+        public void defausseMoins()
+        {
+            this.defausse--;
+            if(this.defausse==0)
+            {
+                JBCarte.setDoubleClick(false);
+            }
+        }
+        
+        
 
 
 	public int getArgent() {
