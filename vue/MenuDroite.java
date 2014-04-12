@@ -78,8 +78,17 @@ public class MenuDroite extends JPanel{
             
             @Override
             public void mouseClicked(MouseEvent e) {
-                London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
-                London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
+                if(London.getListeJoueur().getJoueur().getPioche()!=0)
+                {
+                    London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
+                    London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
+                    London.getListeJoueur().getJoueur().piocheMoins();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Vous n'avez pas le droit de piocher une carte");
+                }
+                
             }
             
         });
@@ -89,11 +98,18 @@ public class MenuDroite extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) 
             {
-                 for(int i=0;i<3;i++)
-                 {
-                     London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
-                     London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
-                 }
+                 int rep = JOptionPane.showConfirmDialog(London.acc,
+                        "Êtes-vous sûr de vouloir choisir l'action 'Piocher 3 cartes' ?",
+                        "Emprunter",
+                        JOptionPane.YES_NO_OPTION);
+                if (rep == JOptionPane.YES_OPTION)
+                {
+                    disableAll();
+                    piocher.setEnabled(true);
+                    finTour.setEnabled(true);
+                    London.getListeJoueur().getJoueur().setPioche(3);
+                    JBCarte.setDoubleClick(true);
+                }
             }
         });
         
@@ -177,6 +193,8 @@ public class MenuDroite extends JPanel{
 // actualiser la fenêtre
         London.frame.repaint();
         London.central.revalidate();
+        
+        London.getListeJoueur().getJoueur().setPioche(1);
         
         // on informe le joueur
        JOptionPane.showMessageDialog(null, "C'est au tour de "+London.getListeJoueur().getJoueur().getNom()+" de jouer");

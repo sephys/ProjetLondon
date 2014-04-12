@@ -70,7 +70,7 @@ public class JPMain extends JPanel {
         
     }
     
-    // ajout d'une carte dans le panel
+    // ajout d'une carte dans le panel main du joueur
     public  void ajoutCarte(Carte e){
             main.add(new JBCarte(e));
             main.revalidate();

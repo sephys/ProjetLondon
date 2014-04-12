@@ -18,6 +18,7 @@ public class Joueur {
         private static int nbJoueur;
         private int placeJoueur;
         private int defausse; // savoir combien de cartes le joueur doit se défausser
+        private int pioche; // savoir combien de cartes le joueur peut piocher
 
 
 	
@@ -91,6 +92,25 @@ public class Joueur {
 	public void setPointPauvrete(int pointPauvrete) {
 		this.pointPauvrete = pointPauvrete;
 	}
+
+        public int getPioche() {
+            return pioche;
+        }
+
+        public void setPioche(int pioche) {
+            this.pioche = pioche;
+        }
+        
+        public void piocheMoins()
+        {
+            this.pioche--;
+            if(this.pioche==0)
+            {
+                JBCarte.setDoubleClick(false);
+            }
+        }
+        
+        
 
         public int getDefausse() {
             return defausse;

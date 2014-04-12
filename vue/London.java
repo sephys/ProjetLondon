@@ -107,6 +107,8 @@ public class London {
                 
                 // informe le joueur qui joue
                 JOptionPane.showMessageDialog(null, "C'est au tour de "+London.getListeJoueur().getJoueur().getNom()+" de jouer");
+                
+                London.getListeJoueur().getJoueur().setPioche(1);
 
 
 	}

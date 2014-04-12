@@ -117,11 +117,16 @@ public class JPEtalage extends JPanel{
         {
             if(tab1[i]!=null)
             {
-              this.tab1[i].add(new JBCarte(tab1[i]));
+                System.out.println("ajout");
+              JBCarte jb=new JBCarte(tab1[i]);
+              jb.setPosition("etalage");
+              this.tab1[i].add(jb);
             } 
             if(tab2[i]!=null)
-            {
-              this.tab2[i].add(new JBCarte(tab2[i]));  
+            { 
+                JBCarte jb=new JBCarte(tab2[i]);
+                jb.setPosition("etalage");
+              this.tab2[i].add(jb);  
             }
         
             
