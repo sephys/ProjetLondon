@@ -48,6 +48,7 @@ public class MenuDroite extends JPanel{
         emprunter = new JButton("Emprunter (10£)");
         this.invest = false;
         piocher3 = new JButton("Prendre trois cartes");
+        finTour=new JButton("Fin du Tour");
         
         main.add(labelJoueur);
         main.add(jouer);
@@ -83,12 +84,32 @@ public class MenuDroite extends JPanel{
             
         });
         
-        finTour=new JButton("Fin du Tour");
+        piocher3.addMouseListener(new MouseAdapter(){
+            
+            @Override
+            public void mouseClicked(MouseEvent e) 
+            {
+                 for(int i=0;i<3;i++)
+                 {
+                     London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
+                     London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
+                 }
+            }
+        });
+        
+        
         finTour.addMouseListener(new MouseAdapter(){
             
             @Override
             public void mouseClicked(MouseEvent e)
             {
+                // check trop grand nombre de cartes dans la main
+                if(London.getListeJoueur().getJoueur().getMain().size()>9)
+                {
+                   JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
+                   disableAll();
+                }
+                
                 
                 actualiserMain();
                 jouer.setEnabled(true);
@@ -122,13 +143,7 @@ public class MenuDroite extends JPanel{
                         "Investir",
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION){
-                    jouer.setEnabled(false);
-                    restaurer.setEnabled(false);
-                    investir.setEnabled(false);
-                    piocher3.setEnabled(false);
-                    piocher.setEnabled(false);
-                    emprunter.setEnabled(false);
-                    finTour.setEnabled(false);
+                    disableAll();
                     London.getPlateau().activerZonesInvestissables();
                     invest = true;
                 }
@@ -158,6 +173,19 @@ public class MenuDroite extends JPanel{
         London.frame.repaint();
         London.central.revalidate();
     }
+    
+    public void disableAll()
+    {
+                    jouer.setEnabled(false);
+                    restaurer.setEnabled(false);
+                    investir.setEnabled(false);
+                    piocher3.setEnabled(false);
+                    piocher.setEnabled(false);
+                    emprunter.setEnabled(false);
+                    finTour.setEnabled(false);
+        
+    }
+    
 
     public JButton getJouer() {
         return jouer;

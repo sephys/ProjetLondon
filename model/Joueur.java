@@ -14,8 +14,9 @@ public class Joueur {
 	private int pointPauvrete;
 	private int argent;
 	private int nbPret; 
-    private static int nbJoueur;
-    private int placeJoueur;
+        private static int nbJoueur;
+        private int placeJoueur;
+        private int defausse; // savoir combien de cartes le joueur doit se défausser
 
 
 	

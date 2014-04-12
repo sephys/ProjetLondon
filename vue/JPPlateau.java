@@ -26,7 +26,7 @@ public class JPPlateau extends JPanel implements MouseListener {
     private int imageWidth;
     private int imageHeight;
     private boolean estZoome;
-    public JBZone[] tableauZone;
+    private JBZone[] tableauZone;
 
  
     public JPPlateau() {
@@ -199,6 +199,11 @@ public class JPPlateau extends JPanel implements MouseListener {
         tableauZone[18] = jb19;
         tableauZone[19] = jb20;
     }
+
+    public JBZone[] getTableauZone() {
+        return tableauZone;
+    }
+    
 
     public void activerZonesInvestissables() {
         for(int i = 0; i < tableauZone.length; i++){

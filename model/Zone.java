@@ -149,46 +149,28 @@ public class Zone {
     
     public static void initZone(){
         London.zones=new HashMap<String,Zone>();
-        try {
-            /* R�cup�ration du classeur Excel (en lecture) */
-            URL uri = Joueur.class.getResource("../fichier/ZonePlateau.xls");
-            Workbook workbook = Workbook.getWorkbook(new File(uri.getPath()));
+        URL uri = Joueur.class.getResource("../fichier/ZonePlateau.xls");
+        Workbook workbook = Workbook.getWorkbook(new File(uri.getPath()));
+        Sheet sheet = workbook.getSheet(0);
+        for(int i=1;i<21;i++){
             
-            /* Un fichier excel est compos� de plusieurs feuilles, on r�cup�re la premi�re, celle qui nous int�resse*/
-            Sheet sheet = workbook.getSheet(0);
-            
-            
-            
-            //Parcour du fichier
-            for(int i=1;i<21;i++){
-                
-                String listZ=sheet.getCell(7,i).getContents();
-                String[] t=listZ.split(";");
-                ArrayList<String> tmpL = new ArrayList<String>();
-                for(int j=0;j<t.length;j++){
-                    tmpL.add(t[j]);
-                }
-                Zone tmpZ=new Zone(sheet.getCell(0,i).getContents(),
-                        Integer.parseInt(sheet.getCell(1,i).getContents()),
-                        Integer.parseInt(sheet.getCell(2,i).getContents()),
-                        Integer.parseInt(sheet.getCell(3,i).getContents()),
-                        Boolean.parseBoolean(sheet.getCell(4,i).getContents()),
-                        Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
-                        Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
-                        tmpL);
-                London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
+            String listZ=sheet.getCell(7,i).getContents();
+            String[] t=listZ.split(";");
+            ArrayList<String> tmpL = new ArrayList<String>();
+            for(int j=0;j<t.length;j++){
+                tmpL.add(t[j]);
             }
-            activationZonesVoisines();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (BiffException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Zone tmpZ=new Zone(sheet.getCell(0,i).getContents(),
+                    Integer.parseInt(sheet.getCell(1,i).getContents()),
+                    Integer.parseInt(sheet.getCell(2,i).getContents()),
+                    Integer.parseInt(sheet.getCell(3,i).getContents()),
+                    Boolean.parseBoolean(sheet.getCell(4,i).getContents()), 
+                    Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
+                    Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
+                    tmpL);
+            London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
         }
+        activationZonesVoisines();
     }
     
     private static void activationZonesVoisines() {
@@ -222,10 +204,10 @@ public class Zone {
     }
     
     public void investir(Joueur j){
-        London.getPlateau().tableauZone[London.getPlateau().indiceZone(this.getNom())].getZone().setActivable(true);
+        London.getPlateau().getTableauZone()[London.getPlateau().indiceZone(this.getNom())].getZone().setActivable(true);
         this.setProprietaire(j);
         for(String s : zonesAdjacentes){
-            London.getPlateau().tableauZone[London.getPlateau().indiceZone(s)].getZone().setActivable(true);
+            London.getPlateau().getTableauZone()[London.getPlateau().indiceZone(s)].getZone().setActivable(true);
         }
     }
 }
