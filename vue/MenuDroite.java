@@ -177,6 +177,11 @@ public class MenuDroite extends JPanel{
 // actualiser la fenêtre
         London.frame.repaint();
         London.central.revalidate();
+        
+        // on informe le joueur
+       JOptionPane.showMessageDialog(null, "C'est au tour de "+London.getListeJoueur().getJoueur().getNom()+" de jouer");
+
+        
     }
     
     public void disableAll()

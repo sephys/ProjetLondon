@@ -104,6 +104,10 @@ public class London {
 		frame.setVisible(true);
                 // on supprime la page d'accueil
 		acc.dispose();
+                
+                // informe le joueur qui joue
+                JOptionPane.showMessageDialog(null, "C'est au tour de "+London.getListeJoueur().getJoueur().getNom()+" de jouer");
+
 
 	}
 
