@@ -196,7 +196,6 @@ public class Zone {
         Zone Southwark = London.zones.get("Southwark & Bermondsey");
         Zone Westminster = London.zones.get("Westminster");
         for(String s : City.getZonesAdjacentes()){
-            System.out.println(s);
             London.zones.get(s).setActivable(true);
         }
         for(String s : Southwark.getZonesAdjacentes()){
