@@ -1,9 +1,8 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
-
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package vue;
 
 import java.awt.BorderLayout;
@@ -19,212 +18,227 @@ import javax.swing.*;
  *
  * @author Joke
  */
-public class MenuDroite extends JPanel{
-    
+public class MenuDroite extends JPanel {
+
     private JLabel labelJoueur; // indique quel joueur joue
-    private JPanel main;
-    private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, finTour;
+    private JLabel labelInfo; // indique ce que doit faire l'utilisateur
+    private JPanel menuBouton; // panel contenant tous les boutons
+    private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, finTour; // les différents boutons du menu
     public static boolean invest; // a virer !
-    
-    
-    public MenuDroite()
-    {
+
+    public MenuDroite() {
         super(new BorderLayout());
-        main=new JPanel();
-        main.setLayout(new BoxLayout(main,BoxLayout.PAGE_AXIS));
-        
-        // 1er attribut : largeur
-        Dimension d=new Dimension(310,260);
-        
-        main.setPreferredSize(d);
-        main.setBackground(Color.yellow);
-        
-        // a changer : dynamique
-        labelJoueur=new JLabel(London.getListeJoueur().getJoueur().getNom());
-        
+        menuBouton = new JPanel();
+        menuBouton.setLayout(new BoxLayout(menuBouton, BoxLayout.PAGE_AXIS));
+
+        // position le menuBouton
+        Dimension d = new Dimension(310, 260);
+
+        menuBouton.setPreferredSize(d);
+        menuBouton.setBackground(Color.yellow);
+
+        // label du joueur qui joue
+        labelJoueur = new JLabel(London.getListeJoueur().getJoueur().getNom());
+
+        // intancie tous les boutons
         jouer = new JButton("Jouer des cartes");
         restaurer = new JButton("Restaurer la ville");
         investir = new JButton("Investir");
         emprunter = new JButton("Emprunter (10£)");
         this.invest = false;
         piocher3 = new JButton("Prendre trois cartes");
-        finTour=new JButton("Fin du Tour");
-        
-        main.add(labelJoueur);
-        main.add(jouer);
-        main.add(restaurer);
-        main.add(investir);
-        main.add(emprunter);
-        main.add(piocher3);
-        
-        
-        emprunter.addMouseListener(new MouseAdapter(){
+        finTour = new JButton("Fin du Tour");
+        labelInfo = new JLabel("Vous devez piocher");
+        this.piocher = new JButton("Piocher");
+
+        // on les ajoute au menu
+        menuBouton.add(labelJoueur);
+        menuBouton.add(jouer);
+        menuBouton.add(restaurer);
+        menuBouton.add(investir);
+        menuBouton.add(emprunter);
+        menuBouton.add(piocher3);
+        menuBouton.add(piocher);
+        menuBouton.add(finTour);
+        menuBouton.add(labelInfo);
+
+        // on doit piocher au début
+        disableAll();
+        piocher.setEnabled(true);
+
+        // ACTION BOUTON EMPRUNTER
+        emprunter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                 int rep = JOptionPane.showConfirmDialog(London.acc,
+                int rep = JOptionPane.showConfirmDialog(London.acc,
                         "Êtes-vous sûr de vouloir emprunter 10£ à la banque ?",
                         "Emprunter",
                         JOptionPane.YES_NO_OPTION);
-                if (rep == JOptionPane.YES_OPTION){
-                    London.getListeJoueur().getJoueur().setNbPret(London.getListeJoueur().getJoueur().getNbPret()+1);
-                    London.getListeJoueur().getJoueur().setArgent(London.getListeJoueur().getJoueur().getArgent()+10);
+                if (rep == JOptionPane.YES_OPTION) {
+                    London.getListeJoueur().getJoueur().setNbPret(London.getListeJoueur().getJoueur().getNbPret() + 1);
+                    London.getListeJoueur().getJoueur().setArgent(London.getListeJoueur().getJoueur().getArgent() + 10);
                     London.infos.maj_infos();
                 }
             }
         });
-        
-        this.piocher = new JButton("Piocher");
-        piocher.addMouseListener(new MouseAdapter(){
-            
+
+        // ACTION BOUTON PIOCHER
+        piocher.addMouseListener(new MouseAdapter() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(London.getListeJoueur().getJoueur().getPioche()!=0)
-                {
+                if (London.getListeJoueur().getJoueur().getPioche() != 0) {
                     London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
                     London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
                     London.getListeJoueur().getJoueur().piocheMoins();
-                }
-                else
-                {
+                    London.getMenudroite().repaint();
+                    London.getMenudroite().revalidate();
+
+                } else {
                     JOptionPane.showMessageDialog(null, "Vous n'avez pas le droit de piocher une carte");
                 }
-                
+
             }
-            
+
         });
-        
-        piocher3.addMouseListener(new MouseAdapter(){
-            
+
+        // ACTION BOUTON PIOCHER 3
+        piocher3.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void mouseClicked(MouseEvent e) 
-            {
-                 int rep = JOptionPane.showConfirmDialog(London.acc,
+            public void mouseClicked(MouseEvent e) {
+                int rep = JOptionPane.showConfirmDialog(London.acc,
                         "Êtes-vous sûr de vouloir choisir l'action 'Piocher 3 cartes' ?",
                         "Emprunter",
                         JOptionPane.YES_NO_OPTION);
-                if (rep == JOptionPane.YES_OPTION)
-                {
+                if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
                     piocher.setEnabled(true);
                     finTour.setEnabled(true);
                     London.getListeJoueur().getJoueur().setPioche(3);
+                    London.getListeJoueur().getJoueur().setCarte3(true);
+                    labelInfo.setText("Vous devez piocher 3 cartes");
                     JBCarte.setDoubleClick(true);
+                    London.getMenudroite().repaint();
+                    London.getMenudroite().revalidate();
                 }
             }
         });
-        
-        
-        finTour.addMouseListener(new MouseAdapter(){
-            
+
+        // ACTION BOUTON FIN DE TOUR
+        finTour.addMouseListener(new MouseAdapter() {
+
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                // check trop grand nombre de cartes dans la main
-                if(London.getListeJoueur().getJoueur().getMain().size()>9)
-                {
-                   System.out.println(London.getListeJoueur().getJoueur().getMain().size());
-                   JBCarte.setDoubleClick(true);
-                   JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
-                   London.getListeJoueur().getJoueur().setDefausse(London.getListeJoueur().getJoueur().getMain().size()-9);
-                   disableAll();
-                   finTour.setEnabled(true);
-                   
+            public void mouseClicked(MouseEvent e) {
+                if (London.getListeJoueur().getJoueur().isFinitTour()) {
+                    // check trop grand nombre de cartes dans la main
+                    if (London.getListeJoueur().getJoueur().getMain().size() > 9) {
+                        System.out.println(London.getListeJoueur().getJoueur().getMain().size());
+                        JBCarte.setDoubleClick(true);
+                        JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
+                        if(London.getListeJoueur().getJoueur().getDefausse()==0)
+                        {
+                           London.getListeJoueur().getJoueur().setDefausse(London.getListeJoueur().getJoueur().getMain().size() - 9); 
+                        }
+                        
+                        disableAll();
+                        labelInfo.setText("Vous avez trop de cartes en main");
+                        finTour.setEnabled(true);
+
+                    } else { // ici le joueur finit son tour
+                        actualiserMain();
+                        disableAll();
+                        piocher.setEnabled(true);
+                        labelInfo.setText("Vous devez piocher");
+                        invest = false;
+                        London.getMenudroite().repaint();
+                        London.getMenudroite().revalidate();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vous n'avez pas finit votre tour");
                 }
-                else
-                {
-                    actualiserMain();
-                    enableAll();
-                    invest = false;
-                }
-                
-                
-                
-                
-                
+
             }
-            
+
         });
-        
-        main.add(piocher);
-        main.add(finTour);
-        this.add(main,BorderLayout.NORTH);
-        
-        JPZoom zoom=new JPZoom();
-        zoom.setPreferredSize(new Dimension(300,400));
-        // zoom.setBackground(Color.red);
-        this.add(zoom,BorderLayout.SOUTH);
-        
-        
-        investir.addActionListener(new ActionListener(){
-            
+
+        // ACTION BOUTON INVESTIR
+        investir.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rep = JOptionPane.showConfirmDialog(London.acc,
                         "Êtes-vous sûr de vouloir investir ?",
                         "Investir",
                         JOptionPane.YES_NO_OPTION);
-                if (rep == JOptionPane.YES_OPTION){
+                if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
                     London.getPlateau().activerZonesInvestissables();
                     invest = true;
                 }
             }
         });
+
+        // ajout du menuBOUTON
+        this.add(menuBouton, BorderLayout.NORTH);
+
+        // Panel conteant le zoom de la carte
+        JPZoom zoom = new JPZoom();
+        zoom.setPreferredSize(new Dimension(300, 400));
+        // zoom.setBackground(Color.red);
+        this.add(zoom, BorderLayout.SOUTH);
     }
-    
-    public void actualiserMain()
-    {
-        
-        
-        
-// sauvegarde de la main dans le tableau
-        London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=(JPMain) London.south;
-// on enleve la main
+
+    // methode qui permet de changer de joueur
+    public void actualiserMain() {
+        // sauvegarde de la main dans le tableau
+        London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) London.south;
+        // on enleve la main
         London.central.remove(London.south);
-// on passe au joueur suivant
+        // on passe au joueur suivant
         London.setListeJoueur(London.getListeJoueur().getSuivant());
-// change le label nomJoeuur
+        // change le label nomJoeuur
         labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
-// on remplace le panel par celui du nouveau joueur
-        London.south=London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()];
-// on ajoute le panel
-        London.central.add(London.south,BorderLayout.SOUTH);
-        
-// actualiser la fenêtre
+        // on remplace le panel par celui du nouveau joueur
+        London.south = London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()];
+        // on ajoute le panel
+        London.central.add(London.south, BorderLayout.SOUTH);
+
+        // actualiser la fenêtre
         London.frame.repaint();
         London.central.revalidate();
-        
+
+        // le jouuer peut piocher une carte 
         London.getListeJoueur().getJoueur().setPioche(1);
+
+        // on réinitialise les valeurs
+        London.getListeJoueur().getJoueur().setFinitTour(false);
+        London.getListeJoueur().getJoueur().setCarte3(false);
         
         // on informe le joueur
-       JOptionPane.showMessageDialog(null, "C'est au tour de "+London.getListeJoueur().getJoueur().getNom()+" de jouer");
+        JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");
 
-        
     }
-    
-    public void disableAll()
-    {
-                    jouer.setEnabled(false);
-                    restaurer.setEnabled(false);
-                    investir.setEnabled(false);
-                    piocher3.setEnabled(false);
-                    piocher.setEnabled(false);
-                    emprunter.setEnabled(false);
-                    finTour.setEnabled(false);    
+
+    public void disableAll() {
+        jouer.setEnabled(false);
+        restaurer.setEnabled(false);
+        investir.setEnabled(false);
+        piocher3.setEnabled(false);
+        piocher.setEnabled(false);
+        emprunter.setEnabled(false);
+        finTour.setEnabled(false);
     }
-    
-    public void enableAll()
-    {
-                    jouer.setEnabled(true);
-                    restaurer.setEnabled(true);
-                    investir.setEnabled(true);
-                    piocher3.setEnabled(true);
-                    piocher.setEnabled(true);
-                    emprunter.setEnabled(true);
-                    finTour.setEnabled(true);
+
+    public void enableAll() {
+        jouer.setEnabled(true);
+        restaurer.setEnabled(true);
+        investir.setEnabled(true);
+        piocher3.setEnabled(true);
+        piocher.setEnabled(true);
+        emprunter.setEnabled(true);
+        finTour.setEnabled(true);
     }
-    
-    
 
     public JButton getJouer() {
         return jouer;
@@ -253,12 +267,11 @@ public class MenuDroite extends JPanel{
     public JButton getFinTour() {
         return finTour;
     }
+
+    public JLabel getLabelInfo() {
+        return labelInfo;
+    }
+    
     
 
-    
-    
-    
-    
-    
-    
 }
