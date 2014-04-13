@@ -26,7 +26,7 @@ public class JPPlateau extends JPanel implements MouseListener {
     private int imageWidth;
     private int imageHeight;
     private boolean estZoome;
-    public static JBZone[] tableauZone;
+    private JBZone[] tableauZone;
 
  
     public JPPlateau() {
@@ -200,7 +200,12 @@ public class JPPlateau extends JPanel implements MouseListener {
         tableauZone[19] = jb20;
     }
 
-    public static void activerZonesInvestissables() {
+    public JBZone[] getTableauZone() {
+        return tableauZone;
+    }
+    
+
+    public void activerZonesInvestissables() {
         for(int i = 0; i < tableauZone.length; i++){
             JBZone courrant = tableauZone[i];
             if(courrant.getZone().isActivable()){
@@ -209,7 +214,7 @@ public class JPPlateau extends JPanel implements MouseListener {
         }
     }
     
-    public static int indiceZone(String nom){
+    public int indiceZone(String nom){
         int z = -1;
         for(int i = 0; i < tableauZone.length; i++){
             JBZone zone = tableauZone[i];
@@ -247,7 +252,7 @@ public class JPPlateau extends JPanel implements MouseListener {
     }
     
     private void updateImageSizeDezoom() {
-        imageWidth=805;
+        imageWidth=825;
         imageHeight=588;
     }
     
@@ -286,7 +291,7 @@ public class JPPlateau extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
     }
     
-    public static void desactiveZones(){
+    public  void desactiveZones(){
         for(int i = 0; i < tableauZone.length; i++){
             tableauZone[i].setEnabled(false);
         }

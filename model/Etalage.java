@@ -28,21 +28,28 @@ public class Etalage {
         return ligne2;
     }
     
-    public void piocheCarte(Carte e){
+    public void piocherCarte(Carte e){
     	for(int i=0;i<this.ligne1.length;i++){
+            if(ligne1[i]!=null)
+            {
     		if(ligne1[i].equals(e)){
     			ligne1[i]=null;
     		}
+            }
     	}
     	for(int i=0;i<this.ligne1.length;i++){
+            if(ligne2[i]!=null)
+            {
     		if(ligne2[i].equals(e)){
     			ligne2[i]=null;
     		}
+            }
     	}
     }
     	
 
-    public void addCarte(Carte carte){        
+    public void addCarte(Carte carte){   
+        
         if(this.isFull(this.ligne1)){
             if(this.isFull(this.ligne2)){
                   this.ligne1 = this.ligne2.clone();

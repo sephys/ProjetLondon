@@ -221,10 +221,10 @@ public class Zone {
     }
     
     public void investir(Joueur j){
-        JPPlateau.tableauZone[JPPlateau.indiceZone(this.getNom())].getZone().setActivable(true);
+        London.getPlateau().getTableauZone()[London.getPlateau().indiceZone(this.getNom())].getZone().setActivable(true);
         this.setProprietaire(j);
         for(String s : zonesAdjacentes){
-            JPPlateau.tableauZone[JPPlateau.indiceZone(s)].getZone().setActivable(true);
+            London.getPlateau().getTableauZone()[London.getPlateau().indiceZone(s)].getZone().setActivable(true);
         }
     }
 }

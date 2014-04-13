@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import model.Carte;
 import model.Constructible;
 import model.Etalage;
@@ -36,6 +37,8 @@ public class JBCarte extends JButton implements  MouseListener {
 
     private Image image;
     private Carte carte;
+    private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
+    private  String position; // permet de savoir ou est la carte : main - etalage - construction
 
     public JBCarte(Carte carte) {
         this.carte=carte;
@@ -47,6 +50,7 @@ public class JBCarte extends JButton implements  MouseListener {
         	System.out.println(carte.getPath());
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.position="main";
         this.setIcon(new ImageIcon(JBCarte.scaleImage(image, 67, 103)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
@@ -81,15 +85,63 @@ public class JBCarte extends JButton implements  MouseListener {
    // pour poser une carte sur l'etalage
     @Override
     public void mouseClicked(MouseEvent e) {
-        JBCarte jb=(JBCarte) e.getComponent();
+        
         if(e.getClickCount()==2)
         {
-           London.getEtalage().addCarte(jb.getCarte());
-           London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+            System.out.println("yo : "+((JBCarte) e.getComponent()).getPosition());
            
-           London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(jb.carte);
+               switch (((JBCarte) e.getComponent()).getPosition()) {
+                   case "main": // on met la carte de la main sur le l'étalage
+                      if(doubleClick)
+                      {
+                        ((JBCarte) e.getComponent()).setPosition("etalage");
+                        // ajout de la carte dans l'etalage
+                        London.getEtalage().addCarte(((JBCarte) e.getComponent()).carte);
+                        // on rafrachit l'etalage
+                        London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+                        // on enleve la carte de la main du joueur ( graphiquement )
+                        London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                        //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
+                        // suppression de la carte de la main du joueur
+                        London.getListeJoueur().getJoueur().getMain().remove(((JBCarte) e.getComponent()).carte);
+                        //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
+                        London.getListeJoueur().getJoueur().defausseMoins();
+                        
+                        
+                      }
+                      else
+                      {
+                          JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+                      }
+                        break;
+                      
+                       
+                   case "etalage": // on met la carte de l'etalage dans la main
+                       if(doubleClick)
+                       {
+                            // ajout de la carte dans la main du joueur graphiquement
+                            London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(((JBCarte) e.getComponent()).carte);
+                            // ajout de la carte das la main du joueur
+                            London.getListeJoueur().getJoueur().getMain().add(((JBCarte) e.getComponent()).carte);
+                            // suppresssion de la carte dans l'etalage
+                            London.getEtalage().piocherCarte(((JBCarte) e.getComponent()).carte);
+                            // on rafraichit l'étalage
+                            London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+                            London.getListeJoueur().getJoueur().piocheMoins();
+                            
+                       }
+                       else
+                       {
+                           JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
+                       }
+                       break;
+               }
+               
+               
+           }
+          
         }
-    }
+    
     
 
     /**
@@ -137,6 +189,26 @@ public class JBCarte extends JButton implements  MouseListener {
     public void setCarte(Carte carte) {
         this.carte = carte;
     }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+    
+    
+
+    public static boolean isDoubleClick() {
+        return doubleClick;
+    }
+
+    public static void setDoubleClick(boolean doubleClick) {
+        JBCarte.doubleClick = doubleClick;
+    }
+    
+    
     
     
     
