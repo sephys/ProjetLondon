@@ -178,7 +178,6 @@ public class Zone {
                         tmpL);
                 London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
             }
-            activationZonesVoisines();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

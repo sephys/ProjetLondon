@@ -233,6 +233,20 @@ public class Joueur {
         this.finitTour = finitTour;
     }
     
+    public void addPointVictoire(int pointVictoire){
+        this.pointVictoire += pointVictoire;
+    }
     
-
+    public void addPointPauvrete(int pointPauvrete){
+        this.pointPauvrete += pointPauvrete;
+    }
+    
+    public void addArgent(int argent){
+        this.argent += argent;
+    }
+    
+    public void addPret(int nbPret){
+        this.nbPret += nbPret;
+        this.addArgent(10*nbPret);
+    }
 }

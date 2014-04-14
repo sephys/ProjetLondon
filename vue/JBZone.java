@@ -56,11 +56,18 @@ public class JBZone extends JButton implements ActionListener{
                             "Emprunt",
                             JOptionPane.YES_NO_OPTION);
                     if (rep == JOptionPane.YES_OPTION){
-                        courrant.setNbPret(courrant.getNbPret() + 1);
+                        courrant.addPret(1);
                         this.zone.investir(courrant);
                         this.setBackground(Color.YELLOW);
                         London.getMenudroite().getFinTour().setEnabled(true);
                         JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
+                        courrant.setPioche(this.zone.getNbCartes());
+                        courrant.addArgent(-this.zone.getPrix());
+                        courrant.setPioche(this.zone.getNbCartes());
+                        courrant.addPointVictoire(this.zone.getPointsVictoire());
+                        London.getListeJoueur().getJoueur().setCarte3(true);
+                        London.getMenudroite().getPiocher().setEnabled(true);
+                        London.getMenudroite().getFinTour().setEnabled(true);
                         London.getPlateau().desactiveZones();
                         // Gérer les cartes en trop en main.
                     }else{
@@ -69,15 +76,21 @@ public class JBZone extends JButton implements ActionListener{
                 }else{
                     this.zone.investir(courrant);
                     this.setBackground(Color.YELLOW);
-                    London.getMenudroite().getFinTour().setEnabled(true);                    
+                    London.getMenudroite().getFinTour().setEnabled(true);
                     JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
+                    courrant.setPioche(this.zone.getNbCartes());
+                    courrant.setArgent(courrant.getArgent() + 10 - this.zone.getPrix());
+                    London.getListeJoueur().getJoueur().setCarte3(true);
+                    London.getMenudroite().getPiocher().setEnabled(true);
+                    London.getMenudroite().getFinTour().setEnabled(true);
                     London.getPlateau().desactiveZones();
                     // Gérer les cartes en trop en main
                 }
-            }else{
+            }else{  
                 JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
             }
         }
+        London.infos.maj_infos();
     }
     
     private String split(String nomZone) {
