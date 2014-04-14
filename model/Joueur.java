@@ -35,6 +35,11 @@ public class Joueur {
         this.nbPret = 0;
         this.color=color;
         this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
+        System.out.println("plop");
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     
