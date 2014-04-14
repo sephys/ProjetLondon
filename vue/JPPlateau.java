@@ -252,8 +252,8 @@ public class JPPlateau extends JPanel implements MouseListener {
     }
     
     private void updateImageSizeDezoom() {
-        imageWidth=825;
-        imageHeight=588;
+        imageWidth=842;
+        imageHeight=608;
     }
     
     @Override

@@ -16,11 +16,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import model.Zone;
 
 
@@ -61,6 +64,12 @@ public class London {
 	// méthode qui initialise la fenêtre lorsqu'on lance une partie
 	public static void start()
 	{
+            // permet d'avoir le même affichage sous windows et mac
+            try {
+                UIManager.setLookAndFeel(new MetalLookAndFeel());
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(London.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
 		initTabJPMain(); // initialisation des panel contenant les mains des joueurs
 

@@ -17,7 +17,8 @@ import javax.swing.JPanel;
 public class JPPileChantier extends JPanel{
     
     public JPPileChantier(){
-        
+        this.setBackground(Color.LIGHT_GRAY);
+        this.setPreferredSize(new Dimension(80,110));
        
     }
 }
