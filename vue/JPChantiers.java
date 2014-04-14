@@ -19,25 +19,21 @@ public class JPChantiers extends JPanel{
         
     public JPChantiers(){
            
-     /* On ajoute un gridbagLauout au panel */
-    this.setLayout(new GridBagLayout());
+        /* On ajoute un gridbagLauout au panel */
+       this.setLayout(new GridBagLayout());
 
-    /* Le gridBagConstraints va définir la position et la taille des éléments */
-    GridBagConstraints gc = new GridBagConstraints();
-    gc.fill = GridBagConstraints.HORIZONTAL;
-    gc.gridx = 2;
-    gc.gridy = 1;
-    JPPileChantier chantier = new JPPileChantier();
-    this.add(chantier,gc);
- 
-    
-    GridBagConstraints gc2 = new GridBagConstraints();
-    gc.fill = GridBagConstraints.HORIZONTAL;
-    gc2.gridx = 4;
-    gc2.gridy = 1;
-    JPPileChantier chantier2 = new JPPileChantier();
-    this.add(chantier2,gc2);
-        
+       /* Le gridBagConstraints va définir la position et la taille des éléments */
+       for(int i=0; i<16; i++){
+           for(int j=0; j<16;j++){
+            GridBagConstraints gc = new GridBagConstraints();
+            gc.fill = GridBagConstraints.HORIZONTAL;
+            gc.gridx = 2;
+            gc.gridy = 1;
+            gc.insets = new Insets(10,10,10,10);
+            JPPileChantier chantier = new JPPileChantier();
+            this.add(chantier,gc);
+           }
+       }
     }
     
     public static void main(String[] args){
