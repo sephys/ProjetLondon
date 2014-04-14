@@ -40,7 +40,7 @@ public class JPEtalage extends JPanel{
     {   
         
         try {
-            URL uri = JPZoom.class.getResource("../img/etalage.png"); 
+            URL uri = JPEtalage.class.getResource("../img/etalage.png"); 
             img = ImageIO.read(uri);
         } catch (IOException ex) {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
