@@ -94,7 +94,7 @@ public class JBZone extends JButton implements ActionListener{
                 }else{
                     // S'il dispose d'assez d'argent, la zone est directement investie
                     this.zone.investir(courrant);
-                    this.setBackground(Color.YELLOW);   // La couleur associée au joueur est insérée dans la case 
+                    this.setBackground(London.getListeJoueur().getJoueur().getColor());
                     JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");    // Une fenêtre affiche que l'investissement s'est bien déroulé
                     // Les actions d'investissement de la zone sont ajoutée au joueur courrant (nombre de cartes à piocher, coût décrémenté à son argent, points de victoire ajoutés)
                     courrant.addArgent(-this.zone.getPrix());
@@ -114,7 +114,7 @@ public class JBZone extends JButton implements ActionListener{
                 London.getMenudroite().getFinTour().setEnabled(false);
             }
         }
-        London.infos.maj_infos();   // Actualisation du panneau de gauche 
+        London.infos.maj_infos();   // Actualisation du panneau de gauche
         London.getPlateau().desactiveZones();   // Désactivation de tous les boutons de zone pour le prochain joueur
     }
     
@@ -122,17 +122,17 @@ public class JBZone extends JButton implements ActionListener{
      * Cette méthode permet au nom de la zone d'être centré dans son bouton, en utilisant du HTML.
      * Il a été défini que la taille maximum approximative de la chaîne de caractère possible
      * que l'on pouvait mettre sur une ligne sur un Bouton de la taille que l'on a définie
-     * était de 14. La méthode place en plus les sauts de ligne où il le faut afin que l'espace 
+     * était de 14. La méthode place en plus les sauts de ligne où il le faut afin que l'espace
      * dans le bouton soit le mieux utilisé.
      * @param nomZone
-     * @return 
+     * @return
      */
     private String split(String nomZone) {
         // taille max de 14
         StringBuilder retour = new StringBuilder("<html><center>");
         String[] tab = nomZone.split(" ");
         StringBuilder aAjouter = new StringBuilder("");
-        for(int i = 0; i < tab.length; i++){    
+        for(int i = 0; i < tab.length; i++){
             if(aAjouter.length() <= 14){
                 aAjouter.append(" ");
                 aAjouter.append(tab[i]);
