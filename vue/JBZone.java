@@ -58,7 +58,7 @@ public class JBZone extends JButton implements ActionListener{
                     if (rep == JOptionPane.YES_OPTION){
                         courrant.setNbPret(courrant.getNbPret() + 1);
                         this.zone.investir(courrant);
-                        this.setBackground(Color.YELLOW);
+                        this.setBackground(London.getListeJoueur().getJoueur().getColor());
                         London.getMenudroite().getFinTour().setEnabled(true);
                         JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
                         London.getPlateau().desactiveZones();
