@@ -240,6 +240,9 @@ public class Joueur {
         this.finitTour = finitTour;
     }
     
-    
+    public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
+    	carteJouer.jouerCarte(this,ind);
+    	this.getMain().remove(defausse);
+    }
 
 }

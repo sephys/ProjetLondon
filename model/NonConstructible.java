@@ -20,14 +20,16 @@ public class NonConstructible extends Carte {
 	}
 	
 	public String toString(){
-		return new String(super.toString()+"\n Pouvoir : "+this.getPouvoir()+"\n");
+		
+		//return new String(super.toString()+"\n Pouvoir : "+this.getPouvoir()+"\n");
+		return super.toString();
 	}
 
 
 	@Override
-	public void jouerCarte(Joueur currJ, int jCarte) {
+	public void jouerCarte(Joueur currJ, int ind) {
 		// TODO Auto-generated method stub
-		
+		currJ.getMain().remove(this);
 	}
 
 }

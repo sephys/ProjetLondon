@@ -6,9 +6,7 @@
 
 package vue;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import javax.swing.*;
 import model.Joueur;
 
@@ -17,21 +15,17 @@ import model.Joueur;
  * @author FT
  */
 public class JPChantiers extends JPanel{
-    
+        private JPPileChantier[] chantiers;
+        
     public JPChantiers(){
-
-    this.setLayout(new GridLayout(4,3, 20, 20));
+           
     //On ajoute le bouton au content pane de la JFrame
-this.add(new JButton("1"));
-this.add(new JButton("2"));
-this.add(new JButton("3"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-
+    chantiers = new JPPileChantier[48];
+    for(int i=0; i<32;i++){
+         JPPileChantier chantier = new JPPileChantier();
+         chantiers[i]=chantier;
+         this.add(chantier);
+    }
             
         
         
@@ -39,8 +33,9 @@ this.add(new JButton("5"));
     
     public static void main(String[] args){
         Frame f = new Frame();
+        f.setSize(700, 500);
         f.add(new JPChantiers());
-        f.pack();
-        f.setVisible(true);
+
+    f.setVisible(true);
     }
 }
