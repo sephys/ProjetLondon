@@ -29,6 +29,9 @@ public class NonConstructible extends Carte {
 	@Override
 	public void jouerCarte(Joueur currJ, int ind) {
 		// TODO Auto-generated method stub
+		if(currJ.getPouvoir().containsKey(this.getPouvoir())){
+			currJ.getPouvoir().put(this.getPouvoir(),new Integer(currJ.getPouvoir().get(this.getPouvoir()).intValue()+1));
+		}
 		currJ.getMain().remove(this);
 	}
 

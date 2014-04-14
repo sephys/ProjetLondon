@@ -111,7 +111,7 @@ public class Joueur {
             {
                 London.getMenudroite().disableAll();
                 London.getMenudroite().getFinTour().setEnabled(true);
-                London.getMenudroite().getLabelInfo().setText("Vous avez finit votre tour");
+                London.getMenudroite().getLabelInfo().setText("Vous avez fini votre tour");
                 this.finitTour = true;
 
             } else // une pioche normal
@@ -245,9 +245,25 @@ public class Joueur {
         this.finitTour = finitTour;
     }
     
+    public void addPointVictoire(int pointVictoire){
+        this.pointVictoire += pointVictoire;
+    }
+    
+    public void addPointPauvrete(int pointPauvrete){
+        this.pointPauvrete += pointPauvrete;
+    }
+    
+    public void addArgent(int argent){
+        this.argent += argent;
+    }
+    
+    public void addPret(int nbPret){
+        this.nbPret += nbPret;
+        this.addArgent(10*nbPret);
+    }
+    
     public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
     	carteJouer.jouerCarte(this,ind);
     	this.getMain().remove(defausse);
     }
-
 }

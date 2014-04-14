@@ -20,11 +20,14 @@ import model.Zone;
  */
 public class JBZone extends JButton implements ActionListener{
     
-    private Zone zone; // nom du bouton et de la zone
+    private Zone zone; // Zone contenue dans le bouton.
     
-    
+    /**
+     * Le constructeur de JBZone prend en paramètre la zone associée.
+     * @param zone
+     */
     public JBZone(Zone zone){
-        this.setMargin(new Insets(0, 0, 0, 0)); //A revoir, pour diminuer la taille des marges
+        this.setMargin(new Insets(0, 0, 0, 0));
         Font f = this.getFont();
         f = new Font(Font.DIALOG, Font.BOLD, 9);
         this.setFont(f);
@@ -41,45 +44,89 @@ public class JBZone extends JButton implements ActionListener{
         this.zone = zone;
     }
     
+    /**
+     * actionPerformed gère le comportement de l'appui sur le bouton.
+     * 2 principaux cas sont gérés :
+     *  Le joueur voulant investir sur la zone possède l'argent nécessaire et investit donc la zone.
+     *  Le joueur voulant investir sur la zone ne possède pas l'argent nécessaire, il lui est alors
+     *  proposé de faire un emprunt.
+     *
+     * A chaque opération, une fenêtre de confirmation apparaît pour que le joueur ne puisse pas se
+     * tromper.
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {
         if(MenuDroite.invest){
-            int rep = JOptionPane.showConfirmDialog(London.acc,
+            int rep = JOptionPane.showConfirmDialog(London.acc,             // Affichage de la fenêtre de confirmation de l'action d'investir
                     "Voulez-vous investir dans " + this.zone.getNom()+ " ?",
                     "Investir",
                     JOptionPane.YES_NO_OPTION);
-            if (rep == JOptionPane.YES_OPTION){
+            if (rep == JOptionPane.YES_OPTION){                             // Cas ou le joueur accepte d'investir
                 Joueur courrant = London.getListeJoueur().getJoueur();
                 if(zone.getPrix() > courrant.getArgent()){
+                    // Dans le cas ou son argent est insuffisant, il lui est proposé un emprunt (fenêtre de confirmation)
                     rep = JOptionPane.showConfirmDialog(London.acc,
                             "La zone dans laquelle vous voulez investir coûte " + this.zone.getPrix() +
                                     " et vous ne possédez que " + courrant.getArgent() + ". Voulez vous faire un emprunt ?",
                             "Emprunt",
                             JOptionPane.YES_NO_OPTION);
-                    if (rep == JOptionPane.YES_OPTION){
-                        courrant.setNbPret(courrant.getNbPret() + 1);
+                    if (rep == JOptionPane.YES_OPTION){                     // Cas ou le joueur accepte de prendre un prêt
+                        courrant.addPret(1);
                         this.zone.investir(courrant);
                         this.setBackground(London.getListeJoueur().getJoueur().getColor());
+                        JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");    // Une fenêtre affiche que l'investissement s'est bien déroulé
+                        // Les actions d'investissement de la zone sont ajoutée au joueur courrant (nombre de cartes à piocher, coût décrémenté à son argent, points de victoire ajoutés)
+                        courrant.addArgent(-this.zone.getPrix());
+                        courrant.setPioche(this.zone.getNbCartes());
+                        courrant.addPointVictoire(this.zone.getPointsVictoire());
+                        London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
+                        London.getMenudroite().getPiocher().setEnabled(true);
                         London.getMenudroite().getFinTour().setEnabled(true);
-                        JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
-                        London.getPlateau().desactiveZones();
-                        // Gérer les cartes en trop en main.
+                        // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit
+                        London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+ this.zone.getNbCartes() + " cartes");
                     }else{
-                        JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
+                        // S'il refuse de faire un emprunt, l'investissement est annulé, il peut donc rechoisir l'action à effectuer
+                        JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");    // Une fenêtre affichant l'échec de l'action Investir est affichée
+                        London.getMenudroite().enableAll();
+                        London.getMenudroite().getPiocher().setEnabled(false);
+                        London.getMenudroite().getFinTour().setEnabled(false);
                     }
                 }else{
+                    // S'il dispose d'assez d'argent, la zone est directement investie
                     this.zone.investir(courrant);
-                    this.setBackground(Color.YELLOW);
-                    London.getMenudroite().getFinTour().setEnabled(true);                    
-                    JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");
-                    London.getPlateau().desactiveZones();
-                    // Gérer les cartes en trop en main
+                    this.setBackground(London.getListeJoueur().getJoueur().getColor());
+                    JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");    // Une fenêtre affiche que l'investissement s'est bien déroulé
+                    // Les actions d'investissement de la zone sont ajoutée au joueur courrant (nombre de cartes à piocher, coût décrémenté à son argent, points de victoire ajoutés)
+                    courrant.addArgent(-this.zone.getPrix());
+                    courrant.setPioche(this.zone.getNbCartes());
+                    courrant.addPointVictoire(this.zone.getPointsVictoire());
+                    London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
+                    London.getMenudroite().getPiocher().setEnabled(true);
+                    London.getMenudroite().getFinTour().setEnabled(true);
+                    // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit
+                    London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+ this.zone.getNbCartes() + " cartes");
                 }
             }else{
-                JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");
+                // S'il refuse l'action d'investir, il peut donc rechoisir l'action à effectuer
+                JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");    // Une fenêtre affichant l'échec de l'action Investir est affichée
+                London.getMenudroite().enableAll();
+                London.getMenudroite().getPiocher().setEnabled(false);
+                London.getMenudroite().getFinTour().setEnabled(false);
             }
         }
+        London.infos.maj_infos();   // Actualisation du panneau de gauche
+        London.getPlateau().desactiveZones();   // Désactivation de tous les boutons de zone pour le prochain joueur
     }
     
+    /**
+     * Cette méthode permet au nom de la zone d'être centré dans son bouton, en utilisant du HTML.
+     * Il a été défini que la taille maximum approximative de la chaîne de caractère possible
+     * que l'on pouvait mettre sur une ligne sur un Bouton de la taille que l'on a définie
+     * était de 14. La méthode place en plus les sauts de ligne où il le faut afin que l'espace
+     * dans le bouton soit le mieux utilisé.
+     * @param nomZone
+     * @return
+     */
     private String split(String nomZone) {
         // taille max de 14
         StringBuilder retour = new StringBuilder("<html><center>");

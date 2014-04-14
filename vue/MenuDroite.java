@@ -174,6 +174,7 @@ public class MenuDroite extends JPanel {
                 if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
                     London.getPlateau().activerZonesInvestissables();
+                    London.getPlateau().desactiveZonesInvesties();
                     invest = true;
                 }
             }
