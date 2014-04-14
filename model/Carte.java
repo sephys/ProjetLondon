@@ -86,12 +86,12 @@ public abstract class Carte {
 	public void setPath(String path){
 		this.path = path;
 	}
-	public abstract void jouerCarte(Joueur currJ, int jCarte);
+	public abstract void jouerCarte(Joueur currJ, int ind);
 
 	public String toString(){
 		StringBuffer tmpStr=new StringBuffer("\n Nom : "+this.getNom());
-		tmpStr.append("\n Categorie : "+this.getCategorie());
-		tmpStr.append("\n Couleur : "+this.getCouleur());
+		//tmpStr.append("\n Categorie : "+this.getCategorie());
+		//tmpStr.append("\n Couleur : "+this.getCouleur());
 		return new String(tmpStr);
 	}
 

@@ -22,16 +22,25 @@ public class JPChantiers extends JPanel{
 
     this.setLayout(new GridLayout(4,3, 20, 20));
     //On ajoute le bouton au content pane de la JFrame
-this.add(new JButton("1"));
-this.add(new JButton("2"));
-this.add(new JButton("3"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-
+    JPanel t1=new JPanel();
+    JPanel t2=new JPanel();
+    JPanel t3=new JPanel();
+    JPanel t4=new JPanel();
+    JPanel t5=new JPanel();
+    t5.setPreferredSize(new Dimension(30,30));
+    t5.setBackground(Color.red);
+    t1.add(new JButton("1"));
+    t2.add(new JButton("2"));
+    t3.add(new JButton("3"));
+    t4.add(new JButton("4"));
+    t5.add(new JButton("5"));
+    this.add(t1);
+    this.add(t2);
+    this.add(t3);
+    this.add(t4);
+    this.add(t5);
+    this.revalidate();
+    
             
         
         
@@ -39,6 +48,7 @@ this.add(new JButton("5"));
     
     public static void main(String[] args){
         Frame f = new Frame();
+        f.setPreferredSize(new Dimension(700,600));
         f.add(new JPChantiers());
         f.pack();
         f.setVisible(true);
