@@ -41,10 +41,10 @@ public class JPSousInfos extends JPanel{
     JLabel nomJoueur;
     JPSousSousInfos piece, pauvrete, emprunt, victoire, metro;
     
-    public JPSousInfos(String nomJoueur){
+    public JPSousInfos(Joueur joueur){
         this.setLayout(new GridLayout(2, 3));
         
-        this.nomJoueur = new JLabel(nomJoueur);
+        this.nomJoueur = new JLabel(joueur.getNom());
         this.nomJoueur.setHorizontalAlignment(JLabel.CENTER);
         this.nomJoueur.setVerticalAlignment(JLabel.CENTER);
         this.nomJoueur.setFont(this.nomJoueur.getFont ().deriveFont (16.0f));
@@ -59,7 +59,7 @@ public class JPSousInfos extends JPanel{
         this.add(this.emprunt);
         this.add(this.victoire);
         this.add(this.metro);
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(joueur.getColor());
         
     }
     

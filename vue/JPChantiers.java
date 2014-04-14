@@ -6,9 +6,7 @@
 
 package vue;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import javax.swing.*;
 import model.Joueur;
 
@@ -17,30 +15,32 @@ import model.Joueur;
  * @author FT
  */
 public class JPChantiers extends JPanel{
-    
+        private JPPileChantier[] chantiers;
+        
     public JPChantiers(){
+           
+        /* On ajoute un gridbagLauout au panel */
+       this.setLayout(new GridBagLayout());
 
-    this.setLayout(new GridLayout(4,3, 20, 20));
-    //On ajoute le bouton au content pane de la JFrame
-this.add(new JButton("1"));
-this.add(new JButton("2"));
-this.add(new JButton("3"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-this.add(new JButton("4"));
-this.add(new JButton("5"));
-
-            
-        
-        
+       /* Le gridBagConstraints va définir la position et la taille des éléments */
+       for(int i=0; i<16; i++){
+           for(int j=0; j<16;j++){
+            GridBagConstraints gc = new GridBagConstraints();
+            gc.fill = GridBagConstraints.HORIZONTAL;
+            gc.gridx = 2;
+            gc.gridy = 1;
+            gc.insets = new Insets(10,10,10,10);
+            JPPileChantier chantier = new JPPileChantier();
+            this.add(chantier,gc);
+           }
+       }
     }
     
     public static void main(String[] args){
         Frame f = new Frame();
+        f.setSize(700, 500);
         f.add(new JPChantiers());
-        f.pack();
-        f.setVisible(true);
+
+    f.setVisible(true);
     }
 }

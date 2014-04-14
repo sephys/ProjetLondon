@@ -73,7 +73,7 @@ public class JBZone extends JButton implements ActionListener{
                     if (rep == JOptionPane.YES_OPTION){                     // Cas ou le joueur accepte de prendre un prêt
                         courrant.addPret(1);
                         this.zone.investir(courrant);
-                        this.setBackground(Color.YELLOW);
+                        this.setBackground(London.getListeJoueur().getJoueur().getColor());
                         JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");    // Une fenêtre affiche que l'investissement s'est bien déroulé
                         // Les actions d'investissement de la zone sont ajoutée au joueur courrant (nombre de cartes à piocher, coût décrémenté à son argent, points de victoire ajoutés)
                         courrant.addArgent(-this.zone.getPrix());

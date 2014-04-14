@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +23,9 @@ public class Joueur {
     private int pioche; // savoir combien de cartes le joueur peut piocher
     private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
     private boolean finitTour; // savoir si le joueur a finit son tour
+    private Color color;
 
-    public Joueur(String nom) {
+    public Joueur(String nom,Color color) {
         this.nom = nom;
         this.main = new ArrayList<Carte>();
         this.pouvoir = new HashMap<String, Integer>();
@@ -31,8 +33,18 @@ public class Joueur {
         this.argent = 5;
         this.pointPauvrete = 5;
         this.nbPret = 0;
+        this.color=color;
         this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
+        System.out.println("plop");
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    
+    
+    
 
     public static int getNbJoueur() {
         return nbJoueur;
@@ -248,5 +260,10 @@ public class Joueur {
     public void addPret(int nbPret){
         this.nbPret += nbPret;
         this.addArgent(10*nbPret);
+    }
+    
+    public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
+    	carteJouer.jouerCarte(this,ind);
+    	this.getMain().remove(defausse);
     }
 }
