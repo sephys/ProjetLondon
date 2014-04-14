@@ -49,7 +49,6 @@ public class JPInfos extends JPanel{
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i].getNom());
             aljpsi[i] = jps;
             this.add(jps);
-
         }
     }
     
