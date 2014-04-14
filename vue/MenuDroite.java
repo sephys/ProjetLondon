@@ -116,7 +116,7 @@ public class MenuDroite extends JPanel {
                     piocher.setEnabled(true);
                     finTour.setEnabled(true);
                     London.getListeJoueur().getJoueur().setPioche(3);
-                    London.getListeJoueur().getJoueur().setCarte3(true);
+                    London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
                     labelInfo.setText("Vous devez piocher 3 cartes");
                     JBCarte.setDoubleClick(true);
                     London.getMenudroite().repaint();
@@ -213,7 +213,7 @@ public class MenuDroite extends JPanel {
 
         // on réinitialise les valeurs
         London.getListeJoueur().getJoueur().setFinitTour(false);
-        London.getListeJoueur().getJoueur().setCarte3(false);
+        London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
         
         // on informe le joueur
         JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");

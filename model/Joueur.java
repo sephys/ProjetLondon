@@ -20,7 +20,7 @@ public class Joueur {
     private int placeJoueur; // la place du joueur dans le cycle
     private int defausse; // savoir combien de cartes le joueur doit se défausser
     private int pioche; // savoir combien de cartes le joueur peut piocher
-    private boolean carte3; // savoir si le joueur a choisi l'action 3 cartes
+    private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
     private boolean finitTour; // savoir si le joueur a finit son tour
 
     public Joueur(String nom) {
@@ -95,7 +95,7 @@ public class Joueur {
         this.pioche--;
         if (this.pioche == 0) {
             JBCarte.setDoubleClick(false);
-            if (carte3) // fin du tour du joueur
+            if (finTourPiocheCarte) // fin du tour du joueur
             {
                 London.getMenudroite().disableAll();
                 London.getMenudroite().getFinTour().setEnabled(true);
@@ -217,16 +217,16 @@ public class Joueur {
         return res;
     }
 
-    public boolean isCarte3() {
-        return carte3;
+    public boolean isFinTourPiocheCarte() {
+        return finTourPiocheCarte;
     }
 
     public boolean isFinitTour() {
         return finitTour;
     }
 
-    public void setCarte3(boolean carte3) {
-        this.carte3 = carte3;
+    public void setFinTourPiocheCarte(boolean bool) {
+        this.finTourPiocheCarte = bool;
     }
 
     public void setFinitTour(boolean finitTour) {
