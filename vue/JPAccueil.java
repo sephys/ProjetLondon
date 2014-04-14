@@ -202,14 +202,14 @@ public class JPAccueil extends JPanel {
             switch (i % nb) {
                 case 0:
                     if (London.getTabJoueur()[0] == null) {
-                        London.getTabJoueur()[0] = new Joueur(nomJoueurs[0]);
+                        London.getTabJoueur()[0] = new Joueur(nomJoueurs[0],Color.red);
 
                     }
                     London.getTabJoueur()[0].piocheCarte(arrayDeque.poll());
                     break;
                 case 1:
                     if (London.getTabJoueur()[1] == null) {
-                        London.getTabJoueur()[1] = new Joueur(nomJoueurs[1]);
+                        London.getTabJoueur()[1] = new Joueur(nomJoueurs[1],Color.blue);
 
                     }
                     London.getTabJoueur()[1].piocheCarte(arrayDeque.poll());
@@ -217,14 +217,14 @@ public class JPAccueil extends JPanel {
 
                 case 2:
                     if (London.getTabJoueur()[2] == null) {
-                        London.getTabJoueur()[2] = new Joueur(nomJoueurs[2]);
+                        London.getTabJoueur()[2] = new Joueur(nomJoueurs[2],Color.GREEN);
 
                     }
                     London.getTabJoueur()[2].piocheCarte(arrayDeque.poll());
                     break;
                 case 3:
                     if (London.getTabJoueur()[3] == null) {
-                        London.getTabJoueur()[3] = new Joueur(nomJoueurs[3]);
+                        London.getTabJoueur()[3] = new Joueur(nomJoueurs[3],Color.yellow);
 
                     }
                     London.getTabJoueur()[3].piocheCarte(arrayDeque.poll());

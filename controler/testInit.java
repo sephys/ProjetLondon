@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
+import vue.London;
+
 import model.Carte;
 import model.Constructible;
 import model.Etalage;
@@ -17,6 +19,32 @@ public class testInit {
 	private static Etalage defausse;
 
 	public static void main(String[] args) {
+		Joueur j=new Joueur("toto");
+		Carte.initDeck();
+		for(int i=0;i<30;i++){
+			j.piocheCarte(London.getDeck().poll());
+		}
+		boolean arret=false;
+		j.nouveauChantier();
+		j.nouveauChantier();
+		while(!arret){
+			System.out.println(j.getMain());
+			System.out.println("Quelle carte Voulez vous jouer?");
+			Scanner sc=new Scanner(System.in);
+			int index=sc.nextInt();
+			Carte jouerC=j.getCarteMain(index);
+			if(jouerC.getClass()==Constructible.class){
+				System.out.println("Quelle carte voulez vous defausser");
+				index=sc.nextInt();
+				Carte defCarte=j.getCarteMain(index);
+				System.out.println(j.getListeChantier());
+				System.out.println("Chantier?");
+				index=sc.nextInt();
+				j.jouerCarte(defCarte,jouerC, index);
+			}else{
+				j.jouerCarte(null,jouerC, index);
+			}
+		}
 		/*
 		// TODO Auto-generated method stub
 		//crÃ©ation du deck

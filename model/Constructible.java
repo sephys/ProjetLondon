@@ -110,14 +110,17 @@ public class Constructible extends Carte {
 
 	public String toString(){
 		StringBuffer tmpStr=new StringBuffer(super.toString());
-		tmpStr.append("\n Cout : "+this.getCoutPose());
-		tmpStr.append("\n Pouvoir : "+this.getPouvoirIlli()+"\n");
+		//tmpStr.append("\n Cout : "+this.getCoutPose());
+		//tmpStr.append("\n Pouvoir : "+this.getPouvoirIlli()+"\n");
 		return new String(tmpStr);
 	}
 
 	@Override
-	public void jouerCarte(Joueur currJ, int jCarte) {
+	public void jouerCarte(Joueur currJ,int ind) { 
 		// TODO Auto-generated method stub
-		
+		currJ.setArgent(currJ.getArgent()-this.getCoutPose());
+		currJ.setPointVictoire(currJ.getPointVictoire()+this.getPointsVictoirePose());
+		currJ.getListeChantier().get(ind).add(this);
+		currJ.getMain().remove(this);
 	}
 }
