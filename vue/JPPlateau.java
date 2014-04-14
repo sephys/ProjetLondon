@@ -48,52 +48,48 @@ public class JPPlateau extends JPanel implements MouseListener {
         initBouton();
     }
     
+    /**
+     * Cette fonction crée puis place tous les boutons associés aux zones.
+     */
     public void initBouton(){
         // ajout bouton :
         
-        //JButton jb1=new JButton("Bethnal Green, Stepney&Poplar");
         JBZone jb1=new JBZone(London.zones.get("Bethnal Green, Stepney & Poplar"));
         jb1.setBounds(870, 328, 86, 38);
         jb1.setVisible(false);
         jb1.setEnabled(false);
         this.add(jb1);
         
-        //JButton jb2=new JButton("City");
         JBZone jb2=new JBZone(London.zones.get("City"));
         jb2.setBounds(620, 342, 88, 38);
         jb2.setVisible(false);
         jb2.setEnabled(false);
         this.add(jb2);
         
-        // JButton jb3=new JButton("Hackney");
         JBZone jb3=new JBZone(London.zones.get("Hackney"));
         jb3.setBounds(793, 122, 88, 38);
         jb3.setVisible(false);
         jb3.setEnabled(false);
         this.add(jb3);
         
-        //JButton jb4=new JButton("Islington&Stoke Newington");
         JBZone jb4=new JBZone(London.zones.get("Islington & Stoke Newington"));
         jb4.setBounds(582, 122, 88, 38);
         jb4.setVisible(false);
         jb4.setEnabled(false);
         this.add(jb4);
         
-        //JButton jb5=new JButton("Saint Pancras");
         JBZone jb5=new JBZone(London.zones.get("St. Pancras"));
         jb5.setBounds(447, 225, 88, 38);
         jb5.setVisible(false);
         jb5.setEnabled(false);
         this.add(jb5);
         
-        //JButton jb6=new JButton("Hampstead");
         JBZone jb6=new JBZone(London.zones.get("Hampstead"));
         jb6.setBounds(271, 139, 88, 38);
         jb6.setVisible(false);
         jb6.setEnabled(false);        
         this.add(jb6);
         
-        //JButton jb7=new JButton("St. Marylebone");
         JBZone jb7=new JBZone(London.zones.get("St. Marylebone"));
         jb7.setBounds(333, 313, 88, 38);
         jb7.setVisible(false);
@@ -204,7 +200,10 @@ public class JPPlateau extends JPanel implements MouseListener {
         return tableauZone;
     }
     
-
+    /**
+     * La méthode activerZonesInvestissables active toutes les zones investissables
+     * (les zones adjacentes aux zones qui ont déjà été investies)
+     */
     public void activerZonesInvestissables() {
         for(int i = 0; i < tableauZone.length; i++){
             JBZone courrant = tableauZone[i];
@@ -214,6 +213,12 @@ public class JPPlateau extends JPanel implements MouseListener {
         }
     }
     
+    /**
+     * Cette méthode permet de récupérer l'indice d'un bouton associé à une zone
+     * grâce au nom de celle-ci.
+     * @param nom   Le nom de la zone recherchée
+     * @return      L'indice de la zone recherchée
+     */
     public int indiceZone(String nom){
         int z = -1;
         for(int i = 0; i < tableauZone.length; i++){
@@ -291,6 +296,9 @@ public class JPPlateau extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
     }
     
+    /**
+     * Cette méthode désactive toutes les boutons associés aux zones
+     */
     public  void desactiveZones(){
         for(int i = 0; i < tableauZone.length; i++){
             tableauZone[i].setEnabled(false);

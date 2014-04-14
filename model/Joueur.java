@@ -99,7 +99,7 @@ public class Joueur {
             {
                 London.getMenudroite().disableAll();
                 London.getMenudroite().getFinTour().setEnabled(true);
-                London.getMenudroite().getLabelInfo().setText("Vous avez finit votre tour");
+                London.getMenudroite().getLabelInfo().setText("Vous avez fini votre tour");
                 this.finitTour = true;
 
             } else // une pioche normal

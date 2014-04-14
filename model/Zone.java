@@ -132,10 +132,6 @@ public class Zone {
         return this.nom+" [prix : "+this.prix+", nbCartes : "+this.nbCartes+", pointsVictoire : "+this.pointsVictoire+", ";
     }
     
-    public String tranadToString(){
-        return this.nom + " " + this.activable;
-    }
-    
     public boolean isActivable() {
         // TODO Auto-generated method stub
         return activable;
@@ -190,22 +186,6 @@ public class Zone {
         }
     }
     
-    private static void activationZonesVoisines() {
-        Zone City = London.zones.get("City");
-        Zone Southwark = London.zones.get("Southwark & Bermondsey");
-        Zone Westminster = London.zones.get("Westminster");
-        for(String s : City.getZonesAdjacentes()){
-            London.zones.get(s).setActivable(true);
-        }
-        for(String s : Southwark.getZonesAdjacentes()){
-            London.zones.get(s).setActivable(true);
-        }
-        for(String s : Westminster.getZonesAdjacentes()){
-            London.zones.get(s).setActivable(true);
-        }       
-    }
-    
-    
     public HashSet<String> zoneInvest(){
         HashSet <String> res=new HashSet<String>();
         Collection zone=London.zones.values();
@@ -219,6 +199,11 @@ public class Zone {
         return res;
     }
     
+    /**
+     * La méthode investir associe au joueur courrant la zone sur laquelle il investit.
+     * Les zones adjacentes à celles-ci deviennent du coup activées.
+     * @param j 
+     */
     public void investir(Joueur j){
         London.getPlateau().getTableauZone()[London.getPlateau().indiceZone(this.getNom())].getZone().setActivable(true);
         this.setProprietaire(j);
