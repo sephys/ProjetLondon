@@ -304,4 +304,12 @@ public class JPPlateau extends JPanel implements MouseListener {
             tableauZone[i].setEnabled(false);
         }
     }
+    
+    public void desactiveZonesInvesties(){
+        for(int i = 0; i < tableauZone.length; i++){
+            if(tableauZone[i].getZone().getProprietaire() != null){
+                tableauZone[i].setEnabled(false);
+            }
+        }
+    }
 }
