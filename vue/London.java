@@ -34,7 +34,7 @@ public class London {
 	private static Etalage etalage;
 	private static JPMain[] tabJPMain;
         private static JPEtalage jpEtalage;
-        private static JPChantier jpChantier;
+        private static JPChantiers jpChantier;
 	static JPMain south; // panel contenant la main des joueurs
 	static JPanel central;
         private static MenuDroite menudroite;
@@ -78,7 +78,7 @@ public class London {
 		panelOnglet.addTab("Plateau",new JScrollPane(plateau));
                 jpEtalage=new JPEtalage();
 		panelOnglet.addTab("Etalage",jpEtalage);
-                jpChantier=new JPChantier();
+                jpChantier=new JPChantiers();
 		panelOnglet.addTab("Chantiers",jpChantier);
 
 
