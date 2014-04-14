@@ -7,8 +7,8 @@
 package vue;
 
 import java.awt.*;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  *
@@ -17,7 +17,8 @@ import javax.swing.JPanel;
 public class JPPileChantier extends JPanel{
     
     public JPPileChantier(){
-        this.setBackground(Color.LIGHT_GRAY);
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        this.setBorder(blackline);
         this.setPreferredSize(new Dimension(80,110));
        
     }

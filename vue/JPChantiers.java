@@ -19,16 +19,24 @@ public class JPChantiers extends JPanel{
         
     public JPChantiers(){
            
-    //On ajoute le bouton au content pane de la JFrame
-    chantiers = new JPPileChantier[48];
-    for(int i=0; i<32;i++){
-         JPPileChantier chantier = new JPPileChantier();
-         chantiers[i]=chantier;
-         this.add(chantier);
-    }
+     /* On ajoute un gridbagLauout au panel */
+    this.setLayout(new GridBagLayout());
 
-            
-        
+    /* Le gridBagConstraints va définir la position et la taille des éléments */
+    GridBagConstraints gc = new GridBagConstraints();
+    gc.fill = GridBagConstraints.HORIZONTAL;
+    gc.gridx = 2;
+    gc.gridy = 1;
+    JPPileChantier chantier = new JPPileChantier();
+    this.add(chantier,gc);
+ 
+    
+    GridBagConstraints gc2 = new GridBagConstraints();
+    gc.fill = GridBagConstraints.HORIZONTAL;
+    gc2.gridx = 4;
+    gc2.gridy = 1;
+    JPPileChantier chantier2 = new JPPileChantier();
+    this.add(chantier2,gc2);
         
     }
     
