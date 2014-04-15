@@ -165,17 +165,17 @@ public abstract class Carte {
 			//cr�ation du deck final					
 			int indice;
 			while(!carteA.isEmpty()){ 								//tant que l'ArrayList n'est pas vite
-				indice=(int) (Math.random()*carteA.size()-1);		//on d�termine un indice al�atoire entre [0;carteA.size()-1]
+				indice=(int) (Math.random()*carteA.size());		//on d�termine un indice al�atoire entre [0;carteA.size()-1]
 				tmpDeck.add(carteA.get(indice));						//on r�cup�re la carte et on l'ajoute a la fin de ce deck
 				carteA.remove(indice);								//on retire l'�l�ment de la liste
 			}
 			while(!carteB.isEmpty()){
-				indice=(int) (Math.random()*carteB.size()-1);
+				indice=(int) (Math.random()*carteB.size());
 				tmpDeck.add(carteB.get(indice));
 				carteB.remove(indice);
 			}
 			while(!carteC.isEmpty()){
-				indice=(int) (Math.random()*carteC.size()-1);
+				indice=(int) (Math.random()*carteC.size());
 				tmpDeck.add(carteC.get(indice));
 				carteC.remove(indice);
 			}
