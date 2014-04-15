@@ -111,7 +111,9 @@ public class JBCarte extends JButton implements  MouseListener {
                       if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
                       {
 
-            
+                        /**/
+                        London.getListeJoueur().getJoueur().setPayeConstruction(false);
+                        London.getMenudroite().getFinTour().setEnabled(true);
 
                         ((JBCarte) e.getComponent()).setPosition("etalage");
                         // ajout de la carte dans l'etalage

@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package vue;
 
 /**
  *
  * @author Joke
  */
-
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
@@ -28,7 +26,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
     static final DataFlavor[] supportedFlavors = {null};
     private boolean dragEnable = false;
-    
+
     static {
         try {
             supportedFlavors[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
@@ -37,6 +35,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
         }
     }
     Object object;
+
     // Transferable methods.
     public Object getTransferData(DataFlavor flavor) {
         if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
@@ -53,7 +52,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
     public void setDragEnable(boolean dragEnable) {
         this.dragEnable = dragEnable;
     }
-    
+
     public DataFlavor[] getTransferDataFlavors() {
         return supportedFlavors;
     }
@@ -61,10 +60,12 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
     public boolean isDataFlavorSupported(DataFlavor flavor) {
         return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
     }
+
     // DragGestureListener method.
     public void dragGestureRecognized(DragGestureEvent ev) {
         ev.startDrag(null, this, this);
     }
+
     // DragSourceListener methods.
     public void dragDropEnd(DragSourceDropEvent ev) {
     }
@@ -81,6 +82,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
     public void dropActionChanged(DragSourceDragEvent ev) {
     }
+
     // DropTargetListener methods.
     public void dragEnter(DropTargetDragEvent ev) {
     }
@@ -108,85 +110,78 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
             Component component = ((DragSourceContext) source).getComponent();
             Container oldContainer = component.getParent();
             Container container = (Container) ((DropTarget) target).getComponent();
-            
-             JBCarte JBcarte = (JBCarte) component;
-             JPPileChantier chantier = (JPPileChantier) container;
-             if(this.dragEnable){
-                if(JBcarte.getCarte().getClass()==Constructible.class && chantier.isPosable() && !chantier.isCarte2() && (((DropTarget) target).getComponent() instanceof JPPileChantier)){
+
+            JBCarte JBcarte = (JBCarte) component;
+            JPPileChantier chantier = (JPPileChantier) container;
+            if (this.dragEnable) {
+                if (JBcarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2() && (((DropTarget) target).getComponent() instanceof JPPileChantier)) {
                     Constructible carte = (Constructible) JBcarte.getCarte();
-                    int rep = JOptionPane.showConfirmDialog(London.acc,
-                        "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera "+carte.getCoutPose()+" pièces",
-                        "Construire",
-                        JOptionPane.YES_NO_OPTION);
-                    if (rep == JOptionPane.YES_OPTION) {
-                         if(!London.getListeJoueur().getJoueur().isPayeConstruction()){
-                            if(carte.getCoutPose()<London.getListeJoueur().getJoueur().getArgent()){
-                                    if(London.getListeJoueur().getJoueur().getListeChantier().size()<=chantier.getIndex()){
-                                        London.getListeJoueur().getJoueur().nouveauChantier();
-                                    }
-                                    else{
-                                        container.removeAll();
-                                        container.validate();
-                                        container.repaint();
-                                    }
+                    if (!London.getListeJoueur().getJoueur().isPayeConstruction()) {
+                        int rep = JOptionPane.showConfirmDialog(London.acc,
+                                "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
+                                "Construire",
+                                JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                            if (carte.getCoutPose() < London.getListeJoueur().getJoueur().getArgent()) {
+                                if (London.getListeJoueur().getJoueur().getListeChantier().size() <= chantier.getIndex()) {
+                                    London.getListeJoueur().getJoueur().nouveauChantier();
+                                } else {
+                                    container.removeAll();
+                                    container.validate();
+                                    container.repaint();
+                                }
 
-                                        chantier.setCarte2(true);
-                                        /*Ajout de la carte visuellement*/
-                                            container.add(component);
-                                            oldContainer.validate();
-                                            oldContainer.repaint();
-                                            container.validate();
-                                            container.repaint();
+                                chantier.setCarte2(true);
+                                /*Ajout de la carte visuellement*/
+                                container.add(component);
+                                oldContainer.validate();
+                                oldContainer.repaint();
+                                container.validate();
+                                container.repaint();
 
-                                            System.out.println(JBcarte.getCarte().getCouleur());
-                                            System.out.println("index du chantier : "+chantier.getIndex());
+                                System.out.println(JBcarte.getCarte().getCouleur());
+                                System.out.println("index du chantier : " + chantier.getIndex());
 
-                                            /*appel de jouerCarte*/
-                                            London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
+                                /*appel de jouerCarte*/
+                                London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
 
-                                            /*Passer le chantier suivant a posable=true*/
-                                            London.getJpChantier().getChantiers()[chantier.getIndex()+1].setPosable(true);
+                                /*Passer le chantier suivant a posable=true*/
+                                London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
 
-                                            /*Mise a jour du panel d'information*/
-                                            London.infos.maj_infos();
+                                /*Mise a jour du panel d'information*/
+                                London.infos.maj_infos();
 
+                                /*Le joueur peut finir son tour*/
+                                London.getListeJoueur().getJoueur().setFinitTour(true);
 
+                                /*Le joueur peut finir son tour*/
+                                London.getListeJoueur().getJoueur().setPayeConstruction(true);
 
-                                            /*Le joueur peut finir son tour*/
-                                            London.getListeJoueur().getJoueur().setFinitTour(true);
-
-                                             /*Le joueur peut finir son tour*/
-                                            London.getListeJoueur().getJoueur().setPayeConstruction(true);
-
-                                            London.getListeJoueur().getJoueur().setDefausse(1);
-                                            London.getMenudroite().disableAll();
-                                            London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
-                                    }
-                                    else{
-                                           JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
-                                       }
-                         }else{
-                                JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");
+                                London.getListeJoueur().getJoueur().setDefausse(1);
+                                London.getMenudroite().disableAll();
+                                London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
+                                London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                                JBCarte.setDoubleClick(true);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
                             }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");
                     }
-                }
-                else{
-                     // informe le joueur qui joue
+                } else {
+                    // informe le joueur qui joue
                     JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
                 }
-             }
-             else{
-                 JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
-             }
-        }
-        catch (Exception ex) {
+            } else {
+                JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         ev.dropComplete(true);
-            
+
     }
-    
-    
 
     public static void main(String[] arg) {
         JButton button = new JButton("Drag this button");
@@ -217,7 +212,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
         DragSource dragSource = new DragSource();
         DropTarget dropTarget1 = new DropTarget(source, DnDConstants.ACTION_MOVE,
                 dndListener);
-        DropTarget dropTarget2 = new DropTarget(target, DnDConstants.ACTION_MOVE, 
+        DropTarget dropTarget2 = new DropTarget(target, DnDConstants.ACTION_MOVE,
                 dndListener);
         DragGestureRecognizer dragRecognizer1 = dragSource.
                 createDefaultDragGestureRecognizer(button, DnDConstants.ACTION_MOVE, dndListener);
