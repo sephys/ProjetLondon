@@ -14,10 +14,13 @@ package vue;
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.Constructible;
 
 public class DragDrop implements DragGestureListener, DragSourceListener,
         DropTargetListener, Transferable {
@@ -100,11 +103,21 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
             oldContainer.repaint();
             container.validate();
             container.repaint();
-            System.out.println("wuuuuuuuuut");
             
-           if(((DropTarget) target).getComponent() instanceof JPTest) 
+
+           if(((DropTarget) target).getComponent() instanceof JPPileChantier) 
            {
-               System.out.println("youhou");
+               JBCarte JBcarte = (JBCarte) component;
+               if(JBcarte.getCarte().getClass()==Constructible.class){
+                JPPileChantier chantier = (JPPileChantier)((DropTarget) target).getComponent();
+                
+                if(London.getListeJoueur().getJoueur().getListeChantier().size()<=chantier.getIndex()){
+                    London.getListeJoueur().getJoueur().nouveauChantier();
+                }
+                System.out.println(JBcarte.getCarte().getNom());
+                London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
+                System.out.println(London.getListeJoueur().getJoueur().getListeChantier().get(chantier.getIndex()).getFirst());
+               }
            }
         } 
         catch (Exception ex) {

@@ -7,6 +7,8 @@
 package vue;
 
 import java.awt.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
 import javax.swing.*;
 import model.Joueur;
 
@@ -16,9 +18,13 @@ import model.Joueur;
  */
 public class JPChantiers extends JPanel{
         private JPPileChantier[] chantiers;
+        private DropTarget[] dropChantiers;
         
     public JPChantiers(){
            
+       chantiers = new JPPileChantier[16];
+       dropChantiers = new DropTarget[16];
+        
         /* On ajoute un gridbagLauout au panel */
        this.setLayout(new GridBagLayout());
 
@@ -31,10 +37,17 @@ public class JPChantiers extends JPanel{
                 gc.gridy = 1;
            }
             gc.insets = new Insets(0,0,5,5);
-            JPPileChantier chantier = new JPPileChantier();
+            JPPileChantier chantier = new JPPileChantier(i);
+              
+            /*Ajout Drag n Drop*/
+            DropTarget dropChantier = new DropTarget(chantier, DnDConstants.ACTION_MOVE, 
+            London.dndListener);
+            dropChantiers[i] = dropChantier;
+            chantiers[i] = chantier;
             this.add(chantier,gc);
        }
     }
+    
     
     public static void main(String[] args){
         Frame f = new Frame();
