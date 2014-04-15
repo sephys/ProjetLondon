@@ -19,7 +19,7 @@ public class JPPileChantier extends JPanel{
     public JPPileChantier(){
         Border blackline = BorderFactory.createLineBorder(Color.black);
         this.setBorder(blackline);
-        this.setPreferredSize(new Dimension(80,110));
+        this.setPreferredSize(new Dimension(80,122));
        
     }
 }
