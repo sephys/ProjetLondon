@@ -50,7 +50,6 @@ public class MenuDroite extends JPanel {
         finTour = new JButton("Fin du Tour");
         labelInfo = new JLabel("Vous devez piocher");
         this.piocher = new JButton("Piocher");
-        
         // on les ajoute au menu
         menuBouton.add(labelJoueur);
         menuBouton.add(jouer);
@@ -62,7 +61,7 @@ public class MenuDroite extends JPanel {
         menuBouton.add(piocher);
         menuBouton.add(finTour);
         menuBouton.add(labelInfo);
-        
+
         // on doit piocher au début
         disableAll();
         piocher.setEnabled(true);
@@ -213,6 +212,10 @@ public class MenuDroite extends JPanel {
     public void actualiserMain() {
         // sauvegarde de la main dans le tableau
         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) London.south;
+        
+        // sauvegarde zone de construction
+        London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=London.getJpChantier();
+        
         // on enleve la main
         London.central.remove(London.south);
         // on passe au joueur suivant
@@ -224,6 +227,16 @@ public class MenuDroite extends JPanel {
         // on ajoute le panel
         London.central.add(London.south, BorderLayout.SOUTH);
         
+        
+        
+        // on enleve la zone
+        London.getPanelOnglet().remove(London.getPanelOnglet().getComponent(2));
+        // on remplace la zone
+        London.setJpChantier(London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]);
+        // on ajoute la zone
+        London.getPanelOnglet().addTab("Chantiers",London.getJpChantier());
+
+                
         // actualiser la fenêtre
         London.frame.repaint();
         London.central.revalidate();

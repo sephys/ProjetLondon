@@ -5,6 +5,7 @@
  */
 
 package vue;
+
 import model.TourJoueur;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -20,27 +21,21 @@ import javax.swing.*;
 import model.Carte;
 import model.Joueur;
 
-
 /**
  *
  * @author Joke
- * @Vue
- * Représentage l'étalage
+ * @Vue Représentage l'étalage
  */
-public class JPEtalage extends JPanel{
+public class JPEtalage extends JPanel {
     
     private Image img; // image de l'étalage
     private JPanel[] tab1;
     private JPanel[] tab2;
     
-    
- 
-    
-    public JPEtalage()
-    {   
+    public JPEtalage() {        
         
         try {
-            URL uri = JPEtalage.class.getResource("../img/etalage.png"); 
+            URL uri = JPEtalage.class.getResource("../img/etalage.png");            
             img = ImageIO.read(uri);
         } catch (IOException ex) {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,86 +44,72 @@ public class JPEtalage extends JPanel{
         
         initEtalage(TourJoueur.getNbJoueur());
         
-           
     }
-    
     
     @Override
-        public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this), this);
+        g.drawImage(img, 0, 0, 850, 430, this);
     }
-        
     
-    public void initEtalage(int nbJoueur)
-    {
-       
+    public void initEtalage(int nbJoueur) {
         
-        int nbEtalage=Joueur.getNbJoueur()+1;
-        tab1=new JPanel[nbEtalage];
-        tab2=new JPanel[nbEtalage];
-        for(int i=0;i<nbEtalage;i++)
-        {
-            JPTest eta1=new JPTest();
-          
-             // panel haut
-        
-            eta1.setBounds(23+161*i, 13, 122, 168);
-            eta1.setOpaque(false); // transparance
+        int nbEtalage = Joueur.getNbJoueur() + 1;
+        tab1 = new JPanel[nbEtalage];
+        tab2 = new JPanel[nbEtalage];
+        for (int i = 0; i < nbEtalage; i++) {
+            JPTest eta1 = new JPTest();
+
+            // panel haut
+            eta1.setBounds(23 + 161 * i, 13, 122, 168);
+            //eta1.setOpaque(false); // transparance
+            eta1.setBackground(Color.red);
             
             this.add(eta1);
-            tab1[i]=eta1;
+            tab1[i] = eta1;
             // D&D
-            DropTarget dropTarget1 = new DropTarget(eta1, DnDConstants.ACTION_MOVE, 
-                London.dndListener);
+            DropTarget dropTarget1 = new DropTarget(eta1, DnDConstants.ACTION_MOVE,
+                    London.dndListener);
             
-            JPTest eta2=new JPTest(); // panel bas
-            eta2.setBounds(23+161*i, 216, 122, 168);
+            JPTest eta2 = new JPTest(); // panel bas
+            eta2.setBounds(23 + 161 * i, 216, 122, 168);
             eta2.setOpaque(false); // transparance
             
             this.add(eta2);
-            tab2[i]=eta2;
+            tab2[i] = eta2;
             // D&D
-            DropTarget dropTarget2 = new DropTarget(eta2, DnDConstants.ACTION_MOVE, 
-                London.dndListener);
+            DropTarget dropTarget2 = new DropTarget(eta2, DnDConstants.ACTION_MOVE,
+                    London.dndListener);
         }
         
     }
     
-    public void actualiser(Carte[] tab1,Carte[] tab2)
-    {
-        
+    public void actualiser(Carte[] tab1, Carte[] tab2) {
+
         // on vide l'etalage
-        for(int i=0;i<tab1.length;i++)
-        {
-            if(this.tab1[i].getComponentCount()!=0)
-            {
+        for (int i = 0; i < tab1.length; i++) {
+            if (this.tab1[i].getComponentCount() != 0) {
                 this.tab1[i].remove(0);
             }
             
-            if(this.tab2[i].getComponentCount()!=0)
-            {
+            if (this.tab2[i].getComponentCount() != 0) {
                 this.tab2[i].remove(0);
             }
         }
-        
+
         // on remplit l'etalage
-        for(int i=0;i<tab1.length;i++)
-        {
-            if(tab1[i]!=null)
-            {
+        for (int i = 0; i < tab1.length; i++) {
+            if (tab1[i] != null) {
                 System.out.println("ajout");
-              JBCarte jb=new JBCarte(tab1[i]);
-              jb.setPosition("etalage");
-              this.tab1[i].add(jb);
-            } 
-            if(tab2[i]!=null)
-            { 
-                JBCarte jb=new JBCarte(tab2[i]);
+                JBCarte jb = new JBCarte(tab1[i]);
                 jb.setPosition("etalage");
-              this.tab2[i].add(jb);  
+                this.tab1[i].add(jb);
+            }            
+            if (tab2[i] != null) {                
+                JBCarte jb = new JBCarte(tab2[i]);
+                jb.setPosition("etalage");
+                this.tab2[i].add(jb);                
             }
-        
             
         }
         
