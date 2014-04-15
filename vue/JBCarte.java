@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package vue;
 
 import java.awt.Dimension;
@@ -35,37 +35,42 @@ import model.Joueur;
  * @author Anh-Djuy Bouton représentant une carte
  */
 public class JBCarte extends JButton implements  MouseListener {
-
+    
     private Image image;
     private Carte carte;
     private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
     private String position; // permet de savoir ou est la carte : main - etalage - construction
-
+    
     public JBCarte(Carte carte) {
         this.carte=carte;
-        URL uri = JBCarte.class.getResource(carte.getPath()); 
+        URL uri = JBCarte.class.getResource(carte.getPath());
         try {
-        	System.out.println(carte.getPath());
+            System.out.println(carte.getPath());
             image = ImageIO.read(uri);
         } catch (IOException ex) {
-        	System.out.println(carte.getPath());
+            System.out.println(carte.getPath());
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.position="main";
         this.setIcon(new ImageIcon(JBCarte.scaleImage(image, 67, 103)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
-        DragGestureRecognizer dragRecognizer1 = London.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, London.dndListener);
+        //DragGestureRecognizer dragRecognizer1 = London.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, London.dndListener);
         
         this.addMouseListener(this);
     }
-
+    
+    public void changeTailleBoutonImage(Dimension d){
+        this.setPreferredSize(d);
+        this.setIcon(new ImageIcon(JBCarte.scaleImage(image, (int)d.getWidth(), (int)d.getHeight())));
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -82,19 +87,19 @@ public class JBCarte extends JButton implements  MouseListener {
     }
     
     
-
-   // pour poser une carte sur l'etalage
+    
+    // pour poser une carte sur l'etalage
     @Override
     public void mouseClicked(MouseEvent e) {
         
         if(e.getClickCount()==2)
         {
             System.out.println("yo : "+((JBCarte) e.getComponent()).getPosition());
-           Joueur courrant = London.getListeJoueur().getJoueur();
-               switch (((JBCarte) e.getComponent()).getPosition()) {
-                   case "main": // on met la carte de la main sur le l'étalage
-                      if(doubleClick&&courrant.getPiocheDefausse().equals("defausse"))
-                      {
+            Joueur courrant = London.getListeJoueur().getJoueur();
+            switch (((JBCarte) e.getComponent()).getPosition()) {
+                case "main": // on met la carte de la main sur le l'étalage
+                    if(doubleClick&&courrant.getPiocheDefausse().equals("defausse"))
+                    {
                         ((JBCarte) e.getComponent()).setPosition("etalage");
                         // ajout de la carte dans l'etalage
                         London.getEtalage().addCarte(((JBCarte) e.getComponent()).carte);
@@ -110,42 +115,66 @@ public class JBCarte extends JButton implements  MouseListener {
                         London.getListeJoueur().getJoueur().defausseMoins();
                         
                         
-                      }
-                      else
-                      {
-                          JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
-                      }
-                        break;
-                      
-                       
-                   case "etalage": // on met la carte de l'etalage dans la main
-                       if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
-                       {
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+                    }
+                    break;
+                    
+                    
+                case "etalage": // on met la carte de l'etalage dans la main
+                    if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
+                    {
+                        // ajout de la carte dans la main du joueur graphiquement
+                        London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(((JBCarte) e.getComponent()).carte);
+                        // ajout de la carte das la main du joueur
+                        London.getListeJoueur().getJoueur().getMain().add(((JBCarte) e.getComponent()).carte);
+                        // suppresssion de la carte dans l'etalage
+                        London.getEtalage().piocherCarte(((JBCarte) e.getComponent()).carte);
+                        // on rafraichit l'étalage
+                        London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+                        London.getListeJoueur().getJoueur().piocheMoins();
+                        
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
+                    }
+                    break;
+                    
+                case "fenetre": // on met la carte de la fenetre dans la main
+                    if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
+                    {
+                        
+                        int rep = JOptionPane.showConfirmDialog(London.acc,
+                                "Êtes-vous sûr de vouloir choisir \"" + this.getCarte().getNom() + "\" ?",
+                                "Piocher",
+                                JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                            London.getMenudroite().getF().dispose();
+                            London.getMenudroite().getF().remetCartes(this);
                             // ajout de la carte dans la main du joueur graphiquement
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(((JBCarte) e.getComponent()).carte);
                             // ajout de la carte das la main du joueur
                             London.getListeJoueur().getJoueur().getMain().add(((JBCarte) e.getComponent()).carte);
-                            // suppresssion de la carte dans l'etalage
-                            London.getEtalage().piocherCarte(((JBCarte) e.getComponent()).carte);
-                            // on rafraichit l'étalage
-                            London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
                             London.getListeJoueur().getJoueur().piocheMoins();
-                            
-                       }
-                       else
-                       {
-                           JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
-                       }
-                       break;
-               }
-               
-               
-           }
-          
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+                    }
+                    break;
+            }
+            
+            
         }
+        
+    }
     
     
-
+    
     /**
      * Code repris de http://www.developpez.net permettant de redimensionner une
      * image.
@@ -163,49 +192,49 @@ public class JBCarte extends JButton implements  MouseListener {
         g.dispose();
         return img;
     }
-
+    
     @Override
     public void mousePressed(MouseEvent e) {
     }
-
+    
     @Override
     public void mouseReleased(MouseEvent e) {
     }
-
+    
     @Override
     public void mouseExited(MouseEvent e) {
         JPZoom.setImg("../img/cartes/Background.png");
-
+        
     }
-
+    
     @Override
     public void mouseEntered(MouseEvent e) {
         JPZoom.setImg(carte.getPath());
-
+        
     }
-
+    
     public Carte getCarte() {
         return carte;
     }
-
+    
     public void setCarte(Carte carte) {
         this.carte = carte;
     }
-
+    
     public String getPosition() {
         return position;
     }
-
+    
     public void setPosition(String position) {
         this.position = position;
     }
     
     
-
+    
     public static boolean isDoubleClick() {
         return doubleClick;
     }
-
+    
     public static void setDoubleClick(boolean doubleClick) {
         JBCarte.doubleClick = doubleClick;
     }
