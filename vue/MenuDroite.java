@@ -52,7 +52,12 @@ public class MenuDroite extends JPanel {
 
         menuBouton.setOpaque(false);
 
-
+           try {
+            URL uri = JPEtalage.class.getResource("../img/rgbg2.png");            
+            img = ImageIO.read(uri);
+        } catch (IOException ex) {
+            Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
         
 
@@ -87,17 +92,12 @@ public class MenuDroite extends JPanel {
         piocher.setEnabled(true);
         
         
-        
-        try {
-            URL uri = JPEtalage.class.getResource("../img/rgbg2.png");            
-            img = ImageIO.read(uri);
-        } catch (IOException ex) {
-            Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
 
         
         // ACTION BOUTON JOUERCARTES
         jouer.addActionListener(new ActionListener() {
+            
             @Override
             public void actionPerformed(ActionEvent e) { 
                 int rep = JOptionPane.showConfirmDialog(London.acc,

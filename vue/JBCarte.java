@@ -111,10 +111,7 @@ public class JBCarte extends JButton implements  MouseListener {
                       if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
                       {
 
-            switch (((JBCarte) e.getComponent()).getPosition()) {
-                case "main": // on met la carte de la main sur le l'étalage
-                    if(doubleClick&&courrant.getPiocheDefausse().equals("defausse"))
-                    {
+            
 
                         ((JBCarte) e.getComponent()).setPosition("etalage");
                         // ajout de la carte dans l'etalage
@@ -188,8 +185,8 @@ public class JBCarte extends JButton implements  MouseListener {
         }
         
     }
-        }
-    }
+        
+    
     
     
     
