@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import static vue.London.dndListener;
 
 /**
  *
@@ -65,6 +66,25 @@ public class MenuDroite extends JPanel {
         // on doit piocher au début
         disableAll();
         piocher.setEnabled(true);
+
+        
+        // ACTION BOUTON JOUERCARTES
+        jouer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { 
+                int rep = JOptionPane.showConfirmDialog(London.acc,
+                        "Êtes-vous sûr de vouloir jouer des cartes ?",
+                        "Jouer des cartes",
+                        JOptionPane.YES_NO_OPTION);
+                if (rep == JOptionPane.YES_OPTION) {
+                 London.dndListener.setDragEnable(true);
+                 disableAll();
+                 finTour.setEnabled(true);
+                }
+            }
+        });
+        
+       
         
         // ACTION BOUTON EMPRUNTER
         emprunter.addActionListener(new ActionListener() {
@@ -227,6 +247,11 @@ public class MenuDroite extends JPanel {
         // on ajoute le panel
         London.central.add(London.south, BorderLayout.SOUTH);
         
+        //passer chantier.carte2 à false
+        for(int i=0;i<London.getJpChantier().getChantiers().length;i++){
+            JPPileChantier chantier = London.getJpChantier().getChantiers()[i];
+            chantier.setCarte2(false);
+        }
         
         
         // on enleve la zone
