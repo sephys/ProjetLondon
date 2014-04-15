@@ -84,7 +84,6 @@ public class MenuDroite extends JPanel {
             }
         });
         
-       
         
         // ACTION BOUTON EMPRUNTER
         emprunter.addActionListener(new ActionListener() {

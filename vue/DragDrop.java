@@ -114,46 +114,39 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
              System.out.println("chantier posable : "+chantier.isPosable());
              if(this.dragEnable){
                 if(JBcarte.getCarte().getClass()==Constructible.class && chantier.isPosable() && !chantier.isCarte2() && (((DropTarget) target).getComponent() instanceof JPPileChantier)){
-                    int rep = JOptionPane.showConfirmDialog(London.acc,
-                        "Êtes-vous sûr de vouloir construire cette carte ?",
-                        "Construire",
-                        JOptionPane.YES_NO_OPTION);
-                        if (rep == JOptionPane.YES_OPTION) {
-                        Constructible carte = (Constructible) JBcarte.getCarte();
-                        if(carte.getCoutPose()<London.getListeJoueur().getJoueur().getArgent()){
-                            if(London.getListeJoueur().getJoueur().getListeChantier().size()<=chantier.getIndex()){
-                                London.getListeJoueur().getJoueur().nouveauChantier();
-                            }
-                            else{
-                                container.removeAll();
-                                container.validate();
-                                container.repaint();
-                            }
-
-
-                            chantier.setCarte2(true);
-                            /*Ajout de la carte visuellement*/
-                                container.add(component);
-                                oldContainer.validate();
-                                oldContainer.repaint();
-                                container.validate();
-                                container.repaint();
-
-                                System.out.println(JBcarte.getCarte().getNom());
-                                System.out.println("index du chantier : "+chantier.getIndex());
-
-                                /*appel de jouerCarte*/
-                                London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
-
-                                /*Passer le chantier suivant a posable=true*/
-                                London.getJpChantier().getChantiers()[chantier.getIndex()+1].setPosable(true);
-
-                                /*Mise a jour du panel d'information*/
-                                London.infos.maj_infos();
-
-                                /*Le joueur peut finir son tour*/
-                                London.getListeJoueur().getJoueur().setFinitTour(true);
+                    Constructible carte = (Constructible) JBcarte.getCarte();
+                    if(carte.getCoutPose()<London.getListeJoueur().getJoueur().getArgent()){
+                        if(London.getListeJoueur().getJoueur().getListeChantier().size()<=chantier.getIndex()){
+                            London.getListeJoueur().getJoueur().nouveauChantier();
                         }
+                        else{
+                            container.removeAll();
+                            container.validate();
+                            container.repaint();
+                        }
+
+                        chantier.setCarte2(true);
+                        /*Ajout de la carte visuellement*/
+                            container.add(component);
+                            oldContainer.validate();
+                            oldContainer.repaint();
+                            container.validate();
+                            container.repaint();
+
+                            System.out.println(JBcarte.getCarte().getNom());
+                            System.out.println("index du chantier : "+chantier.getIndex());
+
+                            /*appel de jouerCarte*/
+                            London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
+
+                            /*Passer le chantier suivant a posable=true*/
+                            London.getJpChantier().getChantiers()[chantier.getIndex()+1].setPosable(true);
+
+                            /*Mise a jour du panel d'information*/
+                            London.infos.maj_infos();
+                            
+                            /*Le joueur peut finir son tour*/
+                            London.getListeJoueur().getJoueur().setFinitTour(true);
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
