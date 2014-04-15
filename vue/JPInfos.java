@@ -8,6 +8,7 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
@@ -39,16 +40,24 @@ import model.Joueur;
  */
 public class JPInfos extends JPanel{
     
-    JPSousInfos[] aljpsi;
-    
+    JPSousInfos[] aljpsi; // faudra mettre les getter et setter
+    private Image img;
     public JPInfos(Joueur listeJoueurs[]){
         aljpsi = new JPSousInfos[Joueur.getNbJoueur()];
+       
         this.setPreferredSize(new Dimension(280,810));
         this.setLayout(new GridLayout(4,1,0,20));
         for(int i = 0; i < listeJoueurs.length; i++){
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi[i] = jps;
             this.add(jps);
+        }
+        
+        try {
+            URL uri = JPEtalage.class.getResource("../img/leftBackground.png");            
+            img = ImageIO.read(uri);
+        } catch (IOException ex) {
+            Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -65,11 +74,10 @@ public class JPInfos extends JPanel{
         }
     }
     
-    public static void main(String[] args){
-        Frame f = new Frame();
-        Joueur liste[]=null;
-        f.add(new JPInfos(liste));
-        f.pack();
-        f.setVisible(true);
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(img, 0, 0, 280, 810, this);
     }
+
 }

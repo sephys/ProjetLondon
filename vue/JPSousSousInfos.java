@@ -39,6 +39,7 @@ public class JPSousSousInfos extends JPanel{
         
         this.nombre = nombre;
         this.setLayout(new BorderLayout());
+        this.setOpaque(false); // transparance
         URL uri = JBCarte.class.getResource(imagePath);
         bas = new JLabel();
         bas.setText(""+nombre);

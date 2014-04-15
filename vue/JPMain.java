@@ -10,8 +10,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
+import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -32,6 +39,7 @@ public class JPMain extends JPanel {
     private JScrollPane JSPMain;
     private JPanel main;
     private boolean goEtalage; // est-ce que le joueur peut poser une carte sur l'etalage
+    private Image img;
     
     public JPMain(){
         super(new BorderLayout());
@@ -40,6 +48,9 @@ public class JPMain extends JPanel {
         JSPMain = new JScrollPane(main);
         JSPMain.setPreferredSize(new Dimension(675,131));
         this.add(JSPMain, BorderLayout.NORTH);
+        
+       
+        
         //// D&D
         DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
                 London.dndListener);
@@ -48,13 +59,29 @@ public class JPMain extends JPanel {
     public JPMain(Joueur j)
     {
         super(new BorderLayout());
-        main = new JPanel(new FlowLayout());
-        main.setBackground(Color.red);
+        
+        try {
+            URL uri = JPEtalage.class.getResource("../img/mainBG1.png");            
+            img = ImageIO.read(uri);
+        } catch (IOException ex) {
+            Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        main = new JPanel(new FlowLayout()){
+            @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(img, 0, 0, 847, 147, this);
+    }
+        };
+       // main.setBackground(Color.red);
         JSPMain = new JScrollPane(main);
 
         JSPMain.setPreferredSize(new Dimension(675,150));
 
       
+         
+        
         JSPMain.setWheelScrollingEnabled(true);
 
         
@@ -70,11 +97,18 @@ public class JPMain extends JPanel {
         
     }
     
+    
+    
     // ajout d'une carte dans le panel main du joueur
     public  void ajoutCarte(Carte e){
             main.add(new JBCarte(e));
             main.revalidate();
       
+    }
+    
+    public JPanel getMain()
+    {
+        return this.main;
     }
     
     public void removeCarte(Carte e)
