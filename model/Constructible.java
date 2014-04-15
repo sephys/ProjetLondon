@@ -118,6 +118,10 @@ public class Constructible extends Carte {
 	@Override
 	public void jouerCarte(Joueur currJ,int ind) { 
 		// TODO Auto-generated method stub
+		String pouv = this.getPouvoirIlli();
+		if(pouv!=null){
+			currJ.getPouvoir().put(pouv,new Integer(currJ.getPouvoir().get(pouv).intValue()+1));
+		}
 		currJ.setArgent(currJ.getArgent()-this.getCoutPose());
 		currJ.setPointVictoire(currJ.getPointVictoire()+this.getPointsVictoirePose());
 		currJ.getListeChantier().get(ind).add(this);

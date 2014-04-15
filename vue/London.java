@@ -144,6 +144,7 @@ public class London {
 
         London.getListeJoueur().getJoueur().setPioche(1);
 
+
     }
 
     // methode qui affiche le menu quand on lance l'application
@@ -157,6 +158,7 @@ public class London {
                 System.exit(0);
             }
         });
+
 
         acc.setTitle("London");
         acc.setSize(570, 810);
