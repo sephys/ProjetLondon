@@ -102,12 +102,11 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
             
              JBCarte JBcarte = (JBCarte) component;
              JPPileChantier chantier = (JPPileChantier) container;
-             System.out.println(chantier.isPosable());
+             System.out.println("chantier posable : "+chantier.isPosable());
              
             if(JBcarte.getCarte().getClass()==Constructible.class && chantier.isPosable() && (((DropTarget) target).getComponent() instanceof JPPileChantier)){
                 if(London.getListeJoueur().getJoueur().getListeChantier().size()<=chantier.getIndex()){
                     London.getListeJoueur().getJoueur().nouveauChantier();
-                    System.out.println(London.getListeJoueur().getJoueur().getListeChantier().size());
                 }
 
                 container.add(component);
