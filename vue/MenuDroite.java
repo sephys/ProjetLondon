@@ -23,7 +23,7 @@ public class MenuDroite extends JPanel {
     private JLabel labelJoueur; // indique quel joueur joue
     private JLabel labelInfo; // indique ce que doit faire l'utilisateur
     private JPanel menuBouton; // panel contenant tous les boutons
-    private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, finTour; // les différents boutons du menu
+    private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, finTour,save; // les différents boutons du menu
     public static boolean invest; // a virer !
 
     public MenuDroite() {
@@ -50,6 +50,7 @@ public class MenuDroite extends JPanel {
         finTour = new JButton("Fin du Tour");
         labelInfo = new JLabel("Vous devez piocher");
         this.piocher = new JButton("Piocher");
+        save=new JButton("test");
 
         // on les ajoute au menu
         menuBouton.add(labelJoueur);
@@ -61,11 +62,28 @@ public class MenuDroite extends JPanel {
         menuBouton.add(piocher);
         menuBouton.add(finTour);
         menuBouton.add(labelInfo);
+        menuBouton.add(save);
 
         // on doit piocher au début
         disableAll();
         piocher.setEnabled(true);
 
+        //test
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    JFrame f=new JFrame("plop");
+                    //f=Main.jeu.frame;
+                    
+                    JFrame a=f;
+                    a.setVisible(true);
+                    f.setLocationRelativeTo(null);
+                    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    f.setVisible(true);
+            }
+        });
+        
+        
         // ACTION BOUTON EMPRUNTER
         emprunter.addActionListener(new ActionListener() {
             @Override
@@ -206,6 +224,17 @@ public class MenuDroite extends JPanel {
         London.south = London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()];
         // on ajoute le panel
         London.central.add(London.south, BorderLayout.SOUTH);
+        
+        
+        // sauvegarde zone de construction
+        London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=London.getJpChantier();
+        
+        // on enleve la zone
+        London.getPanelOnglet().remove(London.getPanelOnglet().getComponent(2));
+        // on remplace la zone
+        London.setJpChantier(London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]);
+        // on ajoute la zone
+        London.getPanelOnglet().addTab("Chantiers",London.getJpChantier());
 
         // actualiser la fenêtre
         London.frame.repaint();

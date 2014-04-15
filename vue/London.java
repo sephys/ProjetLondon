@@ -43,7 +43,8 @@ public class London {
     private static TourJoueur lJoueur;
     private static ArrayDeque<Carte> deck;
     private static Etalage etalage;
-    private static JPMain[] tabJPMain;
+    private static JPMain[] tabJPMain; // tableau des étalages
+    private static JPChantiers[] tabJPChantiers; // tableau des chantiers
     private static JPEtalage jpEtalage;
     private static JPChantiers jpChantier;
     static JPMain south; // panel contenant la main des joueurs
@@ -51,8 +52,9 @@ public class London {
     private static MenuDroite menudroite;
     private static JPPlateau plateau;
     private static Thread sound; // thread pour la musique
+    private static JTabbedPane panelOnglet; // panel contenant les onglets
 
-    static JFrame frame; // fenêtre principale
+    public static JFrame frame; // fenêtre principale
 
     // pour le drag & drop
     static DragDrop dndListener;
@@ -62,7 +64,7 @@ public class London {
     public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
     private static Joueur[] tabJoueur;
 
-    public static void main(String[] args) {
+    public London() {
 
         // D&D
         dndListener = new DragDrop();
@@ -82,6 +84,7 @@ public class London {
         }
 
         initTabJPMain(); // initialisation des panel contenant les mains des joueurs
+        initTabJPChantier(); // initialisation des panel contenant les zones de construction des joueurs
 
         frame = new JFrame(); // frame contenant le jeu
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -92,6 +95,20 @@ public class London {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     sound.stop();
+                    
+                    /*FileOutputStream out=null;
+                    try {
+                        out = new FileOutputStream("temp.txt");
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(London.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        ObjectOutputStream s = new ObjectOutputStream(out);
+                    } catch (IOException ex) {
+                        Logger.getLogger(London.class.getName()).log(Level.SEVERE, null, ex);
+                    }*/
+                   
+                    
                     System.exit(0);
                 }
             }
@@ -100,7 +117,7 @@ public class London {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // panel contenant les différents onglets
-        JTabbedPane panelOnglet = new JTabbedPane();
+        panelOnglet = new JTabbedPane();
 
         plateau = new JPPlateau();
 
@@ -109,6 +126,7 @@ public class London {
         jpEtalage = new JPEtalage();
         panelOnglet.addTab("Etalage", jpEtalage);
         jpChantier = new JPChantiers();
+        tabJPChantiers[0]=jpChantier;
         panelOnglet.addTab("Chantiers", jpChantier);
 
         // panel central contenant le plateau et la main du joueur
@@ -206,6 +224,22 @@ public class London {
         return menudroite;
     }
 
+    public static JTabbedPane getPanelOnglet() {
+        return panelOnglet;
+    }
+
+    public static JPChantiers[] getTabJPChantiers() {
+        return tabJPChantiers;
+    }
+
+    public static JPChantiers getJpChantier() {
+        return jpChantier;
+    }
+    
+    
+
+    
+    
     public static JPPlateau getPlateau() {
         return plateau;
     }
@@ -250,6 +284,16 @@ public class London {
         for (int i = 0; i < Joueur.getNbJoueur(); i++) {
             tabJPMain[i] = new JPMain(getTabJoueur()[i]);
         }
+    }
+    
+    public static void initTabJPChantier()
+    {
+       tabJPChantiers=new JPChantiers[Joueur.getNbJoueur()];
+       for(int i=0;i<Joueur.getNbJoueur();i++)
+       {
+           tabJPChantiers[i]=new JPChantiers();
+       }
+       
     }
 
     public static Joueur[] getTabJoueur() {
