@@ -268,4 +268,10 @@ public class London {
         return deck;
     }
 
+    public static JPChantiers getJpChantier() {
+        return jpChantier;
+    }
+    
+    
+
 }

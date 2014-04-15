@@ -18,11 +18,25 @@ import javax.swing.border.Border;
  */
 public class JPPileChantier extends JPanel{
     private int index;
+    private boolean posable;
     
     public JPPileChantier(int index){
-        this.index = index;
-        Border blackline = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackline);
+        if(index==0){
+            /*Ajout Drag n Drop*/
+            DropTarget dropChantier = new DropTarget(this, DnDConstants.ACTION_MOVE, 
+            London.dndListener);
+            this.index = index;
+            this.posable=true;
+            Border greenline = BorderFactory.createLineBorder(Color.green);
+            this.setBorder(greenline);
+        }
+        else{
+            this.index = index;
+            this.posable=false;
+             Border blackline = BorderFactory.createLineBorder(Color.black);
+             this.setBorder(blackline);
+        }
+       
         this.setPreferredSize(new Dimension(85,120));
     }
 
@@ -32,6 +46,22 @@ public class JPPileChantier extends JPanel{
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public boolean isPosable() {
+        return posable;
+    }
+
+    public void setPosable(boolean posable) {
+        this.posable = posable;
+        if(posable==true){
+            /*Ajout Drag n Drop*/
+            DropTarget dropChantier = new DropTarget(this, DnDConstants.ACTION_MOVE, 
+            London.dndListener);
+            Border greenline = BorderFactory.createLineBorder(Color.green);
+            this.setBorder(greenline);
+            this.repaint();
+        }
     }
     
     

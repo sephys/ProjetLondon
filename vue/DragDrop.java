@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Constructible;
 
@@ -98,34 +99,39 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
             Component component = ((DragSourceContext) source).getComponent();
             Container oldContainer = component.getParent();
             Container container = (Container) ((DropTarget) target).getComponent();
-            container.add(component);
-            oldContainer.validate();
-            oldContainer.repaint();
-            container.validate();
-            container.repaint();
             
-
-           if(((DropTarget) target).getComponent() instanceof JPPileChantier) 
-           {
-               JBCarte JBcarte = (JBCarte) component;
-               if(JBcarte.getCarte().getClass()==Constructible.class){
-                JPPileChantier chantier = (JPPileChantier)((DropTarget) target).getComponent();
-                
-                System.out.println(London.getListeJoueur().getJoueur().getListeChantier().size());
+             JBCarte JBcarte = (JBCarte) component;
+             JPPileChantier chantier = (JPPileChantier) container;
+             System.out.println(chantier.isPosable());
+             
+            if(JBcarte.getCarte().getClass()==Constructible.class && chantier.isPosable() && (((DropTarget) target).getComponent() instanceof JPPileChantier)){
                 if(London.getListeJoueur().getJoueur().getListeChantier().size()<=chantier.getIndex()){
                     London.getListeJoueur().getJoueur().nouveauChantier();
                     System.out.println(London.getListeJoueur().getJoueur().getListeChantier().size());
                 }
+
+                container.add(component);
+                oldContainer.validate();
+                oldContainer.repaint();
+                container.validate();
+                container.repaint();
+                
                 System.out.println(JBcarte.getCarte().getNom());
-                //London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
-                //System.out.println(London.getListeJoueur().getJoueur().getListeChantier().get(chantier.getIndex()).getFirst());
-               }
-           }
-        } 
+                System.out.println("index du chantier : "+chantier.getIndex());
+                London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
+                London.getJpChantier().getChantiers()[chantier.getIndex()+1].setPosable(true);
+            }
+            else{
+                 // informe le joueur qui joue
+                JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
+
+            }
+        }
         catch (Exception ex) {
             ex.printStackTrace();
         }
         ev.dropComplete(true);
+            
     }
 
     public static void main(String[] arg) {
