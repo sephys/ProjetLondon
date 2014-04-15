@@ -67,9 +67,9 @@ public class MenuDroite extends JPanel {
         piocher.setEnabled(true);
 
         // ACTION BOUTON EMPRUNTER
-        emprunter.addMouseListener(new MouseAdapter() {
+        emprunter.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 int rep = JOptionPane.showConfirmDialog(London.acc,
                         "Êtes-vous sûr de vouloir emprunter 10£ à la banque ?",
                         "Emprunter",
@@ -83,10 +83,10 @@ public class MenuDroite extends JPanel {
         });
 
         // ACTION BOUTON PIOCHER
-        piocher.addMouseListener(new MouseAdapter() {
+        piocher.addActionListener(new ActionListener() {
 
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 if (London.getListeJoueur().getJoueur().getPioche() != 0) {
                     London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
                     London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
@@ -103,10 +103,10 @@ public class MenuDroite extends JPanel {
         });
 
         // ACTION BOUTON PIOCHER 3
-        piocher3.addMouseListener(new MouseAdapter() {
+        piocher3.addActionListener(new ActionListener() {
 
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 int rep = JOptionPane.showConfirmDialog(London.acc,
                         "Êtes-vous sûr de vouloir choisir l'action 'Piocher 3 cartes' ?",
                         "Emprunter",
@@ -126,10 +126,10 @@ public class MenuDroite extends JPanel {
         });
 
         // ACTION BOUTON FIN DE TOUR
-        finTour.addMouseListener(new MouseAdapter() {
+        finTour.addActionListener(new ActionListener() {
 
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 if (London.getListeJoueur().getJoueur().isFinitTour()) {
                     // check trop grand nombre de cartes dans la main
                     if (London.getListeJoueur().getJoueur().getMain().size() > 9) {
