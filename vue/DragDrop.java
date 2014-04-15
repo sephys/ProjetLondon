@@ -111,12 +111,14 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                if(JBcarte.getCarte().getClass()==Constructible.class){
                 JPPileChantier chantier = (JPPileChantier)((DropTarget) target).getComponent();
                 
+                System.out.println(London.getListeJoueur().getJoueur().getListeChantier().size());
                 if(London.getListeJoueur().getJoueur().getListeChantier().size()<=chantier.getIndex()){
                     London.getListeJoueur().getJoueur().nouveauChantier();
+                    System.out.println(London.getListeJoueur().getJoueur().getListeChantier().size());
                 }
                 System.out.println(JBcarte.getCarte().getNom());
-                London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
-                System.out.println(London.getListeJoueur().getJoueur().getListeChantier().get(chantier.getIndex()).getFirst());
+                //London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
+                //System.out.println(London.getListeJoueur().getJoueur().getListeChantier().get(chantier.getIndex()).getFirst());
                }
            }
         } 
