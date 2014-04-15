@@ -311,10 +311,6 @@ public class London {
         // TODO Auto-generated method stub
         return deck;
     }
-
-    public static JPChantiers getJpChantier() {
-        return jpChantier;
-    }
     
     
 
