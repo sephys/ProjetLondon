@@ -42,10 +42,6 @@ public class Joueur {
         return color;
     }
 
-    
-    
-    
-
     public static int getNbJoueur() {
         return nbJoueur;
     }
@@ -105,7 +101,7 @@ public class Joueur {
 
     public void piocheMoins() {
         this.pioche--;
-        if (this.pioche == 0) {
+        if (this.pioche <= 0) {
             JBCarte.setDoubleClick(false);
             if (finTourPiocheCarte) // fin du tour du joueur
             {
@@ -134,7 +130,7 @@ public class Joueur {
 
     public void defausseMoins() {
         this.defausse--;
-        if (this.defausse == 0) {
+        if (this.defausse <= 0) {
             JBCarte.setDoubleClick(false);
         }
     }

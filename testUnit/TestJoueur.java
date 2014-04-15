@@ -2,6 +2,7 @@ package testUnit;
 
 import static org.junit.Assert.*;
 
+import java.awt.Color;
 import java.util.ArrayDeque;
 
 import model.Carte;
@@ -28,7 +29,7 @@ public class TestJoueur {
 
 	@Before
 	public void setUp() throws Exception {
-		this.test=new Joueur("j1");
+		this.test=new Joueur("j1",Color.blue);
 		Carte.initDeck();
 		d=London.getDeck();
 	}
@@ -37,6 +38,35 @@ public class TestJoueur {
 	public void tearDown() throws Exception {
 	}
 
+	@Test
+	public void testDoublonColor() {
+		Joueur tmpJ2=new Joueur("J2",Color.blue);
+		//assertNotEquals(test.getColor(),tmpJ2.getColor());
+	}
+	
+	@Test
+	public void testNbJoueur() {
+		Joueur tmpJ2=new Joueur("J2",Color.blue);
+		assertEquals(this.test.getNbJoueur(),tmpJ2.getNbJoueur());
+	}
+	
+	@Test
+	public void testNbJoueur2() {
+		int nb1 = this.test.getNbJoueur();
+		Joueur tmpJ2=new Joueur("J2",Color.blue);
+		int nb2 = tmpJ2.getNbJoueur();
+		assertEquals(this.test.getNbJoueur(),tmpJ2.getNbJoueur());
+		assertEquals(nb1,nb2-1);
+	}
+	
+	@Test
+	public void testJouerCarte() {
+		//Verif que la zone de construction est constructible
+		//Verif si remove sur null marche
+		//Verif que la carte jouer ne soit pu en main
+		//Verif que le carte jouer soit sur le terrain
+	}
+	
 	@Test
 	public void testPiocheCarteSimple() {
 		Carte e=d.peekFirst();
@@ -47,7 +77,7 @@ public class TestJoueur {
 	
 	@Test
 	public void testPiocheCarteComplexe() {
-		Joueur tmptest=new Joueur("test");
+		Joueur tmptest=new Joueur("test",Color.black);
 		for(int i=0;i<6;i++){
 			test.piocheCarte(d.peekFirst());
 			tmptest.piocheCarte(d.poll());
