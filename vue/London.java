@@ -235,13 +235,10 @@ public class London {
         return jpChantier;
     }
 
+
     public static void setJpChantier(JPChantiers jpChantier) {
         London.jpChantier = jpChantier;
     }
-    
-    
-    
-
     
     
     public static JPPlateau getPlateau() {
