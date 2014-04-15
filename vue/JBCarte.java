@@ -18,6 +18,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +41,8 @@ public class JBCarte extends JButton implements  MouseListener {
     private Image image;
     private Carte carte;
     private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
-    private String position; // permet de savoir ou est la carte : main - etalage - construction
+    private String position; // permet de savoir ou est la carte : main - etalage - construction - fenetre
+    private boolean retournee;
     
     public JBCarte(Carte carte) {
         this.carte=carte;
@@ -52,6 +55,7 @@ public class JBCarte extends JButton implements  MouseListener {
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.position="main";
+        this.retournee = false;
         this.setIcon(new ImageIcon(JBCarte.scaleImage(image, 67, 103)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
@@ -237,5 +241,19 @@ public class JBCarte extends JButton implements  MouseListener {
     
     public static void setDoubleClick(boolean doubleClick) {
         JBCarte.doubleClick = doubleClick;
+    }
+    
+    public void pouvoirBridge(){
+        int argent = 0;
+        if(this.carte.getNom().equals("Bridge")){
+            ArrayList al = new ArrayList(London.getListeJoueur().getJoueur().getListeChantier());
+            for(Object o : al){
+                ArrayDeque<Constructible> a = (ArrayDeque<Constructible>) o;
+                if(a.poll().getCouleur().equals("marron")){
+                    argent++;
+                }
+            }
+        }
+        London.getListeJoueur().getJoueur().addArgent(argent);
     }
 }
