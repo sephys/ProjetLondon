@@ -266,4 +266,7 @@ public class Joueur {
     	carteJouer.jouerCarte(this,ind);
     	this.getMain().remove(defausse);
     }
+    public void activerCarte(Constructible ActCarte){
+    	
+    }
 }
