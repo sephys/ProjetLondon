@@ -52,7 +52,7 @@ public class JPZoom extends JPanel{
         catch(IOException e1)
         {
                     
-        }  
+        }
     }
         
         

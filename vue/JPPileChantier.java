@@ -19,6 +19,7 @@ import javax.swing.border.Border;
 public class JPPileChantier extends JPanel{
     private int index;
     private boolean posable;
+    private boolean carte2;
     
     public JPPileChantier(int index){
         if(index==0){
@@ -36,6 +37,7 @@ public class JPPileChantier extends JPanel{
              Border blackline = BorderFactory.createLineBorder(Color.black);
              this.setBorder(blackline);
         }
+        this.carte2=false;
        
         this.setPreferredSize(new Dimension(85,120));
     }
@@ -62,6 +64,14 @@ public class JPPileChantier extends JPanel{
             this.setBorder(greenline);
             this.repaint();
         }
+    }
+
+    public boolean isCarte2() {
+        return carte2;
+    }
+
+    public void setCarte2(boolean carte2) {
+        this.carte2 = carte2;
     }
     
     
