@@ -128,7 +128,8 @@ public class Constructible extends Carte {
 		}
 		currJ.setArgent(currJ.getArgent()-this.getCoutPose());
 		currJ.setPointVictoire(currJ.getPointVictoire()+this.getPointsVictoirePose());
-		Constructible sousCarte=currJ.getListeChantier().get(ind).getFirst();
+		
+                /*Constructible sousCarte=currJ.getListeChantier().get(ind).getFirst();
 		if(sousCarte!=null){
 			String pouvoir=sousCarte.getPouvoirIlli();
 			if(currJ.getPouvoir().get(pouvoir)!=null);{
@@ -136,8 +137,9 @@ public class Constructible extends Carte {
 			}
 		}else{
 			currJ.getListeChantier().get(ind).add(this);
-		}
+		}*/
 		
+                currJ.getListeChantier().get(ind).add(this);
 		currJ.getMain().remove(this);
 	}
 	

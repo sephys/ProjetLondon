@@ -63,10 +63,6 @@ public class London {
     public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
     private static Joueur[] tabJoueur;
 
-    static void setJpChantier(JPChantiers jpChantiers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public London() {
 
         // D&D
@@ -238,9 +234,10 @@ public class London {
     public static JPChantiers getJpChantier() {
         return jpChantier;
     }
-    
-    
 
+    public static void setJpChantier(JPChantiers jpChantier) {
+        London.jpChantier = jpChantier;
+    }
     
     
     public static JPPlateau getPlateau() {

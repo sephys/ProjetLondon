@@ -266,7 +266,6 @@ public class Joueur {
     public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
     	carteJouer.jouerCarte(this,ind);
     	this.getMain().remove(defausse);
-        this.getMain().remove(carteJouer);
     }
     
     public String getPiocheDefausse(){
