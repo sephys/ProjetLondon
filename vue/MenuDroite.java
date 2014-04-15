@@ -125,7 +125,6 @@ public class MenuDroite extends JPanel {
                 }
             }
         });
-        regarder3Cartes.setVisible(false);
                 
         
         // POUVOIR DE "UNIVERSITY OF LONDON"
@@ -206,6 +205,7 @@ public class MenuDroite extends JPanel {
         zoom.setPreferredSize(new Dimension(300, 400));
         // zoom.setBackground(Color.red);
         this.add(zoom, BorderLayout.SOUTH);
+        regarder3Cartes.setVisible(false);
     }
     
     // methode qui permet de changer de joueur

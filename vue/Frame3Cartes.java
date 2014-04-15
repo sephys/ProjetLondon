@@ -45,6 +45,11 @@ public class Frame3Cartes extends JFrame{
         this.add(panel);
         this.pack();
         this.setVisible(true);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(
+                (screenSize.width-this.getWidth())/2,
+                (screenSize.height-this.getHeight())/2
+        );
     }
     
     void remetCartes(JBCarte aThis) {
