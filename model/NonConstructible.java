@@ -29,8 +29,13 @@ public class NonConstructible extends Carte {
 	@Override
 	public void jouerCarte(Joueur currJ, int ind) {
 		// TODO Auto-generated method stub
-		if(currJ.getPouvoir().containsKey(this.getPouvoir())){
-			currJ.getPouvoir().put(this.getPouvoir(),new Integer(currJ.getPouvoir().get(this.getPouvoir()).intValue()+1));
+		String pouv = this.getPouvoir();
+		if(pouv.compareTo("vide")!=0){
+			if(currJ.getPouvoir().get(pouv)!=null){
+				currJ.getPouvoir().put(pouv,new Integer(currJ.getPouvoir().get(pouv).intValue()+1));
+			}else{
+				currJ.getPouvoir().put(pouv,new Integer(1));
+			}
 		}
 		currJ.getMain().remove(this);
 	}

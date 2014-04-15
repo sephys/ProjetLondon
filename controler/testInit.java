@@ -1,5 +1,6 @@
 package controler;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ public class testInit {
 	private static Etalage defausse;
 
 	public static void main(String[] args) {
-		Joueur j=new Joueur("toto");
+		Joueur j=new Joueur("toto",Color.RED);
 		Carte.initDeck();
 		for(int i=0;i<30;i++){
 			j.piocheCarte(London.getDeck().poll());
