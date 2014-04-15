@@ -24,6 +24,7 @@ public class Joueur {
     private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
     private boolean finitTour; // savoir si le joueur a finit son tour
     private Color color;
+    private static String piocheDefausse;   // Permet de savoir si le joueur est en train de piocher ou de defausser
 
     public Joueur(String nom,Color color) {
         this.nom = nom;
@@ -265,5 +266,13 @@ public class Joueur {
     public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
     	carteJouer.jouerCarte(this,ind);
     	this.getMain().remove(defausse);
+    }
+    
+    public String getPiocheDefausse(){
+        return this.piocheDefausse;
+    }
+    
+    public void setPiocheDefausse(String piocheDefausse){
+        this.piocheDefausse = piocheDefausse;
     }
 }

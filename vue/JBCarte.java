@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 import model.Carte;
 import model.Constructible;
 import model.Etalage;
+import model.Joueur;
 
 /**
  *
@@ -38,7 +39,7 @@ public class JBCarte extends JButton implements  MouseListener {
     private Image image;
     private Carte carte;
     private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
-    private  String position; // permet de savoir ou est la carte : main - etalage - construction
+    private String position; // permet de savoir ou est la carte : main - etalage - construction
 
     public JBCarte(Carte carte) {
         this.carte=carte;
@@ -89,10 +90,10 @@ public class JBCarte extends JButton implements  MouseListener {
         if(e.getClickCount()==2)
         {
             System.out.println("yo : "+((JBCarte) e.getComponent()).getPosition());
-           
+           Joueur courrant = London.getListeJoueur().getJoueur();
                switch (((JBCarte) e.getComponent()).getPosition()) {
                    case "main": // on met la carte de la main sur le l'étalage
-                      if(doubleClick)
+                      if(doubleClick&&courrant.getPiocheDefausse().equals("defausse"))
                       {
                         ((JBCarte) e.getComponent()).setPosition("etalage");
                         // ajout de la carte dans l'etalage
@@ -117,7 +118,7 @@ public class JBCarte extends JButton implements  MouseListener {
                       
                        
                    case "etalage": // on met la carte de l'etalage dans la main
-                       if(doubleClick)
+                       if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
                        {
                             // ajout de la carte dans la main du joueur graphiquement
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(((JBCarte) e.getComponent()).carte);
@@ -207,9 +208,4 @@ public class JBCarte extends JButton implements  MouseListener {
     public static void setDoubleClick(boolean doubleClick) {
         JBCarte.doubleClick = doubleClick;
     }
-    
-    
-    
-    
-    
 }
