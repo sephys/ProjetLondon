@@ -119,10 +119,8 @@ public class London {
                 
                 // informe le joueur qui joue
                 JOptionPane.showMessageDialog(null, "C'est au tour de "+London.getListeJoueur().getJoueur().getNom()+" de jouer");
-                
+                London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
                 London.getListeJoueur().getJoueur().setPioche(1);
-
-
 	}
 
 	// methode qui affiche le menu quand on lance l'application

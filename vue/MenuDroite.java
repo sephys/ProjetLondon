@@ -118,6 +118,7 @@ public class MenuDroite extends JPanel {
                     London.getListeJoueur().getJoueur().setPioche(3);
                     London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
                     labelInfo.setText("Vous devez piocher 3 cartes");
+                    London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
                     JBCarte.setDoubleClick(true);
                     London.getMenudroite().repaint();
                     London.getMenudroite().revalidate();
@@ -135,6 +136,7 @@ public class MenuDroite extends JPanel {
                     if (London.getListeJoueur().getJoueur().getMain().size() > 9) {
                         System.out.println(London.getListeJoueur().getJoueur().getMain().size());
                         JBCarte.setDoubleClick(true);
+                        London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
                         JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
                         if(London.getListeJoueur().getJoueur().getDefausse()==0)
                         {
@@ -218,6 +220,7 @@ public class MenuDroite extends JPanel {
         
         // on informe le joueur
         JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");
+        London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
 
     }
 
