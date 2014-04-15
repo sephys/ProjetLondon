@@ -275,4 +275,7 @@ public class Joueur {
     public void setPiocheDefausse(String piocheDefausse){
         this.piocheDefausse = piocheDefausse;
     }
+    
+    public void activerCarte(Constructible ActCarte){
+    }
 }
