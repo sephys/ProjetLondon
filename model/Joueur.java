@@ -276,6 +276,6 @@ public class Joueur {
         this.piocheDefausse = piocheDefausse;
     }
     
-    public void activerCarte(Constructible ActCarte){
+    public void activerCarte(Constructible actCarte){
     }
 }
