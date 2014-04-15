@@ -214,6 +214,10 @@ public class MenuDroite extends JPanel {
     public void actualiserMain() {
         // sauvegarde de la main dans le tableau
         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) London.south;
+        
+        // sauvegarde zone de construction
+        London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=London.getJpChantier();
+        
         // on enleve la main
         London.central.remove(London.south);
         // on passe au joueur suivant
@@ -226,8 +230,7 @@ public class MenuDroite extends JPanel {
         London.central.add(London.south, BorderLayout.SOUTH);
         
         
-        // sauvegarde zone de construction
-        London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=London.getJpChantier();
+        
         
         // on enleve la zone
         London.getPanelOnglet().remove(London.getPanelOnglet().getComponent(2));
@@ -236,6 +239,8 @@ public class MenuDroite extends JPanel {
         // on ajoute la zone
         London.getPanelOnglet().addTab("Chantiers",London.getJpChantier());
 
+                
+                
         // actualiser la fenêtre
         London.frame.repaint();
         London.central.revalidate();

@@ -234,6 +234,11 @@ public class London {
     public static JPChantiers getJpChantier() {
         return jpChantier;
     }
+
+    public static void setJpChantier(JPChantiers jpChantier) {
+        London.jpChantier = jpChantier;
+    }
+    
     
     
 
