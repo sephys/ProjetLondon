@@ -25,7 +25,6 @@ public class Joueur {
     private boolean finitTour; // savoir si le joueur a finit son tour
     private Color color;
     private static String piocheDefausse;   // Permet de savoir si le joueur est en train de piocher ou de defausser
-    private boolean pouvoirPret12;  // Cet attribut permet de savoir s'il a le pouvoir de "Bank of England"
 
     public Joueur(String nom,Color color) {
         this.nom = nom;
@@ -37,21 +36,19 @@ public class Joueur {
         this.nbPret = 0;
         this.color=color;
         this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
-        this.pouvoirPret12 = false;
+        initialisePouvoir();
+    }
+    
+    public void initialisePouvoir(){
+        pouvoir.put("Bank of England", 0);
+        pouvoir.put("Brixton Prison", 0);
+        pouvoir.put(nom, argent);
     }
 
     public Color getColor() {
         return color;
     }
-
-    public boolean isPouvoirPret12() {
-        return pouvoirPret12;
-    }
-
-    public void setPouvoirPret12(boolean pouvoirPret12) {
-        this.pouvoirPret12 = pouvoirPret12;
-    }
-
+    
     public static int getNbJoueur() {
         return nbJoueur;
     }
@@ -265,7 +262,7 @@ public class Joueur {
     
     public void addPret(int nbPret){
         this.nbPret += nbPret;
-        if(this.pouvoirPret12){
+        if(pouvoir.get("Bank of England") == 1){
             this.addArgent(12*nbPret);
         }else{
             this.addArgent(10*nbPret);

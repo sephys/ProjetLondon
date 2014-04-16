@@ -256,4 +256,8 @@ public class JBCarte extends JButton implements  MouseListener {
         }
         London.getListeJoueur().getJoueur().addArgent(argent);
     }
+    
+    public void pouvoirBrixtonPrison(int nombreCartes){
+        London.getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
+    }
 }
