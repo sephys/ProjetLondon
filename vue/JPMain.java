@@ -71,7 +71,7 @@ public class JPMain extends JPanel {
             @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, 847, 147, this);
+        g.drawImage(img, 0, 0, 855, 147, this);
     }
         };
        // main.setBackground(Color.red);

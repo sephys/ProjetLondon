@@ -103,7 +103,6 @@ public class JBCarte extends JButton implements  MouseListener {
         
         if(e.getClickCount()==2)
         {
-            System.out.println("yo : "+((JBCarte) e.getComponent()).getPosition());
 
            Joueur courrant = London.getListeJoueur().getJoueur();
                switch (((JBCarte) e.getComponent()).getPosition()) {
