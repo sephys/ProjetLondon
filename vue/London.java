@@ -132,8 +132,8 @@ public class London {
         central = new JPanel(new BorderLayout());
 
         // south contient la main du Joueur et contient celle du premier joueur en premier
-        south = new JPMain(getTabJoueur()[0]);
-        tabJPMain[0] = south;
+        south = tabJPMain[0];
+        //tabJPMain[0] = south;
 
         central.add(panelOnglet, BorderLayout.CENTER);
         central.add(south, BorderLayout.SOUTH);
@@ -282,8 +282,10 @@ public class London {
 
     public static void initTabJPMain() {
         tabJPMain = new JPMain[Joueur.getNbJoueur()];
-        for (int i = 0; i < Joueur.getNbJoueur(); i++) {
-            tabJPMain[i] = new JPMain(getTabJoueur()[i]);
+        for (int i = 0; i <Joueur.getNbJoueur(); i++) {
+            System.out.println("moi"+London.getListeJoueur().getJoueur());
+            tabJPMain[i] = new JPMain(London.getListeJoueur().getJoueur());
+            London.setListeJoueur(London.getListeJoueur().getSuivant());
         }
     }
     

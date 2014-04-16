@@ -8,8 +8,18 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.*;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import static vue.London.dndListener;
 
@@ -24,8 +34,13 @@ public class MenuDroite extends JPanel {
     private JPanel menuBouton; // panel contenant tous les boutons
     private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, regarder3Cartes, finTour; // les différents boutons du menu
     public static boolean invest; // a virer !
+
+    private Image img;
+
+
     private Frame3Cartes f;
     
+
     public MenuDroite() {
         super(new BorderLayout());
         menuBouton = new JPanel();
@@ -34,9 +49,18 @@ public class MenuDroite extends JPanel {
         // position le menuBouton
         Dimension d = new Dimension(310, 260);
         
-        menuBouton.setPreferredSize(d);
-        menuBouton.setBackground(Color.yellow);
+
+        menuBouton.setOpaque(false);
+
+           try {
+            URL uri = JPEtalage.class.getResource("../img/rgbg2.png");            
+            img = ImageIO.read(uri);
+        } catch (IOException ex) {
+            Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         
+
         // label du joueur qui joue
         labelJoueur = new JLabel(London.getListeJoueur().getJoueur().getNom());
         
@@ -66,10 +90,14 @@ public class MenuDroite extends JPanel {
         // on doit piocher au début
         disableAll();
         piocher.setEnabled(true);
+        
+        
+      
 
         
         // ACTION BOUTON JOUERCARTES
         jouer.addActionListener(new ActionListener() {
+            
             @Override
             public void actionPerformed(ActionEvent e) { 
                 int rep = JOptionPane.showConfirmDialog(London.acc,
@@ -171,6 +199,7 @@ public class MenuDroite extends JPanel {
                         System.out.println(London.getListeJoueur().getJoueur().getMain().size());
                         JBCarte.setDoubleClick(true);
                         London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                        setDefausseCarte(true);
                         JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
                         if(London.getListeJoueur().getJoueur().getDefausse()==0)
                         {
@@ -229,6 +258,10 @@ public class MenuDroite extends JPanel {
     
     // methode qui permet de changer de joueur
     public void actualiserMain() {
+        
+        
+        
+        
         // sauvegarde de la main dans le tableau
         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) London.south;
         
@@ -276,8 +309,22 @@ public class MenuDroite extends JPanel {
         JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");
         London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
         
+
+        // on peut pas se defausser a la base
+        setDefausseCarte(false);
+
     }
     
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(img, 0, 0, 310, 810, this);
+    }
+
+
+    
+    
+
     public void disableAll() {
         jouer.setEnabled(false);
         restaurer.setEnabled(false);
@@ -298,6 +345,28 @@ public class MenuDroite extends JPanel {
         finTour.setEnabled(true);
     }
     
+
+    public void setTrueDefausseColor(String color)
+    {
+       for(int i=0;i<London.south.getMain().getComponentCount();i++) // parcours la main du joueur
+       {
+           if(((JBCarte) London.south.getMain().getComponent(i)).getCarte().getCouleur().equals(color)) // si la carte est de la même couleur
+           {
+               ((JBCarte) London.south.getMain().getComponent(i)).setDefausse(true); // il peut la defausser
+           }
+           
+       } 
+    }
+    
+    public void setDefausseCarte(boolean bool)
+    {
+       for(int i=0;i<London.south.getMain().getComponentCount();i++) // parcourt la main du joueuer
+       {
+           ((JBCarte) London.south.getMain().getComponent(i)).setDefausse(bool); // il peut se defausser
+       }
+    }
+    
+
     public JButton getJouer() {
         return jouer;
     }

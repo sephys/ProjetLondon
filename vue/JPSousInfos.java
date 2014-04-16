@@ -47,6 +47,7 @@ public class JPSousInfos extends JPanel{
         this.nomJoueur = new JLabel(joueur.getNom());
         this.nomJoueur.setHorizontalAlignment(JLabel.CENTER);
         this.nomJoueur.setVerticalAlignment(JLabel.CENTER);
+        this.setOpaque(false); // transparance
         this.nomJoueur.setFont(this.nomJoueur.getFont ().deriveFont (16.0f));
         piece = new JPSousSousInfos("../img/jetons/Piece1.png", 5);
         pauvrete = new JPSousSousInfos("../img/jetons/PointPauvrete.png", 5);

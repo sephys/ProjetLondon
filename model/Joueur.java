@@ -24,8 +24,9 @@ public class Joueur {
     private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
     private boolean finitTour; // savoir si le joueur a finit son tour
     private Color color;
-    private static String piocheDefausse;   // Permet de savoir si le joueur est en train de piocher ou de defausser
-
+    private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
+    private boolean pouvoirPret12;  // Cet attribut permet de savoir s'il a le pouvoir de "Bank of England"
+    private boolean payeConstruction; //booléen qui repère si le joueur à payé d'une carte défaussé sa construction
     public Joueur(String nom,Color color) {
         this.nom = nom;
         this.main = new ArrayList<Carte>();
@@ -42,7 +43,9 @@ public class Joueur {
     public void initialisePouvoir(){
         pouvoir.put("Bank of England", 0);
         pouvoir.put("Brixton Prison", 0);
-        pouvoir.put(nom, argent);
+        //pouvoir.put(nom, argent);
+        this.pouvoirPret12 = false;
+        this.payeConstruction = false;
     }
 
     public Color getColor() {
@@ -284,4 +287,14 @@ public class Joueur {
     
     public void activerCarte(Constructible actCarte){
     }
+
+    public boolean isPayeConstruction() {
+        return payeConstruction;
+    }
+
+    public void setPayeConstruction(boolean payeConstruction) {
+        this.payeConstruction = payeConstruction;
+    }
+    
+    
 }

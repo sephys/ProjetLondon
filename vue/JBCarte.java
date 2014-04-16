@@ -41,9 +41,14 @@ public class JBCarte extends JButton implements  MouseListener {
     private Image image;
     private Carte carte;
     private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
-    private String position; // permet de savoir ou est la carte : main - etalage - construction - fenetre
+
+    private String position; // permet de savoir ou est la carte : main - etalage - construction
+    private boolean defausse; // est-ce que la carte pour etre defauser
+
+
     private boolean retournee;
     
+
     public JBCarte(Carte carte) {
         this.carte=carte;
         URL uri = JBCarte.class.getResource(carte.getPath());
@@ -99,11 +104,17 @@ public class JBCarte extends JButton implements  MouseListener {
         if(e.getClickCount()==2)
         {
             System.out.println("yo : "+((JBCarte) e.getComponent()).getPosition());
-            Joueur courrant = London.getListeJoueur().getJoueur();
-            switch (((JBCarte) e.getComponent()).getPosition()) {
-                case "main": // on met la carte de la main sur le l'étalage
-                    if(doubleClick&&courrant.getPiocheDefausse().equals("defausse"))
-                    {
+
+           Joueur courrant = London.getListeJoueur().getJoueur();
+               switch (((JBCarte) e.getComponent()).getPosition()) {
+                   case "main": // on met la carte de la main sur le l'étalage
+                      if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
+                      {
+
+                        /**/
+                        London.getListeJoueur().getJoueur().setPayeConstruction(false);
+                        London.getMenudroite().getFinTour().setEnabled(true);
+
                         ((JBCarte) e.getComponent()).setPosition("etalage");
                         // ajout de la carte dans l'etalage
                         London.getEtalage().addCarte(((JBCarte) e.getComponent()).carte);
@@ -114,6 +125,11 @@ public class JBCarte extends JButton implements  MouseListener {
                         //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
                         // suppression de la carte de la main du joueur
                         System.out.println(((JBCarte) e.getComponent()).carte.getNom());
+                        for(int i=0;i<London.getListeJoueur().getJoueur().getMain().size();i++)
+                        {
+                            System.out.println("affichage carte : "+London.getListeJoueur().getJoueur().getMain().get(i).getNom());
+                        }
+                        System.out.println("Carte sup :"+(((JBCarte) e.getComponent()).carte.getNom()));
                         System.out.println(London.getListeJoueur().getJoueur().getMain().remove(((JBCarte) e.getComponent()).carte));
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         London.getListeJoueur().getJoueur().defausseMoins();
@@ -176,6 +192,8 @@ public class JBCarte extends JButton implements  MouseListener {
         }
         
     }
+        
+    
     
     
     
@@ -242,6 +260,20 @@ public class JBCarte extends JButton implements  MouseListener {
     public static void setDoubleClick(boolean doubleClick) {
         JBCarte.doubleClick = doubleClick;
     }
+
+
+    public void setDefausse(boolean defausse) {
+        this.defausse = defausse;
+    }
+
+    public boolean isDefausse() {
+        return defausse;
+    }
+    
+    
+    
+    
+
     
     public void pouvoirBridge(){
         int argent = 0;
