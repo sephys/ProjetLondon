@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 package vue;
 
@@ -26,13 +26,13 @@ import model.Carte;
 import model.Joueur;
 
 /**
- *  
+ *
  * @author Anh-Djuy
- * 
+ *
  * Classe JPMain
- * 
+ *
  * Cette classe permet d'afficher la main d'un joueur.
- * 
+ *
  */
 public class JPMain extends JPanel {
     
@@ -49,7 +49,7 @@ public class JPMain extends JPanel {
         JSPMain.setPreferredSize(new Dimension(675,131));
         this.add(JSPMain, BorderLayout.NORTH);
         
-       
+        
         
         //// D&D
         DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
@@ -61,7 +61,7 @@ public class JPMain extends JPanel {
         super(new BorderLayout());
         
         try {
-            URL uri = JPEtalage.class.getResource("../img/mainBG1.png");            
+            URL uri = JPEtalage.class.getResource("../img/mainBG1.png");
             img = ImageIO.read(uri);
         } catch (IOException ex) {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,21 +69,16 @@ public class JPMain extends JPanel {
         
         main = new JPanel(new FlowLayout()){
             @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(img, 0, 0, 855, 147, this);
-    }
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(img, 0, 0, 855, 147, this);
+            }
         };
-       // main.setBackground(Color.red);
+        // main.setBackground(Color.red);
         JSPMain = new JScrollPane(main);
-
         JSPMain.setPreferredSize(new Dimension(675,150));
-
-      
-         
-        
         JSPMain.setWheelScrollingEnabled(true);
-
+        
         
         this.add(JSPMain, BorderLayout.NORTH);
         //// D&D
@@ -101,9 +96,11 @@ public class JPMain extends JPanel {
     
     // ajout d'une carte dans le panel main du joueur
     public  void ajoutCarte(Carte e){
-            main.add(new JBCarte(e));
-            main.revalidate();
-      
+        JBCarte carte = new JBCarte(e);
+        carte.changeTailleBoutonImage(new Dimension(79, 121));
+        main.add(carte);
+        main.revalidate();
+        
     }
     
     public JPanel getMain()
@@ -114,7 +111,7 @@ public class JPMain extends JPanel {
     public void removeCarte(Carte e)
     {
         JBCarte c=new JBCarte(e);
-
+        
         for(int i=0;i<main.getComponentCount();i++)
         {
             if(((JBCarte) main.getComponent(i)).equals(c))
