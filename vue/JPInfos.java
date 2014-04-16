@@ -54,7 +54,7 @@ public class JPInfos extends JPanel{
         }
         
         try {
-            URL uri = JPEtalage.class.getResource("../img/leftBackground.png");            
+            URL uri = JPEtalage.class.getResource("../img/lfbord.png");            
             img = ImageIO.read(uri);
         } catch (IOException ex) {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
