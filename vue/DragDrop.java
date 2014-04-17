@@ -111,70 +111,79 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
             Container oldContainer = component.getParent();
             Container container = (Container) ((DropTarget) target).getComponent();
 
-            JBCarte JBcarte = (JBCarte) component;
-            JPPileChantier chantier = (JPPileChantier) container;
-            if (this.dragEnable) {
-                if (JBcarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2() && (((DropTarget) target).getComponent() instanceof JPPileChantier)) {
-                    Constructible carte = (Constructible) JBcarte.getCarte();
+            if (((DropTarget) target).getComponent() instanceof JPPileChantier) {
+                if (this.dragEnable) {
                     if (!London.getListeJoueur().getJoueur().isPayeConstruction()) {
-                        int rep = JOptionPane.showConfirmDialog(London.acc,
-                                "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
-                                "Construire",
-                                JOptionPane.YES_NO_OPTION);
-                        if (rep == JOptionPane.YES_OPTION) {
-                            if (carte.getCoutPose() < London.getListeJoueur().getJoueur().getArgent()) {
-                                if (London.getListeJoueur().getJoueur().getListeChantier().size() <= chantier.getIndex()) {
-                                    London.getListeJoueur().getJoueur().nouveauChantier();
-                                } else {
-                                    container.removeAll();
-                                    container.validate();
-                                    container.repaint();
+                        JBCarte JBcarte = (JBCarte) component;
+                        JPPileChantier chantier = (JPPileChantier) container;
+                        if (JBcarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()){
+                            Constructible carte = (Constructible) JBcarte.getCarte();
+                            if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1) {
+                                int rep = JOptionPane.showConfirmDialog(London.acc,
+                                        "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
+                                        "Construire",
+                                        JOptionPane.YES_NO_OPTION);
+                                if (rep == JOptionPane.YES_OPTION) {
+                                    if (carte.getCoutPose() <= London.getListeJoueur().getJoueur().getArgent()) {
+                                        if (London.getListeJoueur().getJoueur().getListeChantier().size() <= chantier.getIndex()) {
+                                            London.getListeJoueur().getJoueur().nouveauChantier();
+                                        } else {
+                                            container.removeAll();
+                                            container.validate();
+                                            container.repaint();
+                                        }
+
+                                        chantier.setCarte2(true);
+                                        /*Ajout de la carte visuellement*/
+                                        JBcarte.changeTailleBoutonImage(new Dimension(122, 168));
+                                        container.add(JBcarte);
+                                        oldContainer.validate();
+                                        oldContainer.repaint();
+                                        container.validate();
+                                        container.repaint();
+
+                                        System.out.println(JBcarte.getCarte().getCouleur());
+                                        System.out.println("index du chantier : " + chantier.getIndex());
+
+                                        /*appel de jouerCarte*/
+                                        London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
+
+                                        /*Passer le chantier suivant a posable=true*/
+                                        London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
+
+                                        /*Mise a jour du panel d'information*/
+                                        London.infos.maj_infos();
+
+                                        /*Le joueur peut finir son tour*/
+                                        London.getListeJoueur().getJoueur().setFinitTour(true);
+
+                                        /*Le joueur peut finir son tour*/
+                                        London.getListeJoueur().getJoueur().setPayeConstruction(true);
+
+                                        London.getListeJoueur().getJoueur().setDefausse(1);
+                                        London.getMenudroite().disableAll();
+                                        London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
+                                        London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                                        JBCarte.setDoubleClick(true);
+                                        London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
+                                    }
                                 }
-
-                                chantier.setCarte2(true);
-                                /*Ajout de la carte visuellement*/
-                                container.add(component);
-                                oldContainer.validate();
-                                oldContainer.repaint();
-                                container.validate();
-                                container.repaint();
-
-                                System.out.println(JBcarte.getCarte().getCouleur());
-                                System.out.println("index du chantier : " + chantier.getIndex());
-
-                                /*appel de jouerCarte*/
-                                London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
-
-                                /*Passer le chantier suivant a posable=true*/
-                                London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
-
-                                /*Mise a jour du panel d'information*/
-                                London.infos.maj_infos();
-
-                                /*Le joueur peut finir son tour*/
-                                London.getListeJoueur().getJoueur().setFinitTour(true);
-
-                                /*Le joueur peut finir son tour*/
-                                London.getListeJoueur().getJoueur().setPayeConstruction(true);
-
-                                London.getListeJoueur().getJoueur().setDefausse(1);
-                                London.getMenudroite().disableAll();
-                                London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
-                                London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
-                                JBCarte.setDoubleClick(true);
                             } else {
-                                JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
+                                JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte car vous n'avez aucune autre carte de la même couleur");
                             }
+
+                        } else {
+                            // informe le joueur qui joue
+                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");
                     }
                 } else {
-                    // informe le joueur qui joue
-                    JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
+                    JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
             }
         } catch (Exception ex) {
             ex.printStackTrace();

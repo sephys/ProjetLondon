@@ -34,12 +34,13 @@ public class JPPileChantier extends JPanel{
         else{
             this.index = index;
             this.posable=false;
-             Border blackline = BorderFactory.createLineBorder(Color.black);
+             Border blackline = BorderFactory.createLineBorder(Color.GRAY);
              this.setBorder(blackline);
         }
         this.carte2=false;
        
-        this.setPreferredSize(new Dimension(85,120));
+        this.setPreferredSize(new Dimension(122,168));
+        this.setOpaque(false);
     }
 
     public int getIndex() {

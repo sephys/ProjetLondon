@@ -296,5 +296,15 @@ public class Joueur {
         this.payeConstruction = payeConstruction;
     }
     
+    //retourne le nombre de carte d'une couleur donnée (dans la main du joueur)
+    public int nb_carte_couleur(String couleur){
+        int res=0;
+        for(Carte carte:main){
+            if(carte.getCouleur()==couleur){
+                res++;
+            }
+        }
+        return res;
+    }
     
 }
