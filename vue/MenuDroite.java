@@ -53,7 +53,7 @@ public class MenuDroite extends JPanel {
         menuBouton.setOpaque(false);
 
            try {
-            URL uri = JPEtalage.class.getResource("../img/rgbg2.png");            
+            URL uri = JPEtalage.class.getResource("../img/rgbg3.png");            
             img = ImageIO.read(uri);
         } catch (IOException ex) {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);

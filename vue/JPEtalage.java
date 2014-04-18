@@ -8,6 +8,7 @@ package vue;
 
 import model.TourJoueur;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.dnd.DnDConstants;
@@ -103,11 +104,13 @@ public class JPEtalage extends JPanel {
                 System.out.println("ajout");
                 JBCarte jb = new JBCarte(tab1[i]);
                 jb.setPosition("etalage");
+                jb.changeTailleBoutonImage(new Dimension(122, 168));                
                 this.tab1[i].add(jb);
             }            
             if (tab2[i] != null) {                
                 JBCarte jb = new JBCarte(tab2[i]);
                 jb.setPosition("etalage");
+                jb.changeTailleBoutonImage(new Dimension(122, 168));      
                 this.tab2[i].add(jb);                
             }
             

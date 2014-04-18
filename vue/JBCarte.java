@@ -61,7 +61,7 @@ public class JBCarte extends JButton implements  MouseListener {
         }
         this.position="main";
         this.retournee = false;
-        this.setIcon(new ImageIcon(JBCarte.scaleImage(image, 67, 103)));
+        this.setIcon(new ImageIcon(JBCarte.scaleImage(image, 79, 121)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
         DragGestureRecognizer dragRecognizer1 = London.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, London.dndListener);
@@ -103,7 +103,6 @@ public class JBCarte extends JButton implements  MouseListener {
         
         if(e.getClickCount()==2)
         {
-            System.out.println("yo : "+((JBCarte) e.getComponent()).getPosition());
 
            Joueur courrant = London.getListeJoueur().getJoueur();
                switch (((JBCarte) e.getComponent()).getPosition()) {
@@ -114,19 +113,23 @@ public class JBCarte extends JButton implements  MouseListener {
                         /**/
                         London.getListeJoueur().getJoueur().setPayeConstruction(false);
                         London.getMenudroite().getFinTour().setEnabled(true);
-
-                        ((JBCarte) e.getComponent()).setPosition("etalage");
+                        JBCarte carte = ((JBCarte) e.getComponent());
+                        carte.setPosition("etalage");
                         // ajout de la carte dans l'etalage
-                        London.getEtalage().addCarte(((JBCarte) e.getComponent()).carte);
+                        London.getEtalage().addCarte(carte.carte);
                         // on rafrachit l'etalage
                         London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
                         // on enleve la carte de la main du joueur ( graphiquement )
                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
                         //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
                         // suppression de la carte de la main du joueur
-                        System.out.println(((JBCarte) e.getComponent()).carte);
-                        System.out.println(London.getListeJoueur().getJoueur().getMain().contains((JBCarte) e.getComponent().carte));
-                        System.out.println(London.getListeJoueur().getJoueur().getMain().remove(((JBCarte) e.getComponent()).carte));
+                        System.out.println(carte.carte.getNom());
+                        for(int i=0;i<London.getListeJoueur().getJoueur().getMain().size();i++)
+                        {
+                            System.out.println("affichage carte : "+London.getListeJoueur().getJoueur().getMain().get(i).getNom());
+                        }
+                        System.out.println("Carte sup :"+(carte.carte.getNom()));
+                        System.out.println(London.getListeJoueur().getJoueur().getMain().remove(carte.carte));
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         London.getListeJoueur().getJoueur().defausseMoins();
                         
@@ -284,5 +287,8 @@ public class JBCarte extends JButton implements  MouseListener {
         }
         London.getListeJoueur().getJoueur().addArgent(argent);
     }
-
+    
+    public void pouvoirBrixtonPrison(int nombreCartes){
+        London.getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
+    }
 }

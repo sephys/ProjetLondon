@@ -6,6 +6,7 @@
 package vue;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -46,6 +47,9 @@ public class JPPlateau extends JPanel implements MouseListener {
         this.setPreferredSize(new Dimension(5,568));
         this.setBackground(Color.blue);
         initBouton();
+        
+      
+        
     }
     
     /**
@@ -257,7 +261,7 @@ public class JPPlateau extends JPanel implements MouseListener {
     }
     
     private void updateImageSizeDezoom() {
-        imageWidth=842;
+        imageWidth=852;
         imageHeight=608;
     }
     
