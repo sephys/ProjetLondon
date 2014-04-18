@@ -124,7 +124,8 @@ public class JBCarte extends JButton implements  MouseListener {
                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
                         //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
                         // suppression de la carte de la main du joueur
-                        System.out.println(((JBCarte) e.getComponent()).carte.getNom());
+                        System.out.println(((JBCarte) e.getComponent()).carte);
+                        System.out.println(London.getListeJoueur().getJoueur().getMain().contains((JBCarte) e.getComponent().carte));
                         System.out.println(London.getListeJoueur().getJoueur().getMain().remove(((JBCarte) e.getComponent()).carte));
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         London.getListeJoueur().getJoueur().defausseMoins();
