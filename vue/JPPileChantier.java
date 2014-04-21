@@ -29,7 +29,7 @@ public class JPPileChantier extends JPanel{
     
     public JPPileChantier(int index){
          try {
-            URL uri = JPEtalage.class.getResource("../img/carteChantier.jpg");            
+            URL uri = JPEtalage.class.getResource("../img/carteChantier.png");            
             img = ImageIO.read(uri);
         } catch (IOException ex) {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);

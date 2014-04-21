@@ -155,7 +155,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         //System.out.println("index du chantier : " + chantier.getIndex());
 
                                         /*appel de jouerCarte*/
-                                        London.getListeJoueur().getJoueur().jouerCarte(null, jbCarte.getCarte(), chantier.getIndex());
+                                        London.getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
 
                                         /*Passer le chantier suivant a posable=true*/
                                         London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
