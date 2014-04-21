@@ -134,6 +134,8 @@ public class MenuDroite extends JPanel {
                  London.getListeJoueur().getJoueur().setFinitTour(true);
                  disableAll();
                  finTour.setEnabled(true);
+                 // change onglet
+                 London.getPanelOnglet().setSelectedIndex(2);
                 }
             }
 
@@ -152,6 +154,8 @@ public class MenuDroite extends JPanel {
                     finTour.enable(true);
                     labelInfo.setText("Vous pouvez activer des cartes");
                     JBCarte.setActiverCarte(true);
+                    // change onglet
+                    London.getPanelOnglet().setSelectedIndex(2);
                     
                 }
                 
@@ -259,6 +263,9 @@ public class MenuDroite extends JPanel {
                         labelInfo.setText("Vous avez trop de cartes en main");
                        // finTour.setEnabled(true);
                         
+                       // change onglet
+                        London.getPanelOnglet().setSelectedIndex(1);
+                        
                     } else { // ici le joueur finit son tour
                         actualiserMain();
                         
@@ -289,6 +296,8 @@ public class MenuDroite extends JPanel {
                     London.getPlateau().desactiveZonesInvesties();
                     invest = true;
                     emprunter.setEnabled(true);
+                    // change onglet
+                    London.getPanelOnglet().setSelectedIndex(0);
                 }
             }
         });
@@ -364,6 +373,9 @@ public class MenuDroite extends JPanel {
 
         // on peut pas se defausser a la base
         setDefausseCarte(false);
+        
+        // change onglet
+        London.getPanelOnglet().setSelectedIndex(0);
         
         // on peut pas d&d à la base
         DragDrop.setDragEnable(false);
