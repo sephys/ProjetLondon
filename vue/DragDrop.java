@@ -120,7 +120,10 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                         if (jbCarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
                             Constructible carte = (Constructible) jbCarte.getCarte();
                             // check 2 carte de la même couleur pour la defausse
-                            if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || London.getListeJoueur().getJoueur().getPouvoir().get("School")==1) {
+                            if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || London.getListeJoueur().getJoueur().getPouvoir().get("School")==1 || London.getListeJoueur().getJoueur().getPouvoir().get("Wren")==1) {
+                                if(London.getListeJoueur().getJoueur().getPouvoir().get("Wren")==1){
+                                    JOptionPane.showMessageDialog(null, "[Pouvoir Wren] Posez deux cartes sur votre chantier sans devoir défausser des cartes");
+                                }
                                 int rep = JOptionPane.showConfirmDialog(London.acc,
                                         "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
                                         "Construire",
