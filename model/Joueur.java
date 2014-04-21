@@ -26,14 +26,9 @@ public class Joueur {
     private boolean finitTour; // savoir si le joueur a le droit finit son tour
     private Color color;
     //private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
-<<<<<<< HEAD
-    private boolean pouvoirPret12;  // Cet attribut permet de savoir s'il a le pouvoir de "Bank of England"
+
  
-=======
-    //private boolean pouvoirPret12;  // Cet attribut permet de savoir s'il a le pouvoir de "Bank of England"
-    private boolean payeConstruction; //booléen qui repère si le joueur à payé d'une carte défaussé sa construction
-    
->>>>>>> f5c8d243ddbfb09bf8b8ed41fb963e3831aca084
+
     
     
     public Joueur(String nom,Color color) {
@@ -53,7 +48,7 @@ public class Joueur {
         pouvoir.put("Bank of England", 0);
         pouvoir.put("Brixton Prison", 0);
         //pouvoir.put(nom, argent);
-        this.pouvoirPret12 = false;
+
 
     }
 
