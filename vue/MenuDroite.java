@@ -242,6 +242,7 @@ public class MenuDroite extends JPanel {
                     London.getListeJoueur().getJoueur().setFinitTour(true);
                     London.getPlateau().desactiveZonesInvesties();
                     invest = true;
+                    emprunter.setEnabled(true);
                 }
             }
         });

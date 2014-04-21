@@ -65,32 +65,7 @@ public class JBZone extends JButton implements ActionListener{
                 Joueur courrant = London.getListeJoueur().getJoueur();
                 if(zone.getPrix() > courrant.getArgent()){
                     // Dans le cas ou son argent est insuffisant, il lui est proposé un emprunt (fenêtre de confirmation)
-                    rep = JOptionPane.showConfirmDialog(London.acc,
-                            "La zone dans laquelle vous voulez investir coûte " + this.zone.getPrix() +
-                                    " et vous ne possédez que " + courrant.getArgent() + ". Voulez vous faire un emprunt ?",
-                            "Emprunt",
-                            JOptionPane.YES_NO_OPTION);
-                    if (rep == JOptionPane.YES_OPTION){                     // Cas ou le joueur accepte de prendre un prêt
-                        courrant.addPret(1);
-                        this.zone.investir(courrant);
-                        this.setBackground(London.getListeJoueur().getJoueur().getColor());
-                        JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");    // Une fenêtre affiche que l'investissement s'est bien déroulé
-                        // Les actions d'investissement de la zone sont ajoutée au joueur courrant (nombre de cartes à piocher, coût décrémenté à son argent, points de victoire ajoutés)
-                        courrant.addArgent(-this.zone.getPrix());
-                        courrant.setPioche(this.zone.getNbCartes());
-                        courrant.addPointVictoire(this.zone.getPointsVictoire());
-                       // London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
-                        
-                        //London.getMenudroite().getFinTour().setEnabled(true);
-                        // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit
-                        London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+ this.zone.getNbCartes() + " cartes");
-                    }else{
-                        // S'il refuse de faire un emprunt, l'investissement est annulé, il peut donc rechoisir l'action à effectuer
-                        JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");    // Une fenêtre affichant l'échec de l'action Investir est affichée
-                        London.getMenudroite().enableAll();
-                        London.getMenudroite().getPiocher().setEnabled(false);
-                        London.getMenudroite().getFinTour().setEnabled(false);
-                    }
+                    JOptionPane.showMessageDialog(London.acc, "Vous n'avez pas assez d'argent ! Empruntez ou choisissez une autre zone.");
                 }else{
                     // S'il dispose d'assez d'argent, la zone est directement investie
                     this.zone.investir(courrant);
@@ -105,17 +80,15 @@ public class JBZone extends JButton implements ActionListener{
                     London.getMenudroite().getFinTour().setEnabled(true);
                     // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit
                     London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+ this.zone.getNbCartes() + " cartes");
+                    
+                    London.getPlateau().desactiveZones();   // Désactivation de tous les boutons de zone pour le prochain joueur
                 }
             }else{
                 // S'il refuse l'action d'investir, il peut donc rechoisir l'action à effectuer
                 JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");    // Une fenêtre affichant l'échec de l'action Investir est affichée
-                London.getMenudroite().enableAll();
-                London.getMenudroite().getPiocher().setEnabled(false);
-                London.getMenudroite().getFinTour().setEnabled(false);
             }
         }
         London.infos.maj_infos();   // Actualisation du panneau de gauche
-        London.getPlateau().desactiveZones();   // Désactivation de tous les boutons de zone pour le prochain joueur
     }
     
     /**
