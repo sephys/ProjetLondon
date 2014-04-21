@@ -183,12 +183,13 @@ public class JBCarte extends JButton implements MouseListener {
                             London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
                             System.out.println(London.getListeJoueur().getJoueur().getMain());
+                            System.out.println(London.getListeJoueur().getJoueur().getPouvoir());
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
+                    JOptionPane.showMessageDialog(null, "Cette carte est constructible");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
