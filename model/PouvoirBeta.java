@@ -3,11 +3,12 @@ package model;
 import vue.London;
 
 public class PouvoirBeta {
-
+    
+    
     private static int specialDouble = 0; // Wren //huguenots Jewish
     private static int speChoix; //
-
-	//pouvoir illimité.
+    
+    //pouvoir illimité.
     public static boolean pouvoirSchool(Joueur j, String colorJ, String colorD) {
         boolean res = false;
         int test = j.getPouvoir().get("School");
@@ -24,8 +25,8 @@ public class PouvoirBeta {
         }
         return res;
     }
-
-	//pouvoir limité.
+    
+    //pouvoir limité.
     public static boolean pouvoirWren(Joueur j) {
         boolean res = false;
         int test = j.getPouvoir().get("Wren");
@@ -36,7 +37,7 @@ public class PouvoirBeta {
                 specialDouble = 1;				//première utilisation						//on peut utiliser le pouvoir
             } else {
                 //sinon 2 carte on décremente le pouvoir wren
-                
+
                 j.getPouvoir().put("Wren", new Integer(j.getPouvoir().get("Wren").intValue()) - 1);
                 specialDouble = 0;
                 London.getMenudroite().setFinTour();
@@ -47,7 +48,8 @@ public class PouvoirBeta {
         // TODO Auto-generated method stub
         return res;
     }
-
+    
+    
     public static void pouvoirFireBrigade(Joueur j) {
         for (Zone n : London.zones.values()) {
             if (n != null && (!n.getProprietaire().equals(j))) {
@@ -55,18 +57,19 @@ public class PouvoirBeta {
             }
         }
     }
-
+    
+    
     public static void pouvoirFleetStreet(Joueur implique) {
         implique.addPointPauvrete(2);
     }
-
+    
     public static void pouvoirLloydsOfLondon(Joueur j) {
         for (int i = 0; i < London.getTabJoueur().length; i++) {
             London.getTabJoueur()[i].addArgent(-2);
         }
         j.addArgent(London.getTabJoueur().length * 2);
     }
-
+    
     public static void pouvoirOmnibus(Joueur j) {
         for (Zone n : London.zones.values()) {
             if (n != null && n.getProprietaire().equals(j)) {
@@ -74,12 +77,12 @@ public class PouvoirBeta {
             }
         }
     }
-
+    
     public void pouvoirPoliceForce(Joueur donneur, Joueur donne) {
         donneur.addPointPauvrete(-1);
         donne.addPointPauvrete(1);
     }
-
+    
     public void pouvoirSteamBoats(Joueur j) {
         for (Zone n : London.zones.values()) {
             if (n != null && n.getProprietaire().equals(j) && n.isAdjacentTamise()) {
@@ -87,7 +90,7 @@ public class PouvoirBeta {
             }
         }
     }
-
+    
     public void pouvoirTownHouse(Joueur j) {
         int argent = 0;
         for (Carte c : j.getMain()) {
@@ -97,14 +100,21 @@ public class PouvoirBeta {
         }
         j.addArgent(argent);
     }
-
-    public void pouvoirBridge(Joueur j) {
-        int argent = 0;
-        for (Carte c : j.getMain()) {
-            if (c.getCouleur().equals("marron")) {
-                argent++;
+    
+    public static void pouvoirNorthTrainStation(Joueur j){
+        for(Zone n : London.zones.values()){
+            if(n != null && n.getProprietaire().equals(j) && (!n.isDessousTamise())){
+                j.addArgent(2);
             }
         }
-        j.addArgent(argent);
     }
+    
+    public static void pouvoirSouthTrainStation(Joueur j){
+        for(Zone n : London.zones.values()){
+            if(n != null && n.getProprietaire().equals(j) && n.isDessousTamise()){
+                j.addArgent(2);
+            }
+        }
+    }
+    
 }

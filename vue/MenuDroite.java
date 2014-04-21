@@ -71,22 +71,22 @@ public class MenuDroite extends JPanel {
         // intancie tous les boutons
         jouer = new JButton("    Jouer des cartes    ");
         jouer.setAlignmentX(Component.CENTER_ALIGNMENT);
-        restaurer = new JButton("    Restaurer la ville    ");
+        restaurer = new JButton("   Restaurer la ville   ");
         restaurer.setAlignmentX(Component.CENTER_ALIGNMENT);
-        investir = new JButton("             Investir             ");
+        investir = new JButton("          Investir           ");
         investir.setAlignmentX(Component.CENTER_ALIGNMENT);
-        emprunter = new JButton("     Emprunter (10£)    ");
+        emprunter = new JButton("    Emprunter (10£)   ");
         emprunter.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.invest = false;
         piocher3 = new JButton(" Prendre trois cartes ");
         piocher3.setAlignmentX(Component.CENTER_ALIGNMENT);
         regarder3Cartes = new JButton("Regarder les 3 premières cartes");
         regarder3Cartes.setAlignmentX(Component.CENTER_ALIGNMENT);
-        finTour = new JButton("          Fin du Tour         ");
+        finTour = new JButton("        Fin du Tour       ");
         finTour.setAlignmentX(Component.CENTER_ALIGNMENT);
         labelInfo = new JLabel("Vous devez piocher");
         labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.piocher = new JButton("            Piocher             ");
+        this.piocher = new JButton("          Piocher           ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         jouer.setPreferredSize(new Dimension(149, 26));
@@ -116,7 +116,7 @@ public class MenuDroite extends JPanel {
         menuBouton.add(finTour);
         menuBouton.add(Box.createRigidArea(new Dimension(0,30)));
         menuBouton.add(labelInfo);
-        menuBouton.add(Box.createRigidArea(new Dimension(0,7)));
+        menuBouton.add(Box.createRigidArea(new Dimension(0,30)));
         
 
         // on doit piocher au début
