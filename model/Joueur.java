@@ -282,7 +282,7 @@ public class Joueur {
 		boolean res=false;
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
-			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
+			if(!PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
 				this.defausse=0;
 			}else{								//besoin de dépenser une carte
 				this.defausse=1;
@@ -296,11 +296,8 @@ public class Joueur {
 	public boolean payeConstruction(Carte depense){
 		boolean res= false;
 		res=PouvoirBeta.pouvoirSchool(this,lastCarte.getCouleur(),depense.getCouleur());
-                if(res){
-                    this.defausseMoins();
-                }
 		return res;
-	}
+	} 
 
 	/*   public String getPiocheDefausse(){
         return this.piocheDefausse;
