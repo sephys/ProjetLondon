@@ -160,7 +160,7 @@ public class MenuDroite extends JPanel {
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
-                    finTour.disable(false);
+                    finTour.setEnabled(true);
                     labelInfo.setText("Vous pouvez activer des cartes");
                     JBCarte.setActiverCarte(true);
                     // change onglet
@@ -384,7 +384,7 @@ public class MenuDroite extends JPanel {
         setDefausseCarte(false);
         
         // change onglet
-        London.getPanelOnglet().setSelectedIndex(0);
+        London.getPanelOnglet().setSelectedIndex(1);
         
         // on peut pas d&d à la base
         DragDrop.setDragEnable(false);
