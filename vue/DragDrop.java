@@ -159,10 +159,6 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         /*Mise a jour du panel d'information*/
                                         London.infos.maj_infos();
 
-                                       
-
-                                    
-
                                         London.getListeJoueur().getJoueur().setDefausse(1);
                                         London.getMenudroite().disableAll();
                                         London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
