@@ -48,6 +48,8 @@ public class Joueur {
 	public void initialisePouvoir(){
 		pouvoir.put("Bank of England", 0);
 		pouvoir.put("Brixton Prison", 0);
+		pouvoir.put("School",0);
+		pouvoir.put("Wren",0);
 		//pouvoir.put(nom, argent);
 	}
 
