@@ -298,6 +298,9 @@ public class Joueur {
 	public boolean payeConstruction(Carte depense){
 		boolean res= false;
 		res=PouvoirBeta.pouvoirSchool(this,lastCarte.getCouleur(),depense.getCouleur());
+		if (res){
+			this.lastCarte=null;
+		}
 		return res;
 	} 
 
