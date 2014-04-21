@@ -4,13 +4,13 @@ import vue.London;
 
 public class PouvoirBeta {
     
+    
     private static int specialDouble = 0; // Wren //huguenots Jewish
     private static int speChoix; //
     
     //pouvoir illimité.
     public static boolean pouvoirSchool(Joueur j, String colorJ, String colorD) {
         boolean res = false;
-        
         if (j.getPouvoir().get("School") == null) {
             j.getPouvoir().put("School", new Integer(0));
         }
@@ -49,6 +49,7 @@ public class PouvoirBeta {
         return res;
     }
     
+    
     public static void pouvoirFireBrigade(Joueur j) {
         for (Zone n : London.zones.values()) {
             if (n != null && (!n.getProprietaire().equals(j))) {
@@ -56,6 +57,7 @@ public class PouvoirBeta {
             }
         }
     }
+    
     
     public static void pouvoirFleetStreet(Joueur implique) {
         implique.addPointPauvrete(2);
@@ -114,6 +116,5 @@ public class PouvoirBeta {
             }
         }
     }
-    
     
 }
