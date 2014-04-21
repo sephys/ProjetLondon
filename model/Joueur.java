@@ -48,8 +48,12 @@ public class Joueur {
         pouvoir.put("Bank of England", 0);
         pouvoir.put("Brixton Prison", 0);
         //pouvoir.put(nom, argent);
+<<<<<<< HEAD
 
 
+=======
+        //this.payeConstruction = false;
+>>>>>>> c95401124a0211f789cb65873e5c0f5c2252f1cd
     }
 
     public Color getColor() {
@@ -288,7 +292,6 @@ public class Joueur {
     }*/
     
     public void activerCarte(Constructible actCarte){
-    	
     }
 
 
