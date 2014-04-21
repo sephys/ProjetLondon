@@ -121,6 +121,9 @@ public class JBCarte extends JButton implements MouseListener {
 
                         // suppression de la carte de la main du joueur
                         London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
+                        
+                        //on enlève la défausse
+                        London.getListeJoueur().getJoueur().defausseMoins();
 
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
