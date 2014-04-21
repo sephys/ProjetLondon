@@ -111,8 +111,16 @@ public class Joueur {
 
 	public void setPioche(int pioche) {
 		this.pioche = pioche;
-		London.getMenudroite().getPiocher().setEnabled(true);
+		London.getMenudroite().disableAll();
+                London.getMenudroite().getPiocher().setEnabled(true);
 		//JBCarte.setDoubleClick(true);
+                
+                London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");
+                    //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
+                    //JBCarte.setDoubleClick(true);
+                    London.getMenudroite().repaint();
+                    London.getMenudroite().revalidate();
+                    
 	}
 
 	public void piocheMoins() {
