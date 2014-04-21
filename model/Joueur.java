@@ -9,320 +9,301 @@ import vue.London;
 
 public class Joueur {
 
-	private String nom;
-	private ArrayList<Carte> main;
-	private HashMap<String, Integer> pouvoir;
-	private ArrayList<ArrayDeque<Constructible>> listeChantier;
-	private int pointVictoire;
-	private int pointPauvrete;
-	private int argent;
-	private int nbPret;
-	private static int nbJoueur;
-	private int placeJoueur; // la place du joueur dans le cycle
-	private int defausse; // savoir combien de cartes le joueur doit se défausser
-	private int pioche; // savoir combien de cartes le joueur peut piocher
-	private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
-	private boolean finitTour; // savoir si le joueur a finit son tour
-	private Color color;
-	private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
-	private boolean pouvoirPret12;  // Cet attribut permet de savoir s'il a le pouvoir de "Bank of England"
-	private boolean payeConstruction; //booléen qui repère si le joueur à payé d'une carte défaussé sa construction
-	public Joueur(String nom,Color color) {
-		this.nom = nom;
-		this.main = new ArrayList<Carte>();
-		this.pouvoir = new HashMap<String, Integer>();
-		this.pointVictoire = 0;
-		this.argent = 5;
-		this.pointPauvrete = 5;
-		this.nbPret = 0;
-		this.color=color;
-		this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
-		initialisePouvoir();
-	}
 
-	public void initialisePouvoir(){
-		pouvoir.put("Bank of England", 0);
-		pouvoir.put("Brixton Prison", 0);
-		//pouvoir.put(nom, argent);
-		this.pouvoirPret12 = false;
-		this.payeConstruction = false;
-	}
+    private String nom;
+    private ArrayList<Carte> main;
+    private HashMap<String, Integer> pouvoir;
+    private ArrayList<ArrayDeque<Constructible>> listeChantier;
+    private int pointVictoire;
+    private int pointPauvrete;
+    private int argent;
+    private int nbPret;
+    private static int nbJoueur;
+    private int placeJoueur; // la place du joueur dans le cycle
+    private int defausse; // savoir combien de cartes le joueur doit se défausser
+    private int pioche; // savoir combien de cartes le joueur peut piocher
+   // private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
+    private boolean finitTour; // savoir si le joueur a le droit finit son tour
+    private Color color;
+    //private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
 
-	public Color getColor() {
-		return color;
-	}
+ 
 
-	public static int getNbJoueur() {
-		return nbJoueur;
-	}
+    
+    
+    public Joueur(String nom,Color color) {
+        this.nom = nom;
+        this.main = new ArrayList<Carte>();
+        this.pouvoir = new HashMap<String, Integer>();
+        this.pointVictoire = 0;
+        this.argent = 5;
+        this.pointPauvrete = 5;
+        this.nbPret = 0;
+        this.color=color;
+        this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
+        initialisePouvoir();
+    }
+    
+    public void initialisePouvoir(){
+        pouvoir.put("Bank of England", 0);
+        pouvoir.put("Brixton Prison", 0);
+        //pouvoir.put(nom, argent);
 
-	public static void setNbJoueur(int nbJoueur) {
-		Joueur.nbJoueur = nbJoueur;
-	}
 
-	public String getNom() {
-		return nom;
-	}
+    }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public Color getColor() {
+        return color;
+    }
+    
+    public static int getNbJoueur() {
+        return nbJoueur;
+    }
 
-	public ArrayList<Carte> getMain() {
-		return main;
-	}
+    public static void setNbJoueur(int nbJoueur) {
+        Joueur.nbJoueur = nbJoueur;
+    }
 
-	public void setMain(ArrayList<Carte> main) {
-		this.main = main;
-	}
+    public String getNom() {
+        return nom;
+    }
 
-	public HashMap<String, Integer> getPouvoir() {
-		return pouvoir;
-	}
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-	public void setPouvoir(HashMap<String, Integer> pouvoir) {
-		this.pouvoir = pouvoir;
-	}
+    public ArrayList<Carte> getMain() {
+        return main;
+    }
 
-	public int getPointVictoire() {
-		return pointVictoire;
-	}
+    public void setMain(ArrayList<Carte> main) {
+        this.main = main;
+    }
 
-	public void setPointVictoire(int pointVictoire) {
-		this.pointVictoire = pointVictoire;
-	}
+    public HashMap<String, Integer> getPouvoir() {
+        return pouvoir;
+    }
 
-	public int getPointPauvrete() {
-		return pointPauvrete;
-	}
+    public void setPouvoir(HashMap<String, Integer> pouvoir) {
+        this.pouvoir = pouvoir;
+    }
 
-	public void setPointPauvrete(int pointPauvrete) {
-		this.pointPauvrete = pointPauvrete;
-	}
+    public int getPointVictoire() {
+        return pointVictoire;
+    }
 
-	public int getPioche() {
-		return pioche;
-	}
+    public void setPointVictoire(int pointVictoire) {
+        this.pointVictoire = pointVictoire;
+    }
 
-	public void setPioche(int pioche) {
-		this.pioche = pioche;
-		JBCarte.setDoubleClick(true);
-	}
+    public int getPointPauvrete() {
+        return pointPauvrete;
+    }
 
-	public void piocheMoins() {
-		this.pioche--;
-		if (this.pioche <= 0) {
-			JBCarte.setDoubleClick(false);
-			if (finTourPiocheCarte) // fin du tour du joueur
-			{
-				London.getMenudroite().disableAll();
-				London.getMenudroite().getFinTour().setEnabled(true);
-				London.getMenudroite().getLabelInfo().setText("Vous avez fini votre tour");
-				this.finitTour = true;
+    public void setPointPauvrete(int pointPauvrete) {
+        this.pointPauvrete = pointPauvrete;
+    }
 
-			} else // une pioche normal
-			{
-				London.getMenudroite().enableAll();
-				London.getMenudroite().getPiocher().setEnabled(false);
-				London.getMenudroite().getFinTour().setEnabled(false);
-				London.getMenudroite().getLabelInfo().setText("Vous devez choisir une action");
-			}
-		}
-	}
+    public int getPioche() {
+        return pioche;
+    }
 
-	public int getDefausse() {
-		return defausse;
-	}
+    public void setPioche(int pioche) {
+        this.pioche = pioche;
+        London.getMenudroite().getPiocher().setEnabled(true);
+        //JBCarte.setDoubleClick(true);
+    }
 
-	public void setDefausse(int defausse) {
-		this.defausse = defausse;
-	}
+    public void piocheMoins() {
+        this.pioche--;
+        if (this.pioche == 0) {
+            //JBCarte.setDoubleClick(false);
+            if (London.getListeJoueur().getJoueur().isFinitTour()) // fin du tour du joueur
+            {
+               London.getMenudroite().setFinTour();
 
-	public void defausseMoins() {
-		this.defausse--;
-		if (this.defausse <= 0) {
-			JBCarte.setDoubleClick(false);
-		}
-	}
+            } else // une pioche normal
+            {
+                London.getMenudroite().enableAll();
+                London.getMenudroite().getPiocher().setEnabled(false);
+                London.getMenudroite().getFinTour().setEnabled(false);
+                London.getMenudroite().getLabelInfo().setText("Vous devez choisir une action");
+            }
+        }
+    }
 
-	public int getArgent() {
-		return argent;
-	}
+    public int getDefausse() {
+        return defausse;
+    }
 
-	public void setArgent(int argent) {
-		this.argent = argent;
-	}
+    public void setDefausse(int defausse) {
+        this.defausse = defausse;
+    }
 
-	public int getNbPret() {
-		return nbPret;
-	}
+    public void defausseMoins() {
+        this.defausse--;
+        if (this.defausse == 0 && London.getListeJoueur().getJoueur().isFinitTour()) {
+            London.getMenudroite().setFinTour();
+        }
+    }
 
-	public void setNbPret(int nbPret) {
-		this.nbPret = nbPret;
-	}
+    public int getArgent() {
+        return argent;
+    }
 
-	public ArrayList<ArrayDeque<Constructible>> getListeChantier() {
-		return listeChantier;
-	}
+    public void setArgent(int argent) {
+        this.argent = argent;
+    }
 
-	public void setListeChantier(ArrayList<ArrayDeque<Constructible>> listeChantier) {
-		this.listeChantier = listeChantier;
-	}
+    public int getNbPret() {
+        return nbPret;
+    }
 
-	public int getPlaceJoueur() {
-		return placeJoueur;
-	}
+    public void setNbPret(int nbPret) {
+        this.nbPret = nbPret;
+    }
 
-	public void setPlaceJoueur(int placeJoueur) {
-		this.placeJoueur = placeJoueur;
-	}
+    public ArrayList<ArrayDeque<Constructible>> getListeChantier() {
+        return listeChantier;
+    }
 
-	public void piocheCarte(Carte e) { 	//ajout de la carte dans la main
-		if (main.isEmpty()) {
-			this.main.add(e);			//si lamain est vide on ajoute la carte directement
-		} else {
-			Carte temp;
-			int i = 0;
-			boolean arret = false;
-			while (i < this.main.size() && !arret) { //sinon on parcour la main
-				temp = this.main.get(i);
-				if (temp.getCouleur().compareTo(e.getCouleur()) == 0) { //d�s que l'on trouve une carte de la m�me couleur
-					if (i < this.main.size() - 1) { //si on est pas � la fin de la main, on ajoute la carte pioch� apr�s la carte courante
-						this.main.add(i + 1, e);
-					} else {
-						this.main.add(e); //sinon on ajoute la carte a la fin
-					}
-					arret = true; //on sort de la boucle
-				}
-				i++;
-			}
-			if (!arret) { //dans le cas ou on n'as trouv� aucune carte dans la main de la m�me couleur qe la carte pioch�
-				this.main.add(e); //on ajoute la carte a la fin
-			}
-		}
-	}
+    public void setListeChantier(ArrayList<ArrayDeque<Constructible>> listeChantier) {
+        this.listeChantier = listeChantier;
+    }
 
-	public boolean peutInvestir(Zone z) { //verification si le joueur possde assez d'argent
-		boolean res = true;
-		if (this.argent < z.getPrix()) {
-			res = false;
-		}
-		return res;
-	}
+    public int getPlaceJoueur() {
+        return placeJoueur;
+    }
 
-	public void nouveauChantier() { //ajoute un nouveau chantier
-		this.listeChantier.add(new ArrayDeque<Constructible>());
-	}
+    public void setPlaceJoueur(int placeJoueur) {
+        this.placeJoueur = placeJoueur;
+    }
 
-	public void emprunt(int i) {
-		// TODO Auto-generated method stub
-		this.setNbPret(i % 10);
-		this.setArgent(this.getArgent() + i);
-	}
+    public void piocheCarte(Carte e) { 	//ajout de la carte dans la main
+        if (main.isEmpty()) {
+            this.main.add(e);			//si lamain est vide on ajoute la carte directement
+        } else {
+            Carte temp;
+            int i = 0;
+            boolean arret = false;
+            while (i < this.main.size() && !arret) { //sinon on parcour la main
+                temp = this.main.get(i);
+                if (temp.getCouleur().compareTo(e.getCouleur()) == 0) { //d�s que l'on trouve une carte de la m�me couleur
+                    if (i < this.main.size() - 1) { //si on est pas � la fin de la main, on ajoute la carte pioch� apr�s la carte courante
+                        this.main.add(i + 1, e);
+                    } else {
+                        this.main.add(e); //sinon on ajoute la carte a la fin
+                    }
+                    arret = true; //on sort de la boucle
+                }
+                i++;
+            }
+            if (!arret) { //dans le cas ou on n'as trouv� aucune carte dans la main de la m�me couleur qe la carte pioch�
+                this.main.add(e); //on ajoute la carte a la fin
+            }
+        }
+    }
 
-	public Carte getCarteMain(int index) {
-		return this.main.get(index);
-	}
+    public boolean peutInvestir(Zone z) { //verification si le joueur possde assez d'argent
+        boolean res = true;
+        if (this.argent < z.getPrix()) {
+            res = false;
+        }
+        return res;
+    }
 
-	public String toString() {
-		String res;
-		StringBuffer tmpRes = new StringBuffer("Joueur :");
-		tmpRes.append("\n" + this.getNom());
-		tmpRes.append("\n" + this.getMain());
-		tmpRes.append("\n" + this.getNbPret());
-		tmpRes.append("\n" + this.getArgent());
-		res = new String(tmpRes);
-		return res;
-	}
+    public void nouveauChantier() { //ajoute un nouveau chantier
+        this.listeChantier.add(new ArrayDeque<Constructible>());
+    }
 
-	public boolean isFinTourPiocheCarte() {
-		return finTourPiocheCarte;
-	}
+    public void emprunt(int i) {
+        // TODO Auto-generated method stub
+        this.setNbPret(i % 10);
+        this.setArgent(this.getArgent() + i);
+    }
 
-	public boolean isFinitTour() {
-		return finitTour;
-	}
+    public Carte getCarteMain(int index) {
+        return this.main.get(index);
+    }
 
-	public void setFinTourPiocheCarte(boolean bool) {
-		this.finTourPiocheCarte = bool;
-	}
+    public String toString() {
+        String res;
+        StringBuffer tmpRes = new StringBuffer("Joueur :");
+        tmpRes.append("\n" + this.getNom());
+        tmpRes.append("\n" + this.getMain());
+        tmpRes.append("\n" + this.getNbPret());
+        tmpRes.append("\n" + this.getArgent());
+        res = new String(tmpRes);
+        return res;
+    }
 
-	public void setFinitTour(boolean finitTour) {
-		this.finitTour = finitTour;
-	}
+   /* public boolean isFinTourPiocheCarte() {
+        return finTourPiocheCarte;
+    }*/
 
-	public void addPointVictoire(int pointVictoire){
-		this.pointVictoire += pointVictoire;
-	}
+    public boolean isFinitTour() {
+        return finitTour;
+    }
 
-	public void addPointPauvrete(int pointPauvrete){
-		this.pointPauvrete += pointPauvrete;
-	}
+   /* public void setFinTourPiocheCarte(boolean bool) {
+        this.finTourPiocheCarte = bool;
+    }*/
 
-	public void addArgent(int argent){
-		this.argent += argent;
-	}
+    public void setFinitTour(boolean finitTour) {
+        this.finitTour = finitTour;
+    }
+    
+    public void addPointVictoire(int pointVictoire){
+        this.pointVictoire += pointVictoire;
+    }
+    
+    public void addPointPauvrete(int pointPauvrete){
+        this.pointPauvrete += pointPauvrete;
+    }
+    
+    public void addArgent(int argent){
+        this.argent += argent;
+    }
+    
+    public void addPret(int nbPret){
+        this.nbPret += nbPret;
+        if(pouvoir.get("Bank of England") == 1){
+            this.addArgent(12*nbPret);
+        }else{
+            this.addArgent(10*nbPret);
+        }
+    }
+    
+    public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
+    	carteJouer.jouerCarte(this,ind);
+    	this.getMain().remove(defausse);
+    }
+    
+ /*   public String getPiocheDefausse(){
+        return this.piocheDefausse;
+    }
+    
+    public void setPiocheDefausse(String piocheDefausse){
+        this.piocheDefausse = piocheDefausse;
+    }*/
+    
+    public void activerCarte(Constructible actCarte){
+    	
+    }
 
-	public void addPret(int nbPret){
-		this.nbPret += nbPret;
-		if(pouvoir.get("Bank of England") == 1){
-			this.addArgent(12*nbPret);
-		}else{
-			this.addArgent(10*nbPret);
-		}
-	}
 
-	public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
-		carteJouer.jouerCarte(this,ind);
-		this.getMain().remove(defausse);
-	}
-	public boolean jouerCarte2(Carte defausse,Carte carteJouer, int ind){
-		boolean res=false;
-		String col1=defausse.getCouleur();	//récupère la couleur de la carte a jetter dans l'etalage
-		String col2=carteJouer.getCouleur(); //on récupère la couleur de la carte que l'on joue
-		if(carteJouer.getClass()==Constructible.class){ //si constructible
-			if(!PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
-				carteJouer.jouerCarte(this,ind);
-			}else{								//besoin de dépenser une carte
-				res=PouvoirBeta.pouvoirSchool(this,col2,col1);	//gère la vérification couleur en tenant compte de école
-			}
-		}else{
-			carteJouer.jouerCarte(this,ind);
-		}
+    
+    //retourne le nombre de carte d'une couleur donnée (dans la main du joueur)
+    public int nb_carte_couleur(String couleur){
+        int res=0;
+        for(Carte carte:main){
+            if(carte.getCouleur()==couleur){
+                res++;
+            }
+        }
+        return res;
+    }
+    
 
-		carteJouer.jouerCarte(this,ind);
-		this.getMain().remove(defausse);
-		return res;
-	}
-
-	public String getPiocheDefausse(){
-		return this.piocheDefausse;
-	}
-
-	public void setPiocheDefausse(String piocheDefausse){
-		this.piocheDefausse = piocheDefausse;
-	}
-
-	public void activerCarte(Constructible actCarte){
-	}
-
-	public boolean isPayeConstruction() {
-		return payeConstruction;
-	}
-
-	public void setPayeConstruction(boolean payeConstruction) {
-		this.payeConstruction = payeConstruction;
-	}
-
-	//retourne le nombre de carte d'une couleur donnée (dans la main du joueur)
-	public int nb_carte_couleur(String couleur){
-		int res=0;
-		for(Carte carte:main){
-			if(carte.getCouleur()==couleur){
-				res++;
-			}
-		}
-		return res;
-	}
-
+	
 }

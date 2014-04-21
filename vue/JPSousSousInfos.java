@@ -15,14 +15,9 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.SimpleAttributeSet;
 
 /**
  *
@@ -65,6 +60,8 @@ public class JPSousSousInfos extends JPanel{
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
     }*/
+    
+    
     
     public void ajoutNombre(int nombre){
         this.nombre += nombre;

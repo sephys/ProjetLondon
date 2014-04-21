@@ -97,7 +97,7 @@ public abstract class Carte {
 
 	public static void initDeck(){
 		try {
-			/* R�cup�ration du classeur Excel (en lecture) */
+			/* Récupération du classeur Excel (en lecture) */
 			ArrayDeque <Carte> tmpDeck=new ArrayDeque<Carte>();
 			URL uri = Joueur.class.getResource("../fichier/Carte.xls");
 
@@ -118,7 +118,7 @@ public abstract class Carte {
 				int nb=Integer.parseInt(sheet.getCell(14,i).getContents());	//on r�cup�re le nombre de carte semblable (exemple il y a deux carte Water works dans le jeu)
 				String type=sheet.getCell(15,i).getContents();				//on r�cup�re le "type" de la carte (C : constructible N : Non Constructible)
 				Carte c = null;
-				for (int j=1;j<=nb;j++){									//On cr�er ensuite autant de carte de m�me nom
+				for (int j=1;j<=nb;j++){									//On créer ensuite autant de carte de m�me nom
 					switch(type){											//on switch dans le type correspondant pour construire la carte avec le bon constructeur
 					case "C" :												//construction de la carte avec tout les param�tres n�cessaire
 						c=new Constructible(
@@ -165,8 +165,8 @@ public abstract class Carte {
 			//cr�ation du deck final					
 			int indice;
 			while(!carteA.isEmpty()){ 								//tant que l'ArrayList n'est pas vite
-				indice=(int) (Math.random()*carteA.size());		//on d�termine un indice al�atoire entre [0;carteA.size()-1]
-				tmpDeck.add(carteA.get(indice));						//on r�cup�re la carte et on l'ajoute a la fin de ce deck
+				indice=(int) (Math.random()*carteA.size());			//on détermine un indice al�atoire entre [0;carteA.size()-1]
+				tmpDeck.add(carteA.get(indice));					//on récupére la carte et on l'ajoute a la fin de ce deck
 				carteA.remove(indice);								//on retire l'�l�ment de la liste
 			}
 			while(!carteB.isEmpty()){
@@ -195,3 +195,4 @@ public abstract class Carte {
 
 }
 
+	

@@ -50,7 +50,7 @@ public class JPEtalage extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, 850, 430, this);
+        g.drawImage(img, 0, 0, 855, 430, this);
     }
     
     public void initEtalage(int nbJoueur) {
@@ -62,9 +62,9 @@ public class JPEtalage extends JPanel {
             JPTest eta1 = new JPTest();
 
             // panel haut
-            eta1.setBounds(23 + 161 * i, 13, 122, 168);
-            //eta1.setOpaque(false); // transparance
-            eta1.setBackground(Color.red);
+            eta1.setBounds(23 + 174 * i, 20, 122, 168);
+            eta1.setOpaque(false); // transparance
+            //eta1.setBackground(Color.red);
             
             this.add(eta1);
             tab1[i] = eta1;
@@ -73,8 +73,9 @@ public class JPEtalage extends JPanel {
                     London.dndListener);
             
             JPTest eta2 = new JPTest(); // panel bas
-            eta2.setBounds(23 + 161 * i, 216, 122, 168);
+            eta2.setBounds(23 + 174 * i, 224, 122, 168);
             eta2.setOpaque(false); // transparance
+            // eta2.setBackground(Color.red);
             
             this.add(eta2);
             tab2[i] = eta2;
