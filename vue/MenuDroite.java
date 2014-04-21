@@ -7,7 +7,9 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.*;
@@ -29,11 +31,12 @@ import static vue.London.dndListener;
  */
 public class MenuDroite extends JPanel {
     
-    private JLabel labelJoueur; // indique quel joueur joue
+    //private JLabel labelJoueur; // indique quel joueur joue
     private JLabel labelInfo; // indique ce que doit faire l'utilisateur
     private JPanel menuBouton; // panel contenant tous les boutons
     private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, regarder3Cartes, finTour; // les différents boutons du menu
     public static boolean invest; // a virer !
+    private JPnomGaucheImageDroite jpsij;
 
     private Image img;
 
@@ -49,7 +52,8 @@ public class MenuDroite extends JPanel {
         // position le menuBouton
         Dimension d = new Dimension(310, 260);
         
-
+        jpsij = new JPnomGaucheImageDroite();
+        this.add(jpsij);
         menuBouton.setOpaque(false);
 
            try {
@@ -62,30 +66,49 @@ public class MenuDroite extends JPanel {
         
 
         // label du joueur qui joue
-        labelJoueur = new JLabel(London.getListeJoueur().getJoueur().getNom());
+        //labelJoueur = new JLabel(London.getListeJoueur().getJoueur().getNom());
         
         // intancie tous les boutons
         jouer = new JButton("Jouer des cartes");
+        jouer.setAlignmentX(Component.CENTER_ALIGNMENT);
         restaurer = new JButton("Restaurer la ville");
+        restaurer.setAlignmentX(Component.CENTER_ALIGNMENT);
         investir = new JButton("Investir");
+        investir.setAlignmentX(Component.CENTER_ALIGNMENT);
         emprunter = new JButton("Emprunter (10£)");
+        emprunter.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.invest = false;
         piocher3 = new JButton("Prendre trois cartes");
+        piocher3.setAlignmentX(Component.CENTER_ALIGNMENT);
         regarder3Cartes = new JButton("Regarder les 3 premières cartes");
+        regarder3Cartes.setAlignmentX(Component.CENTER_ALIGNMENT);
         finTour = new JButton("Fin du Tour");
+        finTour.setAlignmentX(Component.CENTER_ALIGNMENT);
         labelInfo = new JLabel("Vous devez piocher");
+        labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.piocher = new JButton("Piocher");
+        piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
         // on les ajoute au menu
-        menuBouton.add(labelJoueur);
+        menuBouton.add(jpsij);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
         menuBouton.add(jouer);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
         menuBouton.add(restaurer);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
         menuBouton.add(investir);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
         menuBouton.add(emprunter);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
         menuBouton.add(piocher3);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,4)));
         menuBouton.add(regarder3Cartes);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
         menuBouton.add(piocher);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
         menuBouton.add(finTour);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,30)));
         menuBouton.add(labelInfo);
+        menuBouton.add(Box.createRigidArea(new Dimension(0,7)));
 
         // on doit piocher au début
         disableAll();
@@ -113,8 +136,7 @@ public class MenuDroite extends JPanel {
                  finTour.setEnabled(true);
                 }
             }
-        });
-        
+        });        
         
         // ACTION BOUTON EMPRUNTER
         emprunter.addActionListener(new ActionListener() {
@@ -248,7 +270,7 @@ public class MenuDroite extends JPanel {
         });
         
         // ajout du menuBOUTON
-        this.add(menuBouton, BorderLayout.NORTH);
+        this.add(menuBouton, BorderLayout.CENTER);
         
         // Panel conteant le zoom de la carte
         JPZoom zoom = new JPZoom();
@@ -280,7 +302,8 @@ public class MenuDroite extends JPanel {
         // on passe au joueur suivant
         London.setListeJoueur(London.getListeJoueur().getSuivant());
         // change le label nomJoeuur
-        labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
+        //labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
+        jpsij.actualiseJoueur();
         // on remplace le panel par celui du nouveau joueur
         London.south = London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()];
         // on ajoute le panel
@@ -345,7 +368,6 @@ public class MenuDroite extends JPanel {
         investir.setEnabled(false);
         piocher3.setEnabled(false);
         piocher.setEnabled(false);
-        emprunter.setEnabled(false);
         finTour.setEnabled(false);
     }
     
