@@ -129,6 +129,7 @@ public class MenuDroite extends JPanel {
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
                  London.dndListener.setDragEnable(true);
+                 JBCarte.setClicDroitJouer(true);
                  labelInfo.setText("Vous pouvez jouer des cartes");
                  London.getListeJoueur().getJoueur().setFinitTour(true);
                  disableAll();

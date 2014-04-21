@@ -37,6 +37,9 @@ public class NonConstructible extends Carte {
 				currJ.getPouvoir().put(pouv,new Integer(1));
 			}
 		}
+		if(this.getNom()=="Paupers"){
+			System.out.println("Ne peut pas être joué");
+		}
 		currJ.getMain().remove(this);
 	}
 

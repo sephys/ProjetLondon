@@ -86,6 +86,7 @@ public class London {
         initTabJPChantier(); // initialisation des panel contenant les zones de construction des joueurs
 
         frame = new JFrame(); // frame contenant le jeu
+        
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -110,10 +111,15 @@ public class London {
                     
                     System.exit(0);
                 }
+                else
+                {
+                    System.out.println("non fin de jeu");
+                }
+                
             }
         });
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
 
         // panel contenant les différents onglets
         panelOnglet = new JTabbedPane();

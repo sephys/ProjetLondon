@@ -1,0 +1,1194 @@
+diff --git a/model/Carte.java b/model/Carte.java
+index 6583883..3746f19 100644
+--- a/model/Carte.java
++++ b/model/Carte.java
+@@ -97,7 +97,7 @@ public abstract class Carte {
+ 
+ 	public static void initDeck(){
+ 		try {
+-			/* R�cup�ration du classeur Excel (en lecture) */
++			/* Récupération du classeur Excel (en lecture) */
+ 			ArrayDeque <Carte> tmpDeck=new ArrayDeque<Carte>();
+ 			URL uri = Joueur.class.getResource("../fichier/Carte.xls");
+ 
+@@ -118,7 +118,7 @@ public abstract class Carte {
+ 				int nb=Integer.parseInt(sheet.getCell(14,i).getContents());	//on r�cup�re le nombre de carte semblable (exemple il y a deux carte Water works dans le jeu)
+ 				String type=sheet.getCell(15,i).getContents();				//on r�cup�re le "type" de la carte (C : constructible N : Non Constructible)
+ 				Carte c = null;
+-				for (int j=1;j<=nb;j++){									//On cr�er ensuite autant de carte de m�me nom
++				for (int j=1;j<=nb;j++){									//On créer ensuite autant de carte de m�me nom
+ 					switch(type){											//on switch dans le type correspondant pour construire la carte avec le bon constructeur
+ 					case "C" :												//construction de la carte avec tout les param�tres n�cessaire
+ 						c=new Constructible(
+@@ -165,8 +165,8 @@ public abstract class Carte {
+ 			//cr�ation du deck final					
+ 			int indice;
+ 			while(!carteA.isEmpty()){ 								//tant que l'ArrayList n'est pas vite
+-				indice=(int) (Math.random()*carteA.size());		//on d�termine un indice al�atoire entre [0;carteA.size()-1]
+-				tmpDeck.add(carteA.get(indice));						//on r�cup�re la carte et on l'ajoute a la fin de ce deck
++				indice=(int) (Math.random()*carteA.size());			//on détermine un indice al�atoire entre [0;carteA.size()-1]
++				tmpDeck.add(carteA.get(indice));					//on récupére la carte et on l'ajoute a la fin de ce deck
+ 				carteA.remove(indice);								//on retire l'�l�ment de la liste
+ 			}
+ 			while(!carteB.isEmpty()){
+@@ -195,3 +195,4 @@ public abstract class Carte {
+ 
+ }
+ 
++	
+\ No newline at end of file
+diff --git a/model/Joueur.java b/model/Joueur.java
+index 8517a74..7bff861 100644
+--- a/model/Joueur.java
++++ b/model/Joueur.java
+@@ -9,320 +9,301 @@ import vue.London;
+ 
+ public class Joueur {
+ 
+-	private String nom;
+-	private ArrayList<Carte> main;
+-	private HashMap<String, Integer> pouvoir;
+-	private ArrayList<ArrayDeque<Constructible>> listeChantier;
+-	private int pointVictoire;
+-	private int pointPauvrete;
+-	private int argent;
+-	private int nbPret;
+-	private static int nbJoueur;
+-	private int placeJoueur; // la place du joueur dans le cycle
+-	private int defausse; // savoir combien de cartes le joueur doit se défausser
+-	private int pioche; // savoir combien de cartes le joueur peut piocher
+-	private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
+-	private boolean finitTour; // savoir si le joueur a finit son tour
+-	private Color color;
+-	private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
+-	private boolean pouvoirPret12;  // Cet attribut permet de savoir s'il a le pouvoir de "Bank of England"
+-	private boolean payeConstruction; //booléen qui repère si le joueur à payé d'une carte défaussé sa construction
+-	public Joueur(String nom,Color color) {
+-		this.nom = nom;
+-		this.main = new ArrayList<Carte>();
+-		this.pouvoir = new HashMap<String, Integer>();
+-		this.pointVictoire = 0;
+-		this.argent = 5;
+-		this.pointPauvrete = 5;
+-		this.nbPret = 0;
+-		this.color=color;
+-		this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
+-		initialisePouvoir();
+-	}
+-
+-	public void initialisePouvoir(){
+-		pouvoir.put("Bank of England", 0);
+-		pouvoir.put("Brixton Prison", 0);
+-		//pouvoir.put(nom, argent);
+-		this.pouvoirPret12 = false;
+-		this.payeConstruction = false;
+-	}
+-
+-	public Color getColor() {
+-		return color;
+-	}
+-
+-	public static int getNbJoueur() {
+-		return nbJoueur;
+-	}
+-
+-	public static void setNbJoueur(int nbJoueur) {
+-		Joueur.nbJoueur = nbJoueur;
+-	}
+-
+-	public String getNom() {
+-		return nom;
+-	}
+-
+-	public void setNom(String nom) {
+-		this.nom = nom;
+-	}
+-
+-	public ArrayList<Carte> getMain() {
+-		return main;
+-	}
+-
+-	public void setMain(ArrayList<Carte> main) {
+-		this.main = main;
+-	}
+-
+-	public HashMap<String, Integer> getPouvoir() {
+-		return pouvoir;
+-	}
+-
+-	public void setPouvoir(HashMap<String, Integer> pouvoir) {
+-		this.pouvoir = pouvoir;
+-	}
+-
+-	public int getPointVictoire() {
+-		return pointVictoire;
+-	}
+-
+-	public void setPointVictoire(int pointVictoire) {
+-		this.pointVictoire = pointVictoire;
+-	}
+-
+-	public int getPointPauvrete() {
+-		return pointPauvrete;
+-	}
+-
+-	public void setPointPauvrete(int pointPauvrete) {
+-		this.pointPauvrete = pointPauvrete;
+-	}
+-
+-	public int getPioche() {
+-		return pioche;
+-	}
+-
+-	public void setPioche(int pioche) {
+-		this.pioche = pioche;
+-		JBCarte.setDoubleClick(true);
+-	}
+-
+-	public void piocheMoins() {
+-		this.pioche--;
+-		if (this.pioche <= 0) {
+-			JBCarte.setDoubleClick(false);
+-			if (finTourPiocheCarte) // fin du tour du joueur
+-			{
+-				London.getMenudroite().disableAll();
+-				London.getMenudroite().getFinTour().setEnabled(true);
+-				London.getMenudroite().getLabelInfo().setText("Vous avez fini votre tour");
+-				this.finitTour = true;
+-
+-			} else // une pioche normal
+-			{
+-				London.getMenudroite().enableAll();
+-				London.getMenudroite().getPiocher().setEnabled(false);
+-				London.getMenudroite().getFinTour().setEnabled(false);
+-				London.getMenudroite().getLabelInfo().setText("Vous devez choisir une action");
+-			}
+-		}
+-	}
+-
+-	public int getDefausse() {
+-		return defausse;
+-	}
+-
+-	public void setDefausse(int defausse) {
+-		this.defausse = defausse;
+-	}
+-
+-	public void defausseMoins() {
+-		this.defausse--;
+-		if (this.defausse <= 0) {
+-			JBCarte.setDoubleClick(false);
+-		}
+-	}
+-
+-	public int getArgent() {
+-		return argent;
+-	}
+-
+-	public void setArgent(int argent) {
+-		this.argent = argent;
+-	}
+-
+-	public int getNbPret() {
+-		return nbPret;
+-	}
+-
+-	public void setNbPret(int nbPret) {
+-		this.nbPret = nbPret;
+-	}
+-
+-	public ArrayList<ArrayDeque<Constructible>> getListeChantier() {
+-		return listeChantier;
+-	}
+-
+-	public void setListeChantier(ArrayList<ArrayDeque<Constructible>> listeChantier) {
+-		this.listeChantier = listeChantier;
+-	}
+-
+-	public int getPlaceJoueur() {
+-		return placeJoueur;
+-	}
+-
+-	public void setPlaceJoueur(int placeJoueur) {
+-		this.placeJoueur = placeJoueur;
+-	}
+-
+-	public void piocheCarte(Carte e) { 	//ajout de la carte dans la main
+-		if (main.isEmpty()) {
+-			this.main.add(e);			//si lamain est vide on ajoute la carte directement
+-		} else {
+-			Carte temp;
+-			int i = 0;
+-			boolean arret = false;
+-			while (i < this.main.size() && !arret) { //sinon on parcour la main
+-				temp = this.main.get(i);
+-				if (temp.getCouleur().compareTo(e.getCouleur()) == 0) { //d�s que l'on trouve une carte de la m�me couleur
+-					if (i < this.main.size() - 1) { //si on est pas � la fin de la main, on ajoute la carte pioch� apr�s la carte courante
+-						this.main.add(i + 1, e);
+-					} else {
+-						this.main.add(e); //sinon on ajoute la carte a la fin
+-					}
+-					arret = true; //on sort de la boucle
+-				}
+-				i++;
+-			}
+-			if (!arret) { //dans le cas ou on n'as trouv� aucune carte dans la main de la m�me couleur qe la carte pioch�
+-				this.main.add(e); //on ajoute la carte a la fin
+-			}
+-		}
+-	}
+-
+-	public boolean peutInvestir(Zone z) { //verification si le joueur possde assez d'argent
+-		boolean res = true;
+-		if (this.argent < z.getPrix()) {
+-			res = false;
+-		}
+-		return res;
+-	}
+-
+-	public void nouveauChantier() { //ajoute un nouveau chantier
+-		this.listeChantier.add(new ArrayDeque<Constructible>());
+-	}
+-
+-	public void emprunt(int i) {
+-		// TODO Auto-generated method stub
+-		this.setNbPret(i % 10);
+-		this.setArgent(this.getArgent() + i);
+-	}
+-
+-	public Carte getCarteMain(int index) {
+-		return this.main.get(index);
+-	}
+-
+-	public String toString() {
+-		String res;
+-		StringBuffer tmpRes = new StringBuffer("Joueur :");
+-		tmpRes.append("\n" + this.getNom());
+-		tmpRes.append("\n" + this.getMain());
+-		tmpRes.append("\n" + this.getNbPret());
+-		tmpRes.append("\n" + this.getArgent());
+-		res = new String(tmpRes);
+-		return res;
+-	}
+-
+-	public boolean isFinTourPiocheCarte() {
+-		return finTourPiocheCarte;
+-	}
+-
+-	public boolean isFinitTour() {
+-		return finitTour;
+-	}
+-
+-	public void setFinTourPiocheCarte(boolean bool) {
+-		this.finTourPiocheCarte = bool;
+-	}
+-
+-	public void setFinitTour(boolean finitTour) {
+-		this.finitTour = finitTour;
+-	}
+-
+-	public void addPointVictoire(int pointVictoire){
+-		this.pointVictoire += pointVictoire;
+-	}
+-
+-	public void addPointPauvrete(int pointPauvrete){
+-		this.pointPauvrete += pointPauvrete;
+-	}
+-
+-	public void addArgent(int argent){
+-		this.argent += argent;
+-	}
+-
+-	public void addPret(int nbPret){
+-		this.nbPret += nbPret;
+-		if(pouvoir.get("Bank of England") == 1){
+-			this.addArgent(12*nbPret);
+-		}else{
+-			this.addArgent(10*nbPret);
+-		}
+-	}
+-
+-	public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
+-		carteJouer.jouerCarte(this,ind);
+-		this.getMain().remove(defausse);
+-	}
+-	public boolean jouerCarte2(Carte defausse,Carte carteJouer, int ind){
+-		boolean res=false;
+-		String col1=defausse.getCouleur();	//récupère la couleur de la carte a jetter dans l'etalage
+-		String col2=carteJouer.getCouleur(); //on récupère la couleur de la carte que l'on joue
+-		if(carteJouer.getClass()==Constructible.class){ //si constructible
+-			if(!PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
+-				carteJouer.jouerCarte(this,ind);
+-			}else{								//besoin de dépenser une carte
+-				res=PouvoirBeta.pouvoirSchool(this,col2,col1);	//gère la vérification couleur en tenant compte de école
+-			}
+-		}else{
+-			carteJouer.jouerCarte(this,ind);
+-		}
+-
+-		carteJouer.jouerCarte(this,ind);
+-		this.getMain().remove(defausse);
+-		return res;
+-	}
+-
+-	public String getPiocheDefausse(){
+-		return this.piocheDefausse;
+-	}
+-
+-	public void setPiocheDefausse(String piocheDefausse){
+-		this.piocheDefausse = piocheDefausse;
+-	}
+-
+-	public void activerCarte(Constructible actCarte){
+-	}
+-
+-	public boolean isPayeConstruction() {
+-		return payeConstruction;
+-	}
+-
+-	public void setPayeConstruction(boolean payeConstruction) {
+-		this.payeConstruction = payeConstruction;
+-	}
+-
+-	//retourne le nombre de carte d'une couleur donnée (dans la main du joueur)
+-	public int nb_carte_couleur(String couleur){
+-		int res=0;
+-		for(Carte carte:main){
+-			if(carte.getCouleur()==couleur){
+-				res++;
+-			}
+-		}
+-		return res;
+-	}
+ 
++    private String nom;
++    private ArrayList<Carte> main;
++    private HashMap<String, Integer> pouvoir;
++    private ArrayList<ArrayDeque<Constructible>> listeChantier;
++    private int pointVictoire;
++    private int pointPauvrete;
++    private int argent;
++    private int nbPret;
++    private static int nbJoueur;
++    private int placeJoueur; // la place du joueur dans le cycle
++    private int defausse; // savoir combien de cartes le joueur doit se défausser
++    private int pioche; // savoir combien de cartes le joueur peut piocher
++   // private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
++    private boolean finitTour; // savoir si le joueur a le droit finit son tour
++    private Color color;
++    //private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
++
++ 
++
++    
++    
++    public Joueur(String nom,Color color) {
++        this.nom = nom;
++        this.main = new ArrayList<Carte>();
++        this.pouvoir = new HashMap<String, Integer>();
++        this.pointVictoire = 0;
++        this.argent = 5;
++        this.pointPauvrete = 5;
++        this.nbPret = 0;
++        this.color=color;
++        this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
++        initialisePouvoir();
++    }
++    
++    public void initialisePouvoir(){
++        pouvoir.put("Bank of England", 0);
++        pouvoir.put("Brixton Prison", 0);
++        //pouvoir.put(nom, argent);
++
++
++    }
++
++    public Color getColor() {
++        return color;
++    }
++    
++    public static int getNbJoueur() {
++        return nbJoueur;
++    }
++
++    public static void setNbJoueur(int nbJoueur) {
++        Joueur.nbJoueur = nbJoueur;
++    }
++
++    public String getNom() {
++        return nom;
++    }
++
++    public void setNom(String nom) {
++        this.nom = nom;
++    }
++
++    public ArrayList<Carte> getMain() {
++        return main;
++    }
++
++    public void setMain(ArrayList<Carte> main) {
++        this.main = main;
++    }
++
++    public HashMap<String, Integer> getPouvoir() {
++        return pouvoir;
++    }
++
++    public void setPouvoir(HashMap<String, Integer> pouvoir) {
++        this.pouvoir = pouvoir;
++    }
++
++    public int getPointVictoire() {
++        return pointVictoire;
++    }
++
++    public void setPointVictoire(int pointVictoire) {
++        this.pointVictoire = pointVictoire;
++    }
++
++    public int getPointPauvrete() {
++        return pointPauvrete;
++    }
++
++    public void setPointPauvrete(int pointPauvrete) {
++        this.pointPauvrete = pointPauvrete;
++    }
++
++    public int getPioche() {
++        return pioche;
++    }
++
++    public void setPioche(int pioche) {
++        this.pioche = pioche;
++        London.getMenudroite().getPiocher().setEnabled(true);
++        //JBCarte.setDoubleClick(true);
++    }
++
++    public void piocheMoins() {
++        this.pioche--;
++        if (this.pioche == 0) {
++            //JBCarte.setDoubleClick(false);
++            if (London.getListeJoueur().getJoueur().isFinitTour()) // fin du tour du joueur
++            {
++               London.getMenudroite().setFinTour();
++
++            } else // une pioche normal
++            {
++                London.getMenudroite().enableAll();
++                London.getMenudroite().getPiocher().setEnabled(false);
++                London.getMenudroite().getFinTour().setEnabled(false);
++                London.getMenudroite().getLabelInfo().setText("Vous devez choisir une action");
++            }
++        }
++    }
++
++    public int getDefausse() {
++        return defausse;
++    }
++
++    public void setDefausse(int defausse) {
++        this.defausse = defausse;
++    }
++
++    public void defausseMoins() {
++        this.defausse--;
++        if (this.defausse == 0 && London.getListeJoueur().getJoueur().isFinitTour()) {
++            London.getMenudroite().setFinTour();
++        }
++    }
++
++    public int getArgent() {
++        return argent;
++    }
++
++    public void setArgent(int argent) {
++        this.argent = argent;
++    }
++
++    public int getNbPret() {
++        return nbPret;
++    }
++
++    public void setNbPret(int nbPret) {
++        this.nbPret = nbPret;
++    }
++
++    public ArrayList<ArrayDeque<Constructible>> getListeChantier() {
++        return listeChantier;
++    }
++
++    public void setListeChantier(ArrayList<ArrayDeque<Constructible>> listeChantier) {
++        this.listeChantier = listeChantier;
++    }
++
++    public int getPlaceJoueur() {
++        return placeJoueur;
++    }
++
++    public void setPlaceJoueur(int placeJoueur) {
++        this.placeJoueur = placeJoueur;
++    }
++
++    public void piocheCarte(Carte e) { 	//ajout de la carte dans la main
++        if (main.isEmpty()) {
++            this.main.add(e);			//si lamain est vide on ajoute la carte directement
++        } else {
++            Carte temp;
++            int i = 0;
++            boolean arret = false;
++            while (i < this.main.size() && !arret) { //sinon on parcour la main
++                temp = this.main.get(i);
++                if (temp.getCouleur().compareTo(e.getCouleur()) == 0) { //d�s que l'on trouve une carte de la m�me couleur
++                    if (i < this.main.size() - 1) { //si on est pas � la fin de la main, on ajoute la carte pioch� apr�s la carte courante
++                        this.main.add(i + 1, e);
++                    } else {
++                        this.main.add(e); //sinon on ajoute la carte a la fin
++                    }
++                    arret = true; //on sort de la boucle
++                }
++                i++;
++            }
++            if (!arret) { //dans le cas ou on n'as trouv� aucune carte dans la main de la m�me couleur qe la carte pioch�
++                this.main.add(e); //on ajoute la carte a la fin
++            }
++        }
++    }
++
++    public boolean peutInvestir(Zone z) { //verification si le joueur possde assez d'argent
++        boolean res = true;
++        if (this.argent < z.getPrix()) {
++            res = false;
++        }
++        return res;
++    }
++
++    public void nouveauChantier() { //ajoute un nouveau chantier
++        this.listeChantier.add(new ArrayDeque<Constructible>());
++    }
++
++    public void emprunt(int i) {
++        // TODO Auto-generated method stub
++        this.setNbPret(i % 10);
++        this.setArgent(this.getArgent() + i);
++    }
++
++    public Carte getCarteMain(int index) {
++        return this.main.get(index);
++    }
++
++    public String toString() {
++        String res;
++        StringBuffer tmpRes = new StringBuffer("Joueur :");
++        tmpRes.append("\n" + this.getNom());
++        tmpRes.append("\n" + this.getMain());
++        tmpRes.append("\n" + this.getNbPret());
++        tmpRes.append("\n" + this.getArgent());
++        res = new String(tmpRes);
++        return res;
++    }
++
++   /* public boolean isFinTourPiocheCarte() {
++        return finTourPiocheCarte;
++    }*/
++
++    public boolean isFinitTour() {
++        return finitTour;
++    }
++
++   /* public void setFinTourPiocheCarte(boolean bool) {
++        this.finTourPiocheCarte = bool;
++    }*/
++
++    public void setFinitTour(boolean finitTour) {
++        this.finitTour = finitTour;
++    }
++    
++    public void addPointVictoire(int pointVictoire){
++        this.pointVictoire += pointVictoire;
++    }
++    
++    public void addPointPauvrete(int pointPauvrete){
++        this.pointPauvrete += pointPauvrete;
++    }
++    
++    public void addArgent(int argent){
++        this.argent += argent;
++    }
++    
++    public void addPret(int nbPret){
++        this.nbPret += nbPret;
++        if(pouvoir.get("Bank of England") == 1){
++            this.addArgent(12*nbPret);
++        }else{
++            this.addArgent(10*nbPret);
++        }
++    }
++    
++    public void jouerCarte(Carte defausse,Carte carteJouer, int ind){
++    	carteJouer.jouerCarte(this,ind);
++    	this.getMain().remove(defausse);
++    }
++    
++ /*   public String getPiocheDefausse(){
++        return this.piocheDefausse;
++    }
++    
++    public void setPiocheDefausse(String piocheDefausse){
++        this.piocheDefausse = piocheDefausse;
++    }*/
++    
++    public void activerCarte(Constructible actCarte){
++    	
++    }
++
++
++    
++    //retourne le nombre de carte d'une couleur donnée (dans la main du joueur)
++    public int nb_carte_couleur(String couleur){
++        int res=0;
++        for(Carte carte:main){
++            if(carte.getCouleur()==couleur){
++                res++;
++            }
++        }
++        return res;
++    }
++    
++
++	
+ }
+diff --git a/vue/DragDrop.java b/vue/DragDrop.java
+index c0552e3..5fab546 100644
+--- a/vue/DragDrop.java
++++ b/vue/DragDrop.java
+@@ -25,7 +25,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
+         DropTargetListener, Transferable {
+ 
+     static final DataFlavor[] supportedFlavors = {null};
+-    private boolean dragEnable = false;
++    private static boolean dragEnable = false;
+ 
+     static {
+         try {
+@@ -45,12 +45,12 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
+         }
+     }
+ 
+-    public boolean isDragEnable() {
++    public static boolean isDragEnable() {
+         return dragEnable;
+     }
+ 
+-    public void setDragEnable(boolean dragEnable) {
+-        this.dragEnable = dragEnable;
++    public static void setDragEnable(boolean dragEnable) {
++       DragDrop.dragEnable = dragEnable;
+     }
+ 
+     public DataFlavor[] getTransferDataFlavors() {
+@@ -112,25 +112,30 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
+             Container container = (Container) ((DropTarget) target).getComponent();
+ 
+             if (((DropTarget) target).getComponent() instanceof JPPileChantier) {
+-                if (this.dragEnable) {
+-                    if (!London.getListeJoueur().getJoueur().isPayeConstruction()) {
++                if (this.dragEnable) { // test si on a clicker sur l'action jouer des cartes
++                    if (London.getListeJoueur().getJoueur().getDefausse() == 0) { // check si je le joueur doit pas de défausser
+                         JBCarte JBcarte = (JBCarte) component;
+                         JPPileChantier chantier = (JPPileChantier) container;
+-                        if (JBcarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()){
++                        // check si carte constructible - check si chantier constructible - check si pose 2 carte sur le même chantier même tour
++                        if (JBcarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
+                             Constructible carte = (Constructible) JBcarte.getCarte();
++                            // check 2 carte de la même couleur pour la defausse
+                             if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1) {
+                                 int rep = JOptionPane.showConfirmDialog(London.acc,
+                                         "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
+                                         "Construire",
+                                         JOptionPane.YES_NO_OPTION);
++                                // le joueur veut poser sa carte
+                                 if (rep == JOptionPane.YES_OPTION) {
++                                    // si le joueur a assez d'argent
+                                     if (carte.getCoutPose() <= London.getListeJoueur().getJoueur().getArgent()) {
++                                        // creer un chantier pour le joueur si pas deja créer
+                                         if (London.getListeJoueur().getJoueur().getListeChantier().size() <= chantier.getIndex()) {
+                                             London.getListeJoueur().getJoueur().nouveauChantier();
+                                         } else {
+-                                            container.removeAll();
++                                           /* container.removeAll();
+                                             container.validate();
+-                                            container.repaint();
++                                            container.repaint();*/
+                                         }
+ 
+                                         chantier.setCarte2(true);
+@@ -154,17 +159,15 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
+                                         /*Mise a jour du panel d'information*/
+                                         London.infos.maj_infos();
+ 
+-                                        /*Le joueur peut finir son tour*/
+-                                        London.getListeJoueur().getJoueur().setFinitTour(true);
++                                       
+ 
+-                                        /*Le joueur peut finir son tour*/
+-                                        London.getListeJoueur().getJoueur().setPayeConstruction(true);
++                                    
+ 
+                                         London.getListeJoueur().getJoueur().setDefausse(1);
+                                         London.getMenudroite().disableAll();
+                                         London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
+-                                        London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+-                                        JBCarte.setDoubleClick(true);
++                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
++                                        //JBCarte.setDoubleClick(true);
+                                         London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                     } else {
+                                         JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
+diff --git a/vue/JBCarte.java b/vue/JBCarte.java
+index a1f5b9b..7e0dbb8 100644
+--- a/vue/JBCarte.java
++++ b/vue/JBCarte.java
+@@ -40,7 +40,7 @@ public class JBCarte extends JButton implements  MouseListener {
+     
+     private Image image;
+     private Carte carte;
+-    private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
++    private static boolean doubleClick = false; // permet de savoir si on autorise le double click pour la défausse -> étalage
+ 
+     private String position; // permet de savoir ou est la carte : main - etalage - construction
+     private boolean defausse; // est-ce que la carte pour etre defauser
+@@ -107,12 +107,13 @@ public class JBCarte extends JButton implements  MouseListener {
+            Joueur courrant = London.getListeJoueur().getJoueur();
+                switch (((JBCarte) e.getComponent()).getPosition()) {
+                    case "main": // on met la carte de la main sur le l'étalage
+-                      if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
++                       //if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
++                      if(London.getListeJoueur().getJoueur().getDefausse()!=0 && ((JBCarte) e.getComponent()).isDefausse())
+                       {
+ 
+                         /**/
+-                        London.getListeJoueur().getJoueur().setPayeConstruction(false);
+-                        London.getMenudroite().getFinTour().setEnabled(true);
++                        
++                        //London.getMenudroite().getFinTour().setEnabled(true);
+                         JBCarte carte = ((JBCarte) e.getComponent());
+                         carte.setPosition("etalage");
+                         // ajout de la carte dans l'etalage
+@@ -122,18 +123,17 @@ public class JBCarte extends JButton implements  MouseListener {
+                         // on enleve la carte de la main du joueur ( graphiquement )
+                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                         //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
++
+                         // suppression de la carte de la main du joueur
+-                        System.out.println(carte.carte.getNom());
+-                        for(int i=0;i<London.getListeJoueur().getJoueur().getMain().size();i++)
+-                        {
+-                            System.out.println("affichage carte : "+London.getListeJoueur().getJoueur().getMain().get(i).getNom());
+-                        }
+-                        System.out.println("Carte sup :"+(carte.carte.getNom()));
+-                        System.out.println(London.getListeJoueur().getJoueur().getMain().remove(carte.carte));
++                        
++                        London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
++
+                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
+                         London.getListeJoueur().getJoueur().defausseMoins();
+                         
+                         
++                        
++                        
+                     }
+                     else
+                     {
+@@ -143,7 +143,8 @@ public class JBCarte extends JButton implements  MouseListener {
+                     
+                     
+                 case "etalage": // on met la carte de l'etalage dans la main
+-                    if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
++                    //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
++                    if(London.getListeJoueur().getJoueur().getPioche()!=0)
+                     {
+                         // ajout de la carte dans la main du joueur graphiquement
+                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(((JBCarte) e.getComponent()).carte);
+@@ -163,7 +164,8 @@ public class JBCarte extends JButton implements  MouseListener {
+                     break;
+                     
+                 case "fenetre": // on met la carte de la fenetre dans la main
+-                    if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
++                    //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
++                    if(doubleClick)
+                     {
+                         
+                         int rep = JOptionPane.showConfirmDialog(London.acc,
+diff --git a/vue/JBZone.java b/vue/JBZone.java
+index 208402a..ce323b8 100644
+--- a/vue/JBZone.java
++++ b/vue/JBZone.java
+@@ -79,9 +79,9 @@ public class JBZone extends JButton implements ActionListener{
+                         courrant.addArgent(-this.zone.getPrix());
+                         courrant.setPioche(this.zone.getNbCartes());
+                         courrant.addPointVictoire(this.zone.getPointsVictoire());
+-                        London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
+-                        London.getMenudroite().getPiocher().setEnabled(true);
+-                        London.getMenudroite().getFinTour().setEnabled(true);
++                       // London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
++                        
++                        //London.getMenudroite().getFinTour().setEnabled(true);
+                         // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit
+                         London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+ this.zone.getNbCartes() + " cartes");
+                     }else{
+@@ -100,7 +100,7 @@ public class JBZone extends JButton implements ActionListener{
+                     courrant.addArgent(-this.zone.getPrix());
+                     courrant.setPioche(this.zone.getNbCartes());
+                     courrant.addPointVictoire(this.zone.getPointsVictoire());
+-                    London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
++                   // London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
+                     London.getMenudroite().getPiocher().setEnabled(true);
+                     London.getMenudroite().getFinTour().setEnabled(true);
+                     // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit
+diff --git a/vue/JPEtalage.java b/vue/JPEtalage.java
+index 8a151ff..698e15f 100644
+--- a/vue/JPEtalage.java
++++ b/vue/JPEtalage.java
+@@ -50,7 +50,7 @@ public class JPEtalage extends JPanel {
+     @Override
+     public void paintComponent(Graphics g) {
+         super.paintComponent(g);
+-        g.drawImage(img, 0, 0, 850, 430, this);
++        g.drawImage(img, 0, 0, 855, 430, this);
+     }
+     
+     public void initEtalage(int nbJoueur) {
+@@ -62,9 +62,9 @@ public class JPEtalage extends JPanel {
+             JPTest eta1 = new JPTest();
+ 
+             // panel haut
+-            eta1.setBounds(23 + 161 * i, 13, 122, 168);
+-            //eta1.setOpaque(false); // transparance
+-            eta1.setBackground(Color.red);
++            eta1.setBounds(23 + 174 * i, 20, 122, 168);
++            eta1.setOpaque(false); // transparance
++            //eta1.setBackground(Color.red);
+             
+             this.add(eta1);
+             tab1[i] = eta1;
+@@ -73,8 +73,9 @@ public class JPEtalage extends JPanel {
+                     London.dndListener);
+             
+             JPTest eta2 = new JPTest(); // panel bas
+-            eta2.setBounds(23 + 161 * i, 216, 122, 168);
++            eta2.setBounds(23 + 174 * i, 224, 122, 168);
+             eta2.setOpaque(false); // transparance
++            // eta2.setBackground(Color.red);
+             
+             this.add(eta2);
+             tab2[i] = eta2;
+diff --git a/vue/JPInfos.java b/vue/JPInfos.java
+index fbf0277..0537022 100644
+--- a/vue/JPInfos.java
++++ b/vue/JPInfos.java
+@@ -13,25 +13,10 @@ import java.awt.GridLayout;
+ import java.awt.Image;
+ import java.io.IOException;
+ import java.net.URL;
+-import java.util.ArrayList;
+ import java.util.logging.Level;
+ import java.util.logging.Logger;
+ import javax.imageio.ImageIO;
+-import javax.swing.BorderFactory;
+-import javax.swing.BoxLayout;
+-import javax.swing.ImageIcon;
+-import javax.swing.JComboBox;
+-import javax.swing.JList;
+ import javax.swing.JPanel;
+-import javax.swing.JSeparator;
+-import javax.swing.JTextArea;
+-import javax.swing.JTextPane;
+-import javax.swing.SwingConstants;
+-import javax.swing.text.BadLocationException;
+-import javax.swing.text.JTextComponent;
+-import javax.swing.text.Style;
+-import javax.swing.text.StyleConstants;
+-import javax.swing.text.StyledDocument;
+ import model.Joueur;
+ 
+ /**
+@@ -64,7 +49,7 @@ public class JPInfos extends JPanel{
+     public void maj_infos(){
+         Joueur j = London.getListeJoueur().getJoueur();
+         for(int i = 0; i < aljpsi.length; i++){
+-            if(aljpsi[i].nomJoueur.getText().equals(j.getNom())){
++            if(aljpsi[i].joueur.getNomJoueur().equals(j.getNom())){
+                 aljpsi[i].setEmprunt(j.getNbPret());
+                 aljpsi[i].setPieces(j.getArgent());
+                 aljpsi[i].setPauvrete(j.getPointPauvrete());
+diff --git a/vue/JPSousInfos.java b/vue/JPSousInfos.java
+index 2aaefab..ce85258 100644
+--- a/vue/JPSousInfos.java
++++ b/vue/JPSousInfos.java
+@@ -7,23 +7,17 @@
+ package vue;
+ 
+ import java.awt.Color;
+-import java.awt.Dimension;
+ import java.awt.GridLayout;
+ import java.awt.Image;
+ import java.io.IOException;
+ import java.net.URL;
+-import java.util.ArrayList;
+ import java.util.logging.Level;
+ import java.util.logging.Logger;
+ import javax.imageio.ImageIO;
+-import javax.swing.BorderFactory;
+-import javax.swing.BoxLayout;
+ import javax.swing.ImageIcon;
+ import javax.swing.JLabel;
+ import javax.swing.JPanel;
+-import javax.swing.JSeparator;
+ import javax.swing.JTextPane;
+-import javax.swing.SwingConstants;
+ import javax.swing.text.BadLocationException;
+ import javax.swing.text.Style;
+ import javax.swing.text.StyleConstants;
+@@ -38,30 +32,44 @@ public class JPSousInfos extends JPanel{
+     
+     private Image img;
+     GridLayout gl;
+-    JLabel nomJoueur;
+     JPSousSousInfos piece, pauvrete, emprunt, victoire, metro;
++    JPSousInfosJoueur joueur;
+     
+     public JPSousInfos(Joueur joueur){
+         this.setLayout(new GridLayout(2, 3));
+-        
+-        this.nomJoueur = new JLabel(joueur.getNom());
+-        this.nomJoueur.setHorizontalAlignment(JLabel.CENTER);
+-        this.nomJoueur.setVerticalAlignment(JLabel.CENTER);
+         this.setOpaque(false); // transparance
+-        this.nomJoueur.setFont(this.nomJoueur.getFont ().deriveFont (16.0f));
+-        piece = new JPSousSousInfos("../img/jetons/Piece1.png", 5);
+-        pauvrete = new JPSousSousInfos("../img/jetons/PointPauvrete.png", 5);
+-        emprunt = new JPSousSousInfos("../img/jetons/10LivreEmprunt.png", 0);
+-        victoire = new JPSousSousInfos("../img/jetons/PointVictoire.png", 0);
+-        metro = new JPSousSousInfos("../img/jetons/JetonMetro.png", 0);
+-        this.add(this.nomJoueur);
++        changeImageJoueur(joueur);
++        this.piece = new JPSousSousInfos("../img/jetons/Piece1.png", 5);
++        this.pauvrete = new JPSousSousInfos("../img/jetons/PointPauvrete.png", 5);
++        this.emprunt = new JPSousSousInfos("../img/jetons/10LivreEmprunt.png", 0);
++        this.victoire = new JPSousSousInfos("../img/jetons/PointVictoire.png", 0);
++        this.metro = new JPSousSousInfos("../img/jetons/JetonMetro.png", 0);
+         this.add(this.piece);
+         this.add(this.pauvrete);
+         this.add(this.emprunt);
+         this.add(this.victoire);
+         this.add(this.metro);
+-        this.setBackground(joueur.getColor());
+-        
++        this.setBackground(joueur.getColor());        
++    }    
++
++    private void changeImageJoueur(Joueur j) {
++        StringBuilder sb = new StringBuilder("../img/");
++        Color c = j.getColor();
++        if(c == Color.yellow){
++            sb.append("jaune.png");
++        }else{
++            if(c == Color.blue){
++                sb.append("bleu.png");
++            }else{
++                if(c == Color.red){
++                    sb.append("rouge.png");
++                }else{
++                    sb.append("vert.png");
++                }
++            }
++        }
++        this.joueur = new JPSousInfosJoueur(new String(sb), j.getNom());
++        this.add(this.joueur);
+     }
+     
+     public void addPieces(int pieces){
+diff --git a/vue/JPSousSousInfos.java b/vue/JPSousSousInfos.java
+index 420ce0c..af567aa 100644
+--- a/vue/JPSousSousInfos.java
++++ b/vue/JPSousSousInfos.java
+@@ -15,14 +15,9 @@ import java.net.URL;
+ import java.util.logging.Level;
+ import java.util.logging.Logger;
+ import javax.imageio.ImageIO;
+-import javax.swing.BorderFactory;
+ import javax.swing.ImageIcon;
+ import javax.swing.JLabel;
+ import javax.swing.JPanel;
+-import javax.swing.JTextPane;
+-import javax.swing.text.StyleConstants;
+-import javax.swing.text.StyledDocument;
+-import javax.swing.text.SimpleAttributeSet;
+ 
+ /**
+  *
+@@ -66,6 +61,8 @@ public class JPSousSousInfos extends JPanel{
+         doc.setParagraphAttributes(0, doc.getLength(), center, false);
+     }*/
+     
++    
++    
+     public void ajoutNombre(int nombre){
+         this.nombre += nombre;
+         bas.setText(String.valueOf(nombre));
+diff --git a/vue/MenuDroite.java b/vue/MenuDroite.java
+index 7fc4e0c..f561ffa 100644
+--- a/vue/MenuDroite.java
++++ b/vue/MenuDroite.java
+@@ -106,6 +106,8 @@ public class MenuDroite extends JPanel {
+                         JOptionPane.YES_NO_OPTION);
+                 if (rep == JOptionPane.YES_OPTION) {
+                  London.dndListener.setDragEnable(true);
++                 labelInfo.setText("Vous pouvez jouer des cartes");
++                 London.getListeJoueur().getJoueur().setFinitTour(true);
+                  disableAll();
+                  finTour.setEnabled(true);
+                 }
+@@ -161,11 +163,11 @@ public class MenuDroite extends JPanel {
+                 if (rep == JOptionPane.YES_OPTION) {
+                     disableAll();
+                     piocher.setEnabled(true);
+-                    finTour.setEnabled(true);
++                    London.getListeJoueur().getJoueur().setFinitTour(true); // le joueur a finit son tour apres avoir piocher 3 cartes
+                     London.getListeJoueur().getJoueur().setPioche(3);
+-                    London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
++                    //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
+                     labelInfo.setText("Vous devez piocher 3 cartes");
+-                    London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
++                    //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
+                     JBCarte.setDoubleClick(true);
+                     London.getMenudroite().repaint();
+                     London.getMenudroite().revalidate();
+@@ -182,7 +184,7 @@ public class MenuDroite extends JPanel {
+                 JBCarte c1 = new JBCarte(London.getDeck().poll());
+                 JBCarte c2 = new JBCarte(London.getDeck().poll());
+                 JBCarte c3 = new JBCarte(London.getDeck().poll());
+-                London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
++                //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
+                 f = new Frame3Cartes(c1, c2, c3);
+             }
+             
+@@ -196,28 +198,24 @@ public class MenuDroite extends JPanel {
+                 if (London.getListeJoueur().getJoueur().isFinitTour()) {
+                     // check trop grand nombre de cartes dans la main
+                     if (London.getListeJoueur().getJoueur().getMain().size() > 9) {
+-                        System.out.println(London.getListeJoueur().getJoueur().getMain().size());
+-                        JBCarte.setDoubleClick(true);
+-                        London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+-                        setDefausseCarte(true);
++                        //System.out.println(London.getListeJoueur().getJoueur().getMain().size());
++                        //JBCarte.setDoubleClick(true);
++                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
++                        setDefausseCarte(true); // peut se defausser de n'importe quelle carte
+                         JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
+-                        if(London.getListeJoueur().getJoueur().getDefausse()==0)
+-                        {
++                       // if(London.getListeJoueur().getJoueur().getDefausse()==0)
++                        //{
+                             London.getListeJoueur().getJoueur().setDefausse(London.getListeJoueur().getJoueur().getMain().size() - 9);
+-                        }
++                        //}
+                         
+                         disableAll();
+                         labelInfo.setText("Vous avez trop de cartes en main");
+-                        finTour.setEnabled(true);
++                       // finTour.setEnabled(true);
+                         
+                     } else { // ici le joueur finit son tour
+                         actualiserMain();
+-                        disableAll();
+-                        piocher.setEnabled(true);
+-                        labelInfo.setText("Vous devez piocher");
++                        
+                         invest = false;
+-                        London.getMenudroite().repaint();
+-                        London.getMenudroite().revalidate();
+                     }
+                 } else {
+                     JOptionPane.showMessageDialog(null, "Vous n'avez pas finit votre tour");
+@@ -238,7 +236,9 @@ public class MenuDroite extends JPanel {
+                         JOptionPane.YES_NO_OPTION);
+                 if (rep == JOptionPane.YES_OPTION) {
+                     disableAll();
++                    labelInfo.setText("Vous devez choisir une zone à investir");
+                     London.getPlateau().activerZonesInvestissables();
++                    London.getListeJoueur().getJoueur().setFinitTour(true);
+                     London.getPlateau().desactiveZonesInvesties();
+                     invest = true;
+                 }
+@@ -260,6 +260,11 @@ public class MenuDroite extends JPanel {
+     public void actualiserMain() {
+         
+         
++          //passer chantier.carte2 à false
++        for(int i=0;i<London.getJpChantier().getChantiers().length;i++){
++            JPPileChantier chantier = London.getJpChantier().getChantiers()[i];
++            chantier.setCarte2(false);
++        }
+         
+         
+         // sauvegarde de la main dans le tableau
+@@ -279,12 +284,7 @@ public class MenuDroite extends JPanel {
+         // on ajoute le panel
+         London.central.add(London.south, BorderLayout.SOUTH);
+         
+-        //passer chantier.carte2 à false
+-        for(int i=0;i<London.getJpChantier().getChantiers().length;i++){
+-            JPPileChantier chantier = London.getJpChantier().getChantiers()[i];
+-            chantier.setCarte2(false);
+-        }
+-        
++      
+         
+         // on enleve la zone
+         London.getPanelOnglet().remove(London.getPanelOnglet().getComponent(2));
+@@ -303,15 +303,27 @@ public class MenuDroite extends JPanel {
+         
+         // on réinitialise les valeurs
+         London.getListeJoueur().getJoueur().setFinitTour(false);
+-        London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
++        
++        //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
+         
+         // on informe le joueur
+         JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");
+-        London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
++        //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
+         
+ 
+         // on peut pas se defausser a la base
+         setDefausseCarte(false);
++        
++        // on peut pas d&d à la base
++        DragDrop.setDragEnable(false);
++        
++        // mise à jour du menu
++        disableAll();
++        piocher.setEnabled(true);
++        labelInfo.setText("Vous devez piocher");
++        London.getMenudroite().repaint();
++        London.getMenudroite().revalidate();
++        
+ 
+     }
+     
+@@ -366,6 +378,13 @@ public class MenuDroite extends JPanel {
+        }
+     }
+     
++    public void setFinTour()
++    {
++        disableAll();
++        finTour.setEnabled(true);
++        labelInfo.setText("Vous avez finit votre tour");
++    }
++    
+ 
+     public JButton getJouer() {
+         return jouer;
