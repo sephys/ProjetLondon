@@ -106,6 +106,8 @@ public class MenuDroite extends JPanel {
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
                  London.dndListener.setDragEnable(true);
+                 labelInfo.setText("Vous pouvez jouer des cartes");
+                 London.getListeJoueur().getJoueur().setFinitTour(true);
                  disableAll();
                  finTour.setEnabled(true);
                 }
@@ -239,6 +241,7 @@ public class MenuDroite extends JPanel {
                     London.getListeJoueur().getJoueur().setFinitTour(true);
                     London.getPlateau().desactiveZonesInvesties();
                     invest = true;
+                    emprunter.setEnabled(true);
                 }
             }
         });
@@ -258,6 +261,11 @@ public class MenuDroite extends JPanel {
     public void actualiserMain() {
         
         
+          //passer chantier.carte2 à false
+        for(int i=0;i<London.getJpChantier().getChantiers().length;i++){
+            JPPileChantier chantier = London.getJpChantier().getChantiers()[i];
+            chantier.setCarte2(false);
+        }
         
         
         // sauvegarde de la main dans le tableau
@@ -277,12 +285,7 @@ public class MenuDroite extends JPanel {
         // on ajoute le panel
         London.central.add(London.south, BorderLayout.SOUTH);
         
-        //passer chantier.carte2 à false
-        for(int i=0;i<London.getJpChantier().getChantiers().length;i++){
-            JPPileChantier chantier = London.getJpChantier().getChantiers()[i];
-            chantier.setCarte2(false);
-        }
-        
+      
         
         // on enleve la zone
         London.getPanelOnglet().remove(London.getPanelOnglet().getComponent(2));
@@ -311,6 +314,9 @@ public class MenuDroite extends JPanel {
 
         // on peut pas se defausser a la base
         setDefausseCarte(false);
+        
+        // on peut pas d&d à la base
+        DragDrop.setDragEnable(false);
         
         // mise à jour du menu
         disableAll();
