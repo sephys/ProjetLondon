@@ -160,7 +160,7 @@ public class MenuDroite extends JPanel {
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
-                    finTour.enable(true);
+                    finTour.disable(false);
                     labelInfo.setText("Vous pouvez activer des cartes");
                     JBCarte.setActiverCarte(true);
                     // change onglet
