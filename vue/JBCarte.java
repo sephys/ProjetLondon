@@ -121,7 +121,7 @@ public class JBCarte extends JButton implements MouseListener {
 
                         // suppression de la carte de la main du joueur
                         London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
-                        
+
                         //on enlève la défausse
                         London.getListeJoueur().getJoueur().defausseMoins();
 
@@ -151,7 +151,7 @@ public class JBCarte extends JButton implements MouseListener {
 
                             // suppression de la carte de la main du joueur
                             London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
-                            
+
                             // refresh
                             London.getSouth().repaint();
                             London.getSouth().revalidate();
@@ -174,7 +174,7 @@ public class JBCarte extends JButton implements MouseListener {
                         // on rafraichit l'étalage
                         London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
                         London.getListeJoueur().getJoueur().piocheMoins();
-                        
+
                         ((JBCarte) e.getComponent()).setPosition("main");
 
                     } else {
@@ -240,8 +240,15 @@ public class JBCarte extends JButton implements MouseListener {
                             System.out.println(carte.getNom());
                             London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                            
+                            /*Wren*/
                             if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
                                 London.getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
+                            }
+                            
+                            /*Hugueunot*/
+                            if (London.getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
+                                PouvoirBeta.pouvoirHuguenots(London.getListeJoueur().getJoueur());
                             }
                         }
                     } else {
@@ -268,7 +275,6 @@ public class JBCarte extends JButton implements MouseListener {
      * @param height
      * @return
      */
-
     public Image scaleImage(Image source, int width, int height) {
 
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
