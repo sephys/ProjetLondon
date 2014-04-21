@@ -151,6 +151,10 @@ public class JBCarte extends JButton implements MouseListener {
 
                             // suppression de la carte de la main du joueur
                             London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
+                            
+                            // refresh
+                            London.getSouth().repaint();
+                            London.getSouth().revalidate();
 
                         }
                     } else {
@@ -170,6 +174,8 @@ public class JBCarte extends JButton implements MouseListener {
                         // on rafraichit l'étalage
                         London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
                         London.getListeJoueur().getJoueur().piocheMoins();
+                        
+                        ((JBCarte) e.getComponent()).setPosition("main");
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
