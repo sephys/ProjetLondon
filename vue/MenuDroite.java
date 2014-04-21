@@ -115,6 +115,26 @@ public class MenuDroite extends JPanel {
             }
         });
         
+       // ACTION BOUTON RESTAURER LA VILLE
+       restaurer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rep = JOptionPane.showConfirmDialog(London.acc,
+                        "Êtes-vous sûr de vouloir restaurer la ville ?",
+                        "Restaurer la ville",
+                        JOptionPane.YES_NO_OPTION);
+                if (rep == JOptionPane.YES_OPTION) {
+                    disableAll();
+                    labelInfo.setText("Vous pouvez activer des cartes");
+                    JBCarte.setActiverCarte(true);
+                    
+                }
+                
+               
+            }
+        });
+        
+        
         
         // ACTION BOUTON EMPRUNTER
         emprunter.addActionListener(new ActionListener() {
@@ -305,6 +325,8 @@ public class MenuDroite extends JPanel {
         
         // on réinitialise les valeurs
         London.getListeJoueur().getJoueur().setFinitTour(false);
+        JBCarte.setClicDroitJouer(false);
+        JBCarte.setActiverCarte(false);
         
         //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
         
