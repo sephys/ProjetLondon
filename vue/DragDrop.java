@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Constructible;
+import model.PouvoirBeta;
 
 public class DragDrop implements DragGestureListener, DragSourceListener,
         DropTargetListener, Transferable {
@@ -121,16 +122,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                             Constructible carte = (Constructible) jbCarte.getCarte();
                             // check 2 carte de la même couleur pour la defausse
                             if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || London.getListeJoueur().getJoueur().getPouvoir().get("School") == 1 || London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
-                                if(London.getListeJoueur().getJoueur().getPouvoir().get("School") == 1){
-                                    int rep = JOptionPane.showConfirmDialog(London.acc,
-                                        "Vous possedez la carte School, voulez vous payer $1 et défaussez n'importe quelle carte ?",
-                                        "School",
-                                        JOptionPane.YES_NO_OPTION);
-                                // le joueur veut poser sa carte
-                                if (rep == JOptionPane.YES_OPTION) {
-                                    
-                                }
-                                }
+  
                                 int rep = JOptionPane.showConfirmDialog(London.acc,
                                         "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
                                         "Construire",
@@ -176,11 +168,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         /*appel de jouerCarte*/
                                         London.getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
                                         System.out.println(London.getListeJoueur().getJoueur().getDefausse());
-                                        
-                                        /*Hugueunot*/
-                                        if(London.getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1){
-                                            PouvoirBeta.
-                                        }
+                                       
 
                                         /*Passer le chantier suivant a posable=true*/
                                         London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
