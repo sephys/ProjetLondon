@@ -155,6 +155,21 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                                         //System.out.println(JBcarte.getCarte().getCouleur());
                                         //System.out.println("index du chantier : " + chantier.getIndex());
+                                        London.getMenudroite().disableAll();
+                                        //London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
+                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                                        //JBCarte.setDoubleClick(true);
+                                        London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+
+                                        London.getMenudroite().disableAll();
+                                        //London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
+                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                                        //JBCarte.setDoubleClick(true);
+                                        if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
+                                            London.getMenudroite().getLabelInfo().setText("[Pouvoir Wren] Posez deux cartes sur votre chantier sans devoir défausser des cartes");
+                                        } else {
+                                            London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                        }
 
                                         /*appel de jouerCarte*/
                                         London.getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
@@ -165,16 +180,6 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                                         /*Mise a jour du panel d'information*/
                                         London.getInfos().maj_infos();
-                                        London.getMenudroite().disableAll();
-                                        London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
-                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
-                                        //JBCarte.setDoubleClick(true);
-                                        if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
-                                            London.getMenudroite().getLabelInfo().setText("[Pouvoir Wren] Posez deux cartes sur votre chantier sans devoir défausser des cartes");
-                                        }else{
-                                            London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
-                                        }
-
                                         // refresh
                                         London.getSouth().revalidate();
                                     } else {
