@@ -291,4 +291,16 @@ public class JBCarte extends JButton implements MouseListener {
     public void pouvoirBrixtonPrison(int nombreCartes) {
         London.getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
     }
+    
+    public void changerImage(String path){
+        URL uri = JBCarte.class.getResource(path);
+        try {
+            image = ImageIO.read(uri);
+        } catch (IOException ex) {
+            Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.position = "main";
+        this.retournee = false;
+        this.setIcon(new ImageIcon(scaleImage(image, 79, 121)));
+    }
 }
