@@ -66,72 +66,72 @@ public class JPEtalage extends JPanel {
         // tab1
         JPanel p1=new JPanel(new BorderLayout());
         p1.setBounds(28, 18, 122, 168);
-        //p1.setOpaque(false);
-        p1.setBackground(Color.red);
+        p1.setOpaque(false);
+        //p1.setBackground(Color.red);
         tab1transi[0]=p1;
         this.add(p1);
         
         JPanel p2=new JPanel(new BorderLayout());
         p2.setBounds(198, 18, 122, 168);
-        //p2.setOpaque(false);
-        p2.setBackground(Color.red);
+        p2.setOpaque(false);
+        //p2.setBackground(Color.red);
         tab1transi[1]=p2;
         this.add(p2);
         
         JPanel p3=new JPanel(new BorderLayout());
         p3.setBounds(368, 18, 122, 168);
-        //p3.setOpaque(false);
-        p3.setBackground(Color.red);
+        p3.setOpaque(false);
+        //p3.setBackground(Color.red);
         tab1transi[2]=p3;
         this.add(p3);
         
         JPanel p4=new JPanel(new BorderLayout());
         p4.setBounds(535, 18, 122, 168);
-        //p4.setOpaque(false);
-        p4.setBackground(Color.red);
+        p4.setOpaque(false);
+        //p4.setBackground(Color.red);
         tab1transi[3]=p4;
         this.add(p4);
         
         JPanel p5=new JPanel(new BorderLayout());
         p5.setBounds(705, 18, 122, 168);
-        //p5.setOpaque(false);
-        p5.setBackground(Color.red);
+        p5.setOpaque(false);
+       // p5.setBackground(Color.red);
         tab1transi[4]=p5;
         this.add(p5);
         
         // tab2
         JPanel p6=new JPanel(new BorderLayout());
         p6.setBounds(28, 231, 122, 168);
-        //p6.setOpaque(false);
-        p6.setBackground(Color.red);
+        p6.setOpaque(false);
+        //p6.setBackground(Color.red);
         tab2transi[0]=p6;
         this.add(p6);
         
         JPanel p7=new JPanel(new BorderLayout());
         p7.setBounds(198, 231, 122, 168);
-        //p7.setOpaque(false);
-        p7.setBackground(Color.red);
+        p7.setOpaque(false);
+       // p7.setBackground(Color.red);
         tab2transi[1]=p7;
         this.add(p7);
         
         JPanel p8=new JPanel(new BorderLayout());
         p8.setBounds(368, 231, 122, 168);
-        //p8.setOpaque(false);
-        p8.setBackground(Color.red);
+        p8.setOpaque(false);
+        //p8.setBackground(Color.red);
         tab2transi[2]=p8;
         this.add(p8);
         
         JPanel p9=new JPanel(new BorderLayout());
         p9.setBounds(535, 231, 122, 168);
-        //p9.setOpaque(false);
-        p9.setBackground(Color.red);
+        p9.setOpaque(false);
+       // p9.setBackground(Color.red);
         tab2transi[3]=p9;
         this.add(p9);
         
         JPanel p10=new JPanel(new BorderLayout());
         p10.setBounds(705, 231, 122, 168);
-        //p10.setOpaque(false);
-        p10.setBackground(Color.red);
+        p10.setOpaque(false);
+       // p10.setBackground(Color.red);
         tab2transi[4]=p10;
         this.add(p10);
         

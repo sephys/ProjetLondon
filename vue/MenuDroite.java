@@ -140,7 +140,7 @@ public class MenuDroite extends JPanel {
                  London.dndListener.setDragEnable(true);
                  JBCarte.setClicDroitJouer(true);
                  labelInfo.setText("Vous pouvez jouer des cartes");
-                 London.getListeJoueur().getJoueur().setFinitTour(true);
+                 
                  disableAll();
                  finTour.setEnabled(true);
                  // change onglet
@@ -261,7 +261,8 @@ public class MenuDroite extends JPanel {
                         //System.out.println(London.getListeJoueur().getJoueur().getMain().size());
                         //JBCarte.setDoubleClick(true);
                         //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
-                        setDefausseCarte(true); // peut se defausser de n'importe quelle carte
+                        //setDefausseCarte(true); // peut se defausser de n'importe quelle carte
+                        
                         JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
                        // if(London.getListeJoueur().getJoueur().getDefausse()==0)
                         //{
@@ -301,7 +302,7 @@ public class MenuDroite extends JPanel {
                     disableAll();
                     labelInfo.setText("Vous devez choisir une zone à investir");
                     London.getPlateau().activerZonesInvestissables();
-                    London.getListeJoueur().getJoueur().setFinitTour(true);
+                    
                     London.getPlateau().desactiveZonesInvesties();
                     invest = true;
                     emprunter.setEnabled(true);
@@ -334,22 +335,22 @@ public class MenuDroite extends JPanel {
         
         
         // sauvegarde de la main dans le tableau
-        London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) London.south;
+        London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) London.getSouth();
         
         // sauvegarde zone de construction
         London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]=London.getJpChantier();
         
         // on enleve la main
-        London.central.remove(London.south);
+        London.central.remove(London.getSouth());
         // on passe au joueur suivant
         London.setListeJoueur(London.getListeJoueur().getSuivant());
         // change le label nomJoeuur
         //labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
         jpsij.actualiseJoueur();
         // on remplace le panel par celui du nouveau joueur
-        London.south = London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()];
+        London.setSouth(London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()]);
         // on ajoute le panel
-        London.central.add(London.south, BorderLayout.SOUTH);
+        London.central.add(London.getSouth(), BorderLayout.SOUTH);
         
       
         
@@ -381,7 +382,8 @@ public class MenuDroite extends JPanel {
         
 
         // on peut pas se defausser a la base
-        setDefausseCarte(false);
+        //setDefausseCarte(false);
+        
         
         // change onglet
         London.getPanelOnglet().setSelectedIndex(1);
@@ -431,11 +433,11 @@ public class MenuDroite extends JPanel {
 
     public void setTrueDefausseColor(String color)
     {
-       for(int i=0;i<London.south.getMain().getComponentCount();i++) // parcours la main du joueur
+       for(int i=0;i<London.getSouth().getMain().getComponentCount();i++) // parcours la main du joueur
        {
-           if(((JBCarte) London.south.getMain().getComponent(i)).getCarte().getCouleur().equals(color)) // si la carte est de la même couleur
+           if(((JBCarte) London.getSouth().getMain().getComponent(i)).getCarte().getCouleur().equals(color)) // si la carte est de la même couleur
            {
-               ((JBCarte) London.south.getMain().getComponent(i)).setDefausse(true); // il peut la defausser
+               ((JBCarte) London.getSouth().getMain().getComponent(i)).setDefausse(true); // il peut la defausser
            }
            
        } 
@@ -443,9 +445,9 @@ public class MenuDroite extends JPanel {
     
     public void setDefausseCarte(boolean bool)
     {
-       for(int i=0;i<London.south.getMain().getComponentCount();i++) // parcourt la main du joueuer
+       for(int i=0;i<London.getSouth().getMain().getComponentCount();i++) // parcourt la main du joueuer
        {
-           ((JBCarte) London.south.getMain().getComponent(i)).setDefausse(bool); // il peut se defausser
+           ((JBCarte) London.getSouth().getMain().getComponent(i)).setDefausse(bool); // il peut se defausser
        }
     }
     

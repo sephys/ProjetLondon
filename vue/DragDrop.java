@@ -150,6 +150,8 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         
                                         // change le statut de la carte
                                         jbCarte.setPosition("construction");
+                                        
+                                        London.getListeJoueur().getJoueur().setFinitTour(true);
 
                                         //System.out.println(JBcarte.getCarte().getCouleur());
                                         //System.out.println("index du chantier : " + chantier.getIndex());
@@ -168,6 +170,9 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
                                         //JBCarte.setDoubleClick(true);
                                         London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                        
+                                        // refresh
+                                        London.getSouth().revalidate();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
                                     }

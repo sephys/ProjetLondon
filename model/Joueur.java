@@ -334,6 +334,10 @@ public class Joueur {
 		
 	}
 
+    public Carte getLastCarte() {
+        return this.lastCarte;
+    }
+
 
 
 }
