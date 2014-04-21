@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import model.Joueur;
 
 /**
  *
@@ -29,13 +30,13 @@ public class JPSousInfosJoueur extends JPanel{
     JLabel bas;
     String nomJoueur;
     
-    public JPSousInfosJoueur(String imagePath, String nomJoueur){
+    public JPSousInfosJoueur(Joueur j){
        // this.setPreferredSize(new Dimension(50,50));
         this.setLayout(new BorderLayout());
         this.setOpaque(false); // transparance
-        URL uri = JBCarte.class.getResource(imagePath);
+        URL uri = JBCarte.class.getResource(image(j));
         bas = new JLabel();
-        bas.setText(nomJoueur);
+        bas.setText(j.getNom());
         bas.setFont(bas.getFont ().deriveFont (14.0f));
         try {
             Image image = ImageIO.read(uri);
@@ -50,7 +51,7 @@ public class JPSousInfosJoueur extends JPanel{
         }
         haut.setPreferredSize(new Dimension(60,50));
         this.setBackground(Color.LIGHT_GRAY);
-        this.nomJoueur = nomJoueur;
+        this.nomJoueur = j.getNom();
     }
 
     public String getNomJoueur() {
@@ -60,4 +61,23 @@ public class JPSousInfosJoueur extends JPanel{
     public void setNomJoueur(String nomJoueur) {
         this.nomJoueur = nomJoueur;
     }   
+    
+    public String image(Joueur j){        
+        StringBuilder sb = new StringBuilder("../img/");
+        Color c = j.getColor();
+        if(c == Color.yellow){
+            sb.append("jaune.png");
+        }else{
+            if(c == Color.blue){
+                sb.append("bleu.png");
+            }else{
+                if(c == Color.red){
+                    sb.append("rouge.png");
+                }else{
+                    sb.append("vert.png");
+                }
+            }
+        }
+        return new String(sb);
+    }
 }

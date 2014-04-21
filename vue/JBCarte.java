@@ -61,7 +61,7 @@ public class JBCarte extends JButton implements  MouseListener {
         }
         this.position="main";
         this.retournee = false;
-        this.setIcon(new ImageIcon(JBCarte.scaleImage(image, 79, 121)));
+        this.setIcon(new ImageIcon(scaleImage(image, 79, 121)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
         DragGestureRecognizer dragRecognizer1 = London.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, London.dndListener);
@@ -71,7 +71,7 @@ public class JBCarte extends JButton implements  MouseListener {
     
     public void changeTailleBoutonImage(Dimension d){
         this.setPreferredSize(d);
-        this.setIcon(new ImageIcon(JBCarte.scaleImage(image, (int)d.getWidth(), (int)d.getHeight())));
+        this.setIcon(new ImageIcon(scaleImage(image, (int)d.getWidth(), (int)d.getHeight())));
     }
     
     @Override
@@ -207,7 +207,7 @@ public class JBCarte extends JButton implements  MouseListener {
      * @param height
      * @return
      */
-    public static Image scaleImage(Image source, int width, int height) {
+    public Image scaleImage(Image source, int width, int height) {
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D) img.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
