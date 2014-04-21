@@ -136,7 +136,30 @@ public class MenuDroite extends JPanel {
                  finTour.setEnabled(true);
                 }
             }
-        });        
+
+        });
+        
+       // ACTION BOUTON RESTAURER LA VILLE
+       restaurer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rep = JOptionPane.showConfirmDialog(London.acc,
+                        "Êtes-vous sûr de vouloir restaurer la ville ?",
+                        "Restaurer la ville",
+                        JOptionPane.YES_NO_OPTION);
+                if (rep == JOptionPane.YES_OPTION) {
+                    disableAll();
+                    labelInfo.setText("Vous pouvez activer des cartes");
+                    JBCarte.setActiverCarte(true);
+                    
+                }
+                
+               
+            }
+        });
+        
+        
+
         
         // ACTION BOUTON EMPRUNTER
         emprunter.addActionListener(new ActionListener() {
@@ -149,7 +172,7 @@ public class MenuDroite extends JPanel {
                 if (rep == JOptionPane.YES_OPTION) {
                     London.getListeJoueur().getJoueur().setNbPret(London.getListeJoueur().getJoueur().getNbPret() + 1);
                     London.getListeJoueur().getJoueur().setArgent(London.getListeJoueur().getJoueur().getArgent() + 10);
-                    London.infos.maj_infos();
+                    London.getInfos().maj_infos();
                 }
             }
         });
@@ -328,6 +351,8 @@ public class MenuDroite extends JPanel {
         
         // on réinitialise les valeurs
         London.getListeJoueur().getJoueur().setFinitTour(false);
+        JBCarte.setClicDroitJouer(false);
+        JBCarte.setActiverCarte(false);
         
         //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
         
