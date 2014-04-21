@@ -238,7 +238,7 @@ public class JBCarte extends JButton implements MouseListener {
                                 JOptionPane.YES_NO_OPTION);
                         if (rep == JOptionPane.YES_OPTION) {
                             System.out.println(carte.getNom());
-                            London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
+                            London.getListeJoueur().getJoueur().jouerCarte2(carte,0);
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
                             
                             /*Wren*/
@@ -249,6 +249,7 @@ public class JBCarte extends JButton implements MouseListener {
                             /*Hugueunot*/
                             if (London.getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
                                 PouvoirBeta.pouvoirHuguenots(London.getListeJoueur().getJoueur());
+                                
                             }
                         }
                     } else {
@@ -259,9 +260,11 @@ public class JBCarte extends JButton implements MouseListener {
                     JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                 }
             } else {
-
-                JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
-
+            	if(London.getListeJoueur().getJoueur().getPioche()==0){
+            		JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+            	}else{
+            		JOptionPane.showMessageDialog(null, "Vous devez piocher");
+            	}
             }
         }
     }

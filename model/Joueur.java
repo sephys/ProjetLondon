@@ -112,6 +112,7 @@ public class Joueur {
 
 	public void setPioche(int pioche) {
 		this.pioche = pioche;
+		London.dndListener.setDragEnable(false);
 		London.getMenudroite().disableAll();
                 London.getMenudroite().getPiocher().setEnabled(true);
 		//JBCarte.setDoubleClick(true);
@@ -128,8 +129,9 @@ public class Joueur {
 		this.pioche--;
 		if (this.pioche == 0) {
 			//JBCarte.setDoubleClick(false);
-			if (London.getListeJoueur().getJoueur().isFinitTour()) // fin du tour du joueur
+			if (this.finitTour) // fin du tour du joueur
 			{
+				London.dndListener.setDragEnable(true);
 				London.getMenudroite().setFinTour();
 
 			} else // une pioche normal
@@ -292,6 +294,7 @@ public class Joueur {
 	public boolean jouerCarte2(Carte carteJouer, int ind){
 		boolean res=false;
 		this.finitTour=true;
+		System.out.println(this.finitTour);
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
 			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte

@@ -28,6 +28,7 @@ public class PouvoirBeta {
     
     public static boolean pouvoirHuguenots(Joueur j){
     	boolean res=false;
+    	System.out.println(j.isFinitTour());
     	int test = j.getPouvoir().get("Huguenots");
     	if(test>=1){
     		res=true;
