@@ -50,7 +50,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
     }
 
     public static void setDragEnable(boolean dragEnable) {
-       DragDrop.dragEnable = dragEnable;
+        DragDrop.dragEnable = dragEnable;
     }
 
     public DataFlavor[] getTransferDataFlavors() {
@@ -120,7 +120,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                         if (jbCarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
                             Constructible carte = (Constructible) jbCarte.getCarte();
                             // check 2 carte de la même couleur pour la defausse
-                            if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || London.getListeJoueur().getJoueur().getPouvoir().get("School")==1) {
+                            if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || London.getListeJoueur().getJoueur().getPouvoir().get("School") == 1 || London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
                                 int rep = JOptionPane.showConfirmDialog(London.acc,
                                         "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
                                         "Construire",
@@ -134,7 +134,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                             London.getListeJoueur().getJoueur().nouveauChantier();
                                         } else {
                                             /* affichage de la dernière carte posée si plusieurs cartes sur le chantier*/
-                                           container.removeAll();
+                                            container.removeAll();
                                             container.validate();
                                             container.repaint();
                                         }
@@ -147,14 +147,21 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         oldContainer.repaint();
                                         container.validate();
                                         container.repaint();
-                                        
+
                                         // change le statut de la carte
                                         jbCarte.setPosition("construction");
-                                        
+
                                         London.getListeJoueur().getJoueur().setFinitTour(true);
 
                                         //System.out.println(JBcarte.getCarte().getCouleur());
                                         //System.out.println("index du chantier : " + chantier.getIndex());
+                                        London.getMenudroite().disableAll();
+                                        //London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
+                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                                        //JBCarte.setDoubleClick(true);
+                                        if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") != 1) {
+                                            London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                        }
 
                                         /*appel de jouerCarte*/
                                         London.getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
@@ -165,14 +172,10 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                                         /*Mise a jour du panel d'information*/
                                         London.getInfos().maj_infos();
-                                        London.getMenudroite().disableAll();
-                                        London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
-                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
-                                        //JBCarte.setDoubleClick(true);
-                                        London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
-                                        
                                         // refresh
+                                        London.getSouth().repaint();
                                         London.getSouth().revalidate();
+                                        
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
                                     }
@@ -183,7 +186,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                         } else {
                             // informe le joueur qui joue
-                            JOptionPane.showMessageDialog(null, "Cette carte n'est pas constructible");
+                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");

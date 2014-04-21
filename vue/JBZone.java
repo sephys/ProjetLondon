@@ -77,6 +77,7 @@ public class JBZone extends JButton implements ActionListener{
                     courrant.addPointVictoire(this.zone.getPointsVictoire());
                    // London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
                     London.getMenudroite().getPiocher().setEnabled(true);
+                    London.getListeJoueur().getJoueur().setFinitTour(true);
                     
                     // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit
                     London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+ this.zone.getNbCartes() + " cartes");

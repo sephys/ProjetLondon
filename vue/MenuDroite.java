@@ -84,7 +84,7 @@ public class MenuDroite extends JPanel {
         regarder3Cartes.setAlignmentX(Component.CENTER_ALIGNMENT);
         finTour = new JButton("        Fin du Tour       ");
         finTour.setAlignmentX(Component.CENTER_ALIGNMENT);
-        labelInfo = new JLabel("Vous devez piocher");
+        labelInfo = new JLabel("");
         labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.piocher = new JButton("          Piocher           ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -221,16 +221,11 @@ public class MenuDroite extends JPanel {
                         "Emprunter",
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
-                    disableAll();
-                    piocher.setEnabled(true);
+                    
                     London.getListeJoueur().getJoueur().setFinitTour(true); // le joueur a finit son tour apres avoir piocher 3 cartes
                     London.getListeJoueur().getJoueur().setPioche(3);
                     //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
-                    labelInfo.setText("Vous devez piocher 3 cartes");
-                    //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
-                    JBCarte.setDoubleClick(true);
-                    London.getMenudroite().repaint();
-                    London.getMenudroite().revalidate();
+                    
                 }
             }
         });
@@ -391,12 +386,7 @@ public class MenuDroite extends JPanel {
         // on peut pas d&d à la base
         DragDrop.setDragEnable(false);
         
-        // mise à jour du menu
-        disableAll();
-        piocher.setEnabled(true);
-        labelInfo.setText("Vous devez piocher");
-        London.getMenudroite().repaint();
-        London.getMenudroite().revalidate();
+       
         
 
     }

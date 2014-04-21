@@ -151,6 +151,10 @@ public class JBCarte extends JButton implements MouseListener {
 
                             // suppression de la carte de la main du joueur
                             London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
+                            
+                            // refresh
+                            London.getSouth().repaint();
+                            London.getSouth().revalidate();
 
                         }
                     } else {
@@ -170,6 +174,8 @@ public class JBCarte extends JButton implements MouseListener {
                         // on rafraichit l'étalage
                         London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
                         London.getListeJoueur().getJoueur().piocheMoins();
+                        
+                        ((JBCarte) e.getComponent()).setPosition("main");
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
@@ -234,7 +240,9 @@ public class JBCarte extends JButton implements MouseListener {
                             System.out.println(carte.getNom());
                             London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
-                            System.out.println(London.getListeJoueur().getJoueur().getMain());
+                            if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
+                                London.getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
+                            }
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
