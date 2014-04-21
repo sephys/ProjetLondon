@@ -284,21 +284,22 @@ public class Joueur {
 		boolean res=false;
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
-			if(!PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
+			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
 				this.defausse=0;
-			}else{								//besoin de dépenser une carte
+			}else{				//besoin de dépenser une carte
 				this.defausse=1;
 			}
 		}
 		carteJouer.jouerCarte(this,ind);
-		this.getMain().remove(defausse);
+		this.getMain().remove(carteJouer);
 		return res;
 	}
-	
+
 	public boolean payeConstruction(Carte depense){
 		boolean res= false;
 		res=PouvoirBeta.pouvoirSchool(this,lastCarte.getCouleur(),depense.getCouleur());
-		if (res){
+		if(res){
+			this.defausse=0;
 			this.lastCarte=null;
 		}
 		return res;
@@ -314,7 +315,7 @@ public class Joueur {
 
 	public void activerCarte(Constructible actCarte){
 		actCarte.activerCarte(this);
-	
+
 	}
 
 
@@ -333,12 +334,12 @@ public class Joueur {
 	public void setLastCarte(Constructible constructible) {
 		// TODO Auto-generated method stub
 		this.lastCarte=constructible;
-		
+
 	}
 
-    public Carte getLastCarte() {
-        return this.lastCarte;
-    }
+	public Carte getLastCarte() {
+		return this.lastCarte;
+	}
 
 
 
