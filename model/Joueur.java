@@ -48,7 +48,6 @@ public class Joueur {
         pouvoir.put("Bank of England", 0);
         pouvoir.put("Brixton Prison", 0);
         //pouvoir.put(nom, argent);
-        this.pouvoirPret12 = false;
         this.payeConstruction = false;
     }
 
