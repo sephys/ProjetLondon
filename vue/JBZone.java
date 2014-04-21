@@ -88,7 +88,7 @@ public class JBZone extends JButton implements ActionListener{
                 JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");    // Une fenêtre affichant l'échec de l'action Investir est affichée
             }
         }
-        London.infos.maj_infos();   // Actualisation du panneau de gauche
+        London.getInfos().maj_infos();   // Actualisation du panneau de gauche
     }
     
     /**

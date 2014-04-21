@@ -43,7 +43,9 @@ public class JPPileChantier extends JPanel{
              this.setBorder(blackline);
         }
         this.carte2=false;
-       
+        
+        
+        this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(122,168));
         this.setOpaque(false);
     }
