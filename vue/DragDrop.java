@@ -183,7 +183,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                         } else {
                             // informe le joueur qui joue
-                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
+                            JOptionPane.showMessageDialog(null, "Cette carte n'est pas constructible");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");
