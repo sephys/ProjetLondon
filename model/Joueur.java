@@ -285,9 +285,10 @@ public class Joueur {
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
 			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
-                            this.defausse=0;
+                            System.out.println("defausse = 0");
 			}else{				//besoin de dépenser une carte
-				this.defausse=1;
+                            this.defausse=1;
+                            System.out.println("defausse = 1");
 			}
 		}
 		carteJouer.jouerCarte(this,ind);
@@ -299,7 +300,7 @@ public class Joueur {
 		boolean res= false;
 		res=PouvoirBeta.pouvoirSchool(this,lastCarte.getCouleur(),depense.getCouleur());
                 if(res){
-                    this.defausse=0;
+                    this.defausseMoins();
                     this.lastCarte=null;
                 }
 		return res;

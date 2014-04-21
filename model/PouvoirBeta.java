@@ -10,10 +10,6 @@ public class PouvoirBeta {
 	//pouvoir illimité.
     public static boolean pouvoirSchool(Joueur j, String colorJ, String colorD) {
         boolean res = false;
-
-        if (j.getPouvoir().get("School") == null) {
-            j.getPouvoir().put("School", new Integer(0));
-        }
         int test = j.getPouvoir().get("School");
         if (colorJ.compareTo(colorD) != 0) {			//les cartes joueur sont de couleur différente
             if (test != 0) { 							//possède le pouvoir de l'école
@@ -24,6 +20,7 @@ public class PouvoirBeta {
             }
         } else { 										//carte de même couleur
             res = true;
+            System.out.println("res school" + res);
         }
         return res;
     }
@@ -31,16 +28,18 @@ public class PouvoirBeta {
 	//pouvoir limité.
     public static boolean pouvoirWren(Joueur j) {
         boolean res = false;
-        if (j.getPouvoir().get("Wren") == null) {
-            j.getPouvoir().put("Wren", new Integer(0));
-        }
         int test = j.getPouvoir().get("Wren");
-        if (test != 0) { 							//possède le pouvoir wren
-            if (specialDouble == 0) {				//si première carte 
-                specialDouble = 1;				//première utilisation
-                res = true;						//on peut utiliser le pouvoir
-            } else {								//sinon 2 carte on décremente le pouvoir wren
+        if (test != 0) { 
+            res=true;//possède le pouvoir wren
+            if (specialDouble == 0) {
+                //si première carte 
+                specialDouble = 1;				//première utilisation						//on peut utiliser le pouvoir
+            } else {
+                //sinon 2 carte on décremente le pouvoir wren
+                
                 j.getPouvoir().put("Wren", new Integer(j.getPouvoir().get("Wren").intValue()) - 1);
+                specialDouble = 0;
+                London.getMenudroite().setFinTour();
             }
         } else {									// ne possède pas le pouvoir wren
             res = false;
