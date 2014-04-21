@@ -173,7 +173,9 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         /*Mise a jour du panel d'information*/
                                         London.getInfos().maj_infos();
                                         // refresh
+                                        London.getSouth().repaint();
                                         London.getSouth().revalidate();
+                                        
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
                                     }
