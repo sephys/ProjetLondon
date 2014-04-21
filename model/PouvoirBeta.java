@@ -54,6 +54,68 @@ public class PouvoirBeta {
 		// TODO Auto-generated method stub
 		return false;
 	}
+        
+        
+        
+        public static void pouvoirFireBrigade(Joueur j){            
+            for(Zone n : London.zones.values()){
+                if(n != null && (!n.getProprietaire().equals(j))){
+                    n.getProprietaire().addArgent(-1);
+                }
+            }
+        }
+        
+        public static void pouvoirFleetStreet(Joueur implique){
+            implique.addPointPauvrete(2);
+        }
+        
+        public static void pouvoirLloydsOfLondon(Joueur j){
+            for(int i = 0; i < London.getTabJoueur().length; i++){
+                London.getTabJoueur()[i].addArgent(-2);
+            }
+            j.addArgent(London.getTabJoueur().length * 2);
+        }
+        
+        public static void pouvoirOmnibus(Joueur j){
+            for(Zone n : London.zones.values()){
+                if(n != null && n.getProprietaire().equals(j)){
+                    j.addArgent(1);
+                }
+            }
+        }
+        
+        public void pouvoirPoliceForce(Joueur donneur, Joueur donne){
+            donneur.addPointPauvrete(-1);
+            donne.addPointPauvrete(1);
+        }
+        
+        public void pouvoirSteamBoats(Joueur j){
+            for(Zone n : London.zones.values()){
+                if(n != null && n.getProprietaire().equals(j) && n.isAdjacentTamise()){
+                    j.addArgent(2);
+                }
+            }
+        }
+        
+        public void pouvoirTownHouse(Joueur j){
+            int argent = 0;
+            for(Carte c : j.getMain()){
+                if(!c.getCouleur().equals("marron")){
+                    argent++;
+                }
+            }
+            j.addArgent(argent);
+        }
+        
+        public void pouvoirBridge(Joueur j){
+            int argent = 0;
+            for(Carte c : j.getMain()){
+                if(c.getCouleur().equals("marron")){
+                    argent++;
+                }
+            }
+            j.addArgent(argent);
+        }
 }
 
 
