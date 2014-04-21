@@ -299,8 +299,6 @@ public class JBCarte extends JButton implements MouseListener {
         } catch (IOException ex) {
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.position = "main";
-        this.retournee = false;
         this.setIcon(new ImageIcon(scaleImage(image, 79, 121)));
     }
 }
