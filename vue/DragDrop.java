@@ -159,12 +159,6 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         //London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
                                         //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
                                         //JBCarte.setDoubleClick(true);
-                                        London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
-
-                                        London.getMenudroite().disableAll();
-                                        //London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
-                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
-                                        //JBCarte.setDoubleClick(true);
                                         if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") != 1) {
                                             London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
                                         }
@@ -190,7 +184,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                         } else {
                             // informe le joueur qui joue
-                            JOptionPane.showMessageDialog(null, "Cette carte n'est pas constructible");
+                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");

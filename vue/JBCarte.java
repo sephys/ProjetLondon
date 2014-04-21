@@ -234,7 +234,9 @@ public class JBCarte extends JButton implements MouseListener {
                             System.out.println(carte.getNom());
                             London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
-                            System.out.println(London.getListeJoueur().getJoueur().getMain());
+                            if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
+                                London.getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
+                            }
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
