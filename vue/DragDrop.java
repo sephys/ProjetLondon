@@ -133,9 +133,10 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         if (London.getListeJoueur().getJoueur().getListeChantier().size() <= chantier.getIndex()) {
                                             London.getListeJoueur().getJoueur().nouveauChantier();
                                         } else {
-                                           /* container.removeAll();
+                                            /* affichage de la dernière carte posée si plusieurs cartes sur le chantier*/
+                                           container.removeAll();
                                             container.validate();
-                                            container.repaint();*/
+                                            container.repaint();
                                         }
 
                                         chantier.setCarte2(true);

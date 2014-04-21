@@ -192,6 +192,7 @@ public class JBCarte extends JButton implements MouseListener {
             }
         }
 
+
             if (e.getButton() == MouseEvent.BUTTON3) {
                 if (JBCarte.clicDroitJouer) {
                     if (carte.getClass() == NonConstructible.class) {
@@ -208,12 +209,15 @@ public class JBCarte extends JButton implements MouseListener {
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
+
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                     }
                 } else {
+
                     JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+
                 }
             }
         }
