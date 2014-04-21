@@ -23,21 +23,19 @@ import javax.swing.JPanel;
  *
  * @author Anh-Djuy
  */
-public class JPSousSousInfos extends JPanel{
+public class JPSousInfosJoueur extends JPanel{
     
     JLabel haut;
     JLabel bas;
-    int nombre;
+    String nomJoueur;
     
-    public JPSousSousInfos(String imagePath, int nombre){
+    public JPSousInfosJoueur(String imagePath, String nomJoueur){
        // this.setPreferredSize(new Dimension(50,50));
-        
-        this.nombre = nombre;
         this.setLayout(new BorderLayout());
         this.setOpaque(false); // transparance
         URL uri = JBCarte.class.getResource(imagePath);
         bas = new JLabel();
-        bas.setText(""+nombre);
+        bas.setText(nomJoueur);
         bas.setFont(bas.getFont ().deriveFont (14.0f));
         try {
             Image image = ImageIO.read(uri);
@@ -52,26 +50,14 @@ public class JPSousSousInfos extends JPanel{
         }
         haut.setPreferredSize(new Dimension(60,50));
         this.setBackground(Color.LIGHT_GRAY);
+        this.nomJoueur = nomJoueur;
     }
-    
-    /**public void centrerTexte(){
-        StyledDocument doc = bas.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-    }*/
-    
-    
-    
-    public void ajoutNombre(int nombre){
-        this.nombre += nombre;
-        bas.setText(String.valueOf(nombre));
-        //bas.setText(new String(new StringBuilder(nombre)));
+
+    public String getNomJoueur() {
+        return nomJoueur;
     }
-    
-    public void setNombre(int nombre){
-        this.nombre = nombre;
-        bas.setText(String.valueOf(nombre));
-        //bas.setText(new String(new StringBuilder(nombre)));
-    }
+
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }   
 }

@@ -7,23 +7,17 @@
 package vue;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JTextPane;
-import javax.swing.SwingConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -38,30 +32,44 @@ public class JPSousInfos extends JPanel{
     
     private Image img;
     GridLayout gl;
-    JLabel nomJoueur;
     JPSousSousInfos piece, pauvrete, emprunt, victoire, metro;
+    JPSousInfosJoueur joueur;
     
     public JPSousInfos(Joueur joueur){
         this.setLayout(new GridLayout(2, 3));
-        
-        this.nomJoueur = new JLabel(joueur.getNom());
-        this.nomJoueur.setHorizontalAlignment(JLabel.CENTER);
-        this.nomJoueur.setVerticalAlignment(JLabel.CENTER);
         this.setOpaque(false); // transparance
-        this.nomJoueur.setFont(this.nomJoueur.getFont ().deriveFont (16.0f));
-        piece = new JPSousSousInfos("../img/jetons/Piece1.png", 5);
-        pauvrete = new JPSousSousInfos("../img/jetons/PointPauvrete.png", 5);
-        emprunt = new JPSousSousInfos("../img/jetons/10LivreEmprunt.png", 0);
-        victoire = new JPSousSousInfos("../img/jetons/PointVictoire.png", 0);
-        metro = new JPSousSousInfos("../img/jetons/JetonMetro.png", 0);
-        this.add(this.nomJoueur);
+        changeImageJoueur(joueur);
+        this.piece = new JPSousSousInfos("../img/jetons/Piece1.png", 5);
+        this.pauvrete = new JPSousSousInfos("../img/jetons/PointPauvrete.png", 5);
+        this.emprunt = new JPSousSousInfos("../img/jetons/10LivreEmprunt.png", 0);
+        this.victoire = new JPSousSousInfos("../img/jetons/PointVictoire.png", 0);
+        this.metro = new JPSousSousInfos("../img/jetons/JetonMetro.png", 0);
         this.add(this.piece);
         this.add(this.pauvrete);
         this.add(this.emprunt);
         this.add(this.victoire);
         this.add(this.metro);
-        this.setBackground(joueur.getColor());
-        
+        this.setBackground(joueur.getColor());        
+    }    
+
+    private void changeImageJoueur(Joueur j) {
+        StringBuilder sb = new StringBuilder("../img/");
+        Color c = j.getColor();
+        if(c == Color.yellow){
+            sb.append("jaune.png");
+        }else{
+            if(c == Color.blue){
+                sb.append("bleu.png");
+            }else{
+                if(c == Color.red){
+                    sb.append("rouge.png");
+                }else{
+                    sb.append("vert.png");
+                }
+            }
+        }
+        this.joueur = new JPSousInfosJoueur(new String(sb), j.getNom());
+        this.add(this.joueur);
     }
     
     public void addPieces(int pieces){
