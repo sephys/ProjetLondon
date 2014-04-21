@@ -163,7 +163,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         London.getListeJoueur().getJoueur().setDefausse(1);
                                         London.getMenudroite().disableAll();
                                         London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
-                                        London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
                                         JBCarte.setDoubleClick(true);
                                         London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
                                     } else {

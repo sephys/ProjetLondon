@@ -21,12 +21,15 @@ public class Joueur {
     private int placeJoueur; // la place du joueur dans le cycle
     private int defausse; // savoir combien de cartes le joueur doit se défausser
     private int pioche; // savoir combien de cartes le joueur peut piocher
-    private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
+   // private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
     private boolean finitTour; // savoir si le joueur a finit son tour
     private Color color;
-    private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
+    //private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
     private boolean pouvoirPret12;  // Cet attribut permet de savoir s'il a le pouvoir de "Bank of England"
     private boolean payeConstruction; //booléen qui repère si le joueur à payé d'une carte défaussé sa construction
+    
+    
+    
     public Joueur(String nom,Color color) {
         this.nom = nom;
         this.main = new ArrayList<Carte>();
@@ -106,19 +109,17 @@ public class Joueur {
 
     public void setPioche(int pioche) {
         this.pioche = pioche;
-        JBCarte.setDoubleClick(true);
+        London.getMenudroite().getPiocher().setEnabled(true);
+        //JBCarte.setDoubleClick(true);
     }
 
     public void piocheMoins() {
         this.pioche--;
-        if (this.pioche <= 0) {
-            JBCarte.setDoubleClick(false);
-            if (finTourPiocheCarte) // fin du tour du joueur
+        if (this.pioche == 0) {
+            //JBCarte.setDoubleClick(false);
+            if (London.getListeJoueur().getJoueur().isFinitTour()) // fin du tour du joueur
             {
-                London.getMenudroite().disableAll();
-                London.getMenudroite().getFinTour().setEnabled(true);
-                London.getMenudroite().getLabelInfo().setText("Vous avez fini votre tour");
-                this.finitTour = true;
+               London.getMenudroite().setFinTour();
 
             } else // une pioche normal
             {
@@ -140,8 +141,8 @@ public class Joueur {
 
     public void defausseMoins() {
         this.defausse--;
-        if (this.defausse <= 0) {
-            JBCarte.setDoubleClick(false);
+        if (this.defausse == 0 && London.getListeJoueur().getJoueur().isFinitTour()) {
+            London.getMenudroite().setFinTour();
         }
     }
 
@@ -235,17 +236,17 @@ public class Joueur {
         return res;
     }
 
-    public boolean isFinTourPiocheCarte() {
+   /* public boolean isFinTourPiocheCarte() {
         return finTourPiocheCarte;
-    }
+    }*/
 
     public boolean isFinitTour() {
         return finitTour;
     }
 
-    public void setFinTourPiocheCarte(boolean bool) {
+   /* public void setFinTourPiocheCarte(boolean bool) {
         this.finTourPiocheCarte = bool;
-    }
+    }*/
 
     public void setFinitTour(boolean finitTour) {
         this.finitTour = finitTour;
@@ -277,13 +278,13 @@ public class Joueur {
     	this.getMain().remove(defausse);
     }
     
-    public String getPiocheDefausse(){
+ /*   public String getPiocheDefausse(){
         return this.piocheDefausse;
     }
     
     public void setPiocheDefausse(String piocheDefausse){
         this.piocheDefausse = piocheDefausse;
-    }
+    }*/
     
     public void activerCarte(Constructible actCarte){
     }

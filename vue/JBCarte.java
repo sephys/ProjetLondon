@@ -40,7 +40,7 @@ public class JBCarte extends JButton implements  MouseListener {
     
     private Image image;
     private Carte carte;
-    private static boolean doubleClick; // permet de savoir si on autorise le double click pour la défausse -> étalage
+    private static boolean doubleClick = false; // permet de savoir si on autorise le double click pour la défausse -> étalage
 
     private String position; // permet de savoir ou est la carte : main - etalage - construction
     private boolean defausse; // est-ce que la carte pour etre defauser
@@ -107,12 +107,13 @@ public class JBCarte extends JButton implements  MouseListener {
            Joueur courrant = London.getListeJoueur().getJoueur();
                switch (((JBCarte) e.getComponent()).getPosition()) {
                    case "main": // on met la carte de la main sur le l'étalage
-                      if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
+                       //if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
+                      if(London.getListeJoueur().getJoueur().getDefausse()!=0 && ((JBCarte) e.getComponent()).isDefausse())
                       {
 
                         /**/
                         London.getListeJoueur().getJoueur().setPayeConstruction(false);
-                        London.getMenudroite().getFinTour().setEnabled(true);
+                        //London.getMenudroite().getFinTour().setEnabled(true);
                         JBCarte carte = ((JBCarte) e.getComponent());
                         carte.setPosition("etalage");
                         // ajout de la carte dans l'etalage
@@ -123,15 +124,12 @@ public class JBCarte extends JButton implements  MouseListener {
                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
                         //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
                         // suppression de la carte de la main du joueur
-                        System.out.println(carte.carte.getNom());
-                        for(int i=0;i<London.getListeJoueur().getJoueur().getMain().size();i++)
-                        {
-                            System.out.println("affichage carte : "+London.getListeJoueur().getJoueur().getMain().get(i).getNom());
-                        }
-                        System.out.println("Carte sup :"+(carte.carte.getNom()));
-                        System.out.println(London.getListeJoueur().getJoueur().getMain().remove(carte.carte));
+                        
+                        London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         London.getListeJoueur().getJoueur().defausseMoins();
+                        
+                        
                         
                         
                     }
@@ -143,7 +141,8 @@ public class JBCarte extends JButton implements  MouseListener {
                     
                     
                 case "etalage": // on met la carte de l'etalage dans la main
-                    if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
+                    //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
+                    if(London.getListeJoueur().getJoueur().getPioche()!=0)
                     {
                         // ajout de la carte dans la main du joueur graphiquement
                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(((JBCarte) e.getComponent()).carte);
@@ -163,7 +162,8 @@ public class JBCarte extends JButton implements  MouseListener {
                     break;
                     
                 case "fenetre": // on met la carte de la fenetre dans la main
-                    if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
+                    //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
+                    if(doubleClick)
                     {
                         
                         int rep = JOptionPane.showConfirmDialog(London.acc,

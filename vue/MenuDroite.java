@@ -161,11 +161,11 @@ public class MenuDroite extends JPanel {
                 if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
                     piocher.setEnabled(true);
-                    finTour.setEnabled(true);
+                    London.getListeJoueur().getJoueur().setFinitTour(true); // le joueur a finit son tour apres avoir piocher 3 cartes
                     London.getListeJoueur().getJoueur().setPioche(3);
-                    London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
+                    //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
                     labelInfo.setText("Vous devez piocher 3 cartes");
-                    London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
+                    //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
                     JBCarte.setDoubleClick(true);
                     London.getMenudroite().repaint();
                     London.getMenudroite().revalidate();
@@ -182,7 +182,7 @@ public class MenuDroite extends JPanel {
                 JBCarte c1 = new JBCarte(London.getDeck().poll());
                 JBCarte c2 = new JBCarte(London.getDeck().poll());
                 JBCarte c3 = new JBCarte(London.getDeck().poll());
-                London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
+                //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
                 f = new Frame3Cartes(c1, c2, c3);
             }
             
@@ -196,28 +196,24 @@ public class MenuDroite extends JPanel {
                 if (London.getListeJoueur().getJoueur().isFinitTour()) {
                     // check trop grand nombre de cartes dans la main
                     if (London.getListeJoueur().getJoueur().getMain().size() > 9) {
-                        System.out.println(London.getListeJoueur().getJoueur().getMain().size());
-                        JBCarte.setDoubleClick(true);
-                        London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
-                        setDefausseCarte(true);
+                        //System.out.println(London.getListeJoueur().getJoueur().getMain().size());
+                        //JBCarte.setDoubleClick(true);
+                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                        setDefausseCarte(true); // peut se defausser de n'importe quelle carte
                         JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
-                        if(London.getListeJoueur().getJoueur().getDefausse()==0)
-                        {
+                       // if(London.getListeJoueur().getJoueur().getDefausse()==0)
+                        //{
                             London.getListeJoueur().getJoueur().setDefausse(London.getListeJoueur().getJoueur().getMain().size() - 9);
-                        }
+                        //}
                         
                         disableAll();
                         labelInfo.setText("Vous avez trop de cartes en main");
-                        finTour.setEnabled(true);
+                       // finTour.setEnabled(true);
                         
                     } else { // ici le joueur finit son tour
                         actualiserMain();
-                        disableAll();
-                        piocher.setEnabled(true);
-                        labelInfo.setText("Vous devez piocher");
+                        
                         invest = false;
-                        London.getMenudroite().repaint();
-                        London.getMenudroite().revalidate();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Vous n'avez pas finit votre tour");
@@ -238,7 +234,9 @@ public class MenuDroite extends JPanel {
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
+                    labelInfo.setText("Vous devez choisir une zone à investir");
                     London.getPlateau().activerZonesInvestissables();
+                    London.getListeJoueur().getJoueur().setFinitTour(true);
                     London.getPlateau().desactiveZonesInvesties();
                     invest = true;
                 }
@@ -303,15 +301,24 @@ public class MenuDroite extends JPanel {
         
         // on réinitialise les valeurs
         London.getListeJoueur().getJoueur().setFinitTour(false);
-        London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
+        
+        //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
         
         // on informe le joueur
         JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");
-        London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
+        //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
         
 
         // on peut pas se defausser a la base
         setDefausseCarte(false);
+        
+        // mise à jour du menu
+        disableAll();
+        piocher.setEnabled(true);
+        labelInfo.setText("Vous devez piocher");
+        London.getMenudroite().repaint();
+        London.getMenudroite().revalidate();
+        
 
     }
     
@@ -364,6 +371,13 @@ public class MenuDroite extends JPanel {
        {
            ((JBCarte) London.south.getMain().getComponent(i)).setDefausse(bool); // il peut se defausser
        }
+    }
+    
+    public void setFinTour()
+    {
+        disableAll();
+        finTour.setEnabled(true);
+        labelInfo.setText("Vous avez finit votre tour");
     }
     
 
