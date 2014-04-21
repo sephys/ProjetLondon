@@ -84,7 +84,7 @@ public class MenuDroite extends JPanel {
         regarder3Cartes.setAlignmentX(Component.CENTER_ALIGNMENT);
         finTour = new JButton("        Fin du Tour       ");
         finTour.setAlignmentX(Component.CENTER_ALIGNMENT);
-        labelInfo = new JLabel("Vous devez piocher");
+        labelInfo = new JLabel("");
         labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.piocher = new JButton("          Piocher           ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
