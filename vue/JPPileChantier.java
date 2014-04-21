@@ -25,8 +25,15 @@ public class JPPileChantier extends JPanel{
     private int index;
     private boolean posable;
     private boolean carte2;
+    private Image img; // image du chantier
     
     public JPPileChantier(int index){
+         try {
+            URL uri = JPEtalage.class.getResource("../img/carteChantier.jpg");            
+            img = ImageIO.read(uri);
+        } catch (IOException ex) {
+            Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(index==0){
             /*Ajout Drag n Drop*/
             DropTarget dropChantier = new DropTarget(this, DnDConstants.ACTION_MOVE, 
@@ -48,6 +55,12 @@ public class JPPileChantier extends JPanel{
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(122,168));
         this.setOpaque(false);
+    }
+    
+     @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(img, 0, 0, 122, 168, this);
     }
     
     public int getIndex() {
