@@ -47,7 +47,7 @@ public class MenuDroite extends JPanel {
     public MenuDroite() {
         super(new BorderLayout());
         menuBouton = new JPanel();
-        menuBouton.setLayout(new BoxLayout(menuBouton, BoxLayout.PAGE_AXIS));
+        menuBouton.setLayout(new BoxLayout(menuBouton, BoxLayout.Y_AXIS));
         
         // position le menuBouton
         Dimension d = new Dimension(310, 260);
@@ -69,25 +69,33 @@ public class MenuDroite extends JPanel {
         //labelJoueur = new JLabel(London.getListeJoueur().getJoueur().getNom());
         
         // intancie tous les boutons
-        jouer = new JButton("Jouer des cartes");
+        jouer = new JButton("    Jouer des cartes    ");
         jouer.setAlignmentX(Component.CENTER_ALIGNMENT);
-        restaurer = new JButton("Restaurer la ville");
+        restaurer = new JButton("    Restaurer la ville    ");
         restaurer.setAlignmentX(Component.CENTER_ALIGNMENT);
-        investir = new JButton("Investir");
+        investir = new JButton("             Investir             ");
         investir.setAlignmentX(Component.CENTER_ALIGNMENT);
-        emprunter = new JButton("Emprunter (10£)");
+        emprunter = new JButton("     Emprunter (10£)    ");
         emprunter.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.invest = false;
-        piocher3 = new JButton("Prendre trois cartes");
+        piocher3 = new JButton(" Prendre trois cartes ");
         piocher3.setAlignmentX(Component.CENTER_ALIGNMENT);
         regarder3Cartes = new JButton("Regarder les 3 premières cartes");
         regarder3Cartes.setAlignmentX(Component.CENTER_ALIGNMENT);
-        finTour = new JButton("Fin du Tour");
+        finTour = new JButton("          Fin du Tour         ");
         finTour.setAlignmentX(Component.CENTER_ALIGNMENT);
         labelInfo = new JLabel("Vous devez piocher");
         labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.piocher = new JButton("Piocher");
+        this.piocher = new JButton("            Piocher             ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        jouer.setPreferredSize(new Dimension(149, 26));
+        restaurer.setPreferredSize(new Dimension(149, 26));
+        investir.setPreferredSize(new Dimension(149, 26));
+        emprunter.setPreferredSize(new Dimension(149, 26));
+        piocher.setPreferredSize(new Dimension(149, 26));
+        piocher3.setPreferredSize(new Dimension(149, 26));
+        finTour.setPreferredSize(new Dimension(149, 26));
         // on les ajoute au menu
         menuBouton.add(jpsij);
         menuBouton.add(Box.createRigidArea(new Dimension(0,6)));
@@ -109,6 +117,7 @@ public class MenuDroite extends JPanel {
         menuBouton.add(Box.createRigidArea(new Dimension(0,30)));
         menuBouton.add(labelInfo);
         menuBouton.add(Box.createRigidArea(new Dimension(0,7)));
+        
 
         // on doit piocher au début
         disableAll();
@@ -134,6 +143,8 @@ public class MenuDroite extends JPanel {
                  London.getListeJoueur().getJoueur().setFinitTour(true);
                  disableAll();
                  finTour.setEnabled(true);
+                 // change onglet
+                 London.getPanelOnglet().setSelectedIndex(2);
                 }
             }
 
@@ -149,8 +160,11 @@ public class MenuDroite extends JPanel {
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
                     disableAll();
+                    finTour.disable(false);
                     labelInfo.setText("Vous pouvez activer des cartes");
                     JBCarte.setActiverCarte(true);
+                    // change onglet
+                    London.getPanelOnglet().setSelectedIndex(2);
                     
                 }
                 
@@ -258,6 +272,9 @@ public class MenuDroite extends JPanel {
                         labelInfo.setText("Vous avez trop de cartes en main");
                        // finTour.setEnabled(true);
                         
+                       // change onglet
+                        London.getPanelOnglet().setSelectedIndex(1);
+                        
                     } else { // ici le joueur finit son tour
                         actualiserMain();
                         
@@ -288,6 +305,8 @@ public class MenuDroite extends JPanel {
                     London.getPlateau().desactiveZonesInvesties();
                     invest = true;
                     emprunter.setEnabled(true);
+                    // change onglet
+                    London.getPanelOnglet().setSelectedIndex(0);
                 }
             }
         });
@@ -363,6 +382,9 @@ public class MenuDroite extends JPanel {
 
         // on peut pas se defausser a la base
         setDefausseCarte(false);
+        
+        // change onglet
+        London.getPanelOnglet().setSelectedIndex(0);
         
         // on peut pas d&d à la base
         DragDrop.setDragEnable(false);

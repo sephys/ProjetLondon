@@ -38,11 +38,12 @@ public class JBCarte extends JButton implements MouseListener {
     private Carte carte;
     private static boolean doubleClick = false; // permet de savoir si on autorise le double click pour la défausse -> étalage
     private static boolean clicDroitJouer = false; /* Autorise le clic droit pour jouer la carte depuis la main */
-    private static boolean activerCarte=false; // savoir si le joueur peut activer des cartes
+
+    private static boolean activerCarte = false; // savoir si le joueur peut activer des cartes
 
     private String position; // permet de savoir ou est la carte : main - etalage - construction
     private boolean defausse; // est-ce que la carte pour etre defauser
-   // private boolean retournee;
+    // private boolean retournee;
 
     public JBCarte(Carte carte) {
         this.carte = carte;
@@ -57,7 +58,6 @@ public class JBCarte extends JButton implements MouseListener {
         this.position = "main";
 
        // this.retournee = false;
-
         this.setIcon(new ImageIcon(scaleImage(image, 79, 121)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
@@ -170,68 +170,66 @@ public class JBCarte extends JButton implements MouseListener {
                     break;
 
                 case "construction": // on active une carte qui est dans la zone de construction
-                    int rep = JOptionPane.showConfirmDialog(London.acc,
+                    if (JBCarte.activerCarte) {
+                        int rep = JOptionPane.showConfirmDialog(London.acc,
                                 "Êtes-vous sûr de vouloir activer cette carte ?",
                                 "Activer la carte",
                                 JOptionPane.YES_NO_OPTION);
                         if (rep == JOptionPane.YES_OPTION) {
-                           London.getListeJoueur().getJoueur().activerCarte(((Constructible)  ((JBCarte) e.getComponent()).carte));
-                           
-                           // on check si la carte doit être retourné
-                           if(((Constructible)  ((JBCarte) e.getComponent()).carte).isARetourne())
-                           {
-                               this.changerImage("../img/cartes/Background.png"); 
-                           }
-                           London.getInfos().maj_infos();
-                           
-                           
-                            
+                            London.getListeJoueur().getJoueur().activerCarte(((Constructible) ((JBCarte) e.getComponent()).carte));
+
+                            // on check si la carte doit être retourné
+                            if (((Constructible) ((JBCarte) e.getComponent()).carte).isARetourne()) {
+                                this.changerImage("../img/cartes/Background.png");
+                            }
+                            London.getInfos().maj_infos();
+
                         }
-                        
-                
-                    
-                    
+
+                    }
+                    break;
 
             }
-
         }
 
-        if (e.getButton() == MouseEvent.BUTTON3) {
-            if (JBCarte.clicDroitJouer) {
-                if (carte.getClass() == NonConstructible.class) {
-                    if (!"Paupers".equals(carte.getNom())) {
-                        int rep = JOptionPane.showConfirmDialog(London.acc,
-                                "Êtes-vous sûr de vouloir jouer cette carte ?",
-                                "Jouer carte",
-                                JOptionPane.YES_NO_OPTION);
-                        if (rep == JOptionPane.YES_OPTION) {
-                            System.out.println(carte.getNom());
-                            London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
-                            London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
-                            System.out.println(London.getListeJoueur().getJoueur().getMain());
-                            System.out.println(London.getListeJoueur().getJoueur().getPouvoir());
+
+            if (e.getButton() == MouseEvent.BUTTON3) {
+                if (JBCarte.clicDroitJouer) {
+                    if (carte.getClass() == NonConstructible.class) {
+                        if (!"Paupers".equals(carte.getNom())) {
+                            int rep = JOptionPane.showConfirmDialog(London.acc,
+                                    "Êtes-vous sûr de vouloir jouer cette carte ?",
+                                    "Jouer carte",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (rep == JOptionPane.YES_OPTION) {
+                                System.out.println(carte.getNom());
+                                London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
+                                London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                                System.out.println(London.getListeJoueur().getJoueur().getMain());
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
+
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
+                        JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Cette carte est constructible");
+
+                    JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
             }
         }
-    }
-
-    /**
-     * Code repris de http://www.developpez.net permettant de redimensionner une
-     * image.
-     *
-     * @param source
-     * @param width
-     * @param height
-     * @return
-     */
+        /**
+         * Code repris de http://www.developpez.net permettant de redimensionner
+         * une image.
+         *
+         * @param source
+         * @param width
+         * @param height
+         * @return
+         */
 
     public Image scaleImage(Image source, int width, int height) {
 
@@ -272,8 +270,6 @@ public class JBCarte extends JButton implements MouseListener {
     public static void setActiverCarte(boolean activerCarte) {
         JBCarte.activerCarte = activerCarte;
     }
-    
-    
 
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -330,8 +326,8 @@ public class JBCarte extends JButton implements MouseListener {
     public void pouvoirBrixtonPrison(int nombreCartes) {
         London.getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
     }
-    
-    public void changerImage(String path){
+
+    public void changerImage(String path) {
         URL uri = JBCarte.class.getResource(path);
         try {
             image = ImageIO.read(uri);
