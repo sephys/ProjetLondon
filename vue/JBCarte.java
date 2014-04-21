@@ -112,7 +112,7 @@ public class JBCarte extends JButton implements  MouseListener {
                       {
 
                         /**/
-                        London.getListeJoueur().getJoueur().setPayeConstruction(false);
+                        
                         //London.getMenudroite().getFinTour().setEnabled(true);
                         JBCarte carte = ((JBCarte) e.getComponent());
                         carte.setPosition("etalage");
