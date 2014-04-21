@@ -46,7 +46,7 @@ public class London {
     private static JPChantiers[] tabJPChantiers; // tableau des chantiers
     private static JPEtalage jpEtalage;
     private static JPChantiers jpChantier;
-    static JPMain south; // panel contenant la main des joueurs
+    private static JPMain south; // panel contenant la main des joueurs
     static JPanel central;
     private static MenuDroite menudroite;
     private static JPPlateau plateau;
@@ -240,6 +240,16 @@ public class London {
     public static JPChantiers getJpChantier() {
         return jpChantier;
     }
+
+    public static JPMain getSouth() {
+        return south;
+    }
+
+    public static void setSouth(JPMain south) {
+        London.south = south;
+    }
+    
+    
 
 
     public static void setJpChantier(JPChantiers jpChantier) {

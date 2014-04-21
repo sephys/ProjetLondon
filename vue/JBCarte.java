@@ -57,7 +57,7 @@ public class JBCarte extends JButton implements MouseListener {
         }
         this.position = "main";
 
-       // this.retournee = false;
+        // this.retournee = false;
         this.setIcon(new ImageIcon(scaleImage(image, 79, 121)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
@@ -104,7 +104,8 @@ public class JBCarte extends JButton implements MouseListener {
             switch (((JBCarte) e.getComponent()).getPosition()) {
                 case "main": // on met la carte de la main sur le l'étalage
                     //if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
-                    if (London.getListeJoueur().getJoueur().getDefausse() != 0 && ((JBCarte) e.getComponent()).isDefausse()) {
+                    // cas ou defausse car trop de cartes dans la main
+                    if (London.getListeJoueur().getJoueur().getDefausse() != 0 && London.getListeJoueur().getJoueur().getLastCarte() == null) {
 
                         /**/
                         //London.getMenudroite().getFinTour().setEnabled(true);
@@ -123,10 +124,34 @@ public class JBCarte extends JButton implements MouseListener {
 
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
-                        London.getListeJoueur().getJoueur().payeConstruction(carte.carte);
+                        //London.getListeJoueur().getJoueur().payeConstruction(carte.carte);
+                    } // cas defausse à cause d'une construction
+                    else if (London.getListeJoueur().getJoueur().getDefausse() != 0) {
+                        /**/
+                        //London.getMenudroite().getFinTour().setEnabled(true);
+                        JBCarte carte = ((JBCarte) e.getComponent());
+                        carte.setPosition("etalage");
 
+                        //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
+                        //London.getListeJoueur().getJoueur().defausseMoins();
+                        // si carte ne respecte pas les contraintes de defausse
+                        if (London.getListeJoueur().getJoueur().payeConstruction(carte.carte) == false) {
+                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+                        } else {
+                            // ajout de la carte dans l'etalage
+                            London.getEtalage().addCarte(carte.carte);
+                            // on rafrachit l'etalage
+                            London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
+                            // on enleve la carte de la main du joueur ( graphiquement )
+                            London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                        //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
+
+                            // suppression de la carte de la main du joueur
+                            London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
+
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte" + ((JBCarte)e.getComponent()).isDefausse());
+                        JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
                     }
                     break;
 
@@ -184,6 +209,7 @@ public class JBCarte extends JButton implements MouseListener {
                                 this.changerImage("../img/cartes/Background.png");
                             }
                             London.getInfos().maj_infos();
+                            London.getListeJoueur().getJoueur().setFinitTour(true);
 
                         }
 
@@ -193,44 +219,44 @@ public class JBCarte extends JButton implements MouseListener {
             }
         }
 
-
-            if (e.getButton() == MouseEvent.BUTTON3) {
-                if (JBCarte.clicDroitJouer) {
-                    if (carte.getClass() == NonConstructible.class) {
-                        if (!"Paupers".equals(carte.getNom())) {
-                            int rep = JOptionPane.showConfirmDialog(London.acc,
-                                    "Êtes-vous sûr de vouloir jouer cette carte ?",
-                                    "Jouer carte",
-                                    JOptionPane.YES_NO_OPTION);
-                            if (rep == JOptionPane.YES_OPTION) {
-                                System.out.println(carte.getNom());
-                                London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
-                                London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
-                                System.out.println(London.getListeJoueur().getJoueur().getMain());
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
-
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            if (JBCarte.clicDroitJouer) {
+                if (carte.getClass() == NonConstructible.class) {
+                    if (!"Paupers".equals(carte.getNom())) {
+                        int rep = JOptionPane.showConfirmDialog(London.acc,
+                                "Êtes-vous sûr de vouloir jouer cette carte ?",
+                                "Jouer carte",
+                                JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                            System.out.println(carte.getNom());
+                            London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
+                            London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                            System.out.println(London.getListeJoueur().getJoueur().getMain());
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
+                        JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
+
                     }
                 } else {
-
-                    JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
-
+                    JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                 }
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+
             }
         }
-        /**
-         * Code repris de http://www.developpez.net permettant de redimensionner
-         * une image.
-         *
-         * @param source
-         * @param width
-         * @param height
-         * @return
-         */
+    }
+
+    /**
+     * Code repris de http://www.developpez.net permettant de redimensionner une
+     * image.
+     *
+     * @param source
+     * @param width
+     * @param height
+     * @return
+     */
 
     public Image scaleImage(Image source, int width, int height) {
 

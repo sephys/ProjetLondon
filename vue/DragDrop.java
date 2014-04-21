@@ -150,6 +150,8 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         
                                         // change le statut de la carte
                                         jbCarte.setPosition("construction");
+                                        
+                                        London.getListeJoueur().getJoueur().setFinitTour(true);
 
                                         //System.out.println(JBcarte.getCarte().getCouleur());
                                         //System.out.println("index du chantier : " + chantier.getIndex());
@@ -168,6 +170,9 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
                                         //JBCarte.setDoubleClick(true);
                                         London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                        
+                                        // refresh
+                                        London.getSouth().revalidate();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
                                     }
@@ -178,7 +183,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                         } else {
                             // informe le joueur qui joue
-                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
+                            JOptionPane.showMessageDialog(null, "Cette carte n'est pas constructible");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");

@@ -48,6 +48,8 @@ public class Joueur {
 	public void initialisePouvoir(){
 		pouvoir.put("Bank of England", 0);
 		pouvoir.put("Brixton Prison", 0);
+		pouvoir.put("School",0);
+		pouvoir.put("Wren",0);
 		//pouvoir.put(nom, argent);
 	}
 
@@ -283,13 +285,13 @@ public class Joueur {
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
 			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
-				this.defausse=0;
-			}else{								//besoin de dépenser une carte
+                            this.defausse=0;
+			}else{				//besoin de dépenser une carte
 				this.defausse=1;
 			}
 		}
 		carteJouer.jouerCarte(this,ind);
-		this.getMain().remove(defausse);
+		this.getMain().remove(carteJouer);
 		return res;
 	}
 	
@@ -297,10 +299,11 @@ public class Joueur {
 		boolean res= false;
 		res=PouvoirBeta.pouvoirSchool(this,lastCarte.getCouleur(),depense.getCouleur());
                 if(res){
-                    this.defausseMoins();
+                    this.defausse=0;
+                    this.lastCarte=null;
                 }
 		return res;
-	}
+	} 
 
 	/*   public String getPiocheDefausse(){
         return this.piocheDefausse;
@@ -333,6 +336,10 @@ public class Joueur {
 		this.lastCarte=constructible;
 		
 	}
+
+    public Carte getLastCarte() {
+        return this.lastCarte;
+    }
 
 
 
