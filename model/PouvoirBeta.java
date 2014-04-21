@@ -29,7 +29,7 @@ public class PouvoirBeta {
     public static boolean pouvoirHuguenots(Joueur j){
     	boolean res=false;
     	int test = j.getPouvoir().get("Huguenots");
-    	if(test>1){
+    	if(test>=1){
     		res=true;
     		j.getPouvoir().put("Huguenots",new Integer(j.getPouvoir().get("Huguenots").intValue()-1));
     		j.setPioche(2);
