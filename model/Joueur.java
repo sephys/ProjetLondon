@@ -290,6 +290,7 @@ public class Joueur {
 
 	public boolean jouerCarte2(Carte carteJouer, int ind){
 		boolean res=false;
+		this.finitTour=true;
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
 			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte

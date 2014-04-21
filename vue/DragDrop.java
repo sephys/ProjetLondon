@@ -151,7 +151,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         // change le statut de la carte
                                         jbCarte.setPosition("construction");
 
-                                        London.getListeJoueur().getJoueur().setFinitTour(true);
+                                        //London.getListeJoueur().getJoueur().setFinitTour(true);
 
                                         //System.out.println(JBcarte.getCarte().getCouleur());
                                         //System.out.println("index du chantier : " + chantier.getIndex());
