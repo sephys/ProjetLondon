@@ -9,6 +9,11 @@ package vue;
 import java.awt.*;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
+import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -42,7 +47,7 @@ public class JPPileChantier extends JPanel{
         this.setPreferredSize(new Dimension(122,168));
         this.setOpaque(false);
     }
-
+    
     public int getIndex() {
         return index;
     }
