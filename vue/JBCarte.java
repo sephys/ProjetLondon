@@ -28,7 +28,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.*;
 
-
 /**
  *
  * @author Anh-Djuy Bouton représentant une carte
@@ -164,31 +163,34 @@ public class JBCarte extends JButton implements MouseListener {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
                     }
                     break;
-                    
+
                 case "construction": // on active une carte qui est dans la zone de construction
-                    
-                    
+
             }
 
         }
 
         if (e.getButton() == MouseEvent.BUTTON3) {
             if (JBCarte.clicDroitJouer) {
-                if(carte.getClass()==NonConstructible.class && carte.getNom()!="Paupers"){
-                    int rep = JOptionPane.showConfirmDialog(London.acc,
-                            "Êtes-vous sûr de vouloir jouer cette carte ?",
-                            "Jouer carte",
-                            JOptionPane.YES_NO_OPTION);
-                    if (rep == JOptionPane.YES_OPTION) {
-                        System.out.println(carte.getNom());
-                        London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
-                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                if (carte.getClass() == NonConstructible.class) {
+                    if (!"Paupers".equals(carte.getNom())) {
+                        int rep = JOptionPane.showConfirmDialog(London.acc,
+                                "Êtes-vous sûr de vouloir jouer cette carte ?",
+                                "Jouer carte",
+                                JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                            System.out.println(carte.getNom());
+                            London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
+                            London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                            System.out.println(London.getListeJoueur().getJoueur().getMain());
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
                     }
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
             }
         }
