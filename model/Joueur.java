@@ -9,6 +9,7 @@ import vue.London;
 
 public class Joueur {
 
+
     private String nom;
     private ArrayList<Carte> main;
     private HashMap<String, Integer> pouvoir;
@@ -308,4 +309,6 @@ public class Joueur {
         return res;
     }
     
+
+	
 }
