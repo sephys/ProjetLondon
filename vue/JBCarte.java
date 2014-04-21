@@ -28,7 +28,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.*;
 
-
 /**
  *
  * @author Anh-Djuy Bouton représentant une carte
@@ -56,7 +55,9 @@ public class JBCarte extends JButton implements MouseListener {
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.position = "main";
+
        // this.retournee = false;
+
         this.setIcon(new ImageIcon(scaleImage(image, 79, 121)));
         this.setPreferredSize(new Dimension(79, 121));
         // D&D
@@ -67,7 +68,9 @@ public class JBCarte extends JButton implements MouseListener {
 
     public void changeTailleBoutonImage(Dimension d) {
         this.setPreferredSize(d);
+
         this.setIcon(new ImageIcon(scaleImage(image, (int) d.getWidth(), (int) d.getHeight())));
+
     }
 
     @Override
@@ -165,42 +168,55 @@ public class JBCarte extends JButton implements MouseListener {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
                     }
                     break;
-                    
+
                 case "construction": // on active une carte qui est dans la zone de construction
-                //((JBCarte) e.getComponent()).scaleImage(image, TOP, CENTER)
-                    URL uri = JBCarte.class.getResource("../img/cartes/Background.png");
-                    try {
+                    int rep = JOptionPane.showConfirmDialog(London.acc,
+                                "Êtes-vous sûr de vouloir activer cette carte ?",
+                                "Activer la carte",
+                                JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                           London.getListeJoueur().getJoueur().activerCarte(((Constructible)  ((JBCarte) e.getComponent()).carte));
+                           
+                           // on check si la carte doit être retourné
+                           if(((Constructible)  ((JBCarte) e.getComponent()).carte).isARetourne())
+                           {
+                               this.changerImage("../img/cartes/Background.png"); 
+                           }
+                           London.getInfos().maj_infos();
+                           
+                           
+                            
+                        }
                         
-                        Image img = ImageIO.read(uri);
-                        ((JBCarte) e.getComponent()).scaleImage(img, 122, 168);
-                        
-                    } catch (IOException ex) {
-                        
-                        Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                
                     
                     
+
             }
 
         }
 
         if (e.getButton() == MouseEvent.BUTTON3) {
             if (JBCarte.clicDroitJouer) {
-                if(carte.getClass()==NonConstructible.class && carte.getNom()!="Paupers"){
-                    int rep = JOptionPane.showConfirmDialog(London.acc,
-                            "Êtes-vous sûr de vouloir jouer cette carte ?",
-                            "Jouer carte",
-                            JOptionPane.YES_NO_OPTION);
-                    if (rep == JOptionPane.YES_OPTION) {
-                        System.out.println(carte.getNom());
-                        London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
-                         London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                if (carte.getClass() == NonConstructible.class) {
+                    if (!"Paupers".equals(carte.getNom())) {
+                        int rep = JOptionPane.showConfirmDialog(London.acc,
+                                "Êtes-vous sûr de vouloir jouer cette carte ?",
+                                "Jouer carte",
+                                JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                            System.out.println(carte.getNom());
+                            London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
+                            London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                            System.out.println(London.getListeJoueur().getJoueur().getMain());
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
                     }
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
             }
         }
@@ -215,7 +231,9 @@ public class JBCarte extends JButton implements MouseListener {
      * @param height
      * @return
      */
-    public  Image scaleImage(Image source, int width, int height) {
+
+    public Image scaleImage(Image source, int width, int height) {
+
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D) img.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -310,5 +328,15 @@ public class JBCarte extends JButton implements MouseListener {
 
     public void pouvoirBrixtonPrison(int nombreCartes) {
         London.getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
+    }
+    
+    public void changerImage(String path){
+        URL uri = JBCarte.class.getResource(path);
+        try {
+            image = ImageIO.read(uri);
+        } catch (IOException ex) {
+            Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setIcon(new ImageIcon(scaleImage(image, 122, 168)));
     }
 }

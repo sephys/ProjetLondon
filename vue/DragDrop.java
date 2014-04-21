@@ -160,7 +160,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
 
                                         /*Mise a jour du panel d'information*/
-                                        London.infos.maj_infos();
+                                        London.getInfos().maj_infos();
 
                                         London.getListeJoueur().getJoueur().setDefausse(1);
                                         London.getMenudroite().disableAll();

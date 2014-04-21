@@ -38,7 +38,8 @@ public class JPSousInfos extends JPanel{
     public JPSousInfos(Joueur joueur){
         this.setLayout(new GridLayout(2, 3));
         this.setOpaque(false); // transparance
-        changeImageJoueur(joueur);
+        this.joueur = new JPSousInfosJoueur(joueur);
+        this.add(this.joueur);
         this.piece = new JPSousSousInfos("../img/jetons/Piece1.png", 5);
         this.pauvrete = new JPSousSousInfos("../img/jetons/PointPauvrete.png", 5);
         this.emprunt = new JPSousSousInfos("../img/jetons/10LivreEmprunt.png", 0);
@@ -51,26 +52,6 @@ public class JPSousInfos extends JPanel{
         this.add(this.metro);
         this.setBackground(joueur.getColor());        
     }    
-
-    private void changeImageJoueur(Joueur j) {
-        StringBuilder sb = new StringBuilder("../img/");
-        Color c = j.getColor();
-        if(c == Color.yellow){
-            sb.append("jaune.png");
-        }else{
-            if(c == Color.blue){
-                sb.append("bleu.png");
-            }else{
-                if(c == Color.red){
-                    sb.append("rouge.png");
-                }else{
-                    sb.append("vert.png");
-                }
-            }
-        }
-        this.joueur = new JPSousInfosJoueur(new String(sb), j.getNom());
-        this.add(this.joueur);
-    }
     
     public void addPieces(int pieces){
         this.piece.ajoutNombre(pieces);

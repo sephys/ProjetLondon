@@ -59,7 +59,7 @@ public class London {
     static DragDrop dndListener;
     static DragSource dragSource;
     static JFrame acc;
-    static JPInfos infos;
+    private static JPInfos infos;
     public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
     private static Joueur[] tabJoueur;
 
@@ -277,6 +277,16 @@ public class London {
     public static Etalage getEtalage() {
         return etalage;
     }
+
+    public static JPInfos getInfos() {
+        return infos;
+    }
+
+    public static void setInfos(JPInfos infos) {
+        London.infos = infos;
+    }
+    
+    
 
     public static JPMain[] getTabJPMain() {
         return tabJPMain;
