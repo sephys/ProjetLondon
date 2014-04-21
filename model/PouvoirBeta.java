@@ -26,6 +26,18 @@ public class PouvoirBeta {
         return res;
     }
     
+    public static boolean pouvoirHuguenots(Joueur j){
+    	boolean res=false;
+    	System.out.println(j.isFinitTour());
+    	int test = j.getPouvoir().get("Huguenots");
+    	if(test>=1){
+    		res=true;
+    		j.getPouvoir().put("Huguenots",new Integer(j.getPouvoir().get("Huguenots").intValue()-1));
+    		j.setPioche(2);
+    	}
+    	return res;
+    }
+    
     //pouvoir limité.
     public static boolean pouvoirWren(Joueur j) {
         boolean res = false;

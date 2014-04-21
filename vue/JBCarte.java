@@ -120,8 +120,10 @@ public class JBCarte extends JButton implements MouseListener {
                         //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
 
                         // suppression de la carte de la main du joueur
+
                         London.getListeJoueur().getJoueur().getMain().remove(carte.getCarte());
                         
+
                         //on enlève la défausse
                         London.getListeJoueur().getJoueur().defausseMoins();
 
@@ -150,8 +152,10 @@ public class JBCarte extends JButton implements MouseListener {
                         //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
 
                             // suppression de la carte de la main du joueur
+
                             London.getListeJoueur().getJoueur().getMain().remove(carte.getCarte());
                             
+
                             // refresh
                             London.getSouth().repaint();
                             London.getSouth().revalidate();
@@ -174,7 +178,7 @@ public class JBCarte extends JButton implements MouseListener {
                         // on rafraichit l'étalage
                         London.getJpEtalage().actualiser(London.getEtalage().getLigne1(), London.getEtalage().getLigne2());
                         London.getListeJoueur().getJoueur().piocheMoins();
-                        
+
                         ((JBCarte) e.getComponent()).setPosition("main");
 
                     } else {
@@ -238,10 +242,18 @@ public class JBCarte extends JButton implements MouseListener {
                                 JOptionPane.YES_NO_OPTION);
                         if (rep == JOptionPane.YES_OPTION) {
                             System.out.println(carte.getNom());
-                            London.getListeJoueur().getJoueur().jouerCarte(null, carte, 0);
+                            London.getListeJoueur().getJoueur().jouerCarte2(carte,0);
                             London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).carte);
+                            
+                            /*Wren*/
                             if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
                                 London.getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
+                            }
+                            
+                            /*Hugueunot*/
+                            if (London.getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
+                                PouvoirBeta.pouvoirHuguenots(London.getListeJoueur().getJoueur());
+                                
                             }
                         }
                     } else {
@@ -252,9 +264,11 @@ public class JBCarte extends JButton implements MouseListener {
                     JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                 }
             } else {
-
-                JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
-
+            	if(London.getListeJoueur().getJoueur().getPioche()==0){
+            		JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+            	}else{
+            		JOptionPane.showMessageDialog(null, "Vous devez piocher");
+            	}
             }
         }
     }
@@ -268,7 +282,6 @@ public class JBCarte extends JButton implements MouseListener {
      * @param height
      * @return
      */
-
     public Image scaleImage(Image source, int width, int height) {
 
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);

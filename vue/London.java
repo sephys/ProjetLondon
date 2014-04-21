@@ -56,7 +56,7 @@ public class London {
     public static JFrame frame; // fenêtre principale
 
     // pour le drag & drop
-    static DragDrop dndListener;
+    public static DragDrop dndListener;
     static DragSource dragSource;
     static JFrame acc;
     private static JPInfos infos;

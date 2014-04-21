@@ -50,6 +50,7 @@ public class Joueur {
 		pouvoir.put("Brixton Prison", 0);
 		pouvoir.put("School",0);
 		pouvoir.put("Wren",0);
+                pouvoir.put("Huguenots",0);
 		//pouvoir.put(nom, argent);
 	}
 
@@ -111,6 +112,7 @@ public class Joueur {
 
 	public void setPioche(int pioche) {
 		this.pioche = pioche;
+		London.dndListener.setDragEnable(false);
 		London.getMenudroite().disableAll();
                 London.getMenudroite().getPiocher().setEnabled(true);
 		//JBCarte.setDoubleClick(true);
@@ -127,8 +129,9 @@ public class Joueur {
 		this.pioche--;
 		if (this.pioche == 0) {
 			//JBCarte.setDoubleClick(false);
-			if (London.getListeJoueur().getJoueur().isFinitTour()) // fin du tour du joueur
+			if (this.finitTour) // fin du tour du joueur
 			{
+				London.dndListener.setDragEnable(true);
 				London.getMenudroite().setFinTour();
 
 			} else // une pioche normal
@@ -290,27 +293,31 @@ public class Joueur {
 
 	public boolean jouerCarte2(Carte carteJouer, int ind){
 		boolean res=false;
+		this.finitTour=true;
+		System.out.println(this.finitTour);
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
 			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
-                            System.out.println("defausse = 0");
+
+				System.out.println("defausse = 0");
+
 			}else{				//besoin de dépenser une carte
-                            this.defausse=1;
-                            System.out.println("defausse = 1");
+				this.defausse=1;
+				System.out.println("defausse = 1");
 			}
 		}
 		carteJouer.jouerCarte(this,ind);
 		this.getMain().remove(carteJouer);
 		return res;
 	}
-	
+
 	public boolean payeConstruction(Carte depense){
 		boolean res= false;
 		res=PouvoirBeta.pouvoirSchool(this,lastCarte.getCouleur(),depense.getCouleur());
-                if(res){
-                    this.defausseMoins();
-                    this.lastCarte=null;
-                }
+		if(res){
+			this.defausseMoins();
+			this.lastCarte=null;
+		}
 		return res;
 	} 
 
@@ -324,7 +331,7 @@ public class Joueur {
 
 	public void activerCarte(Constructible actCarte){
 		actCarte.activerCarte(this);
-	
+
 	}
 
 
@@ -343,12 +350,12 @@ public class Joueur {
 	public void setLastCarte(Constructible constructible) {
 		// TODO Auto-generated method stub
 		this.lastCarte=constructible;
-		
+
 	}
 
-    public Carte getLastCarte() {
-        return this.lastCarte;
-    }
+	public Carte getLastCarte() {
+		return this.lastCarte;
+	}
 
 
 
