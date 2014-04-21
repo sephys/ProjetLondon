@@ -165,9 +165,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         //London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
                                         //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
                                         //JBCarte.setDoubleClick(true);
-                                        if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
-                                            London.getMenudroite().getLabelInfo().setText("[Pouvoir Wren] Posez deux cartes sur votre chantier sans devoir défausser des cartes");
-                                        } else {
+                                        if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") != 1) {
                                             London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
                                         }
 

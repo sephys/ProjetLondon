@@ -286,6 +286,7 @@ public class Joueur {
 		if(carteJouer.getClass()==Constructible.class){ //si constructible
 			if(PouvoirBeta.pouvoirWren(this)){ //pas besoin de jeter de carte
                             System.out.println("defausse = 0");
+                            London.getMenudroite().getLabelInfo().setText("[Pouvoir Wren] Posez deux cartes sur votre /n chantier sans devoir défausser des cartes");
 			}else{				//besoin de dépenser une carte
                             this.defausse=1;
                             System.out.println("defausse = 1");
