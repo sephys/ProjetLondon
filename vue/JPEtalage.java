@@ -68,9 +68,6 @@ public class JPEtalage extends JPanel {
             
             this.add(eta1);
             tab1[i] = eta1;
-            // D&D
-            DropTarget dropTarget1 = new DropTarget(eta1, DnDConstants.ACTION_MOVE,
-                    London.dndListener);
             
             JPTest eta2 = new JPTest(); // panel bas
             eta2.setBounds(23 + 174 * i, 224, 122, 168);
@@ -79,9 +76,6 @@ public class JPEtalage extends JPanel {
             
             this.add(eta2);
             tab2[i] = eta2;
-            // D&D
-            DropTarget dropTarget2 = new DropTarget(eta2, DnDConstants.ACTION_MOVE,
-                    London.dndListener);
         }
         
     }
