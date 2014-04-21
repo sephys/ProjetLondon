@@ -114,11 +114,11 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
             if (((DropTarget) target).getComponent() instanceof JPPileChantier) {
                 if (this.dragEnable) { // test si on a clicker sur l'action jouer des cartes
                     if (London.getListeJoueur().getJoueur().getDefausse() == 0) { // check si je le joueur doit pas de défausser
-                        JBCarte JBcarte = (JBCarte) component;
+                        JBCarte jbCarte = (JBCarte) component;
                         JPPileChantier chantier = (JPPileChantier) container;
                         // check si carte constructible - check si chantier constructible - check si pose 2 carte sur le même chantier même tour
-                        if (JBcarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
-                            Constructible carte = (Constructible) JBcarte.getCarte();
+                        if (jbCarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
+                            Constructible carte = (Constructible) jbCarte.getCarte();
                             // check 2 carte de la même couleur pour la defausse
                             if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1) {
                                 int rep = JOptionPane.showConfirmDialog(London.acc,
@@ -140,18 +140,21 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
 
                                         chantier.setCarte2(true);
                                         /*Ajout de la carte visuellement*/
-                                        JBcarte.changeTailleBoutonImage(new Dimension(122, 168));
-                                        container.add(JBcarte);
+                                        jbCarte.changeTailleBoutonImage(new Dimension(122, 168));
+                                        container.add(jbCarte);
                                         oldContainer.validate();
                                         oldContainer.repaint();
                                         container.validate();
                                         container.repaint();
+                                        
+                                        // change le statut de la carte
+                                        jbCarte.setPosition("construction");
 
-                                        System.out.println(JBcarte.getCarte().getCouleur());
-                                        System.out.println("index du chantier : " + chantier.getIndex());
+                                        //System.out.println(JBcarte.getCarte().getCouleur());
+                                        //System.out.println("index du chantier : " + chantier.getIndex());
 
                                         /*appel de jouerCarte*/
-                                        London.getListeJoueur().getJoueur().jouerCarte(null, JBcarte.getCarte(), chantier.getIndex());
+                                        London.getListeJoueur().getJoueur().jouerCarte(null, jbCarte.getCarte(), chantier.getIndex());
 
                                         /*Passer le chantier suivant a posable=true*/
                                         London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);

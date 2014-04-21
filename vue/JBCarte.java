@@ -187,6 +187,10 @@ public class JBCarte extends JButton implements  MouseListener {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
                     }
                     break;
+                    
+                case "construction": // on active une carte qui est dans la zone de construction
+                    
+                    
             }
             
             
