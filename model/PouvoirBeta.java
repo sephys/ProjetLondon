@@ -116,6 +116,24 @@ public class PouvoirBeta {
             }
             j.addArgent(argent);
         }
+        
+        public static void pouvoirNorthTrainStation(Joueur j){
+            for(Zone n : London.zones.values()){
+                if(n != null && n.getProprietaire().equals(j) && (!n.isDessousTamise())){
+                    j.addArgent(2);
+                }
+            }
+        }
+        
+        public static void pouvoirSouthTrainStation(Joueur j){
+            for(Zone n : London.zones.values()){
+                if(n != null && n.getProprietaire().equals(j) && n.isDessousTamise()){
+                    j.addArgent(2);
+                }
+            }
+        }
+        
+        
 }
 
 
