@@ -120,7 +120,7 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                         if (jbCarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
                             Constructible carte = (Constructible) jbCarte.getCarte();
                             // check 2 carte de la même couleur pour la defausse
-                            if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1) {
+                            if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || London.getListeJoueur().getJoueur().getPouvoir().get("School")==1) {
                                 int rep = JOptionPane.showConfirmDialog(London.acc,
                                         "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
                                         "Construire",
@@ -155,15 +155,14 @@ public class DragDrop implements DragGestureListener, DragSourceListener,
                                         //System.out.println("index du chantier : " + chantier.getIndex());
 
                                         /*appel de jouerCarte*/
-                                        London.getListeJoueur().getJoueur().jouerCarte(null, jbCarte.getCarte(), chantier.getIndex());
+                                        London.getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
+                                        System.out.println(London.getListeJoueur().getJoueur().getDefausse());
 
                                         /*Passer le chantier suivant a posable=true*/
                                         London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
 
                                         /*Mise a jour du panel d'information*/
                                         London.getInfos().maj_infos();
-
-                                        London.getListeJoueur().getJoueur().setDefausse(1);
                                         London.getMenudroite().disableAll();
                                         London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
                                         //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");

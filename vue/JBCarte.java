@@ -122,10 +122,11 @@ public class JBCarte extends JButton implements MouseListener {
                         London.getListeJoueur().getJoueur().getMain().remove(carte.carte);
 
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
-                        London.getListeJoueur().getJoueur().defausseMoins();
+                        //London.getListeJoueur().getJoueur().defausseMoins();
+                        London.getListeJoueur().getJoueur().payeConstruction(carte.carte);
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+                        JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte" + ((JBCarte)e.getComponent()).isDefausse());
                     }
                     break;
 
