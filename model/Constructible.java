@@ -128,8 +128,8 @@ public class Constructible extends Carte {
 		}
 		currJ.setArgent(currJ.getArgent()-this.getCoutPose());
 		currJ.setPointVictoire(currJ.getPointVictoire()+this.getPointsVictoirePose());
-		
-                /*Constructible sousCarte=currJ.getListeChantier().get(ind).getFirst();
+
+		/*Constructible sousCarte=currJ.getListeChantier().get(ind).getFirst();
 		if(sousCarte!=null){
 			String pouvoir=sousCarte.getPouvoirIlli();
 			if(currJ.getPouvoir().get(pouvoir)!=null);{
@@ -138,12 +138,29 @@ public class Constructible extends Carte {
 		}else{
 			currJ.getListeChantier().get(ind).add(this);
 		}*/
-		
-                currJ.getListeChantier().get(ind).add(this);
+
+		currJ.getListeChantier().get(ind).add(this);
 		currJ.getMain().remove(this);
 	}
-	
+
 	public void activerCarte(Joueur currJ){
-		
+		if(this.activable){
+			currJ.setArgent(currJ.getArgent()-Integer.parseInt(this.coutActivation[0]));
+			String coutCarte=this.coutActivation[1];
+			if(coutCarte.compareTo("aucun")!=0){
+				if(coutCarte.compareTo("choix")==0){
+					currJ.setDefausse(1);
+				}else{
+					currJ.setLastCarte(this);
+					currJ.setDefausse(1);
+				}
+			}
+			currJ.setArgent(currJ.getArgent()+this.gainAcivation[0]);
+			currJ.setPointVictoire(currJ.getPointVictoire()+this.gainAcivation[1]);
+			currJ.setPointPauvrete(currJ.getPointPauvrete()+this.gainAcivation[2]);
+			if(this.aRetourne){
+				this.activable=false;
+			}
+		}
 	}
 }
