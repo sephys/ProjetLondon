@@ -69,6 +69,7 @@ public class London {
     
 
 
+
     public London() {
 
         controlJPGID=new JPnomGaucheImageDroiteControl();
