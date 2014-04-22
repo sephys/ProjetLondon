@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import vue.London;
+import vue.Main;
 
 public class TestCarte {
 	
@@ -28,8 +29,9 @@ public class TestCarte {
 
 	@Before
 	public void setUp() throws Exception {
-		Carte.initDeck();
-		d=London.getDeck();
+		Carte.initDeck();				//initialisation du deck
+		London jeu=new London();
+		d=jeu.getDeck();		//récupération du deck
 	}
 
 	@After
@@ -41,14 +43,12 @@ public class TestCarte {
 	public void testEquals() {
 		Carte tmp = d.peekFirst();
 		Carte tmp2 = d.poll();
-		
 		assertSame(tmp,tmp2);
 		
 		
 		while(d.peekFirst().getNom().equals(tmp2.getNom())){
 			tmp = d.poll();
 		}
-		
 		assertNotSame(tmp,tmp2);
 	}
 	
@@ -83,20 +83,21 @@ public class TestCarte {
 	public void testInitDeck2(){
 		
 		Carte tmpPast = d.peekFirst();
+		StringBuffer tmpres= new StringBuffer(tmpPast.getCategorie());
+		String expected="ABC";
 		Carte tmp = d.poll();
-		int cpt = 0;
-		
 		while (d.isEmpty() == false){
 			
 			tmp = d.poll();
 			
 			if (!(tmp.getCategorie().equals(tmpPast.getCategorie()))){
-				cpt++;
+				tmpres.append(tmp.getCategorie());
 			}
 			
 			tmpPast = d.peekFirst(); 
 		}
-		assertEquals(2,cpt);
+		String res=new String(tmpres);
+		assertEquals(expected,res);
 	}
 	
 }
