@@ -52,7 +52,7 @@ public class Frame3Cartes extends JFrame{
         );
     }
     
-    void remetCartes(JBCarte aThis) {
+    public void remetCartes(JBCarte aThis) {
         if(aThis == this.c1){
             London.getDeck().addFirst(c2.getCarte());
             London.getDeck().addFirst(c3.getCarte());

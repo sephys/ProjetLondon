@@ -49,7 +49,7 @@ public class FinTourControl implements ActionListener{
                         invest = false;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Vous n'avez pas finit votre tour");
+                    JOptionPane.showMessageDialog(null, "Vous n'avez pas fini votre tour");
                 }
     }
     

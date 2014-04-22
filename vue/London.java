@@ -58,7 +58,7 @@ public class London {
     // pour le drag & drop
     public static DragDrop dndListener;
     static DragSource dragSource;
-    static JFrame acc;
+    public static JFrame acc;
     private static JPInfos infos;
     public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
     private static Joueur[] tabJoueur;
