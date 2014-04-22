@@ -5,12 +5,10 @@
  */
 package vue;
 
-
 import controleur.*;
 import java.awt.*;
 
 import java.awt.event.*;
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +17,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import javax.swing.*;
-
 
 /**
  *
@@ -41,15 +38,18 @@ public class MenuDroite extends JPanel {
 
     public MenuDroite() {
         super(new BorderLayout());
-        m=new MenuDroiteControl();
+        m = new MenuDroiteControl();
         menuBouton = new JPanel();
         menuBouton.setLayout(new BoxLayout(menuBouton, BoxLayout.Y_AXIS));
 
         // position le menuBouton
         Dimension d = new Dimension(310, 260);
-
+        
+        // panel contenant image + nom du joueur
         jpsij = new JPnomGaucheImageDroite();
         this.add(jpsij);
+        
+        // transparance
         menuBouton.setOpaque(false);
 
         try {
@@ -59,8 +59,7 @@ public class MenuDroite extends JPanel {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // label du joueur qui joue
-        //labelJoueur = new JLabel(London.getListeJoueur().getJoueur().getNom());
+    
         // intancie tous les boutons
         jouer = new JButton("    Jouer des cartes    ");
         jouer.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -89,6 +88,7 @@ public class MenuDroite extends JPanel {
         piocher.setPreferredSize(new Dimension(149, 26));
         piocher3.setPreferredSize(new Dimension(149, 26));
         finTour.setPreferredSize(new Dimension(149, 26));
+        
         // on les ajoute au menu
         menuBouton.add(jpsij);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 6)));
@@ -111,19 +111,14 @@ public class MenuDroite extends JPanel {
         menuBouton.add(labelInfo);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 30)));
 
-        
-        
-
         // ACTION BOUTON JOUERCARTES
         jouer.addActionListener(new JouerControl());
 
         // ACTION BOUTON RESTAURER LA VILLE
         restaurer.addActionListener(new RestaurerControl());
-            
 
         // ACTION BOUTON EMPRUNTER
         emprunter.addActionListener(new EmprunterControl());
-      
 
         // ACTION BOUTON PIOCHER
         piocher.addActionListener(new PiocherControl());
@@ -132,18 +127,7 @@ public class MenuDroite extends JPanel {
         piocher3.addActionListener(new Piocher3Control());
 
         // POUVOIR DE "UNIVERSITY OF LONDON"
-        regarder3Cartes.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JBCarte c1 = new JBCarte(London.getDeck().poll());
-                JBCarte c2 = new JBCarte(London.getDeck().poll());
-                JBCarte c3 = new JBCarte(London.getDeck().poll());
-                //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
-                f = new Frame3Cartes(c1, c2, c3);
-            }
-
-        });
+        regarder3Cartes.addActionListener(new Regarder3CartesControl());
 
         // ACTION BOUTON FIN DE TOUR
         finTour.addActionListener(new FinTourControl());
@@ -160,7 +144,7 @@ public class MenuDroite extends JPanel {
         // zoom.setBackground(Color.red);
         this.add(zoom, BorderLayout.SOUTH);
         regarder3Cartes.setVisible(false);
-        
+
         // on doit piocher au début
         investir.setEnabled(false);
         piocher3.setEnabled(false);
@@ -170,31 +154,13 @@ public class MenuDroite extends JPanel {
         piocher.setEnabled(true);
     }
 
-    
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(img, 0, 0, 310, 810, this);
     }
 
-    /*
-    public void setTrueDefausseColor(String color) {
-    for (int i = 0; i < London.getSouth().getMain().getComponentCount(); i++) // parcours la main du joueur
-    {
-    if (((JBCarte) London.getSouth().getMain().getComponent(i)).getCarte().getCouleur().equals(color)) // si la carte est de la même couleur
-    {
-    ((JBCarte) London.getSouth().getMain().getComponent(i)).setDefausse(true); // il peut la defausser
-    }
-    }
-    }
-    public void setDefausseCarte(boolean bool) {
-    for (int i = 0; i < London.getSouth().getMain().getComponentCount(); i++) // parcourt la main du joueuer
-    {
-    ((JBCarte) London.getSouth().getMain().getComponent(i)).setDefausse(bool); // il peut se defausser
-    }
-    }*/
-    
+
     public JPnomGaucheImageDroite getJpsij() {
         return jpsij;
     }
@@ -202,8 +168,6 @@ public class MenuDroite extends JPanel {
     public void setJpsij(JPnomGaucheImageDroite jpsij) {
         this.jpsij = jpsij;
     }
-
-    
 
     public JButton getJouer() {
         return jouer;

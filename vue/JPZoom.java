@@ -47,7 +47,7 @@ public class JPZoom extends JPanel{
         try
         {
            img = ImageIO.read(uri); 
-           London.getFrame().repaint();
+           Main.getJeu().getFrame().repaint();
         } 
         catch(IOException e1)
         {

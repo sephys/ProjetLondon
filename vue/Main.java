@@ -12,10 +12,20 @@ package vue;
  */
 public class Main {
     
-    public static London jeu;
+    private static London jeu;
     
     public static void main(String[] arg) {
      jeu=new London();
     }
+
+    public static London getJeu() {
+        return jeu;
+    }
+
+    public static void setJeu(London jeu) {
+        Main.jeu = jeu;
+    }
+    
+    
     
 }

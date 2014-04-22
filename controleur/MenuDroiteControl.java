@@ -14,11 +14,12 @@ import vue.*;
  * @author Joke
  */
 public class MenuDroiteControl {
-    
+    JPnomGaucheImageDroiteControl control;
     
     public MenuDroiteControl()
     {
         super();
+        control= new JPnomGaucheImageDroiteControl();
     }
     
     public void disableAll() {
@@ -66,7 +67,7 @@ public class MenuDroiteControl {
         London.setListeJoueur(London.getListeJoueur().getSuivant());
         // change le label nomJoeuur
         //labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
-        London.getMenudroite().getJpsij().actualiseJoueur();
+        control.actualiseJoueur();
         // on remplace le panel par celui du nouveau joueur
         London.setSouth(London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()]);
         // on ajoute le panel

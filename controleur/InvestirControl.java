@@ -31,7 +31,7 @@ public class InvestirControl implements ActionListener{
                     London.getPlateau().activerZonesInvestissables();
 
                     London.getPlateau().desactiveZonesInvesties();
-                    invest = true;
+                  
                     London.getMenudroite().getEmprunter().setEnabled(true);
                     // change onglet
                     London.getPanelOnglet().setSelectedIndex(0);
