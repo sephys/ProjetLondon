@@ -71,11 +71,5 @@ public class JPChantiers extends JPanel{
         this.chantiers = chantiers;
     }
   
-    public static void main(String[] args){
-        Frame f = new Frame();
-        f.setSize(700, 500);
-        f.add(new JPChantiers());
-
-    f.setVisible(true);
-    }
+    
 }
