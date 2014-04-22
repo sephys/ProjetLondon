@@ -6,6 +6,10 @@
 
 package vue;
 
+import controleur.JPAccueilControl;
+import model.Carte;
+import model.Zone;
+
 /**
  *
  * @author Joke
@@ -16,6 +20,8 @@ public class Main {
     
     public static void main(String[] arg) {
      jeu=new London();
+     Carte.initDeck();
+     Zone.initZone();
     }
 
     public static London getJeu() {

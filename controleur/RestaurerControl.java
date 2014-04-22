@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import vue.JBCarte;
 import vue.London;
+import vue.Main;
 
 /**
  *
@@ -22,20 +23,20 @@ public class RestaurerControl implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         MenuDroiteControl m=new MenuDroiteControl();
         // check si pas de chantier
-                if (London.getListeJoueur().getJoueur().getListeChantier().isEmpty()) {
+                if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Vous ne pouvez pas restaurer la ville");
                 } else {
-                    int rep = JOptionPane.showConfirmDialog(London.getFrame(),
+                    int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
                             "Êtes-vous sûr de vouloir restaurer la ville ?",
                             "Restaurer la ville",
                             JOptionPane.YES_NO_OPTION);
                     if (rep == JOptionPane.YES_OPTION) {
                         m.disableAll();
-                        London.getMenudroite().getFinTour().setEnabled(true);
-                        London.getMenudroite().getLabelInfo().setText("Vous pouvez activer des cartes");
+                        Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
+                        Main.getJeu().getMenudroite().getLabelInfo().setText("Vous pouvez activer des cartes");
                         JBCarte.setActiverCarte(true);
                         // change onglet
-                        London.getPanelOnglet().setSelectedIndex(2);
+                        Main.getJeu().getPanelOnglet().setSelectedIndex(2);
 
                     }
                 }

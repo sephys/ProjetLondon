@@ -62,10 +62,12 @@ public class London {
     // pour le drag & drop
     public static DragDrop dndListener;
     static DragSource dragSource;
+
     
     // controleur
     JPnomGaucheImageDroiteControl controlJPGID;
     
+
 
     public London() {
 

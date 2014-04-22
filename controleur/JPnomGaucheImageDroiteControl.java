@@ -19,6 +19,7 @@ import model.Joueur;
 import vue.JBCarte;
 import vue.JPnomGaucheImageDroite;
 import vue.London;
+import vue.Main;
 
 /**
  *
@@ -52,18 +53,18 @@ public class JPnomGaucheImageDroiteControl {
     }
     
     public void actualiseJoueur(){
-        Joueur j = London.getListeJoueur().getJoueur();
+        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         changeImage(j);
-        London.getMenudroite().getJpsij().getGauche().setText(j.getNom());
+        Main.getJeu().getMenudroite().getJpsij().getGauche().setText(j.getNom());
     }
     
     public void changeImage(Joueur j) {
         try {
-            London.getMenudroite().getJpsij().remove(London.getMenudroite().getJpsij().getDroite());
+            Main.getJeu().getMenudroite().getJpsij().remove(Main.getJeu().getMenudroite().getJpsij().getDroite());
             URL uri = JBCarte.class.getResource(image(j));
             Image image = ImageIO.read(uri);
-            London.getMenudroite().getJpsij().setDroite(new JLabel(new ImageIcon(image)));
-            London.getMenudroite().getJpsij().add(London.getMenudroite().getJpsij().getDroite());
+            Main.getJeu().getMenudroite().getJpsij().setDroite(new JLabel(new ImageIcon(image)));
+            Main.getJeu().getMenudroite().getJpsij().add(Main.getJeu().getMenudroite().getJpsij().getDroite());
         } catch (IOException ex) {
             Logger.getLogger(JPnomGaucheImageDroite.class.getName()).log(Level.SEVERE, null, ex);
         }

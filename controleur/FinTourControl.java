@@ -10,7 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import vue.London;
-import static vue.MenuDroite.invest;
+import vue.Main;
+
 
 /**
  *
@@ -22,9 +23,9 @@ public class FinTourControl implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         MenuDroiteControl m=new MenuDroiteControl();
         
-        if (London.getListeJoueur().getJoueur().isFinitTour()) {
+        if (Main.getJeu().getListeJoueur().getJoueur().isFinitTour()) {
                     // check trop grand nombre de cartes dans la main
-                    if (London.getListeJoueur().getJoueur().getMain().size() > 9) {
+                    if (Main.getJeu().getListeJoueur().getJoueur().getMain().size() > 9) {
                         //System.out.println(London.getListeJoueur().getJoueur().getMain().size());
                         //JBCarte.setDoubleClick(true);
                         //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
@@ -33,23 +34,23 @@ public class FinTourControl implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");
                         // if(London.getListeJoueur().getJoueur().getDefausse()==0)
                         //{
-                        London.getListeJoueur().getJoueur().setDefausse(London.getListeJoueur().getJoueur().getMain().size() - 9);
+                        Main.getJeu().getListeJoueur().getJoueur().setDefausse(Main.getJeu().getListeJoueur().getJoueur().getMain().size() - 9);
                         //}
 
                         m.disableAll();
-                        London.getMenudroite().getLabelInfo().setText("Vous avez trop de cartes en main");
+                        Main.getJeu().getMenudroite().getLabelInfo().setText("Vous avez trop de cartes en main");
                        // finTour.setEnabled(true);
 
                         // change onglet
-                        London.getPanelOnglet().setSelectedIndex(1);
+                        Main.getJeu().getPanelOnglet().setSelectedIndex(1);
 
                     } else { // ici le joueur finit son tour
                         m.actualiserMain();
 
-                        invest = false;
+                    
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Vous n'avez pas finit votre tour");
+                    JOptionPane.showMessageDialog(null, "Vous n'avez pas fini votre tour");
                 }
     }
     

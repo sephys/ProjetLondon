@@ -23,84 +23,84 @@ public class MenuDroiteControl {
     }
     
     public void disableAll() {
-        London.getMenudroite().getJouer().setEnabled(false);
-        London.getMenudroite().getRestaurer().setEnabled(false);
-        London.getMenudroite().getInvestir().setEnabled(false);
-        London.getMenudroite().getPiocher3().setEnabled(false);
-        London.getMenudroite().getPiocher().setEnabled(false);
-        London.getMenudroite().getFinTour().setEnabled(false);
+        Main.getJeu().getMenudroite().getJouer().setEnabled(false);
+        Main.getJeu().getMenudroite().getRestaurer().setEnabled(false);
+        Main.getJeu().getMenudroite().getInvestir().setEnabled(false);
+        Main.getJeu().getMenudroite().getPiocher3().setEnabled(false);
+        Main.getJeu().getMenudroite().getPiocher().setEnabled(false);
+        Main.getJeu().getMenudroite().getFinTour().setEnabled(false);
     }
 
     public void enableAll() {
-         London.getMenudroite().getJouer().setEnabled(true);
-        London.getMenudroite().getRestaurer().setEnabled(true);
-        London.getMenudroite().getInvestir().setEnabled(true);
-        London.getMenudroite().getPiocher3().setEnabled(true);
-        London.getMenudroite().getPiocher().setEnabled(true);
-        London.getMenudroite().getFinTour().setEnabled(true);
+        Main.getJeu().getMenudroite().getJouer().setEnabled(true);
+        Main.getJeu().getMenudroite().getRestaurer().setEnabled(true);
+        Main.getJeu().getMenudroite().getInvestir().setEnabled(true);
+        Main.getJeu().getMenudroite().getPiocher3().setEnabled(true);
+        Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
+        Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
     }
     
     public void setFinTour() {
         disableAll();
-        London.getMenudroite().getFinTour().setEnabled(true);
-        London.getMenudroite().getLabelInfo().setText("Vous avez finit votre tour");
+        Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
+        Main.getJeu().getMenudroite().getLabelInfo().setText("Vous avez finit votre tour");
     }
     
     // methode qui permet de changer de joueur
     public void actualiserMain() {
 
         //passer chantier.carte2 à false
-        for (int i = 0; i < London.getJpChantier().getChantiers().length; i++) {
-            JPPileChantier chantier = London.getJpChantier().getChantiers()[i];
+        for (int i = 0; i < Main.getJeu().getJpChantier().getChantiers().length; i++) {
+            JPPileChantier chantier = Main.getJeu().getJpChantier().getChantiers()[i];
             chantier.setCarte2(false);
         }
 
         // sauvegarde de la main dans le tableau
-        London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) London.getSouth();
+        Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) Main.getJeu().getSouth();
 
         // sauvegarde zone de construction
-        London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()] = London.getJpChantier();
+        Main.getJeu().getTabJPChantiers()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()] = Main.getJeu().getJpChantier();
 
         // on enleve la main
-        London.getCentral().remove(London.getSouth());
+        Main.getJeu().getCentral().remove(Main.getJeu().getSouth());
         // on passe au joueur suivant
-        London.setListeJoueur(London.getListeJoueur().getSuivant());
+        Main.getJeu().setListeJoueur(Main.getJeu().getListeJoueur().getSuivant());
         // change le label nomJoeuur
         //labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
         control.actualiseJoueur();
         // on remplace le panel par celui du nouveau joueur
-        London.setSouth(London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()]);
+        Main.getJeu().setSouth(Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()]);
         // on ajoute le panel
-        London.getCentral().add(London.getSouth(), BorderLayout.SOUTH);
+        Main.getJeu().getCentral().add(Main.getJeu().getSouth(), BorderLayout.SOUTH);
 
         // on enleve la zone
-        London.getPanelOnglet().remove(London.getPanelOnglet().getComponent(2));
+        Main.getJeu().getPanelOnglet().remove(Main.getJeu().getPanelOnglet().getComponent(2));
         // on remplace la zone
-        London.setJpChantier(London.getTabJPChantiers()[London.getListeJoueur().getJoueur().getPlaceJoueur()]);
+        Main.getJeu().setJpChantier(Main.getJeu().getTabJPChantiers()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()]);
         // on ajoute la zone
-        London.getPanelOnglet().addTab("Chantiers", London.getJpChantier());
+        Main.getJeu().getPanelOnglet().addTab("Chantiers", Main.getJeu().getJpChantier());
 
         // actualiser la fenêtre
-        London.getFrame().repaint();
-        London.getCentral().revalidate();
+        Main.getJeu().getFrame().repaint();
+        Main.getJeu().getCentral().revalidate();
 
         // le jouuer peut piocher une carte
-        London.getListeJoueur().getJoueur().setPioche(1);
+        Main.getJeu().getListeJoueur().getJoueur().setPioche(1);
 
         // on réinitialise les valeurs
-        London.getListeJoueur().getJoueur().setFinitTour(false);
+        Main.getJeu().getListeJoueur().getJoueur().setFinitTour(false);
         JBCarte.setClicDroitJouer(false);
         JBCarte.setActiverCarte(false);
 
         //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
         // on informe le joueur
-        JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");
+        JOptionPane.showMessageDialog(null, "C'est au tour de " + Main.getJeu().getListeJoueur().getJoueur().getNom() + " de jouer");
         //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
 
         // on peut pas se defausser a la base
         //setDefausseCarte(false);
         // change onglet
-        London.getPanelOnglet().setSelectedIndex(1);
+        Main.getJeu().getPanelOnglet().setSelectedIndex(1);
 
         // on peut pas d&d à la base
         DragDrop.setDragEnable(false);

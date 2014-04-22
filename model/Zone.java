@@ -21,6 +21,7 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import vue.JPPlateau;
 import vue.London;
+import vue.Main;
 
 /**
  *
@@ -144,7 +145,7 @@ public class Zone {
     }
     
     public static void initZone(){
-        London.zones=new HashMap<String,Zone>();
+        Main.getJeu().setZones(new HashMap<String,Zone>());
         try {
             /* R�cup�ration du classeur Excel (en lecture) */
             URL uri = Joueur.class.getResource("../fichier/ZonePlateau.xls");
@@ -172,7 +173,7 @@ public class Zone {
                         Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
                         Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
                         tmpL);
-                London.zones.put(sheet.getCell(0,i).getContents(),tmpZ);
+                Main.getJeu().getZones().put(sheet.getCell(0,i).getContents(),tmpZ);
             }
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -188,7 +189,7 @@ public class Zone {
     
     public HashSet<String> zoneInvest(){
         HashSet <String> res=new HashSet<String>();
-        Collection zone=London.zones.values();
+        Collection zone=Main.getJeu().getZones().values();
         Zone currZ;
         for(Object curr : zone){
             currZ=(Zone)curr;
@@ -205,10 +206,10 @@ public class Zone {
      * @param j 
      */
     public void investir(Joueur j){
-        London.getPlateau().getTableauZone()[London.getPlateau().indiceZone(this.getNom())].getZone().setActivable(true);
+        Main.getJeu().getPlateau().getTableauZone()[Main.getJeu().getPlateau().indiceZone(this.getNom())].getZone().setActivable(true);
         this.setProprietaire(j);
         for(String s : zonesAdjacentes){
-            London.getPlateau().getTableauZone()[London.getPlateau().indiceZone(s)].getZone().setActivable(true);
+            Main.getJeu().getPlateau().getTableauZone()[Main.getJeu().getPlateau().indiceZone(s)].getZone().setActivable(true);
         }
     }
 }

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import vue.Frame3Cartes;
 import vue.JBCarte;
 import vue.London;
+import vue.Main;
 
 /**
  *
@@ -20,9 +21,9 @@ public class Regarder3CartesControl implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JBCarte c1 = new JBCarte(London.getDeck().poll());
-                JBCarte c2 = new JBCarte(London.getDeck().poll());
-                JBCarte c3 = new JBCarte(London.getDeck().poll());
+        JBCarte c1 = new JBCarte(Main.getJeu().getDeck().poll());
+                JBCarte c2 = new JBCarte(Main.getJeu().getDeck().poll());
+                JBCarte c3 = new JBCarte(Main.getJeu().getDeck().poll());
                 //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
                 Frame3Cartes f = new Frame3Cartes(c1, c2, c3);
     }

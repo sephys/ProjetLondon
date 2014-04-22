@@ -69,7 +69,7 @@ public class TestCarte {
 			}else if(tmp.getCategorie().equals("C")){
 				countC++;
 			}else{
-				fail("Une carte est de catégorie différente de A, B ou C");
+				fail("Une carte est de catï¿½gorie diffï¿½rente de A, B ou C");
 			}
 		}
 		
@@ -79,7 +79,7 @@ public class TestCarte {
 	}
 	
 	@Test
-	//Test si le deck est bien mélanger en 3 partie (A, B et C)
+	//Test si le deck est bien mï¿½langer en 3 partie (A, B et C)
 	public void testInitDeck2(){
 		
 		Carte tmpPast = d.peekFirst();

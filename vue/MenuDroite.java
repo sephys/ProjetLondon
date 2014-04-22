@@ -28,7 +28,7 @@ public class MenuDroite extends JPanel {
     private JLabel labelInfo; // indique ce que doit faire l'utilisateur
     private JPanel menuBouton; // panel contenant tous les boutons
     private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, regarder3Cartes, finTour; // les différents boutons du menu
-    public static boolean invest; // a virer !
+    
     private JPnomGaucheImageDroite jpsij;
     MenuDroiteControl m;
 
@@ -69,7 +69,7 @@ public class MenuDroite extends JPanel {
         investir.setAlignmentX(Component.CENTER_ALIGNMENT);
         emprunter = new JButton("    Emprunter (10£)   ");
         emprunter.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.invest = false;
+        
         piocher3 = new JButton(" Prendre trois cartes ");
         piocher3.setAlignmentX(Component.CENTER_ALIGNMENT);
         regarder3Cartes = new JButton("Regarder les 3 premières cartes");

@@ -56,8 +56,8 @@ public class JBZone extends JButton implements ActionListener{
      * @param e
      */
     public void actionPerformed(ActionEvent e) {
-        if(MenuDroite.invest){
-            int rep = JOptionPane.showConfirmDialog(London.acc,             // Affichage de la fenêtre de confirmation de l'action d'investir
+        
+            int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),             // Affichage de la fenêtre de confirmation de l'action d'investir
                     "Voulez-vous investir dans " + this.zone.getNom()+ " ?",
                     "Investir",
                     JOptionPane.YES_NO_OPTION);
@@ -65,12 +65,12 @@ public class JBZone extends JButton implements ActionListener{
                 Joueur courrant = Main.getJeu().getListeJoueur().getJoueur();
                 if(zone.getPrix() > courrant.getArgent()){
                     // Dans le cas ou son argent est insuffisant, il lui est proposé un emprunt (fenêtre de confirmation)
-                    JOptionPane.showMessageDialog(London.acc, "Vous n'avez pas assez d'argent ! Empruntez ou choisissez une autre zone.");
+                    JOptionPane.showMessageDialog(Main.getJeu().getFrame(), "Vous n'avez pas assez d'argent ! Empruntez ou choisissez une autre zone.");
                 }else{
                     // S'il dispose d'assez d'argent, la zone est directement investie
                     this.zone.investir(courrant);
                     this.setBackground(Main.getJeu().getListeJoueur().getJoueur().getColor());
-                    JOptionPane.showMessageDialog(London.acc, "Investissement réussi.");    // Une fenêtre affiche que l'investissement s'est bien déroulé
+                    JOptionPane.showMessageDialog(Main.getJeu().getFrame(), "Investissement réussi.");    // Une fenêtre affiche que l'investissement s'est bien déroulé
                     // Les actions d'investissement de la zone sont ajoutée au joueur courrant (nombre de cartes à piocher, coût décrémenté à son argent, points de victoire ajoutés)
                     courrant.addArgent(-this.zone.getPrix());
                     courrant.setPioche(this.zone.getNbCartes());
@@ -86,9 +86,9 @@ public class JBZone extends JButton implements ActionListener{
                 }
             }else{
                 // S'il refuse l'action d'investir, il peut donc rechoisir l'action à effectuer
-                JOptionPane.showMessageDialog(London.acc, "Investissement annulé.");    // Une fenêtre affichant l'échec de l'action Investir est affichée
+                JOptionPane.showMessageDialog(Main.getJeu().getFrame(), "Investissement annulé.");    // Une fenêtre affichant l'échec de l'action Investir est affichée
             }
-        }
+        
         Main.getJeu().getInfos().maj_infos();   // Actualisation du panneau de gauche
     }
     

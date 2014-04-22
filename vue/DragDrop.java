@@ -116,26 +116,26 @@ DropTargetListener, Transferable {
 
 			if (((DropTarget) target).getComponent() instanceof JPPileChantier) {
 				if (this.dragEnable) { // test si on a clicker sur l'action jouer des cartes
-					if (London.getListeJoueur().getJoueur().getDefausse() == 0) { // check si je le joueur doit pas de défausser
+					if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) { // check si je le joueur doit pas de défausser
 						JBCarte jbCarte = (JBCarte) component;
 						JPPileChantier chantier = (JPPileChantier) container;
 						// check si carte constructible - check si chantier constructible - check si pose 2 carte sur le même chantier même tour
 						if (jbCarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
 							Constructible carte = (Constructible) jbCarte.getCarte();
 							// check 2 carte de la même couleur pour la defausse
-							if (London.getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || London.getListeJoueur().getJoueur().getPouvoir().get("School") >= 1 || London.getListeJoueur().getJoueur().getPouvoir().get("Wren") >= 1) {
+							if (Main.getJeu().getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") >= 1) {
 
-								int rep = JOptionPane.showConfirmDialog(London.acc,
+								int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
 										"Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
 										"Construire",
 										JOptionPane.YES_NO_OPTION);
 								// le joueur veut poser sa carte
 								if (rep == JOptionPane.YES_OPTION) {
 									// si le joueur a assez d'argent
-									if (carte.getCoutPose() <= London.getListeJoueur().getJoueur().getArgent()) {
+									if (carte.getCoutPose() <= Main.getJeu().getListeJoueur().getJoueur().getArgent()) {
 										// creer un chantier pour le joueur si pas deja créer
-										if (London.getListeJoueur().getJoueur().getListeChantier().size() <= chantier.getIndex()) {
-											London.getListeJoueur().getJoueur().nouveauChantier();
+										if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().size() <= chantier.getIndex()) {
+											Main.getJeu().getListeJoueur().getJoueur().nouveauChantier();
 										} else {
 											/* affichage de la dernière carte posée si plusieurs cartes sur le chantier*/
 											container.removeAll();
@@ -163,8 +163,8 @@ DropTargetListener, Transferable {
 										//London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
 										//London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
 										//JBCarte.setDoubleClick(true);
-										if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") != 1) {
-											London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+										if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") != 1) {
+											Main.getJeu().getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
                                                                                         
 										}
                                                                                 else
@@ -173,18 +173,18 @@ DropTargetListener, Transferable {
                                                                                 }
 
 										/*appel de jouerCarte*/
-										London.getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
-										System.out.println(London.getListeJoueur().getJoueur().getDefausse());
+										Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
+										//System.out.println(Main.getJeu().getListeJoueur().getJoueur().getDefausse());
 
 
 										/*Passer le chantier suivant a posable=true*/
-										London.getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
+										Main.getJeu().getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
 
 										/*Mise a jour du panel d'information*/
-										London.getInfos().maj_infos();
+										Main.getJeu().getInfos().maj_infos();
 										// refresh
-										London.getSouth().repaint();
-										London.getSouth().revalidate();
+										Main.getJeu().getSouth().repaint();
+										Main.getJeu().getSouth().revalidate();
 
 									} else {
 										JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
@@ -202,7 +202,7 @@ DropTargetListener, Transferable {
 						JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");
 					}
 				} else {
-					if(London.getListeJoueur().getJoueur().getPioche()==0){
+					if(Main.getJeu().getListeJoueur().getJoueur().getPioche()==0){
 						JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
 					}else{
 	            		JOptionPane.showMessageDialog(null, "Vous devez piocher");
