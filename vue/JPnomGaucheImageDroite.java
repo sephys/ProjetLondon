@@ -31,14 +31,14 @@ public class JPnomGaucheImageDroite extends JPanel{
     JLabel gauche;
     
     public JPnomGaucheImageDroite(){
-        Joueur j = London.getListeJoueur().getJoueur();
+        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         this.setLayout(new FlowLayout());
         this.setOpaque(false); // transparance
         gauche = new JLabel();
         gauche.setText(j.getNom());
         gauche.setFont(gauche.getFont ().deriveFont (14.0f));
         droite = new JLabel();
-        changeImage(j);
+        
         droite.setHorizontalAlignment(JLabel.CENTER);
         gauche.setHorizontalAlignment(JLabel.CENTER);
         //  this.centrerTexte();
@@ -47,41 +47,24 @@ public class JPnomGaucheImageDroite extends JPanel{
         droite.setPreferredSize(new Dimension(60,50));
         this.setBackground(Color.LIGHT_GRAY);
     }
-    
-    public String image(Joueur j){
-        StringBuilder sb = new StringBuilder("../img/");
-        Color c = j.getColor();
-        if(c == Color.yellow){
-            sb.append("jaune.png");
-        }else{
-            if(c == Color.blue){
-                sb.append("bleu.png");
-            }else{
-                if(c == Color.red){
-                    sb.append("rouge.png");
-                }else{
-                    sb.append("vert.png");
-                }
-            }
-        }
-        return new String(sb);
+
+    public JLabel getDroite() {
+        return droite;
+    }
+
+    public JLabel getGauche() {
+        return gauche;
+    }
+
+    public void setDroite(JLabel droite) {
+        this.droite = droite;
+    }
+
+    public void setGauche(JLabel gauche) {
+        this.gauche = gauche;
     }
     
-    public void actualiseJoueur(){
-        Joueur j = London.getListeJoueur().getJoueur();
-        changeImage(j);
-        gauche.setText(j.getNom());
-    }
     
-    private void changeImage(Joueur j) {
-        try {
-            this.remove(droite);
-            URL uri = JBCarte.class.getResource(image(j));
-            Image image = ImageIO.read(uri);
-            droite = new JLabel(new ImageIcon(image));
-            this.add(droite);
-        } catch (IOException ex) {
-            Logger.getLogger(JPnomGaucheImageDroite.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
+
 }

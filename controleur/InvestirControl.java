@@ -10,7 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import vue.London;
-import static vue.MenuDroite.invest;
+import vue.Main;
+
 
 /**
  *
@@ -21,20 +22,20 @@ public class InvestirControl implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         MenuDroiteControl m=new MenuDroiteControl();
-        int rep = JOptionPane.showConfirmDialog(London.getFrame(),
+        int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
                         "Êtes-vous sûr de vouloir investir ?",
                         "Investir",
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
                     m.disableAll();
-                    London.getMenudroite().getLabelInfo().setText("Vous devez choisir une zone à investir");
-                    London.getPlateau().activerZonesInvestissables();
+                    Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez choisir une zone à investir");
+                    Main.getJeu().getPlateau().activerZonesInvestissables();
 
-                    London.getPlateau().desactiveZonesInvesties();
-                    invest = true;
-                    London.getMenudroite().getEmprunter().setEnabled(true);
+                    Main.getJeu().getPlateau().desactiveZonesInvesties();
+                  
+                    Main.getJeu().getMenudroite().getEmprunter().setEnabled(true);
                     // change onglet
-                    London.getPanelOnglet().setSelectedIndex(0);
+                    Main.getJeu().getPanelOnglet().setSelectedIndex(0);
                 }
     }
     

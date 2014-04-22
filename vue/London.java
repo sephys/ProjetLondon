@@ -5,6 +5,7 @@
  */
 package vue;
 
+import controleur.JPnomGaucheImageDroiteControl;
 import model.Carte;
 import model.Etalage;
 import model.Joueur;
@@ -39,32 +40,38 @@ import sun.audio.ContinuousAudioDataStream;
  */
 public class London {
 
-    private static TourJoueur lJoueur;
-    private static ArrayDeque<Carte> deck;
-    private static Etalage etalage;
-    private static JPMain[] tabJPMain; // tableau des étalages
-    private static JPChantiers[] tabJPChantiers; // tableau des chantiers
-    private static JPEtalage jpEtalage;
-    private static JPChantiers jpChantier;
-    private static JPMain south; // panel contenant la main des joueurs
-    private static JPanel central;
-    private static MenuDroite menudroite;
-    private static JPPlateau plateau;
-    private static Thread sound; // thread pour la musique
-    private static JTabbedPane panelOnglet; // panel contenant les onglets
-
-    private static JFrame frame; // fenêtre principale
+    private TourJoueur lJoueur;
+    private ArrayDeque<Carte> deck;
+    private Etalage etalage;
+    private JPMain[] tabJPMain; // tableau des étalages
+    private JPChantiers[] tabJPChantiers; // tableau des chantiers
+    private JPEtalage jpEtalage;
+    private JPChantiers jpChantier;
+    private JPMain south; // panel contenant la main des joueurs
+    private JPanel central;
+    private MenuDroite menudroite;
+    private JPPlateau plateau;
+    private Thread sound; // thread pour la musique
+    private JTabbedPane panelOnglet; // panel contenant les onglets
+    private JFrame acc;
+    private JPInfos infos;
+    private HashMap<String, Zone> zones; // Structure contenant toutes les zones
+    private Joueur[] tabJoueur;
+    private JFrame frame; // fenêtre principale
 
     // pour le drag & drop
     public static DragDrop dndListener;
     static DragSource dragSource;
-    public static JFrame acc;
-    private static JPInfos infos;
-    public static HashMap<String, Zone> zones; // Structure contenant toutes les zones
-    private static Joueur[] tabJoueur;
+
+    
+    // controleur
+    JPnomGaucheImageDroiteControl controlJPGID;
+    
 
     public London() {
 
+        controlJPGID=new JPnomGaucheImageDroiteControl();
+        
         // D&D
         dndListener = new DragDrop();
         dragSource = new DragSource();
@@ -74,7 +81,7 @@ public class London {
     }
 
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
-    public static void start() {
+    public  void start() {
         // permet d'avoir le même affichage sous windows et mac
         try {
             UIManager.setLookAndFeel(new MetalLookAndFeel());
@@ -146,12 +153,15 @@ public class London {
 
         frame.add(central);
 
-        London.menudroite = new MenuDroite();
+        this.menudroite = new MenuDroite();
+        controlJPGID.changeImage(this.getListeJoueur().getJoueur());
 
+    
+        
         frame.add(menudroite, BorderLayout.EAST);
 
-        London.infos = new JPInfos(London.getTabJoueur());
-        frame.add(London.infos, BorderLayout.WEST);
+        infos = new JPInfos(this.getTabJoueur());
+        frame.add(infos, BorderLayout.WEST);
 
         frame.setSize(1444, 810);
 
@@ -161,15 +171,15 @@ public class London {
         acc.dispose();
 
         // informe le joueur qui joue
-        JOptionPane.showMessageDialog(null, "C'est au tour de " + London.getListeJoueur().getJoueur().getNom() + " de jouer");
+        JOptionPane.showMessageDialog(null, "C'est au tour de " + this.getListeJoueur().getJoueur().getNom() + " de jouer");
 
-        London.getListeJoueur().getJoueur().setPioche(1);
+        this.getListeJoueur().getJoueur().setPioche(1);
 
 
     }
 
     // methode qui affiche le menu quand on lance l'application
-    public static void menu() {
+    public void menu() {
         acc = new JFrame(); // JFrame d'accueil
         acc.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -197,7 +207,7 @@ public class London {
 
     }
 
-    public static void music() {
+    public void music() {
 
         sound = new Thread() {
             URL uri = London.class.getResource("../fichier/music.wav");
@@ -225,113 +235,121 @@ public class London {
         sound.start();
     }
 
-    public static MenuDroite getMenudroite() {
+    public MenuDroite getMenudroite() {
         return menudroite;
     }
 
-    public static JTabbedPane getPanelOnglet() {
+    public JTabbedPane getPanelOnglet() {
         return panelOnglet;
     }
 
-    public static JPChantiers[] getTabJPChantiers() {
+    public JPChantiers[] getTabJPChantiers() {
         return tabJPChantiers;
     }
 
-    public static JPChantiers getJpChantier() {
+    public JPChantiers getJpChantier() {
         return jpChantier;
     }
 
-    public static JPMain getSouth() {
+    public JPMain getSouth() {
         return south;
     }
 
-    public static void setSouth(JPMain south) {
-        London.south = south;
+    public void setSouth(JPMain south) {
+        this.south = south;
     }
 
-    public static JFrame getFrame() {
+    public JFrame getFrame() {
         return frame;
     }
 
-    public static void setFrame(JFrame frame) {
-        London.frame = frame;
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
     }
 
-    public static JPanel getCentral() {
+    public JPanel getCentral() {
         return central;
     }
 
-    public static void setCentral(JPanel central) {
-        London.central = central;
+    public void setCentral(JPanel central) {
+        this.central = central;
+    }
+
+    public HashMap<String, Zone> getZones() {
+        return zones;
+    }
+
+    public void setZones(HashMap<String, Zone> zones) {
+        this.zones = zones;
     }
     
     
 
 
-    public static void setJpChantier(JPChantiers jpChantier) {
-        London.jpChantier = jpChantier;
+    public void setJpChantier(JPChantiers jpChantier) {
+        this.jpChantier = jpChantier;
     }
     
     
-    public static JPPlateau getPlateau() {
+    public JPPlateau getPlateau() {
         return plateau;
     }
 
-    public static JPEtalage getJpEtalage() {
+    public JPEtalage getJpEtalage() {
         return jpEtalage;
     }
 
-    public static void setJpEtalage(JPEtalage jpEtalage) {
-        London.jpEtalage = jpEtalage;
+    public void setJpEtalage(JPEtalage jpEtalage) {
+        this.jpEtalage = jpEtalage;
     }
 
-    public static TourJoueur getListeJoueur() {
-        // TODO Auto-generated method stub
+    public TourJoueur getListeJoueur() {
+      
         return lJoueur;
     }
 
-    public static void setListeJoueur(TourJoueur initialisationJoueur) {
-        // TODO Auto-generated method stub
-        lJoueur = initialisationJoueur;
+    public void setListeJoueur(TourJoueur initialisationJoueur) {
+        
+        this.lJoueur = initialisationJoueur;
     }
 
-    public static void setEtalage(Etalage etalage2) {
+    public void setEtalage(Etalage etalage) {
         // TODO Auto-generated method stub
-        etalage = etalage2;
+        this.etalage = etalage;
     }
 
-    public static Etalage getEtalage() {
+    public Etalage getEtalage() {
         return etalage;
     }
 
-    public static JPInfos getInfos() {
+    public JPInfos getInfos() {
         return infos;
     }
 
-    public static void setInfos(JPInfos infos) {
-        London.infos = infos;
+    public void setInfos(JPInfos infos) {
+        this.infos = infos;
     }
     
     
 
-    public static JPMain[] getTabJPMain() {
+    public JPMain[] getTabJPMain() {
         return tabJPMain;
     }
 
-    public static void setTabJPMain(JPMain[] tabJPMain) {
-        London.tabJPMain = tabJPMain;
+    public void setTabJPMain(JPMain[] tabJPMain) {
+        this.tabJPMain = tabJPMain;
     }
 
-    public static void initTabJPMain() {
+    public void initTabJPMain() {
         tabJPMain = new JPMain[Joueur.getNbJoueur()];
         for (int i = 0; i <Joueur.getNbJoueur(); i++) {
-            System.out.println("moi"+London.getListeJoueur().getJoueur());
-            tabJPMain[i] = new JPMain(London.getListeJoueur().getJoueur());
-            London.setListeJoueur(London.getListeJoueur().getSuivant());
+           // System.out.println("moi"+this.getListeJoueur().getJoueur());
+            tabJPMain[i] = new JPMain(this.getListeJoueur().getJoueur());
+            this.setListeJoueur(this.getListeJoueur().getSuivant());
         }
     }
     
-    public static void initTabJPChantier()
+    public void initTabJPChantier()
     {
        tabJPChantiers=new JPChantiers[Joueur.getNbJoueur()];
        for(int i=0;i<Joueur.getNbJoueur();i++)
@@ -341,19 +359,19 @@ public class London {
        
     }
 
-    public static Joueur[] getTabJoueur() {
-        return London.tabJoueur;
+    public Joueur[] getTabJoueur() {
+        return tabJoueur;
     }
 
-    public static void setTabJoueur(Joueur[] tabJoueur) {
-        London.tabJoueur = tabJoueur;
+    public void setTabJoueur(Joueur[] tabJoueur) {
+        this.tabJoueur = tabJoueur;
     }
 
-    public static void setDeck(ArrayDeque<Carte> deck) {
-        London.deck = deck;
+    public void setDeck(ArrayDeque<Carte> deck) {
+        this.deck = deck;
     }
 
-    public static ArrayDeque<Carte> getDeck() {
+    public ArrayDeque<Carte> getDeck() {
         // TODO Auto-generated method stub
         return deck;
     }

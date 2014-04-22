@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import vue.JBCarte;
 import vue.London;
+import vue.Main;
 
 public class Joueur {
 
@@ -118,14 +119,14 @@ public class Joueur {
 		this.pioche = pioche;
 		London.dndListener.setDragEnable(false);
 		m.disableAll();
-                London.getMenudroite().getPiocher().setEnabled(true);
+                Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
 		//JBCarte.setDoubleClick(true);
                 
-                London.getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");
+                Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");
                     //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
                     //JBCarte.setDoubleClick(true);
-                    London.getMenudroite().repaint();
-                    London.getMenudroite().revalidate();
+                    Main.getJeu().getMenudroite().repaint();
+                    Main.getJeu().getMenudroite().revalidate();
                     
 	}
 
@@ -141,9 +142,9 @@ public class Joueur {
 			} else // une pioche normal
 			{
 				m.enableAll();
-				London.getMenudroite().getPiocher().setEnabled(false);
-				London.getMenudroite().getFinTour().setEnabled(false);
-				London.getMenudroite().getLabelInfo().setText("Vous devez choisir une action");
+				Main.getJeu().getMenudroite().getPiocher().setEnabled(false);
+				Main.getJeu().getMenudroite().getFinTour().setEnabled(false);
+				Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez choisir une action");
 			}
 		}
 	}
@@ -158,7 +159,7 @@ public class Joueur {
 
 	public void defausseMoins() {
 		this.defausse--;
-		if (this.defausse == 0 && London.getListeJoueur().getJoueur().isFinitTour()) {
+		if (this.defausse == 0 && Main.getJeu().getListeJoueur().getJoueur().isFinitTour()) {
 			m.setFinTour();
 		}
 	}

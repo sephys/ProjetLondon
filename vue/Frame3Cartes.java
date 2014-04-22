@@ -54,17 +54,17 @@ public class Frame3Cartes extends JFrame{
     
     public void remetCartes(JBCarte aThis) {
         if(aThis == this.c1){
-            London.getDeck().addFirst(c2.getCarte());
-            London.getDeck().addFirst(c3.getCarte());
+            Main.getJeu().getDeck().addFirst(c2.getCarte());
+            Main.getJeu().getDeck().addFirst(c3.getCarte());
         }else{
             
             if(aThis == this.c2){
-                London.getDeck().addFirst(c1.getCarte());
-                London.getDeck().addFirst(c3.getCarte());
+                Main.getJeu().getDeck().addFirst(c1.getCarte());
+                Main.getJeu().getDeck().addFirst(c3.getCarte());
             }else{
                 if(aThis == this.c3){
-                    London.getDeck().addFirst(c1.getCarte());
-                    London.getDeck().addFirst(c2.getCarte());
+                    Main.getJeu().getDeck().addFirst(c1.getCarte());
+                    Main.getJeu().getDeck().addFirst(c2.getCarte());
                 }
             }
         }

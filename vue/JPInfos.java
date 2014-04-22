@@ -47,7 +47,7 @@ public class JPInfos extends JPanel{
     }
     
     public void maj_infos(){
-        Joueur j = London.getListeJoueur().getJoueur();
+        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         for(int i = 0; i < aljpsi.length; i++){
             if(aljpsi[i].joueur.getNomJoueur().equals(j.getNom())){
                 aljpsi[i].setEmprunt(j.getNbPret());

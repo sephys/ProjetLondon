@@ -58,121 +58,121 @@ public class JPPlateau extends JPanel implements MouseListener {
     public void initBouton(){
         // ajout bouton :
         
-        JBZone jb1=new JBZone(London.zones.get("Bethnal Green, Stepney & Poplar"));
+        JBZone jb1=new JBZone(Main.getJeu().getZones().get("Bethnal Green, Stepney & Poplar"));
         jb1.setBounds(870, 328, 86, 38);
         jb1.setVisible(false);
         jb1.setEnabled(false);
         this.add(jb1);
         
-        JBZone jb2=new JBZone(London.zones.get("City"));
+        JBZone jb2=new JBZone(Main.getJeu().getZones().get("City"));
         jb2.setBounds(620, 342, 88, 38);
         jb2.setVisible(false);
         jb2.setEnabled(false);
         this.add(jb2);
         
-        JBZone jb3=new JBZone(London.zones.get("Hackney"));
+        JBZone jb3=new JBZone(Main.getJeu().getZones().get("Hackney"));
         jb3.setBounds(793, 122, 88, 38);
         jb3.setVisible(false);
         jb3.setEnabled(false);
         this.add(jb3);
         
-        JBZone jb4=new JBZone(London.zones.get("Islington & Stoke Newington"));
+        JBZone jb4=new JBZone(Main.getJeu().getZones().get("Islington & Stoke Newington"));
         jb4.setBounds(582, 122, 88, 38);
         jb4.setVisible(false);
         jb4.setEnabled(false);
         this.add(jb4);
         
-        JBZone jb5=new JBZone(London.zones.get("St. Pancras"));
+        JBZone jb5=new JBZone(Main.getJeu().getZones().get("St. Pancras"));
         jb5.setBounds(447, 225, 88, 38);
         jb5.setVisible(false);
         jb5.setEnabled(false);
         this.add(jb5);
         
-        JBZone jb6=new JBZone(London.zones.get("Hampstead"));
+        JBZone jb6=new JBZone(Main.getJeu().getZones().get("Hampstead"));
         jb6.setBounds(271, 139, 88, 38);
         jb6.setVisible(false);
         jb6.setEnabled(false);        
         this.add(jb6);
         
-        JBZone jb7=new JBZone(London.zones.get("St. Marylebone"));
+        JBZone jb7=new JBZone(Main.getJeu().getZones().get("St. Marylebone"));
         jb7.setBounds(333, 313, 88, 38);
         jb7.setVisible(false);
         jb7.setEnabled(false);
         this.add(jb7);
         
-        JBZone jb8=new JBZone(London.zones.get("Paddington"));
+        JBZone jb8=new JBZone(Main.getJeu().getZones().get("Paddington"));
         jb8.setBounds(242, 389, 88, 38);
         jb8.setVisible(false);
         jb8.setEnabled(false);
         this.add(jb8);
         
-        JBZone jb9=new JBZone(London.zones.get("Kensington"));
+        JBZone jb9=new JBZone(Main.getJeu().getZones().get("Kensington"));
         jb9.setBounds(186, 486, 88, 38);
         jb9.setVisible(false);
         jb9.setEnabled(false);
         this.add(jb9);
         
-        JBZone jb10=new JBZone(London.zones.get("Hammersmith"));
+        JBZone jb10=new JBZone(Main.getJeu().getZones().get("Hammersmith"));
         jb10.setBounds(60, 467, 88, 38);
         jb10.setVisible(false);
         jb10.setEnabled(false);
         this.add(jb10);
         
-        JBZone jb11=new JBZone(London.zones.get("Westminster"));
+        JBZone jb11=new JBZone(Main.getJeu().getZones().get("Westminster"));
         jb11.setBounds(432, 462, 88, 38);
         jb11.setVisible(false);
         jb11.setEnabled(false);
         this.add(jb11);
         
-        JBZone jb12=new JBZone(London.zones.get("Southwark & Bermondsey"));
+        JBZone jb12=new JBZone(Main.getJeu().getZones().get("Southwark & Bermondsey"));
         jb12.setBounds(657, 511, 88, 38);
         jb12.setVisible(false);
         jb12.setEnabled(false);
         this.add(jb12);
         
-        JBZone jb13=new JBZone(London.zones.get("Lambeth"));
+        JBZone jb13=new JBZone(Main.getJeu().getZones().get("Lambeth"));
         jb13.setBounds(579, 740, 88, 38);
         jb13.setVisible(false);
         jb13.setEnabled(false);
         this.add(jb13);
         
-        JBZone jb14=new JBZone(London.zones.get("Camberwell"));
+        JBZone jb14=new JBZone(Main.getJeu().getZones().get("Camberwell"));
         jb14.setBounds(736, 712, 88, 38);
         jb14.setVisible(false);
         jb14.setEnabled(false);
         this.add(jb14);
         
-        JBZone jb15=new JBZone(London.zones.get("Deptford"));
+        JBZone jb15=new JBZone(Main.getJeu().getZones().get("Deptford"));
         jb15.setBounds(885, 665, 88, 38);
         jb15.setVisible(false);
         jb15.setEnabled(false);
         this.add(jb15);
         
-        JBZone jb16=new JBZone(London.zones.get("Lewisham"));
+        JBZone jb16=new JBZone(Main.getJeu().getZones().get("Lewisham"));
         jb16.setBounds(972, 842, 88, 38);
         jb16.setVisible(false);
         jb16.setEnabled(false);
         this.add(jb16);
         
-        JBZone jb17=new JBZone(London.zones.get("Greenwich"));
+        JBZone jb17=new JBZone(Main.getJeu().getZones().get("Greenwich"));
         jb17.setBounds(1091, 611, 88, 38);
         jb17.setVisible(false);
         jb17.setEnabled(false);
         this.add(jb17);
         
-        JBZone jb18=new JBZone(London.zones.get("Fulham & Chelsea"));
+        JBZone jb18=new JBZone(Main.getJeu().getZones().get("Fulham & Chelsea"));
         jb18.setBounds(181, 659, 88, 38);
         jb18.setVisible(false);
         jb18.setEnabled(false);
         this.add(jb18);
         
-        JBZone jb19=new JBZone(London.zones.get("Wandsworth"));
+        JBZone jb19=new JBZone(Main.getJeu().getZones().get("Wandsworth"));
         jb19.setBounds(207, 843, 88, 38);
         jb19.setVisible(false);
         jb19.setEnabled(false);
         this.add(jb19);
         
-        JBZone jb20=new JBZone(London.zones.get("Battersea"));
+        JBZone jb20=new JBZone(Main.getJeu().getZones().get("Battersea"));
         jb20.setBounds(366, 711, 88, 38);
         jb20.setVisible(false);
         jb20.setEnabled(false);

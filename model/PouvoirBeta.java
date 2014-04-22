@@ -1,6 +1,7 @@
 package model;
 
 import vue.London;
+import vue.Main;
 
 public class PouvoirBeta {
     
@@ -17,7 +18,7 @@ public class PouvoirBeta {
                 System.out.println("utilisation school" + j.getArgent());
                 j.addArgent(-1);		//paye 1 pour que la carte "change de couleur"
                 res = true;
-                London.getInfos().maj_infos();
+                Main.getJeu().getInfos().maj_infos();
             }
         } else { 										//carte de même couleur
             res = true;
@@ -63,7 +64,7 @@ public class PouvoirBeta {
     
     
     public static void pouvoirFireBrigade(Joueur j) {
-        for (Zone n : London.zones.values()) {
+        for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && (!n.getProprietaire().equals(j))) {
                 n.getProprietaire().addArgent(-1);
             }
@@ -76,14 +77,14 @@ public class PouvoirBeta {
     }
     
     public static void pouvoirLloydsOfLondon(Joueur j) {
-        for (int i = 0; i < London.getTabJoueur().length; i++) {
-            London.getTabJoueur()[i].addArgent(-2);
+        for (int i = 0; i < Main.getJeu().getTabJoueur().length; i++) {
+            Main.getJeu().getTabJoueur()[i].addArgent(-2);
         }
-        j.addArgent(London.getTabJoueur().length * 2);
+        j.addArgent(Main.getJeu().getTabJoueur().length * 2);
     }
     
     public static void pouvoirOmnibus(Joueur j) {
-        for (Zone n : London.zones.values()) {
+        for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && n.getProprietaire().equals(j)) {
                 j.addArgent(1);
             }
@@ -96,7 +97,7 @@ public class PouvoirBeta {
     }
     
     public void pouvoirSteamBoats(Joueur j) {
-        for (Zone n : London.zones.values()) {
+        for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && n.getProprietaire().equals(j) && n.isAdjacentTamise()) {
                 j.addArgent(2);
             }
@@ -114,7 +115,7 @@ public class PouvoirBeta {
     }
     
     public static void pouvoirNorthTrainStation(Joueur j){
-        for(Zone n : London.zones.values()){
+        for(Zone n : Main.getJeu().getZones().values()){
             if(n != null && n.getProprietaire().equals(j) && (!n.isDessousTamise())){
                 j.addArgent(2);
             }
@@ -122,7 +123,7 @@ public class PouvoirBeta {
     }
     
     public static void pouvoirSouthTrainStation(Joueur j){
-        for(Zone n : London.zones.values()){
+        for(Zone n : Main.getJeu().getZones().values()){
             if(n != null && n.getProprietaire().equals(j) && n.isDessousTamise()){
                 j.addArgent(2);
             }
