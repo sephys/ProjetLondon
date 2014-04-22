@@ -25,7 +25,7 @@ import model.Joueur;
  *
  * @author Anh-Djuy
  */
-class JPnomGaucheImageDroite extends JPanel{
+public class JPnomGaucheImageDroite extends JPanel{
     
     JLabel droite;
     JLabel gauche;

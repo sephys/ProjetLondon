@@ -9,6 +9,7 @@ package vue;
  *
  * @author Joke
  */
+import controleur.MenuDroiteControl;
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
@@ -27,6 +28,7 @@ DropTargetListener, Transferable {
 
 	static final DataFlavor[] supportedFlavors = {null};
 	private static boolean dragEnable = false;
+        MenuDroiteControl m=new MenuDroiteControl();
 
 	static {
 		try {
@@ -157,13 +159,18 @@ DropTargetListener, Transferable {
 
 										//System.out.println(JBcarte.getCarte().getCouleur());
 										//System.out.println("index du chantier : " + chantier.getIndex());
-										London.getMenudroite().disableAll();
+										m.disableAll();
 										//London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
 										//London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
 										//JBCarte.setDoubleClick(true);
 										if (London.getListeJoueur().getJoueur().getPouvoir().get("Wren") != 1) {
 											London.getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                                                                        
 										}
+                                                                                else
+                                                                                {
+                                                                                    m.setFinTour();
+                                                                                }
 
 										/*appel de jouerCarte*/
 										London.getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());

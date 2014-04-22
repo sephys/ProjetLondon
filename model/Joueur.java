@@ -1,5 +1,6 @@
 package model;
 
+import controleur.MenuDroiteControl;
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class Joueur {
 	private Color color;
 	//private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
 	private Carte lastCarte;
+        
+        MenuDroiteControl m;
 
 
 
@@ -43,6 +46,7 @@ public class Joueur {
 		this.color=color;
 		this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
 		initialisePouvoir();
+                m=new MenuDroiteControl();
 	}
 
 	public void initialisePouvoir(){
@@ -113,7 +117,7 @@ public class Joueur {
 	public void setPioche(int pioche) {
 		this.pioche = pioche;
 		London.dndListener.setDragEnable(false);
-		London.getMenudroite().disableAll();
+		m.disableAll();
                 London.getMenudroite().getPiocher().setEnabled(true);
 		//JBCarte.setDoubleClick(true);
                 
@@ -132,11 +136,11 @@ public class Joueur {
 			if (this.finitTour) // fin du tour du joueur
 			{
 				London.dndListener.setDragEnable(true);
-				London.getMenudroite().setFinTour();
+				m.setFinTour();
 
 			} else // une pioche normal
 			{
-				London.getMenudroite().enableAll();
+				m.enableAll();
 				London.getMenudroite().getPiocher().setEnabled(false);
 				London.getMenudroite().getFinTour().setEnabled(false);
 				London.getMenudroite().getLabelInfo().setText("Vous devez choisir une action");
@@ -155,7 +159,7 @@ public class Joueur {
 	public void defausseMoins() {
 		this.defausse--;
 		if (this.defausse == 0 && London.getListeJoueur().getJoueur().isFinitTour()) {
-			London.getMenudroite().setFinTour();
+			m.setFinTour();
 		}
 	}
 
@@ -294,6 +298,7 @@ public class Joueur {
 	public boolean jouerCarte2(Carte carteJouer, int ind){
 		boolean res=false;
 		this.finitTour=true;
+                
 		System.out.println(this.finitTour);
 		this.lastCarte=carteJouer;			//stock la dernière carte jouer
 		if(carteJouer.getClass()==Constructible.class){ //si constructible

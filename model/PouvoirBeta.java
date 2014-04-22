@@ -52,7 +52,7 @@ public class PouvoirBeta {
 
                 j.getPouvoir().put("Wren", new Integer(j.getPouvoir().get("Wren").intValue()) - 1);
                 specialDouble = 0;
-                London.getMenudroite().setFinTour();
+                
             }
         } else {									// ne possède pas le pouvoir wren
             res = false;

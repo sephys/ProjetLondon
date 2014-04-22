@@ -47,13 +47,13 @@ public class London {
     private static JPEtalage jpEtalage;
     private static JPChantiers jpChantier;
     private static JPMain south; // panel contenant la main des joueurs
-    static JPanel central;
+    private static JPanel central;
     private static MenuDroite menudroite;
     private static JPPlateau plateau;
     private static Thread sound; // thread pour la musique
     private static JTabbedPane panelOnglet; // panel contenant les onglets
 
-    public static JFrame frame; // fenêtre principale
+    private static JFrame frame; // fenêtre principale
 
     // pour le drag & drop
     public static DragDrop dndListener;
@@ -247,6 +247,22 @@ public class London {
 
     public static void setSouth(JPMain south) {
         London.south = south;
+    }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+
+    public static void setFrame(JFrame frame) {
+        London.frame = frame;
+    }
+
+    public static JPanel getCentral() {
+        return central;
+    }
+
+    public static void setCentral(JPanel central) {
+        London.central = central;
     }
     
     
