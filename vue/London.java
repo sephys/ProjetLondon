@@ -5,6 +5,7 @@
  */
 package vue;
 
+import controleur.DragDropControl;
 import controleur.JPnomGaucheImageDroiteControl;
 import model.Carte;
 import model.Etalage;
@@ -60,7 +61,7 @@ public class London {
     private JFrame frame; // fenêtre principale
 
     // pour le drag & drop
-    public static DragDrop dndListener;
+    public static DragDropControl dndListener;
     static DragSource dragSource;
 
     
@@ -73,7 +74,7 @@ public class London {
         controlJPGID=new JPnomGaucheImageDroiteControl();
         
         // D&D
-        dndListener = new DragDrop();
+        dndListener = new DragDropControl();
         dragSource = new DragSource();
 
         music();

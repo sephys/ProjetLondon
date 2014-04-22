@@ -30,8 +30,8 @@ public class TestJoueur {
 	@Before
 	public void setUp() throws Exception {
 		this.test=new Joueur("j1",Color.blue);
-		Carte.initDeck();
-		d=London.getDeck();
+		d=Carte.initDeck();
+		
 	}
 
 	@After

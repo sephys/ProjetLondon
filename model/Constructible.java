@@ -132,7 +132,7 @@ public class Constructible extends Carte {
 		Constructible sousCarte=currJ.getListeChantier().get(ind).peekFirst();
 		if(sousCarte!=null){
 			String pouvoir=sousCarte.getPouvoirIlli();
-			if(currJ.getPouvoir().get(pouvoir)!=null);{
+			if(currJ.getPouvoir().get(pouvoir)!=null){
 				currJ.getPouvoir().put(pouvoir,new Integer(currJ.getPouvoir().get(pouvoir).intValue()-1));
 			}
 		}else{

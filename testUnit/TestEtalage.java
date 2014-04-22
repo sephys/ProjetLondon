@@ -30,8 +30,8 @@ public class TestEtalage {
 
 	@Before
 	public void setUp() throws Exception {
-		Carte.initDeck();
-		d=London.getDeck();
+		
+		d=Carte.initDeck();
 		System.out.println("nbJoueur?");
 		Scanner sc =new Scanner(System.in);
 		int nb=sc.nextInt();
@@ -100,7 +100,7 @@ public class TestEtalage {
 	@Test
 	//Test que l'ajout d'une carte qui force le switch des lignes vide correctement la ligne qui doit l'etre
 	public void testAddCarte() {
-		for(int i=0;i<et.getLigne1().length+1;i++){
+		for(int i=0;i<et.getLigne1().length;i++){
 			et.addCarte(d.poll());
 			et.addCarte(d.poll());
 		}

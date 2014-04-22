@@ -20,7 +20,7 @@ public class Main {
     
     public static void main(String[] arg) {
      jeu=new London();
-     Carte.initDeck();
+     jeu.setDeck(Carte.initDeck());
      Zone.initZone();
     }
 
