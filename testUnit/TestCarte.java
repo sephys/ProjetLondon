@@ -29,9 +29,7 @@ public class TestCarte {
 
 	@Before
 	public void setUp() throws Exception {
-		Carte.initDeck();				//initialisation du deck
-		London jeu=new London();
-		d=jeu.getDeck();		//récupération du deck
+		d=Carte.initDeck();;		//récupération du deck
 	}
 
 	@After
@@ -46,8 +44,8 @@ public class TestCarte {
 		assertSame(tmp,tmp2);
 		
 		
-		while(d.peekFirst().getNom().equals(tmp2.getNom())){
-			tmp = d.poll();
+		while(tmp.equals(tmp2)){
+			tmp2 = d.poll();
 		}
 		assertNotSame(tmp,tmp2);
 	}
@@ -90,11 +88,10 @@ public class TestCarte {
 			
 			tmp = d.poll();
 			
-			if (!(tmp.getCategorie().equals(tmpPast.getCategorie()))){
+			if (tmp.getCategorie().compareTo(tmpPast.getCategorie())!=0){
 				tmpres.append(tmp.getCategorie());
-			}
-			
-			tmpPast = d.peekFirst(); 
+				tmpPast=tmp;
+			} 
 		}
 		String res=new String(tmpres);
 		assertEquals(expected,res);
