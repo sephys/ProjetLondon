@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vue;
+package controleur;
 
 /**
  *
@@ -21,9 +21,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Constructible;
+import model.Constructible;
 import model.PouvoirBeta;
+import vue.JBCarte;
+import vue.JPPileChantier;
+import vue.Main;
 
-public class DragDrop implements DragGestureListener, DragSourceListener,
+public class DragDropControl implements DragGestureListener, DragSourceListener,
 DropTargetListener, Transferable {
 
 	static final DataFlavor[] supportedFlavors = {null};
@@ -53,7 +57,7 @@ DropTargetListener, Transferable {
 	}
 
 	public static void setDragEnable(boolean dragEnable) {
-		DragDrop.dragEnable = dragEnable;
+		DragDropControl.dragEnable = dragEnable;
 	}
 
 	public DataFlavor[] getTransferDataFlavors() {
@@ -216,51 +220,5 @@ DropTargetListener, Transferable {
 
 	}
 
-	public static void main(String[] arg) {
-		JButton button = new JButton("Drag this button");
-		JLabel label = new JLabel("Drag this label");
-		Checkbox checkbox = new Checkbox("Drag this check box");
-		CheckboxGroup radiobutton = new CheckboxGroup();
-		Checkbox checkbox1 = new Checkbox("Drag this check box", radiobutton, false);
-		Choice country = new Choice();
-
-		// adding possible choices
-		country.add("India");
-		country.add("US");
-		country.add("Australia");
-
-		JFrame source = new JFrame("Source Frame");
-		source.setLayout(new FlowLayout());
-		source.add(button);
-		source.add(label);
-		source.add(checkbox);
-		source.add(checkbox1);
-		source.add(country);
-
-		JFrame target = new JFrame("Target Frame");
-		target.setLayout(new FlowLayout());
-
-		DragDrop dndListener = new DragDrop();
-
-		DragSource dragSource = new DragSource();
-		DropTarget dropTarget1 = new DropTarget(source, DnDConstants.ACTION_MOVE,
-				dndListener);
-		DropTarget dropTarget2 = new DropTarget(target, DnDConstants.ACTION_MOVE,
-				dndListener);
-		DragGestureRecognizer dragRecognizer1 = dragSource.
-				createDefaultDragGestureRecognizer(button, DnDConstants.ACTION_MOVE, dndListener);
-		DragGestureRecognizer dragRecognizer2 = dragSource.
-				createDefaultDragGestureRecognizer(label, DnDConstants.ACTION_MOVE, dndListener);
-		DragGestureRecognizer dragRecognizer3 = dragSource.
-				createDefaultDragGestureRecognizer(checkbox, DnDConstants.ACTION_MOVE, dndListener);
-		DragGestureRecognizer dragRecognizer4 = dragSource.
-				createDefaultDragGestureRecognizer(checkbox1, DnDConstants.ACTION_MOVE, dndListener);
-		DragGestureRecognizer dragRecognizer5 = dragSource.
-				createDefaultDragGestureRecognizer(country, DnDConstants.ACTION_MOVE, dndListener);
-
-		source.setBounds(0, 200, 200, 200);
-		target.setBounds(220, 200, 200, 200);
-		source.show();
-		target.show();
-	}
+	
 }

@@ -103,7 +103,7 @@ public class MenuDroiteControl {
         Main.getJeu().getPanelOnglet().setSelectedIndex(1);
 
         // on peut pas d&d à la base
-        DragDrop.setDragEnable(false);
+        DragDropControl.setDragEnable(false);
 
     }
     
