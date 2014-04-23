@@ -178,6 +178,10 @@ public class Constructible extends Carte {
                         {
                             PouvoirBeta.pouvoirLloydsOfLondon();
                         }
+                        else if(this.pouvoirActiv=="Cofee")
+                        {
+                           // PouvoirBeta.
+                        }
                         
                         
                         
@@ -186,9 +190,6 @@ public class Constructible extends Carte {
 			}
 		}
                 
-                /*Pouvoir carte Coffee House*/
-                if("Coffee".equals(this.pouvoirActiv)){
-                    System.out.println("cofee");
-                }
+                
 	}
 }
