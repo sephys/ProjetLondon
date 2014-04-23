@@ -163,5 +163,10 @@ public class Constructible extends Carte {
 				this.activable=false;
 			}
 		}
+                
+                /*Pouvoir carte Coffee House*/
+                if("Coffee".equals(this.pouvoirActiv)){
+                    System.out.println("cofee");
+                }
 	}
 }
