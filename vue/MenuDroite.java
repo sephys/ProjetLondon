@@ -7,9 +7,6 @@ package vue;
 
 import controleur.*;
 import java.awt.*;
-
-import java.awt.event.*;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -80,6 +77,9 @@ public class MenuDroite extends JPanel {
         labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.piocher = new JButton("          Piocher           ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        JButton test=new JButton("test");
+        test.addActionListener(new TestControl());
 
         jouer.setPreferredSize(new Dimension(149, 26));
         restaurer.setPreferredSize(new Dimension(149, 26));
@@ -110,6 +110,8 @@ public class MenuDroite extends JPanel {
         menuBouton.add(Box.createRigidArea(new Dimension(0, 30)));
         menuBouton.add(labelInfo);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 30)));
+        
+        menuBouton.add(test);
 
         // ACTION BOUTON JOUERCARTES
         jouer.addActionListener(new JouerControl());

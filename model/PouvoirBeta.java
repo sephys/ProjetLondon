@@ -1,5 +1,17 @@
 package model;
 
+import controleur.DeuxJoueurs;
+import controleur.QuatreJoueurs;
+import controleur.TroisJoueurs;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import vue.London;
 import vue.Main;
 
@@ -62,18 +74,93 @@ public class PouvoirBeta {
         return res;
     }
     
-    
+    // done
     public static void pouvoirFireBrigade(Joueur j) {
         for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && (!n.getProprietaire().equals(j))) {
-                n.getProprietaire().addArgent(-1);
+                // si le jouer a plus d'argent ou l'oblige à prendre un pret
+                if(n.getProprietaire().getArgent()==0)
+                {
+                   n.getProprietaire().addPret(1);
+                   n.getProprietaire().addArgent(-1);
+                }
+                else
+                {
+                  n.getProprietaire().addArgent(-1);  
+                }
+                
             }
         }
     }
     
     
-    public static void pouvoirFleetStreet(Joueur implique) {
-        implique.addPointPauvrete(2);
+    public static void pouvoirFleetStreet() {
+        
+                final JFrame choixJoueur = new JFrame();
+                choixJoueur.setLayout(new GridLayout(4, 1));
+                choixJoueur.setSize(300, 200);
+                choixJoueur.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                
+                // premet de lier les radio boutons
+                ButtonGroup bg = new ButtonGroup();
+                
+               
+                
+                final String nomJ1=Main.getJeu().getListeJoueur().getSuivant().getJoueur().getNom();
+                final String nomJ2=Main.getJeu().getListeJoueur().getSuivant().getSuivant().getJoueur().getNom();
+                final String nomJ3=Main.getJeu().getListeJoueur().getSuivant().getSuivant().getSuivant().getJoueur().getNom();
+                
+                final  JRadioButton b1 = new JRadioButton(nomJ1);
+                final JRadioButton b2 = new JRadioButton(nomJ2);
+                final JRadioButton b3 = new JRadioButton(nomJ3);
+              
+                
+                
+                bg.add(b1);
+                bg.add(b2);
+                bg.add(b3);
+                
+                choixJoueur.add(b1);
+                choixJoueur.add(b2);
+                choixJoueur.add(b3);
+                
+                JButton p=new JButton("Ok");
+                
+                p.addActionListener(new ActionListener() {
+                    
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(b1.isSelected())
+                        {
+                            Main.getJeu().getListeJoueur().getSuivant().getJoueur().addPointPauvrete(2);
+                        }
+                        else if(b2.isSelected())
+                        {
+                            Main.getJeu().getListeJoueur().getSuivant().getSuivant().getJoueur().addPointPauvrete(2);
+                        }
+                        else
+                        {
+                            Main.getJeu().getListeJoueur().getSuivant().getSuivant().getSuivant().getJoueur().addPointPauvrete(2);
+                            Main.getJeu().getListeJoueur().getJoueur().addArgent(2);
+                            Main.getJeu().getInfos().maj_infos();
+     
+                        }
+                        
+                        choixJoueur.dispose();
+                    }
+                });
+                choixJoueur.setUndecorated(true);
+                choixJoueur.add(p);
+                choixJoueur.setLocationRelativeTo(null);
+                choixJoueur.setVisible(true);
+                
+               
+                
+               
+              
+                
+        
+        
     }
     
     public static void pouvoirLloydsOfLondon(Joueur j) {

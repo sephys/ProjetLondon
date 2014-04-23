@@ -145,6 +145,7 @@ public class Constructible extends Carte {
 
 	public void activerCarte(Joueur currJ){
 		if(this.activable){
+                    // MODIFIER CODE POUR LES POUVOIRS DANDHUY IF ELSE
 			currJ.setArgent(currJ.getArgent()-Integer.parseInt(this.coutActivation[0]));
 			String coutCarte=this.coutActivation[1];
 			if(coutCarte.compareTo("aucun")!=0){
@@ -158,6 +159,19 @@ public class Constructible extends Carte {
 			currJ.setArgent(currJ.getArgent()+this.gainAcivation[0]);
 			currJ.setPointVictoire(currJ.getPointVictoire()+this.gainAcivation[1]);
 			currJ.setPointPauvrete(currJ.getPointPauvrete()+this.gainAcivation[2]);
+                        
+                        // Pouvoirs
+                        if(this.pouvoirActiv=="Fire")
+                        {
+                            PouvoirBeta.pouvoirFireBrigade(currJ);
+                        }
+                        else if(this.pouvoirActiv=="Street")
+                        {
+                            
+                        }
+                        
+                        
+                        
 			if(this.aRetourne){
 				this.activable=false;
 			}
