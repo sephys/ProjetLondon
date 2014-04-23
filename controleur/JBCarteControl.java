@@ -106,19 +106,43 @@ public class JBCarteControl implements MouseListener {
 
                 case "etalage": // on met la carte de l'etalage dans la main
                     //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
+                    JBCarte carte = ((JBCarte) e.getComponent());
 
                     if (Main.getJeu().getListeJoueur().getJoueur().getPioche() != 0) {
                         // ajout de la carte dans la main du joueur graphiquement
-                        Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(((JBCarte) e.getComponent()).getCarte());
+                        Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(carte.getCarte());
                         // ajout de la carte das la main du joueur
-                        Main.getJeu().getListeJoueur().getJoueur().getMain().add(((JBCarte) e.getComponent()).getCarte());
+                        Main.getJeu().getListeJoueur().getJoueur().getMain().add(carte.getCarte());
                         // suppresssion de la carte dans l'etalage
-                        Main.getJeu().getEtalage().piocherCarte(((JBCarte) e.getComponent()).getCarte());
+                        Main.getJeu().getEtalage().piocherCarte(carte.getCarte());
                         // on rafraichit l'étalage
                         Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
                         Main.getJeu().getListeJoueur().getJoueur().piocheMoins();
 
                         ((JBCarte) e.getComponent()).setPosition("main");
+
+                        /*Pouvoir Coffee Shop : ajout de la carte de l'étalage sur un chantier*/
+                    } else if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Coffee") >= 1) {
+
+                        /*Ajout visuel de la carte*/
+                        for (int i = 0; i < Main.getJeu().getListeJoueur().getJoueur().getListeChantier().size(); i++) {
+                            if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().get(i).peekFirst().getNom().equals("Coffee House")) {
+                                Main.getJeu().getJpChantier().getChantiers()[i].removeAll();
+                                Main.getJeu().getJpChantier().getChantiers()[i].ajoutCarte(carte.getCarte());
+                            }
+                        }
+
+                        /*Ajout dans le modèle de la carte*/
+                        Main.getJeu().getListeJoueur().getJoueur().getMain().add(carte.getCarte());
+
+                        // suppresssion de la carte dans l'etalage
+                        Main.getJeu().getEtalage().piocherCarte(carte.getCarte());
+
+                        /*Rafraichissement de l'étalage*/
+                        Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
+
+                        /*Changer la position de la carte*/
+                        carte.setPosition("construction");
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");

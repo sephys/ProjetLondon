@@ -90,6 +90,7 @@ public class MenuDroite extends JPanel {
         finTour.setPreferredSize(new Dimension(149, 26));
         
         // on les ajoute au menu
+         menuBouton.add(test);
         menuBouton.add(jpsij);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 6)));
         menuBouton.add(jouer);
@@ -111,7 +112,6 @@ public class MenuDroite extends JPanel {
         menuBouton.add(labelInfo);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 30)));
         
-        menuBouton.add(test);
 
         // ACTION BOUTON JOUERCARTES
         jouer.addActionListener(new JouerControl());

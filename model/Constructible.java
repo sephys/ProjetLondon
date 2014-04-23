@@ -160,28 +160,24 @@ public class Constructible extends Carte {
 			currJ.setArgent(currJ.getArgent()+this.gainAcivation[0]);
 			currJ.setPointVictoire(currJ.getPointVictoire()+this.gainAcivation[1]);
 			currJ.setPointPauvrete(currJ.getPointPauvrete()+this.gainAcivation[2]);
-                        
-                        // Pouvoirs
-                        if(this.pouvoirActiv=="Fire")
-                        {
+                    // Pouvoirs
+                    switch (this.pouvoirActiv) {
+                        case "Fire":
                             PouvoirBeta.pouvoirFireBrigade(currJ);
-                        }
-                        else if(this.pouvoirActiv=="Street")
-                        {
+                            break;
+                        case "Street":
                             PouvoirBeta.pouvoirFleetStreet();
-                        }
-                        else if(this.pouvoirActiv=="Omnibus")
-                        {
+                            break;
+                        case "Omnibus":
                             PouvoirBeta.pouvoirOmnibus();
-                        }
-                        else if(this.pouvoirActiv=="Lloyds")
-                        {
+                            break;
+                        case "Lloyds":
                             PouvoirBeta.pouvoirLloydsOfLondon();
-                        }
-                        else if(this.pouvoirActiv=="Cofee")
-                        {
-                           // PouvoirBeta.
-                        }
+                            break;
+                        case "Coffee":
+                            PouvoirBeta.pouvoirCoffee(currJ, this);
+                            break;
+                    }
                         
                         
                         

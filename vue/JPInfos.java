@@ -47,6 +47,9 @@ public class JPInfos extends JPanel {
         }
     }
 
+    /**
+     * Méthode de mise a jour du panel d'infos pour tous les joueurs
+     */
     public void maj_infos() {
         for (int j = 0; j<Main.getJeu().getTabJoueur().length; j++) {
             Joueur joueur = Main.getJeu().getTabJoueur()[j];

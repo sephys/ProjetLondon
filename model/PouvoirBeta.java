@@ -74,6 +74,19 @@ public class PouvoirBeta {
         return res;
     }
 
+    public static void pouvoirCoffee(Joueur J, Constructible carte) {
+        JOptionPane.showMessageDialog(null, "Coffee House activé !");
+        Main.getJeu().getMenudroite().getLabelInfo().setText("Choississez une carte de l'étalage");
+        
+        /*On ajoute le pouvoir dans le tableau de pouvoirs du joueur (obligatoire car on doit faire des conditions dans JBCarte)*/
+        if (J.getPouvoir().get("Coffee") != null) {
+            Main.getJeu().getJpChantier().getChantiers();
+            J.getPouvoir().put("Coffee", new Integer(1));
+        }
+        // change onglet sur etélage
+        Main.getJeu().getPanelOnglet().setSelectedIndex(1);
+    }
+
     // done
     public static void pouvoirFireBrigade(Joueur j) {
         for (Zone n : Main.getJeu().getZones().values()) {

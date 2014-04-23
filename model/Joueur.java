@@ -51,6 +51,7 @@ public class Joueur {
         pouvoir.put("School", 0);
         pouvoir.put("Wren", 0);
         pouvoir.put("Huguenots", 0);
+        pouvoir.put("Coffee", 0);
         //pouvoir.put(nom, argent);
     }
 
@@ -155,7 +156,7 @@ public class Joueur {
     public void defausseMoins(Carte defausse) {
         this.defausse--;
         this.main.remove(defausse);
-        this.lastCarte=null;
+        this.lastCarte = null;
         if (this.defausse == 0 && Main.getJeu().getListeJoueur().getJoueur().isFinitTour()) {
             m.setFinTour();
         }
@@ -297,10 +298,10 @@ public class Joueur {
 
         carteJouer.jouerCarte(this, ind);
         System.out.println(this.finitTour);
-        this.lastCarte = carteJouer;		
+        this.lastCarte = carteJouer;
         System.out.println(carteJouer.getNom());//stock la dernière carte jouer
         if (carteJouer.getClass() == Constructible.class) { //si constructible
-            if (PouvoirBeta.pouvoirWren(this) || "Coffee House".equals(carteJouer.getNom())){
+            if (PouvoirBeta.pouvoirWren(this) || "Coffee House".equals(carteJouer.getNom())) {
                 this.defausse = 0;
                 System.out.println("defausse = 0");
 
@@ -354,5 +355,6 @@ public class Joueur {
     public Carte getLastCarte() {
         return this.lastCarte;
     }
+
 
 }
