@@ -55,7 +55,7 @@ public class JBCarteControl implements MouseListener {
                         Main.getJeu().getListeJoueur().getJoueur().getMain().remove(carte.getCarte());
 
                         //on enlève la défausse
-                        Main.getJeu().getListeJoueur().getJoueur().defausseMoins();
+                        Main.getJeu().getListeJoueur().getJoueur().defausseMoins(carte.getCarte());
 
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
@@ -66,14 +66,25 @@ public class JBCarteControl implements MouseListener {
                         /**/
                         //London.getMenudroite().getFinTour().setEnabled(true);
                         JBCarte carte = ((JBCarte) e.getComponent());
-                        carte.setPosition("etalage");
 
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
                         // si carte ne respecte pas les contraintes de defausse
                         if (Main.getJeu().getListeJoueur().getJoueur().payeConstruction(carte.getCarte()) == false) {
-                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+                            if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1) {
+                                int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                        "[Pouvoir school] Dépensez 1$ pour défausser une carte de couleur différente",
+                                        "Pouvoir school",
+                                        JOptionPane.YES_NO_OPTION);
+                                if (rep == JOptionPane.YES_OPTION) {
+                                    PouvoirBeta.pouvoirSchool(Main.getJeu().getListeJoueur().getJoueur(), carte.getCarte());
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
+                            }
                         } else {
+                            /*La carte va dans l'étalage*/
+                            carte.setPosition("etalage");
                             // ajout de la carte dans l'etalage
                             Main.getJeu().getEtalage().addCarte(carte.getCarte());
                             // on rafrachit l'etalage
@@ -82,15 +93,13 @@ public class JBCarteControl implements MouseListener {
                             Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).getCarte());
 
                             //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
-                            // suppression de la carte de la main du joueur
-                            Main.getJeu().getListeJoueur().getJoueur().getMain().remove(carte.getCarte());
-
                             // refresh
                             Main.getJeu().getSouth().repaint();
                             Main.getJeu().getSouth().revalidate();
 
                         }
                     } else {
+                        System.out.println("JBCARTE defausse = 0");
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
                     }
                     break;
@@ -165,51 +174,52 @@ public class JBCarteControl implements MouseListener {
 
                     }
             }
+        }
 
-            if (e.getButton() == MouseEvent.BUTTON3) {
-                if (JBCarte.isClicDroitJouer()) {
-                    if (((JBCarte) e.getComponent()).getCarte().getClass() == NonConstructible.class) {
-                        if (!"Paupers".equals(((JBCarte) e.getComponent()).getCarte().getNom())) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            if (JBCarte.isClicDroitJouer()) {
+                if (((JBCarte) e.getComponent()).getCarte().getClass() == NonConstructible.class) {
+                    if (!"Paupers".equals(((JBCarte) e.getComponent()).getCarte().getNom())) {
 
-                            int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
-                                    "Êtes-vous sûr de vouloir jouer cette carte ?",
-                                    "Jouer carte",
-                                    JOptionPane.YES_NO_OPTION);
-                            if (rep == JOptionPane.YES_OPTION) {
-                                System.out.println(((JBCarte) e.getComponent()).getCarte().getNom());
+                        int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                "Êtes-vous sûr de vouloir jouer cette carte ?",
+                                "Jouer carte",
+                                JOptionPane.YES_NO_OPTION);
+                        if (rep == JOptionPane.YES_OPTION) {
+                            System.out.println(((JBCarte) e.getComponent()).getCarte().getNom());
 
-                                Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(((JBCarte) e.getComponent()).getCarte(), 0);
-                                Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).getCarte());
+                            Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(((JBCarte) e.getComponent()).getCarte(), 0);
+                            Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).getCarte());
 
-                                /*Wren*/
-                                if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
-                                    Main.getJeu().getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
-                                }
-
-                                /*Hugueunot*/
-                                if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
-                                    PouvoirBeta.pouvoirHuguenots(Main.getJeu().getListeJoueur().getJoueur());
-
-                                }
+                            /*Wren*/
+                            if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
+                                Main.getJeu().getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
                             }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
 
+                            /*Hugueunot*/
+                            if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
+                                PouvoirBeta.pouvoirHuguenots(Main.getJeu().getListeJoueur().getJoueur());
+
+                            }
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
+                        JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
+
                     }
                 } else {
+                    JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
+                }
+            } else {
 
-                    if (Main.getJeu().getListeJoueur().getJoueur().getPioche() == 0) {
+                if (Main.getJeu().getListeJoueur().getJoueur().getPioche() == 0) {
 
-                        JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Vous devez piocher");
-                    }
+                    JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vous devez piocher");
                 }
             }
         }
+
     }
 
     @Override

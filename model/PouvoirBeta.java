@@ -10,14 +10,15 @@ public class PouvoirBeta {
     private static int speChoix; //
     
     //pouvoir illimité.
-    public static boolean pouvoirSchool(Joueur j, String colorJ, String colorD) {
+    public static boolean pouvoirSchool(Joueur j, Carte cD) {
         boolean res = false;
         int test = j.getPouvoir().get("School");
-        if (colorJ.compareTo(colorD) != 0) {			//les cartes joueur sont de couleur différente
+        if (cD.getCouleur().compareTo(j.getLastCarte().getCouleur()) != 0) {			//les cartes joueur sont de couleur différente
             if (test != 0) { 							//possède le pouvoir de l'école
-                System.out.println("utilisation school" + j.getArgent());
-                j.addArgent(-1);		//paye 1 pour que la carte "change de couleur"
+                System.out.println("utilisation school" + j.getArgent());		//paye 1 pour que la carte "change de couleur"
                 res = true;
+                j.addArgent(-1);
+                j.defausseMoins(cD);
                 Main.getJeu().getInfos().maj_infos();
             }
         } else { 										//carte de même couleur
