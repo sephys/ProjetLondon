@@ -168,7 +168,15 @@ public class Constructible extends Carte {
                         }
                         else if(this.pouvoirActiv=="Street")
                         {
-                            
+                            PouvoirBeta.pouvoirFleetStreet();
+                        }
+                        else if(this.pouvoirActiv=="Omnibus")
+                        {
+                            PouvoirBeta.pouvoirOmnibus();
+                        }
+                        else if(this.pouvoirActiv=="Lloyds")
+                        {
+                            PouvoirBeta.pouvoirLloydsOfLondon();
                         }
                         
                         
