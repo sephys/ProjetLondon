@@ -41,8 +41,12 @@ public class TestJoueur {
 	@Test
 	//Test qu'il n'est pas possible d'avoir 2 joueur de la même couleur
 	public void testDoublonColor() {
-		Joueur tmpJ2=new Joueur("J2",Color.blue);
-		//assertNotEquals(test.getColor(),tmpJ2.getColor());
+		try{
+			Joueur tmpJ2=new Joueur("J2",Color.blue);
+			fail("Impossible d'avoir 2 joueurs de la même couleur");
+		}catch(Exception e){
+			assertTrue(true);
+		}
 	}
 	
 	@Test
