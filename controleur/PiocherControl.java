@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import vue.London;
+import vue.Main;
 
 /**
  *
@@ -19,12 +20,12 @@ public class PiocherControl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (London.getListeJoueur().getJoueur().getPioche() != 0) {
-                    London.getListeJoueur().getJoueur().piocheCarte(London.getDeck().peekFirst());
-                    London.getTabJPMain()[London.getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(London.getDeck().poll());
-                    London.getListeJoueur().getJoueur().piocheMoins();
-                    London.getMenudroite().repaint();
-                    London.getMenudroite().revalidate();
+        if (Main.getJeu().getListeJoueur().getJoueur().getPioche() != 0) {
+                    Main.getJeu().getListeJoueur().getJoueur().piocheCarte(Main.getJeu().getDeck().peekFirst());
+                    Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(Main.getJeu().getDeck().poll());
+                    Main.getJeu().getListeJoueur().getJoueur().piocheMoins();
+                    Main.getJeu().getMenudroite().repaint();
+                    Main.getJeu().getMenudroite().revalidate();
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Vous n'avez pas le droit de piocher une carte");

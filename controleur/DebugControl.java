@@ -16,12 +16,13 @@ import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
 import vue.London;
+import vue.Main;
 
 /**
  *
  * @author Anh-Djuy
  */
-public class Debug implements ActionListener{
+public class DebugControl implements ActionListener{
         String[] nomJoueurs;
         
     public void actionPerformed(ActionEvent e) {
@@ -31,45 +32,45 @@ public class Debug implements ActionListener{
         nomJoueurs[1] = "Joueur 2";
         nomJoueurs[2] = "Joueur 3";
         nomJoueurs[3] = "Joueur 4";
-        London.setListeJoueur(initialisationJoueur(London.getDeck()));
-        London.setEtalage(new Etalage(London.getListeJoueur().getNbJoueur() + 1));
-        London.start();
+        Main.getJeu().setListeJoueur(initialisationJoueur(Main.getJeu().getDeck()));
+        Main.getJeu().setEtalage(new Etalage(Main.getJeu().getListeJoueur().getNbJoueur() + 1));
+        Main.getJeu().start();
     }    
     
     private TourJoueur initialisationJoueur(ArrayDeque<Carte> arrayDeque) {
         int nb = Joueur.getNbJoueur();
-        London.setTabJoueur(new Joueur[nb]);
+        Main.getJeu().setTabJoueur(new Joueur[nb]);
         int fin = nb * 6;
         for (int i = 0; i < fin; i++) {
             switch (i % nb) {
                 case 0:
-                    if (London.getTabJoueur()[0] == null) {
-                        London.getTabJoueur()[0] = new Joueur(nomJoueurs[0],Color.red);
+                    if (Main.getJeu().getTabJoueur()[0] == null) {
+                        Main.getJeu().getTabJoueur()[0] = new Joueur(nomJoueurs[0],Color.red);
 
                     }
-                    London.getTabJoueur()[0].piocheCarte(arrayDeque.poll());
+                    Main.getJeu().getTabJoueur()[0].piocheCarte(arrayDeque.poll());
                     break;
                 case 1:
-                    if (London.getTabJoueur()[1] == null) {
-                        London.getTabJoueur()[1] = new Joueur(nomJoueurs[1],Color.blue);
+                    if (Main.getJeu().getTabJoueur()[1] == null) {
+                        Main.getJeu().getTabJoueur()[1] = new Joueur(nomJoueurs[1],Color.blue);
 
                     }
-                    London.getTabJoueur()[1].piocheCarte(arrayDeque.poll());
+                    Main.getJeu().getTabJoueur()[1].piocheCarte(arrayDeque.poll());
                     break;
 
                 case 2:
-                    if (London.getTabJoueur()[2] == null) {
-                        London.getTabJoueur()[2] = new Joueur(nomJoueurs[2],Color.GREEN);
+                    if (Main.getJeu().getTabJoueur()[2] == null) {
+                        Main.getJeu().getTabJoueur()[2] = new Joueur(nomJoueurs[2],Color.GREEN);
 
                     }
-                    London.getTabJoueur()[2].piocheCarte(arrayDeque.poll());
+                    Main.getJeu().getTabJoueur()[2].piocheCarte(arrayDeque.poll());
                     break;
                 case 3:
-                    if (London.getTabJoueur()[3] == null) {
-                        London.getTabJoueur()[3] = new Joueur(nomJoueurs[3],Color.yellow);
+                    if (Main.getJeu().getTabJoueur()[3] == null) {
+                        Main.getJeu().getTabJoueur()[3] = new Joueur(nomJoueurs[3],Color.yellow);
 
                     }
-                    London.getTabJoueur()[3].piocheCarte(arrayDeque.poll());
+                    Main.getJeu().getTabJoueur()[3].piocheCarte(arrayDeque.poll());
                     break;
             }
         }
@@ -82,8 +83,8 @@ public class Debug implements ActionListener{
             TourJoueur current;
             switch ((indice + i) % nb) {
                 case 0:
-                    current = new TourJoueur(London.getTabJoueur()[0]);
-                    London.getTabJoueur()[0].setPlaceJoueur(i);
+                    current = new TourJoueur(Main.getJeu().getTabJoueur()[0]);
+                    Main.getJeu().getTabJoueur()[0].setPlaceJoueur(i);
                     if (tmp != null) {
                         tmp.setSuivant(current);
                     } else {
@@ -92,8 +93,8 @@ public class Debug implements ActionListener{
                     tmp = current;
                     break;
                 case 1:
-                    current = new TourJoueur(London.getTabJoueur()[1]);
-                    London.getTabJoueur()[1].setPlaceJoueur(i);
+                    current = new TourJoueur(Main.getJeu().getTabJoueur()[1]);
+                    Main.getJeu().getTabJoueur()[1].setPlaceJoueur(i);
                     if (tmp != null) {
                         tmp.setSuivant(current);
                     } else {
@@ -103,8 +104,8 @@ public class Debug implements ActionListener{
                     break;
 
                 case 2:
-                    current = new TourJoueur(London.getTabJoueur()[2]);
-                    London.getTabJoueur()[2].setPlaceJoueur(i);
+                    current = new TourJoueur(Main.getJeu().getTabJoueur()[2]);
+                    Main.getJeu().getTabJoueur()[2].setPlaceJoueur(i);
                     if (tmp != null) {
                         tmp.setSuivant(current);
                     } else {
@@ -113,8 +114,8 @@ public class Debug implements ActionListener{
                     tmp = current;
                     break;
                 case 3:
-                    current = new TourJoueur(London.getTabJoueur()[3]);
-                    London.getTabJoueur()[3].setPlaceJoueur(i);
+                    current = new TourJoueur(Main.getJeu().getTabJoueur()[3]);
+                    Main.getJeu().getTabJoueur()[3].setPlaceJoueur(i);
                     if (tmp != null) {
                         tmp.setSuivant(current);
                     } else {

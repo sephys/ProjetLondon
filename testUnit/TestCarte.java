@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import vue.London;
+import vue.Main;
 
 public class TestCarte {
 	
@@ -28,8 +29,7 @@ public class TestCarte {
 
 	@Before
 	public void setUp() throws Exception {
-		Carte.initDeck();
-		d=London.getDeck();
+		d=Carte.initDeck();;		//rÃ©cupÃ©ration du deck
 	}
 
 	@After
@@ -41,14 +41,12 @@ public class TestCarte {
 	public void testEquals() {
 		Carte tmp = d.peekFirst();
 		Carte tmp2 = d.poll();
-		
 		assertSame(tmp,tmp2);
 		
 		
-		while(d.peekFirst().getNom().equals(tmp2.getNom())){
-			tmp = d.poll();
+		while(tmp.equals(tmp2)){
+			tmp2 = d.poll();
 		}
-		
 		assertNotSame(tmp,tmp2);
 	}
 	
@@ -69,7 +67,7 @@ public class TestCarte {
 			}else if(tmp.getCategorie().equals("C")){
 				countC++;
 			}else{
-				fail("Une carte est de catégorie différente de A, B ou C");
+				fail("Une carte est de catï¿½gorie diffï¿½rente de A, B ou C");
 			}
 		}
 		
@@ -79,24 +77,24 @@ public class TestCarte {
 	}
 	
 	@Test
-	//Test si le deck est bien mélanger en 3 partie (A, B et C)
+	//Test si le deck est bien mï¿½langer en 3 partie (A, B et C)
 	public void testInitDeck2(){
 		
 		Carte tmpPast = d.peekFirst();
+		StringBuffer tmpres= new StringBuffer(tmpPast.getCategorie());
+		String expected="ABC";
 		Carte tmp = d.poll();
-		int cpt = 0;
-		
 		while (d.isEmpty() == false){
 			
 			tmp = d.poll();
 			
-			if (!(tmp.getCategorie().equals(tmpPast.getCategorie()))){
-				cpt++;
-			}
-			
-			tmpPast = d.peekFirst(); 
+			if (tmp.getCategorie().compareTo(tmpPast.getCategorie())!=0){
+				tmpres.append(tmp.getCategorie());
+				tmpPast=tmp;
+			} 
 		}
-		assertEquals(2,cpt);
+		String res=new String(tmpres);
+		assertEquals(expected,res);
 	}
 	
 }

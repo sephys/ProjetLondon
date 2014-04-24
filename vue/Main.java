@@ -6,16 +6,32 @@
 
 package vue;
 
+import controleur.JPAccueilControl;
+import model.Carte;
+import model.Zone;
+
 /**
  *
  * @author Joke
  */
 public class Main {
     
-    public static London jeu;
+    private static London jeu;
     
     public static void main(String[] arg) {
      jeu=new London();
+     jeu.setDeck(Carte.initDeck());
+     Zone.initZone();
     }
+
+    public static London getJeu() {
+        return jeu;
+    }
+
+    public static void setJeu(London jeu) {
+        Main.jeu = jeu;
+    }
+    
+    
     
 }

@@ -131,8 +131,9 @@ public class Constructible extends Carte {
 
 		Constructible sousCarte=currJ.getListeChantier().get(ind).peekFirst();
 		if(sousCarte!=null){
+                    
 			String pouvoir=sousCarte.getPouvoirIlli();
-			if(currJ.getPouvoir().get(pouvoir)!=null);{
+			if(currJ.getPouvoir().get(pouvoir)!=null){
 				currJ.getPouvoir().put(pouvoir,new Integer(currJ.getPouvoir().get(pouvoir).intValue()-1));
 			}
 		}else{
@@ -145,6 +146,7 @@ public class Constructible extends Carte {
 
 	public void activerCarte(Joueur currJ){
 		if(this.activable){
+                    // MODIFIER CODE POUR LES POUVOIRS DANDHUY IF ELSE
 			currJ.setArgent(currJ.getArgent()-Integer.parseInt(this.coutActivation[0]));
 			String coutCarte=this.coutActivation[1];
 			if(coutCarte.compareTo("aucun")!=0){
@@ -158,9 +160,32 @@ public class Constructible extends Carte {
 			currJ.setArgent(currJ.getArgent()+this.gainAcivation[0]);
 			currJ.setPointVictoire(currJ.getPointVictoire()+this.gainAcivation[1]);
 			currJ.setPointPauvrete(currJ.getPointPauvrete()+this.gainAcivation[2]);
+                    // Pouvoirs
+                    switch (this.pouvoirActiv) {
+                        case "Fire":
+                            PouvoirBeta.pouvoirFireBrigade(currJ);
+                            break;
+                        case "Street":
+                            PouvoirBeta.pouvoirFleetStreet();
+                            break;
+                        case "Omnibus":
+                            PouvoirBeta.pouvoirOmnibus();
+                            break;
+                        case "Lloyds":
+                            PouvoirBeta.pouvoirLloydsOfLondon();
+                            break;
+                        case "Coffee":
+                            PouvoirBeta.pouvoirCoffee(currJ, this);
+                            break;
+                    }
+                        
+                        
+                        
 			if(this.aRetourne){
 				this.activable=false;
 			}
 		}
+                
+                
 	}
 }

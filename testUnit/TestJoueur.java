@@ -30,8 +30,8 @@ public class TestJoueur {
 	@Before
 	public void setUp() throws Exception {
 		this.test=new Joueur("j1",Color.blue);
-		Carte.initDeck();
-		d=London.getDeck();
+		d=Carte.initDeck();
+		
 	}
 
 	@After
@@ -39,7 +39,7 @@ public class TestJoueur {
 	}
 
 	@Test
-	//Test qu'il n'est pas possible d'avoir 2 joueur de la même couleur
+	//Test qu'il n'est pas possible d'avoir 2 joueur de la mï¿½me couleur
 	public void testDoublonColor() {
 		try{
 			Joueur tmpJ2=new Joueur("J2",Color.blue);
@@ -57,7 +57,7 @@ public class TestJoueur {
 	}
 	
 	@Test
-	//Test que le nombre de joueur est bien incrementé lors de l'ajout d'un nouveau joueur
+	//Test que le nombre de joueur est bien incrementï¿½ lors de l'ajout d'un nouveau joueur
 	public void testNbJoueur2() {
 		int nb1 = this.test.getNbJoueur();
 		Joueur tmpJ2=new Joueur("J2",Color.blue);

@@ -100,7 +100,6 @@ public class JPMain extends JPanel {
         carte.changeTailleBoutonImage(new Dimension(79, 121));
         main.add(carte);
         main.revalidate();
-        
     }
     
     public JPanel getMain()

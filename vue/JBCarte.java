@@ -33,18 +33,16 @@ import model.*;
  *
  * @author Anh-Djuy Bouton représentant une carte
  */
-public class JBCarte extends JButton{
+public class JBCarte extends JButton {
 
-    private Image image;
-    private Carte carte;
+    private Image image; // image de la carte
+    private Carte carte; /// carte 
     private static boolean doubleClick = false; // permet de savoir si on autorise le double click pour la défausse -> étalage
     private static boolean clicDroitJouer = false; /* Autorise le clic droit pour jouer la carte depuis la main */
-
     private static boolean activerCarte = false; // savoir si le joueur peut activer des cartes
-
     private String position; // permet de savoir ou est la carte : main - etalage - construction
     private boolean defausse; // est-ce que la carte pour etre defauser
-    // private boolean retournee;
+   
 
     public JBCarte(Carte carte) {
         this.carte = carte;
@@ -94,9 +92,6 @@ public class JBCarte extends JButton{
         }
         return true;
     }
-
-    // pour poser une carte sur l'etalage
-   
 
     /**
      * Code repris de http://www.developpez.net permettant de redimensionner une
@@ -168,7 +163,7 @@ public class JBCarte extends JButton{
     public void pouvoirBridge() {
         int argent = 0;
         if (this.carte.getNom().equals("Bridge")) {
-            ArrayList al = new ArrayList(London.getListeJoueur().getJoueur().getListeChantier());
+            ArrayList al = new ArrayList(Main.getJeu().getListeJoueur().getJoueur().getListeChantier());
             for (Object o : al) {
                 ArrayDeque<Constructible> a = (ArrayDeque<Constructible>) o;
                 if (a.poll().getCouleur().equals("marron")) {
@@ -176,11 +171,11 @@ public class JBCarte extends JButton{
                 }
             }
         }
-        London.getListeJoueur().getJoueur().addArgent(argent);
+        Main.getJeu().getListeJoueur().getJoueur().addArgent(argent);
     }
 
     public void pouvoirBrixtonPrison(int nombreCartes) {
-        London.getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
+        Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
     }
 
     public void changerImage(String path) {
@@ -192,8 +187,8 @@ public class JBCarte extends JButton{
         }
         this.setIcon(new ImageIcon(scaleImage(image, 122, 168)));
     }
-    
-    public static boolean getDoubleClick(){
+
+    public static boolean getDoubleClick() {
         return JBCarte.doubleClick;
     }
 }

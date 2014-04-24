@@ -30,8 +30,8 @@ public class TestEtalage {
 
 	@Before
 	public void setUp() throws Exception {
-		Carte.initDeck();
-		d=London.getDeck();
+		
+		d=Carte.initDeck();
 		System.out.println("nbJoueur?");
 		Scanner sc =new Scanner(System.in);
 		int nb=sc.nextInt();
@@ -55,7 +55,7 @@ public class TestEtalage {
 	}
 	
 	@Test
-	//Test si l'ajout d'une carte dans l'étalage marche correctement
+	//Test si l'ajout d'une carte dans l'ï¿½talage marche correctement
 	public void testAddCarteSimple(){
 		Carte tmp =d.peekFirst();
 		et.addCarte(tmp);
@@ -63,7 +63,7 @@ public class TestEtalage {
 	}
 	
 	@Test
-	//Test si l'ajout d'une carte qui force les deux lignes de l'étalage a switch marche correctement
+	//Test si l'ajout d'une carte qui force les deux lignes de l'ï¿½talage a switch marche correctement
 	public void testAddCarteSwitch(){
 		
 		for(int i=0;i<et.getLigne2().length;i++){
@@ -77,18 +77,18 @@ public class TestEtalage {
 	}
 	
 	@Test
-	//Test qu'il n'est pas possible de piocher une carte "vide" dans l'étalage
+	//Test qu'il n'est pas possible de piocher une carte "vide" dans l'ï¿½talage
 	public void testPiocheCarte() {
 		try{
 			et.piocherCarte(null);
-			fail("Impossible de piocher une carte null dans l'étalage");
+			fail("Impossible de piocher une carte null dans l'ï¿½talage");
 		}catch (Exception ex){
 			assertTrue(true);
 		}
 	}
 	
 	@Test
-	//Test qu'une carte piocher disparait de l'étalage
+	//Test qu'une carte piocher disparait de l'ï¿½talage
 	public void testPiocheCarte2() {
 		Carte tmp = d.peekFirst();
 		et.addCarte(d.poll());
@@ -100,7 +100,7 @@ public class TestEtalage {
 	@Test
 	//Test que l'ajout d'une carte qui force le switch des lignes vide correctement la ligne qui doit l'etre
 	public void testAddCarte() {
-		for(int i=0;i<et.getLigne1().length+1;i++){
+		for(int i=0;i<et.getLigne1().length;i++){
 			et.addCarte(d.poll());
 			et.addCarte(d.poll());
 		}

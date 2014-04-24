@@ -13,6 +13,7 @@ import vue.London;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import vue.Main;
 
 public abstract class Carte {
 
@@ -95,10 +96,11 @@ public abstract class Carte {
 		return new String(tmpStr);
 	}
 
-	public static void initDeck(){
+	public static ArrayDeque<Carte> initDeck(){
+		ArrayDeque <Carte> tmpDeck = null;
 		try {
 			/* Récupération du classeur Excel (en lecture) */
-			ArrayDeque <Carte> tmpDeck=new ArrayDeque<Carte>();
+			tmpDeck=new ArrayDeque<Carte>();
 			URL uri = Joueur.class.getResource("../fichier/Carte.xls");
 
 
@@ -179,7 +181,6 @@ public abstract class Carte {
 				tmpDeck.add(carteC.get(indice));
 				carteC.remove(indice);
 			}
-			London.setDeck(tmpDeck);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -190,6 +191,7 @@ public abstract class Carte {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return tmpDeck;
 
 	}
 
