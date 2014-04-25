@@ -78,7 +78,7 @@ public class PouvoirBeta {
     public static void pouvoirCoffee(Joueur J, Constructible carte) {
         JOptionPane.showMessageDialog(null, "Coffee House activé !");
         Main.getJeu().getMenudroite().getLabelInfo().setText("Choississez une carte de l'étalage");
-        
+
         /*On ajoute le pouvoir dans le tableau de pouvoirs du joueur (obligatoire car on doit faire des conditions dans JBCarte)*/
         if (J.getPouvoir().get("Coffee") != null) {
             Main.getJeu().getJpChantier().getChantiers();
@@ -186,7 +186,7 @@ public class PouvoirBeta {
     // Police
     public static void pouvoirPoliceForce() {
         JOptionPane.showMessageDialog(null, "Police Force activé !");
-        
+
         final JFrame choixJoueur = new JFrame();
         choixJoueur.setLayout(new GridLayout(4, 1));
         choixJoueur.setSize(300, 200);
@@ -231,57 +231,62 @@ public class PouvoirBeta {
                 choixJoueur.dispose();
             }
         });
-        
+
         // enleve la possibilité de fermer la fenêtre        
         choixJoueur.setUndecorated(true);
-        
+
         choixJoueur.add(p);
         choixJoueur.setLocationRelativeTo(null);
         choixJoueur.setVisible(true);
-        
-        
+
     }
-    
+
     // Boats
     public static void pouvoirSteamBoats() {
         JOptionPane.showMessageDialog(null, "Steamboats activé !");
         for (Zone n : Main.getJeu().getZones().values()) {
-            if(n!=null)
-            {
-                if(n.getProprietaire()!=null)
-                {
-                if (n.getProprietaire().equals(Main.getJeu().getListeJoueur().getJoueur()) && n.isAdjacentTamise()) {
-                   
-                    Main.getJeu().getListeJoueur().getJoueur().addArgent(2);
+            if (n != null) {
+                if (n.getProprietaire() != null) {
+                    if (n.getProprietaire().equals(Main.getJeu().getListeJoueur().getJoueur()) && n.isAdjacentTamise()) {
+
+                        Main.getJeu().getListeJoueur().getJoueur().addArgent(2);
+                    }
                 }
             }
-            }
-            
+
         }
         Main.getJeu().getInfos().maj_infos();
     }
-    
+
     // Town
     public static void pouvoirTownHouse() {
-       JOptionPane.showMessageDialog(null, "Town Houses activé !");
+        JOptionPane.showMessageDialog(null, "Town Houses activé !");
         int vp = 0;
-        for(ArrayDeque<Constructible> c : Main.getJeu().getListeJoueur().getJoueur().getListeChantier()){
-            if(!c.peek().getCouleur().equals("Brun")){
+        for (ArrayDeque<Constructible> c : Main.getJeu().getListeJoueur().getJoueur().getListeChantier()) {
+            if (!c.peek().getCouleur().equals("Brun")) {
                 vp++;
             }
         }
         Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(vp);
         Main.getJeu().getInfos().maj_infos();
-    
+
     }
 
     // Train
-    public static void pouvoirNorthTrainStation(Joueur j) {
+    public static void pouvoirNorthTrainStation() {
+        JOptionPane.showMessageDialog(null, "Train Station activé !");
         for (Zone n : Main.getJeu().getZones().values()) {
-            if (n != null && n.getProprietaire().equals(j) && (!n.isDessousTamise())) {
-                j.addArgent(2);
+            if (n != null) {
+                if (n.getProprietaire() != null) {
+                    if (n.getProprietaire().equals(Main.getJeu().getListeJoueur().getJoueur()) && (!n.isDessousTamise())) {
+                        Main.getJeu().getListeJoueur().getJoueur().addArgent(2);
+                    }
+                }
+
             }
+
         }
+        Main.getJeu().getInfos().maj_infos();
     }
 
     public static void pouvoirSouthTrainStation(Joueur j) {
@@ -291,17 +296,17 @@ public class PouvoirBeta {
             }
         }
     }
-    
+
     //contrôle
-    public static boolean peutJouer(Joueur j,Carte ca){
-    	boolean res=false;
-    	if(j.getPouvoir().get("Wren")==1||j.getPouvoir().get("School")==1){
-    		res=true;
-    	}
-    	if(ca.getNom().compareTo("School")==0||ca.getNom().compareTo("Coffee")==0){
-    		res=true;
-    	}
-    	return res;
+    public static boolean peutJouer(Joueur j, Carte ca) {
+        boolean res = false;
+        if (j.getPouvoir().get("Wren") == 1 || j.getPouvoir().get("School") == 1) {
+            res = true;
+        }
+        if (ca.getNom().compareTo("School") == 0 || ca.getNom().compareTo("Coffee") == 0) {
+            res = true;
+        }
+        return res;
     }
-    
+
 }
