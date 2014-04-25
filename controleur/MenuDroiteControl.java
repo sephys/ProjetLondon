@@ -11,18 +11,23 @@ import model.Joueur;
 import vue.*;
 
 /**
- *
+ *  Cette classe permet de gérer tous les boutons du menu de droite ainsi
+ *  que de changer de tour.
  * @author Joke
  */
 public class MenuDroiteControl {
+    
+    // Panel haut du menu droit.
     JPnomGaucheImageDroiteControl control;
     
-    public MenuDroiteControl()
-    {
+    public MenuDroiteControl(){
         super();
         control= new JPnomGaucheImageDroiteControl();
     }
     
+    /**
+     *  Méthode de désactivation de tous les boutons du menu droit.
+     */
     public void disableAll() {
         Main.getJeu().getMenudroite().getJouer().setEnabled(false);
         Main.getJeu().getMenudroite().getRestaurer().setEnabled(false);
@@ -32,6 +37,9 @@ public class MenuDroiteControl {
         Main.getJeu().getMenudroite().getFinTour().setEnabled(false);
     }
 
+    /**
+     * Méthode d'activation de tous les boutons du menu droit.
+     */
     public void enableAll() {
         Main.getJeu().getMenudroite().getJouer().setEnabled(true);
         Main.getJeu().getMenudroite().getRestaurer().setEnabled(true);
@@ -47,70 +55,69 @@ public class MenuDroiteControl {
         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous avez finit votre tour");
     }
     
-    // methode qui permet de changer de joueur
+    /**
+     *  Cette méthode permet de changer de joueur avec tous les traitements
+     *  que cela implique.
+     */
     public void actualiserMain() {
 
-        //passer chantier.carte2 à false
+        //  Passage de chantier.carte2 à false
         for (int i = 0; i < Main.getJeu().getJpChantier().getChantiers().length; i++) {
             JPPileChantier chantier = Main.getJeu().getJpChantier().getChantiers()[i];
             chantier.setCarte2(false);
         }
 
-        // sauvegarde de la main dans le tableau
+        // Sauvegarde de la main dans le tableau
         Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()] = (JPMain) Main.getJeu().getSouth();
 
-        // sauvegarde zone de construction
+        // Sauvegarde de la zone de construction
         Main.getJeu().getTabJPChantiers()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()] = Main.getJeu().getJpChantier();
 
-        // on enleve la main
+        // On enlève la main
         Main.getJeu().getCentral().remove(Main.getJeu().getSouth());
-        // on passe au joueur suivant
+        // On passe au joueur suivant
         Main.getJeu().setListeJoueur(Main.getJeu().getListeJoueur().getSuivant());
         Main.getJeu().getListeJoueur().getJoueur().setPioche(1);
         Joueur nouveauJoueur = Main.getJeu().getListeJoueur().getJoueur();
+        // On vérifie s'il a le pouvoir University of London 
         if(nouveauJoueur.getPouvoir().get("University") == 1){
             Main.getJeu().getMenudroite().getRegarder3Cartes().setVisible(true);
         }else{
             Main.getJeu().getMenudroite().getRegarder3Cartes().setVisible(false);            
         }
-        // change le label nomJoeuur
-        //labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
+        // Changement de l'image ainsi que du pseudo du joueur dans la partie haute
         control.actualiseJoueur();
-        // on remplace le panel par celui du nouveau joueur
+        // On prend met la main du joueur suivant
         Main.getJeu().setSouth(Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()]);
-        // on ajoute le panel
+        // On ajoute le panel
         Main.getJeu().getCentral().add(Main.getJeu().getSouth(), BorderLayout.SOUTH);
 
-        // on enleve la zone
+        // On enleve les chantiers du précédent joueur
         Main.getJeu().getPanelOnglet().remove(Main.getJeu().getPanelOnglet().getComponent(2));
-        // on remplace la zone
+        // On les remplace par les chantiers du nouveau joueur
         Main.getJeu().setJpChantier(Main.getJeu().getTabJPChantiers()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()]);
-        // on ajoute la zone
+        // On ajoute la zone
         Main.getJeu().getPanelOnglet().addTab("Chantiers", Main.getJeu().getJpChantier());
 
-        // actualiser la fenêtre
+        // Actualisation de la fenêtre
         Main.getJeu().getFrame().repaint();
         Main.getJeu().getCentral().revalidate();
 
-        // le jouuer peut piocher une carte
+        // On permet au joueur de piocher une carte
         Main.getJeu().getListeJoueur().getJoueur().setPioche(1);
 
-        // on réinitialise les valeurs
+        // On réinitialise les valeurs
         Main.getJeu().getListeJoueur().getJoueur().setFinitTour(false);
         JBCarte.setClicDroitJouer(false);
         JBCarte.setActiverCarte(false);
 
-        //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(false);
-        // on informe le joueur
+        // On informe le joueur de son tour
         JOptionPane.showMessageDialog(null, "C'est au tour de " + Main.getJeu().getListeJoueur().getJoueur().getNom() + " de jouer");
-        //London.getListeJoueur().getJoueur().setPiocheDefausse("pioche");
-
-        // on peut pas se defausser a la base
-        //setDefausseCarte(false);
-        // change onglet
+        
+        // Changement d'onglet pour la carte du plateau
         Main.getJeu().getPanelOnglet().setSelectedIndex(1);
 
-        // on peut pas d&d à la base
+        // Désactivation du Drag & Drop
         DragDropControl.setDragEnable(false);
         if(Main.getJeu().getListeJoueur().getFinTour()==0){
             this.disableAll();

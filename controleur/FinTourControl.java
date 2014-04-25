@@ -8,13 +8,9 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import model.Carte;
 import model.Joueur;
-import vue.JBCarte;
 import vue.JPChantiers;
-import vue.London;
 import vue.Main;
 
 
