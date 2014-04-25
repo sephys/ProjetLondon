@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,15 +7,10 @@ import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Objects;
-import javax.imageio.ImageIO;
-
-import vue.London;
 
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import vue.JBCarte;
-import vue.Main;
 
 public abstract class Carte {
 

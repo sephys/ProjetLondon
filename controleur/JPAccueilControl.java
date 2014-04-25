@@ -21,7 +21,6 @@ import model.Carte;
 import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
-import model.Zone;
 import vue.Main;
 
 /**

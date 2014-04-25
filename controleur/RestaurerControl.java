@@ -13,7 +13,7 @@ import vue.JBCarte;
 import vue.Main;
 
 /**
- *
+ *  Ce Listener permet de gérer l'appui sur le bouton Restaurer la ville.
  * @author Joke
  */
 public class RestaurerControl implements ActionListener {
@@ -22,7 +22,7 @@ public class RestaurerControl implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         MenuDroiteControl m=new MenuDroiteControl();
         // check si pas de chantier
-                if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().isEmpty()) {
+                if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().isEmpty() && !(Main.getJeu().getJpChantier().isRestaurable())) {
                     JOptionPane.showMessageDialog(null, "Vous ne pouvez pas restaurer la ville");
                 } else {
                     int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),

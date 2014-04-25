@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import model.Joueur;
+import model.Constructible;
 
 /**
  *
@@ -86,5 +86,17 @@ public class JPChantiers extends JPanel{
             }
         }
         return compteur-1;
+    }
+    
+    public boolean isRestaurable(){
+        System.out.println("rentre dans isRestaurable");
+        boolean restaurable = false;
+        for(JPPileChantier ch : chantiers){
+            Constructible c = (Constructible) ch.getJBCarte().getCarte();
+            if(c.isActivable()){
+                restaurable = true;
+            }
+        }
+        return restaurable;
     }
 }

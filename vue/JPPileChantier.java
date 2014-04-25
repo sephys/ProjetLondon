@@ -104,4 +104,7 @@ public class JPPileChantier extends JPanel{
         this.revalidate();
     }
     
+    public JBCarte getJBCarte(){
+        return this.carte;
+    }
 }
