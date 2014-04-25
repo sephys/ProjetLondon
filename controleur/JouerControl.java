@@ -26,6 +26,7 @@ public class JouerControl implements ActionListener {
                 "Jouer des cartes",
                 JOptionPane.YES_NO_OPTION);
         if (rep == JOptionPane.YES_OPTION) {
+            Main.getJeu().getListeJoueur().getJoueur().setDerniereAction("Jouer des cartes");
             London.dndListener.setDragEnable(true);
             JBCarte.setClicDroitJouer(true);
             Main.getJeu().getMenudroite().getLabelInfo().setText("Vous pouvez jouer des cartes");

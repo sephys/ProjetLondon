@@ -69,8 +69,6 @@ public class London {
     JPnomGaucheImageDroiteControl controlJPGID;
     
 
-
-
     public London() {
 
         controlJPGID=new JPnomGaucheImageDroiteControl();
