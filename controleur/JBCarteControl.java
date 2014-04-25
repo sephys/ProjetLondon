@@ -144,17 +144,11 @@ public class JBCarteControl implements MouseListener {
 
                         if (carte.getCarte().getClass() == Constructible.class) {
                             /*Ajout visuel de la carte*/
-                            int i = 0;
-                            boolean pose = false; /*Boolean qui devient vrai si la carte de l'étalage est posée*/
 
-                            while (i < Main.getJeu().getListeJoueur().getJoueur().getListeChantier().size() && !pose) {
-                                if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().get(i).peekFirst().getNom().equals("Coffee House")) {
-                                    Main.getJeu().getJpChantier().getChantiers()[i].removeAll();
-                                    Main.getJeu().getJpChantier().getChantiers()[i].ajoutCarte(carte.getCarte());
-                                    pose=true;
-                                }
-                                i++;
-                            }
+                            /*Récupère l'index du chantier sur lequel se trouve la carte*/
+                            int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Coffee House");
+                            Main.getJeu().getJpChantier().getChantiers()[indexChantier].removeAll();
+                            Main.getJeu().getJpChantier().getChantiers()[indexChantier].ajoutCarte(carte.getCarte());
 
                             /*Ajout dans le modèle de la carte*/
                             Main.getJeu().getListeJoueur().getJoueur().getMain().add(carte.getCarte());
@@ -218,6 +212,13 @@ public class JBCarteControl implements MouseListener {
 
                             // on check si la carte doit être retourné
                             if (((Constructible) ((JBCarte) e.getComponent()).getCarte()).isARetourne()) {
+
+                                int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Hospital");
+                                System.out.println(indexChantier);
+                                
+                                /*Retourne la carte*/
+                                ((Constructible) ((JBCarte) e.getComponent()).getCarte()).setARetourne(false);
+
                                 ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
 
                                 Main.getJeu().getInfos().maj_infos();
@@ -232,45 +233,46 @@ public class JBCarteControl implements MouseListener {
             }
         }
 
-        if (e.getButton() == MouseEvent.BUTTON3) {
+        if (e.getButton()
+                == MouseEvent.BUTTON3) {
             if (JBCarte.isClicDroitJouer()) {
-                if(Main.getJeu().getListeJoueur().getJoueur().getDefausse()!=0){
-                if (((JBCarte) e.getComponent()).getCarte().getClass() == NonConstructible.class) {
-                    if (!"Paupers".equals(((JBCarte) e.getComponent()).getCarte().getNom())) {
+                if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) {
+                    System.out.println("Deffause JBCarte : " + Main.getJeu().getListeJoueur().getJoueur().getDefausse());
+                    if (((JBCarte) e.getComponent()).getCarte().getClass() == NonConstructible.class) {
+                        if (!"Paupers".equals(((JBCarte) e.getComponent()).getCarte().getNom())) {
 
-                        int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
-                                "Êtes-vous sûr de vouloir jouer cette carte ?",
-                                "Jouer carte",
-                                JOptionPane.YES_NO_OPTION);
-                        if (rep == JOptionPane.YES_OPTION) {
-                            System.out.println(((JBCarte) e.getComponent()).getCarte().getNom());
+                            int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                    "Êtes-vous sûr de vouloir jouer cette carte ?",
+                                    "Jouer carte",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (rep == JOptionPane.YES_OPTION) {
+                                System.out.println(((JBCarte) e.getComponent()).getCarte().getNom());
 
-                            Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(((JBCarte) e.getComponent()).getCarte(), 0);
-                            Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).getCarte());
+                                Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(((JBCarte) e.getComponent()).getCarte(), 0);
+                                Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).getCarte());
 
-                            /*Wren*/
-                            if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
-                                Main.getJeu().getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
+                                /*Wren*/
+                                if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") == 1) {
+                                    Main.getJeu().getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
+                                }
+
+                                /*Hugueunot*/
+                                if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
+                                    PouvoirBeta.pouvoirHuguenots(Main.getJeu().getListeJoueur().getJoueur());
+
+                                }
                             }
-
-                            /*Hugueunot*/
-                            if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
-                                PouvoirBeta.pouvoirHuguenots(Main.getJeu().getListeJoueur().getJoueur());
-
-                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Paupers ne peux pas être jouée");
-
+                        JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
-                }
-                }else{
                     JOptionPane.showMessageDialog(null, "Vous devez d'abord défausser une carte");
                 }
-            
-                } else {
+
+            } else {
 
                 if (Main.getJeu().getListeJoueur().getJoueur().getPioche() == 0) {
 

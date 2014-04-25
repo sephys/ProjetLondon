@@ -356,5 +356,20 @@ public class Joueur {
         return this.lastCarte;
     }
 
-
+    /**
+     * Retourne l'index du chantier ou se trouve la carte recherchée ou -1 si la carte n'existe pas
+     * @param nomCarte
+     * @return 
+     */
+    public int indexCarte(String nomCarte) {
+        int i=0;
+        int res=-1;
+        while (i < Main.getJeu().getListeJoueur().getJoueur().getListeChantier().size()) {
+            if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().get(i).peekFirst().getNom().equals(nomCarte)) {
+                res=i;
+            }
+            i++;
+        }
+        return res;
+    }
 }

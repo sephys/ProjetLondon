@@ -178,9 +178,7 @@ public class Constructible extends Carte {
                             PouvoirBeta.pouvoirCoffee(currJ, this);
                             break;
                     }
-                        
-                        
-                        
+
 			if(this.aRetourne){
 				this.activable=false;
 			}
