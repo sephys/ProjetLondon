@@ -314,7 +314,6 @@ public class London implements Serializable {
     public void initTabJPMain() {
         tabJPMain = new JPMain[TourJoueur.getNbJoueur()];
         for (int i = 0; i < TourJoueur.getNbJoueur(); i++) {
-            // System.out.println("moi"+this.getListeJoueur().getJoueur());
             tabJPMain[i] = new JPMain(this.getListeJoueur().getJoueur());
             this.setListeJoueur(this.getListeJoueur().getSuivant());
         }

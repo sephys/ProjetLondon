@@ -122,7 +122,7 @@ public class MenuDroiteControl {
         if(Main.getJeu().getListeJoueur().getFinTour()==0){
             this.disableAll();
             Main.getJeu().getMenudroite().getLabelInfo().setText("La partie est finie");
-            System.out.println("La partie est finie");
+            Main.getJeu().getListeJoueur().finJeu();
         }
     }
 }

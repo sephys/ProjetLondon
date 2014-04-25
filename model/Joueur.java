@@ -64,7 +64,7 @@ public class Joueur implements Serializable{
     public Color getColor() {
         return color;
     }
-
+    
     public String getNom() {
         return nom;
     }
@@ -113,10 +113,9 @@ public class Joueur implements Serializable{
         this.pioche = pioche;
         London.dndListener.setDragEnable(false);
         m.disableAll();
-        System.out.println("fin de tour:"+Main.getJeu().getListeJoueur().getFinTour());
         if(Main.getJeu().getListeJoueur().getFinTour()<=0){
-        	Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
-    	}
+            Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
+        }
         else{
             Main.getJeu().getMenudroite().getPiocher().setEnabled(false);
             Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
@@ -344,17 +343,13 @@ public class Joueur implements Serializable{
         this.finitTour = true;
         
         carteJouer.jouerCarte(this, ind);
-        //System.out.println(this.finitTour);
         this.lastCarte = carteJouer;
-        //System.out.println(carteJouer.getNom());//stock la dernière carte jouer
         if (carteJouer.getClass() == Constructible.class) { //si constructible
             if (PouvoirBeta.pouvoirWren(this) || "Coffee House".equals(carteJouer.getNom())) {
                 this.defausse = 0;
-                //System.out.println("defausse = 0");
                 
             } else {				//besoin de dépenser une carte
                 this.defausse = 1;
-                //System.out.println("defausse = 1");
             }
         }
         this.getMain().remove(carteJouer);
@@ -373,11 +368,11 @@ public class Joueur implements Serializable{
             m.setFinTour();
         }
     }
-
+    
     /**
      * Retourne l'index du chantier ou se trouve la carte recherchée ou -1 si la carte n'existe pas
      * @param nomCarte
-     * @return 
+     * @return
      */
     public int indexCarte(String nomCarte) {
         int i=0;
@@ -414,5 +409,4 @@ public class Joueur implements Serializable{
 		this.pointPauvrete+=this.getMain().size();
 		return this.pointPauvrete;
 	}
-
 }

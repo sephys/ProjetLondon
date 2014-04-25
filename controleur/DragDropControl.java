@@ -169,7 +169,6 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
                                         
                                         /*appel de jouerCarte*/
                                         Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
-                                        //System.out.println(Main.getJeu().getListeJoueur().getJoueur().getDefausse());
                                         
                                         
                                         /*Passer le chantier suivant a posable=true*/
