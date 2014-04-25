@@ -185,6 +185,8 @@ public class Constructible extends Carte {
                             break;
                         case "Town":
                             PouvoirBeta.pouvoirTownHouse();
+                        case "Train":
+                            PouvoirBeta.pouvoirNorthTrainStation();
                             
                             
                     }
