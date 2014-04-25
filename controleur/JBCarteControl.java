@@ -14,7 +14,7 @@ import vue.London;
 import vue.Main;
 
 /**
- *
+ *  Ce Listener permet de gérer le double clic dans les différents cas où il est utilisé.
  * @author Anh-Djuy
  */
 public class JBCarteControl implements MouseListener {
@@ -241,11 +241,11 @@ public class JBCarteControl implements MouseListener {
                     }
             }
         }
-
+        
+        // Récupération du clic droit pour gérer l'activation des cartes non-constructibles
         if (e.getButton() == MouseEvent.BUTTON3) {
             if (JBCarte.isClicDroitJouer()) {
                 if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) {
-                    System.out.println("Deffause JBCarte : " + Main.getJeu().getListeJoueur().getJoueur().getDefausse());
                     if (carteCourante.getCarte().getClass() == NonConstructible.class) {
                         if (!"Paupers".equals(((JBCarte) e.getComponent()).getCarte().getNom())) {
 
@@ -264,7 +264,7 @@ public class JBCarteControl implements MouseListener {
                                     Main.getJeu().getMenudroite().getLabelInfo().setText("<html>[Pouvoir Wren] Posez deux cartes sur votre<br/>chantier sans devoir défausser des cartes</html>");
                                 }
 
-                                /*Hugueunot*/
+                                /*Huguenots*/
                                 if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Huguenots") == 1) {
                                     PouvoirBeta.pouvoirHuguenots(Main.getJeu().getListeJoueur().getJoueur());
 
@@ -294,25 +294,21 @@ public class JBCarteControl implements MouseListener {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e
-    ) {
+    public void mouseReleased(MouseEvent e) {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e
-    ) {
+    public void mouseEntered(MouseEvent e) {
         JPZoom.setImg(((JBCarte) e.getComponent()).getCarte().getPath());
     }
 
     @Override
-    public void mouseExited(MouseEvent e
-    ) {
+    public void mouseExited(MouseEvent e) {
         JPZoom.setImg("../img/cartes/Background.png");
 
     }
 
     @Override
-    public void mousePressed(MouseEvent e
-    ) {
+    public void mousePressed(MouseEvent e) {
     }
 }

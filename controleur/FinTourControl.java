@@ -68,8 +68,8 @@ public class FinTourControl implements ActionListener{
     public void pointDePauvrete(){
         JPChantiers chantier = Main.getJeu().getJpChantier();
         Joueur j = Main.getJeu().getListeJoueur().getJoueur();
-        ArrayList<Carte> main = j.getMain();
-        j.addPointPauvrete(chantier.nbChantiers() + j.getMain().size());
+        j.addPointPauvrete(chantier.nbChantiers() + j.getMain().size() - Main.getJeu().getPlateau().nbArrondissements(j));
+        
         Main.getJeu().getInfos().maj_infos();
     }
 }

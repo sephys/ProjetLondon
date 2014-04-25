@@ -12,7 +12,7 @@ import model.Joueur;
 import model.TourJoueur;
 
 /**
- *
+ *  Listener qui permet d'initialiser le nombre de joueurs à trois
  * @author Anh-Djuy
  */
 public class TroisJoueurs implements ActionListener {
