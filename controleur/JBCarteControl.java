@@ -125,12 +125,15 @@ public class JBCarteControl implements MouseListener {
 
                         /*Pouvoir Coffee Shop : ajout de la carte de l'étalage sur un chantier*/
                     } else if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Coffee") >= 1) {
+                        System.out.println("Carte coffee");
 
                         if (carte.getCarte().getClass() == Constructible.class) {
+                            
                             /*Ajout visuel de la carte*/
 
                             /*Récupère l'index du chantier sur lequel se trouve la carte*/
                             int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Coffee House");
+                            System.out.println("index coffee : "+indexChantier);
                             Main.getJeu().getJpChantier().getChantiers()[indexChantier].removeAll();
                             Main.getJeu().getJpChantier().getChantiers()[indexChantier].ajoutCarte(carte.getCarte());
 

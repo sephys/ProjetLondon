@@ -55,6 +55,7 @@ public class Joueur {
         pouvoir.put("School",0);
         pouvoir.put("Wren",0);
         pouvoir.put("Huguenots",0);
+        pouvoir.put("Coffee",0);
         //pouvoir.put(nom, argent);
     }
     
