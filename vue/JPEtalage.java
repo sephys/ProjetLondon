@@ -162,7 +162,6 @@ public class JPEtalage extends JPanel {
         // on remplit l'etalage
         for (int i = 0; i < tab1.length; i++) {
             if (tab1[i] != null) {
-                System.out.println("ajout");
                 JBCarte jb = new JBCarte(tab1[i]);
                 jb.setPosition("etalage");
                 jb.changeTailleBoutonImage(new Dimension(122, 168));                

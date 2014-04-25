@@ -46,7 +46,7 @@ public class London implements Serializable {
     private JPChantiers jpChantier; // panel des chantiers du joueur courant
     private JPMain south; // panel contenant la main des joueurs
     private JPanel central; // panel central du jeu ( contient la main du joueur et les onglet )
-    private MenuDroite menudroite; // panel Ã  droite du jeu
+    private JPMenuDroite menudroite; // panel Ã  droite du jeu
     private JPPlateau plateau; // plateau 
     private Thread sound; // thread pour la musique
     private JTabbedPane panelOnglet; // panel contenant les onglets
@@ -132,7 +132,7 @@ public class London implements Serializable {
 
         frame.add(central);
 
-        this.menudroite = new MenuDroite();
+        this.menudroite = new JPMenuDroite();
         controlJPGID.changeImage(this.getListeJoueur().getJoueur());
 
         frame.add(menudroite, BorderLayout.EAST);
@@ -212,7 +212,7 @@ public class London implements Serializable {
         sound.start();
     }
 
-    public MenuDroite getMenudroite() {
+    public JPMenuDroite getMenudroite() {
         return menudroite;
     }
 
@@ -314,7 +314,6 @@ public class London implements Serializable {
     public void initTabJPMain() {
         tabJPMain = new JPMain[TourJoueur.getNbJoueur()];
         for (int i = 0; i < TourJoueur.getNbJoueur(); i++) {
-            // System.out.println("moi"+this.getListeJoueur().getJoueur());
             tabJPMain[i] = new JPMain(this.getListeJoueur().getJoueur());
             this.setListeJoueur(this.getListeJoueur().getSuivant());
         }
@@ -346,15 +345,18 @@ public class London implements Serializable {
     }
 
     
+    //Permet de sauvegarder l'état actuel du jeu dans un fichier texte de maniere serialiser
     public void sauvegarder() throws IOException{
     	FileOutputStream out = new FileOutputStream("temps");
 		ObjectOutputStream s = new ObjectOutputStream(out);
 		
+		//On ecrit nos information dans le fichier
     	s.writeObject(this.getDeck());
     	s.writeObject(this.getEtalage());
     	s.writeObject(this.getPlateau());
     	s.writeObject(this.getZones());
     	
+    	//Ici on va boucler jusqu'a obtenir l'intégralité de nos TourJoueur
     	TourJoueur tmp = this.getListeJoueur();
     	TourJoueur next = this.getListeJoueur();
     	s.writeObject(tmp.getJoueur());
@@ -368,18 +370,20 @@ public class London implements Serializable {
     	out.close();
     }
     
+    //Permet de charger un état sauvegarder du jeu depuis un fichier texte serialiser
     public void charger() throws IOException{
     	FileInputStream in = new FileInputStream("temps");
     	ObjectInputStream t = new ObjectInputStream(in);
 
     	try {
     		
+    		// On recupere les object dans l'ordre dans lequel ils ont était rentré
     		this.setDeck((ArrayDeque<Carte>)t.readObject());
 			this.setEtalage((Etalage)t.readObject());
 			this.plateau = (JPPlateau)t.readObject();
 			this.setZones((HashMap<String,Zone>)t.readObject());
 			
-			
+			//Pour les TourJoueur c'est un peu plus compliqué, il faut reconstruire l'intégralité des structure TourJoueur dans le bon ordre
 			TourJoueur first = new TourJoueur((Joueur)t.readObject());
 			TourJoueur tmp = first;
 			tmp.setSuivant(tmp);
@@ -389,11 +393,16 @@ public class London implements Serializable {
     			tmp.setSuivant(current);
     			tmp = current;
     		}
+    		//On fini la boucle ici
     		tmp.setSuivant(first);
+    		
     	} catch (ClassNotFoundException e) {
     		
     		//EOF
     	}
+    	
+    	t.close();
+    	in.close();
 
     }
 

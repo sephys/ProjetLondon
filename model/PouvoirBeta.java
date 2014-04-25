@@ -35,23 +35,20 @@ public class PouvoirBeta {
         boolean res = false;
         int test = j.getPouvoir().get("School");
         if (cD.getCouleur().compareTo(j.getLastCarte().getCouleur()) != 0) {			//les cartes joueur sont de couleur différente
-            if (test != 0) { 							//possède le pouvoir de l'école
-                System.out.println("utilisation school" + j.getArgent());		//paye 1 pour que la carte "change de couleur"
-                res = true;
+            if (test != 0) { 							//possède le pouvoir de l'école		
+                res = true;                                                     //paye 1 pour que la carte "change de couleur"
                 j.addArgent(-1);
                 j.defausseMoins(cD);
                 Main.getJeu().getInfos().maj_infos();
             }
         } else { 										//carte de même couleur
             res = true;
-            System.out.println("res school" + res);
         }
         return res;
     }
     
     public static boolean pouvoirHuguenots(Joueur j) {
         boolean res = false;
-        System.out.println(j.isFinitTour());
         int test = j.getPouvoir().get("Huguenots");
         if (test >= 1) {
             res = true;

@@ -89,7 +89,6 @@ public class JPChantiers extends JPanel{
     }
     
     public boolean isRestaurable(){
-        System.out.println("rentre dans isRestaurable");
         boolean restaurable = false;
         for(JPPileChantier ch : chantiers){
             if(ch.getJBCarte() == null){

@@ -40,6 +40,7 @@ public class Zone implements Serializable {
     private ArrayList<String> zonesAdjacentes;
     private Joueur proprietaire;
     private boolean activable;
+    public static int [] Penalite={-1,-1,-2,-3,-5,-7,-9,-11,-13,-15};
     
     
     

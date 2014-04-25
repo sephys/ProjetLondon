@@ -88,7 +88,6 @@ public class JBCarteControl implements MouseListener {
                             Main.getJeu().getSouth().revalidate();
                         }
                     } else {
-                        System.out.println("JBCARTE defausse = 0");
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
                     }
                     break;
@@ -246,7 +245,6 @@ public class JBCarteControl implements MouseListener {
                                     "Jouer carte",
                                     JOptionPane.YES_NO_OPTION);
                             if (rep == JOptionPane.YES_OPTION) {
-                                System.out.println(carteCourante.getCarte().getNom());
 
                                 Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(carteCourante.getCarte(), 0);
                                 Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(carteCourante.getCarte());

@@ -27,9 +27,6 @@ public class FinTourControl implements ActionListener{
         if (Main.getJeu().getListeJoueur().getJoueur().isFinitTour()) {
             // check trop grand nombre de cartes dans la main
             if (Main.getJeu().getListeJoueur().getJoueur().getMain().size() > 9) {
-                //System.out.println(London.getListeJoueur().getJoueur().getMain().size());
-                //JBCarte.setDoubleClick(true);
-                //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
                 //setDefausseCarte(true); // peut se defausser de n'importe quelle carte
                 
                 JOptionPane.showMessageDialog(null, "Vous avez trop de cartes en main. Vous devez vous en défausser avant de finir votre tour");

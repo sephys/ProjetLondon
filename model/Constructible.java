@@ -110,17 +110,19 @@ public class Constructible extends Carte implements Serializable {
     public void setActivable(boolean activable) {
         this.activable = activable;
     }
-
-    public String toString() {
-        StringBuffer tmpStr = new StringBuffer(super.toString());
-        //tmpStr.append("\n Cout : "+this.getCoutPose());
-        //tmpStr.append("\n Pouvoir : "+this.getPouvoirIlli()+"\n");
+    
+    
+    public String toString(){
+        StringBuffer tmpStr=new StringBuffer(super.toString());
         return new String(tmpStr);
     }
-
-    @Override
-    public void jouerCarte(Joueur currJ, int ind) {
-        // TODO Auto-generated method stub
+    
+    /**
+     * 
+     * @param currJ
+     * @param ind 
+     */
+    public void jouerCarte(Joueur currJ,int ind) {
         String pouv = this.getPouvoirIlli();
         if (pouv.compareTo("vide") != 0) {
             if (currJ.getPouvoir().get(pouv) != null) {
@@ -147,15 +149,19 @@ public class Constructible extends Carte implements Serializable {
         currJ.getMain().remove(this);
     }
 
-    public void activerCarte(Joueur currJ) {
-        if (this.activable) {
-            currJ.setArgent(currJ.getArgent() - Integer.parseInt(this.coutActivation[0]));
-            String coutCarte = this.coutActivation[1];
-            if (coutCarte.compareTo("aucun") != 0) {
-                if (coutCarte.compareTo("choix") == 0) {
+    
+    /**
+     * Cette méthode permet de connaître le pouvoir de la carte qui vient d'être activée.
+     * @param currJ 
+     */
+    public void activerCarte(Joueur currJ){
+        if(this.activable){
+            currJ.setArgent(currJ.getArgent()-Integer.parseInt(this.coutActivation[0]));
+            String coutCarte=this.coutActivation[1];
+            if(coutCarte.compareTo("aucun")!=0){
+                if(coutCarte.compareTo("choix")==0){
                     currJ.setDefausse(1);
                     Main.getJeu().getMenudroite().getLabelInfo().setText("Défaussez une carte");
-                    currJ.setDefausse(1);
                 } else {
                     currJ.setLastCarte(this);
                     currJ.setDefausse(1);
@@ -211,4 +217,8 @@ public class Constructible extends Carte implements Serializable {
             }
         }
     }
+
 }
+
+
+
