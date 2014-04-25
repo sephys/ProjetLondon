@@ -8,6 +8,7 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import vue.London;
 import vue.Main;
@@ -29,6 +30,8 @@ public class PiocherControl implements ActionListener {
                     	Main.getJeu().getListeJoueur().setFinTour(Main.getJeu().getListeJoueur().getNbJoueur());
                     }
                     Main.getJeu().getListeJoueur().getJoueur().piocheMoins();
+                    int nbCarteRestantes = Main.getJeu().getDeck().size();
+                    Main.getJeu().getMenudroite().getPiocher().setText("          Piocher ("+nbCarteRestantes+")      ");
                     Main.getJeu().getMenudroite().repaint();
                     Main.getJeu().getMenudroite().revalidate();
 

@@ -106,5 +106,4 @@ public class MenuDroiteControl {
         DragDropControl.setDragEnable(false);
 
     }
-    
 }
