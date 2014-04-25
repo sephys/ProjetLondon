@@ -25,8 +25,7 @@ public class EmprunterControl implements ActionListener{
                         "Emprunter",
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
-                    Main.getJeu().getListeJoueur().getJoueur().setNbPret(Main.getJeu().getListeJoueur().getJoueur().getNbPret() + 1);
-                    Main.getJeu().getListeJoueur().getJoueur().setArgent(Main.getJeu().getListeJoueur().getJoueur().getArgent() + 10);
+                    Main.getJeu().getListeJoueur().getJoueur().addPret(1);
                     Main.getJeu().getInfos().maj_infos();
                 }
     }

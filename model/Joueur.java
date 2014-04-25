@@ -110,9 +110,9 @@ public class Joueur {
         this.pioche = pioche;
         London.dndListener.setDragEnable(false);
         m.disableAll();
-        if(Main.getJeu().getListeJoueur().getNbJoueur()==-1){
+        //if(Main.getJeu().getListeJoueur().getNbJoueur()==-1){
         	Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
-    	}
+    	//}
         //JBCarte.setDoubleClick(true);
         
         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");
@@ -224,12 +224,6 @@ public class Joueur {
     
     public void nouveauChantier() { //ajoute un nouveau chantier
         this.listeChantier.add(new ArrayDeque<Constructible>());
-    }
-    
-    public void emprunt(int i) {
-        // TODO Auto-generated method stub
-        this.setNbPret(i % 10);
-        this.setArgent(this.getArgent() + i);
     }
     
     public Carte getCarteMain(int index) {
