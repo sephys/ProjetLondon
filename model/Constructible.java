@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import vue.Main;
 
 public class Constructible extends Carte implements Serializable{
 	//attributs
@@ -152,7 +153,10 @@ public class Constructible extends Carte implements Serializable{
 			String coutCarte=this.coutActivation[1];
 			if(coutCarte.compareTo("aucun")!=0){
 				if(coutCarte.compareTo("choix")==0){
+                                    System.out.println("carte a defausser");
 					currJ.setDefausse(1);
+                                        Main.getJeu().getListeJoueur().getJoueur().setFinitTour(false);
+                                        Main.getJeu().getMenudroite().getLabelInfo().setText("Défaussez une carte");
 				}else{
 					currJ.setLastCarte(this);
 					currJ.setDefausse(1);
