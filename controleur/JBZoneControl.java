@@ -42,7 +42,8 @@ public class JBZoneControl implements ActionListener {
                     courrant.setPioche(bouton.getZone().getNbCartes());
                     courrant.addPointVictoire(bouton.getZone().getPointsVictoire());
                    // London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
-                    Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
+                   
+                    //Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
                     Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
                     
                     // L'action de piocher des cartes lui est affichée dans le JLabel dans le MenuDroit

@@ -66,6 +66,7 @@ public class MenuDroiteControl {
         Main.getJeu().getCentral().remove(Main.getJeu().getSouth());
         // on passe au joueur suivant
         Main.getJeu().setListeJoueur(Main.getJeu().getListeJoueur().getSuivant());
+        Main.getJeu().getListeJoueur().getJoueur().setPioche(1);
         Joueur nouveauJoueur = Main.getJeu().getListeJoueur().getJoueur();
         if(nouveauJoueur.getPouvoir().get("University") == 1){
             Main.getJeu().getMenudroite().getRegarder3Cartes().setVisible(true);
@@ -111,6 +112,10 @@ public class MenuDroiteControl {
 
         // on peut pas d&d à la base
         DragDropControl.setDragEnable(false);
-        
+        if(Main.getJeu().getListeJoueur().getFinTour()==0){
+            this.disableAll();
+            Main.getJeu().getMenudroite().getLabelInfo().setText("La partie est finie");
+            System.out.println("La partie est finie");
+        }
     }
 }

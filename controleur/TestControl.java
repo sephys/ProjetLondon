@@ -20,11 +20,15 @@ import vue.Main;
  */
 public class TestControl implements ActionListener{
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
+        /*
         PouvoirBeta.pouvoirFleetStreet();
-               
-                
+     */
+        for(int i=0; i<80; i++){
+            Main.getJeu().getDeck().poll();
+        }
     }
     
 }
