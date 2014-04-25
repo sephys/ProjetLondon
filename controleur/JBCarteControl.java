@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controleur;
 
 import java.awt.event.MouseEvent;
@@ -15,35 +10,29 @@ import model.PouvoirBeta;
 import vue.JBCarte;
 import vue.JPZoom;
 import vue.London;
-
 import vue.Main;
-
 /**
  *
  * @author Anh-Djuy
  */
-public class JBCarteControl implements MouseListener {
-
+public class JBCarteControl implements MouseListener{
+    
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        
         if (e.getClickCount() == 2) {
-
+            
             Joueur courrant = Main.getJeu().getListeJoueur().getJoueur();
-
             switch (((JBCarte) e.getComponent()).getPosition()) {
                 case "main": // on met la carte de la main sur l'étalage
                     //if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
                     // cas ou defausse car trop de cartes dans la main
-
                     if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() != 0 && Main.getJeu().getListeJoueur().getJoueur().getLastCarte() == null) {
-
                         /**/
                         //London.getMenudroite().getFinTour().setEnabled(true);
                         JBCarte carte = ((JBCarte) e.getComponent());
                         carte.setPosition("etalage");
                         // ajout de la carte dans l'etalage
-
                         Main.getJeu().getEtalage().addCarte(carte.getCarte());
                         // on rafrachit l'etalage
                         Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
@@ -56,20 +45,15 @@ public class JBCarteControl implements MouseListener {
 
                         //on enlève la défausse
                         Main.getJeu().getListeJoueur().getJoueur().defausseMoins(carte.getCarte());
-
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
                         //London.getListeJoueur().getJoueur().payeConstruction(carte.carte);
                     } // cas defausse à cause d'une construction
                     else if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() != 0) {
-
-                        /**/
-                        //London.getMenudroite().getFinTour().setEnabled(true);
-                        JBCarte carte = ((JBCarte) e.getComponent());
-
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
                         // si carte ne respecte pas les contraintes de defausse
+                        JBCarte carte = ((JBCarte) e.getComponent());
                         if (Main.getJeu().getListeJoueur().getJoueur().payeConstruction(carte.getCarte()) == false) {
                             if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1) {
                                 int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
@@ -114,7 +98,6 @@ public class JBCarteControl implements MouseListener {
                             // refresh
                             Main.getJeu().getSouth().repaint();
                             Main.getJeu().getSouth().revalidate();
-
                         }
                     } else {
                         System.out.println("JBCARTE defausse = 0");
@@ -169,7 +152,6 @@ public class JBCarteControl implements MouseListener {
                         } else {
                             JOptionPane.showMessageDialog(null, "Cette carte n'est pas constructible");
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
                     }
@@ -192,7 +174,6 @@ public class JBCarteControl implements MouseListener {
                             // ajout de la carte das la main du joueur
                             Main.getJeu().getListeJoueur().getJoueur().getMain().add(((JBCarte) e.getComponent()).getCarte());
                             Main.getJeu().getListeJoueur().getJoueur().piocheMoins();
-
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
@@ -207,7 +188,6 @@ public class JBCarteControl implements MouseListener {
                                 "Activer la carte",
                                 JOptionPane.YES_NO_OPTION);
                         if (rep == JOptionPane.YES_OPTION) {
-
                             Main.getJeu().getListeJoueur().getJoueur().activerCarte(((Constructible) ((JBCarte) e.getComponent()).getCarte()));
 
                             // on check si la carte doit être retourné
@@ -285,25 +265,24 @@ public class JBCarteControl implements MouseListener {
 
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
+   
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         JPZoom.setImg(((JBCarte) e.getComponent()).getCarte().getPath());
     }
-
+    
     @Override
     public void mouseExited(MouseEvent e) {
         JPZoom.setImg("../img/cartes/Background.png");
 
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
 }
