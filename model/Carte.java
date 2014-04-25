@@ -99,7 +99,7 @@ public abstract class Carte {
 
     public String toString() {
         StringBuffer tmpStr = new StringBuffer("\n Nom : " + this.getNom());
-		//tmpStr.append("\n Categorie : "+this.getCategorie());
+        //tmpStr.append("\n Categorie : "+this.getCategorie());
         //tmpStr.append("\n Couleur : "+this.getCouleur());
         return new String(tmpStr);
     }
