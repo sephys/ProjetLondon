@@ -8,10 +8,6 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.Carte;
-import model.Constructible;
-import model.Joueur;
-import model.PouvoirBeta;
 import vue.Main;
 
 /**
