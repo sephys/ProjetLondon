@@ -23,6 +23,11 @@ public class PiocherControl implements ActionListener {
         if (Main.getJeu().getListeJoueur().getJoueur().getPioche() != 0) {
                     Main.getJeu().getListeJoueur().getJoueur().piocheCarte(Main.getJeu().getDeck().peekFirst());
                     Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].ajoutCarte(Main.getJeu().getDeck().poll());
+                    
+                    // si le deque et vide
+                    if(Main.getJeu().getDeck().isEmpty()){
+                    	Main.getJeu().getListeJoueur().setFinTour(Main.getJeu().getListeJoueur().getNbJoueur());
+                    }
                     Main.getJeu().getListeJoueur().getJoueur().piocheMoins();
                     Main.getJeu().getMenudroite().repaint();
                     Main.getJeu().getMenudroite().revalidate();

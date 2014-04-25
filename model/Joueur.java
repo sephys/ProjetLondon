@@ -115,7 +115,9 @@ public class Joueur {
         this.pioche = pioche;
         London.dndListener.setDragEnable(false);
         m.disableAll();
-        Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
+        if(Main.getJeu().getListeJoueur().getNbJoueur()==-1){
+        	Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
+    	}
         //JBCarte.setDoubleClick(true);
 
         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez piocher " + pioche + " cartes");

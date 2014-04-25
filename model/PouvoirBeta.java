@@ -231,7 +231,6 @@ public class PouvoirBeta {
     		res=true;
     	}
     	return res;
-    	
     }
     
 }
