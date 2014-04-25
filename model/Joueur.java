@@ -338,6 +338,7 @@ public class Joueur {
         this.lastCarte = carteJouer;
         //System.out.println(carteJouer.getNom());//stock la dernière carte jouer
         if (carteJouer.getClass() == Constructible.class) { //si constructible
+            ((Constructible) carteJouer).setActivable(true);
             if (PouvoirBeta.pouvoirWren(this) || "Coffee House".equals(carteJouer.getNom())) {
                 this.defausse = 0;
                 //System.out.println("defausse = 0");

@@ -193,6 +193,8 @@ public class JBCarteControl implements MouseListener {
                             Main.getJeu().getListeJoueur().getJoueur().activerCarte(((Constructible) carteCourante.getCarte()));
 
                             // on check si la carte doit être retourné et est activable
+                            System.out.println("a retourne : "+ ((Constructible) carteCourante.getCarte()).isARetourne());
+                            System.out.println("est activable : "+ ((Constructible) carteCourante.getCarte()).isActivable());
                             if (((Constructible) carteCourante.getCarte()).isARetourne() && ((Constructible) carteCourante.getCarte()).isActivable()) {
 
                                 /*Récupère l'index du chantier contenant une carte hopital sinon -1*/
