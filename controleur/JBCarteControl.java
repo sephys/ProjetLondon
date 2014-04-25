@@ -12,7 +12,9 @@ import vue.JPZoom;
 import vue.Main;
 
 /**
- *  Ce Listener permet de gérer le double clic dans les différents cas où il est utilisé.
+ * Ce Listener permet de gérer le double clic dans les différents cas où il est
+ * utilisé.
+ *
  * @author Anh-Djuy
  */
 public class JBCarteControl implements MouseListener {
@@ -41,7 +43,7 @@ public class JBCarteControl implements MouseListener {
 
                         //on enlève la défausse
                         Main.getJeu().getListeJoueur().getJoueur().defausseMoins(carteCourante.getCarte());
-                    } // cas defausse à cause d'une construction
+                    } // cas defausse à cause d'une construction ou paye une activation
                     else if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() != 0) {
                         // si carte ne respecte pas les contraintes de defausse
                         if (Main.getJeu().getListeJoueur().getJoueur().payeConstruction(carteCourante.getCarte()) == false) {
@@ -61,8 +63,6 @@ public class JBCarteControl implements MouseListener {
                                         Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
                                         // on enleve la carte de la main du joueur ( graphiquement )
                                         Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(carteCourante.getCarte());
-
-                                        //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
                                         // refresh
                                         Main.getJeu().getSouth().repaint();
                                         Main.getJeu().getSouth().revalidate();
@@ -146,7 +146,7 @@ public class JBCarteControl implements MouseListener {
 
                 case "fenetre": // on met la carte de la fenetre dans la main
                     if (JBCarte.getDoubleClick()) {
-                        
+
                         int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
                                 "Êtes-vous sûr de vouloir choisir \"" + ((JBCarte) e.getComponent()).getCarte().getNom() + "\" ?",
                                 "Piocher",
@@ -200,38 +200,32 @@ public class JBCarteControl implements MouseListener {
                                                 ((Constructible) carteHospital.getCarte()).setActivable(false);
 
                                                 carteHospital.changerImage("../img/cartes/Background.png");
-
-                                                Main.getJeu().getInfos().maj_infos();
                                                 Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
 
                                             } else {
                                                 /*Retourne la carte*/
                                                 ((Constructible) carteCourante.getCarte()).setActivable(false);
                                                 ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
-                                                Main.getJeu().getInfos().maj_infos();
                                                 Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
-
                                             }
                                         } else {
                                             /*Retourne la carte*/
                                             ((Constructible) carteCourante.getCarte()).setActivable(false);
                                             ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
-                                            Main.getJeu().getInfos().maj_infos();
                                             Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
                                         }
                                     } else {
                                         /*Retourne la carte*/
                                         ((Constructible) carteCourante.getCarte()).setActivable(false);
                                         ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
-                                        Main.getJeu().getInfos().maj_infos();
                                         Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
 
                                     }
                                 }
 
                             }
-                        }
-                        else{
+                            Main.getJeu().getInfos().maj_infos();
+                        } else {
                             JOptionPane.showMessageDialog(null, "Vous ne pouvez pas activer cette carte");
                         }
                         break;
@@ -239,7 +233,7 @@ public class JBCarteControl implements MouseListener {
                     }
             }
         }
-        
+
         // Récupération du clic droit pour gérer l'activation des cartes non-constructibles
         if (e.getButton() == MouseEvent.BUTTON3) {
             if (JBCarte.isClicDroitJouer()) {
