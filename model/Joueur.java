@@ -386,4 +386,28 @@ public class Joueur implements Serializable{
         return res;
     }
 
+	public int finPartie() {
+		// TODO Auto-generated method stub
+		
+		//remboursePret
+		int nbRemboursable=this.getArgent()%15;
+		while(nbRemboursable-nbPret>=0&&nbPret>0){
+			this.nbPret--;
+			nbRemboursable--;
+			this.argent-=15;
+		}
+		//si il reste des pret nom rembourse on prent 1PP par pret non rembourse
+		while(nbPret>0){
+			this.pointPauvrete+=7;
+			nbPret--;
+		}
+		//si il reste de l'argent
+		int rest=this.argent%3;
+		this.pointVictoire+=rest;
+		
+		//si il reste des carte en main
+		this.pointPauvrete+=this.getMain().size();
+		return this.pointPauvrete;
+	}
+
 }
