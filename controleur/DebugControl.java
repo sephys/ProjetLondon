@@ -127,6 +127,7 @@ public class DebugControl implements ActionListener{
 
         }
         tmp.setSuivant(first);
+        System.out.println("");
         return first;
         // TODO Auto-generated method stub
 

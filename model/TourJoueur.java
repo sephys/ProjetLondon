@@ -7,7 +7,7 @@ public class TourJoueur {
 	private int finTour=-1;
 	
 	public TourJoueur(Joueur joueur) {
-		nbJoueur++;
+		//nbJoueur++;
 		this.joueur = joueur;
 	}
 
