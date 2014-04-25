@@ -26,7 +26,7 @@ public class DebugControl implements ActionListener{
         String[] nomJoueurs;
         
     public void actionPerformed(ActionEvent e) {
-        Joueur.setNbJoueur(4);
+        TourJoueur.setNbJoueur(4);
         nomJoueurs = new String[4];
         nomJoueurs[0] = "Joueur 1";
         nomJoueurs[1] = "Joueur 2";
@@ -38,7 +38,7 @@ public class DebugControl implements ActionListener{
     }    
     
     private TourJoueur initialisationJoueur(ArrayDeque<Carte> arrayDeque) {
-        int nb = Joueur.getNbJoueur();
+        int nb = TourJoueur.getNbJoueur();
         Main.getJeu().setTabJoueur(new Joueur[nb]);
         int fin = nb * 6;
         for (int i = 0; i < fin; i++) {

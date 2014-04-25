@@ -79,9 +79,9 @@ public class JPAccueilControl implements ActionListener{
                         nbJoueur.dispose();
                         
                         // affichage des nom des joueurs
-                        nomJoueurs = new String[Joueur.getNbJoueur()];
+                        nomJoueurs = new String[TourJoueur.getNbJoueur()];
                         int i;
-                        for (i = 0; i < Joueur.getNbJoueur(); i++) {
+                        for (i = 0; i < TourJoueur.getNbJoueur(); i++) {
                             String nom = JOptionPane.showInputDialog("Nom du joueur " + (i + 1));
                             // on a appuyer sur la croix ou cancel
                             if (nom == null) {
@@ -90,11 +90,11 @@ public class JPAccueilControl implements ActionListener{
                             nomJoueurs[i] = nom;
                         }
                         System.out.println("i : " + i);
-                        System.out.println("nb joeuur " + Joueur.getNbJoueur());
-                        if (i == Joueur.getNbJoueur()) // on a bien rentrer tous les noms
+                        System.out.println("nb joeuur " + TourJoueur.getNbJoueur());
+                        if (i == TourJoueur.getNbJoueur()) // on a bien rentrer tous les noms
                         {
                             Main.getJeu().setListeJoueur(initialisationJoueur(Main.getJeu().getDeck()));
-                            Main.getJeu().setEtalage(new Etalage(Joueur.getNbJoueur() + 1));
+                            Main.getJeu().setEtalage(new Etalage(TourJoueur.getNbJoueur() + 1));
                             
                             Main.getJeu().start();
                         }
@@ -109,7 +109,7 @@ public class JPAccueilControl implements ActionListener{
     
     
        public TourJoueur initialisationJoueur(ArrayDeque<Carte> arrayDeque) {
-        int nb = Joueur.getNbJoueur();
+        int nb = TourJoueur.getNbJoueur();
         Main.getJeu().setTabJoueur(new Joueur[nb]);
         int fin = nb * 6;
         for (int i = 0; i < fin; i++) {

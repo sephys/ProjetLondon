@@ -344,8 +344,8 @@ public class London {
     }
 
     public void initTabJPMain() {
-        tabJPMain = new JPMain[Joueur.getNbJoueur()];
-        for (int i = 0; i <Joueur.getNbJoueur(); i++) {
+        tabJPMain = new JPMain[TourJoueur.getNbJoueur()];
+        for (int i = 0; i <TourJoueur.getNbJoueur(); i++) {
            // System.out.println("moi"+this.getListeJoueur().getJoueur());
             tabJPMain[i] = new JPMain(this.getListeJoueur().getJoueur());
             this.setListeJoueur(this.getListeJoueur().getSuivant());
@@ -354,8 +354,8 @@ public class London {
     
     public void initTabJPChantier()
     {
-       tabJPChantiers=new JPChantiers[Joueur.getNbJoueur()];
-       for(int i=0;i<Joueur.getNbJoueur();i++)
+       tabJPChantiers=new JPChantiers[TourJoueur.getNbJoueur()];
+       for(int i=0;i<TourJoueur.getNbJoueur();i++)
        {
            tabJPChantiers[i]=new JPChantiers();
        }
