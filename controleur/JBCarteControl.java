@@ -151,6 +151,7 @@ public class JBCarteControl implements MouseListener {
                                 if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().get(i).peekFirst().getNom().equals("Coffee House")) {
                                     Main.getJeu().getJpChantier().getChantiers()[i].removeAll();
                                     Main.getJeu().getJpChantier().getChantiers()[i].ajoutCarte(carte.getCarte());
+                                    pose=true;
                                 }
                                 i++;
                             }
