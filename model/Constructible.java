@@ -184,9 +184,17 @@ public class Constructible extends Carte {
                             break;
                         case "Town":
                             PouvoirBeta.pouvoirTownHouse();
+                            break;
                         case "Train":
                             PouvoirBeta.pouvoirNorthTrainStation();
-                            
+                            break;
+                        case "Workhouse":
+                            PouvoirBeta.pouvoirWorkHouse();
+                            break;
+                        case "TowerBridge":                     // Pas un bug. Le pouvoir est le même pour les deux cartes.
+                        case "Bridge" :
+                            PouvoirBeta.pouvoirTowerBridge();
+                            break;
                             
                     }
 		}
