@@ -44,7 +44,7 @@ public class TestJoueur {
 	public void testDoublonColor() {
 		try{
 			Joueur tmpJ2=new Joueur("J2",Color.blue);
-			fail("Impossible d'avoir 2 joueurs de la même couleur");
+			fail("Impossible d'avoir 2 joueurs de la mÃªme couleur");
 		}catch(Exception e){
 			assertTrue(true);
 		}
