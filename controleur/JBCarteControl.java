@@ -32,7 +32,7 @@ public class JBCarteControl implements MouseListener {
             Joueur courrant = Main.getJeu().getListeJoueur().getJoueur();
 
             switch (((JBCarte) e.getComponent()).getPosition()) {
-                case "main": // on met la carte de la main sur le l'étalage
+                case "main": // on met la carte de la main sur l'étalage
                     //if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
                     // cas ou defausse car trop de cartes dans la main
 
@@ -77,7 +77,25 @@ public class JBCarteControl implements MouseListener {
                                         "Pouvoir school",
                                         JOptionPane.YES_NO_OPTION);
                                 if (rep == JOptionPane.YES_OPTION) {
-                                    PouvoirBeta.pouvoirSchool(Main.getJeu().getListeJoueur().getJoueur(), carte.getCarte());
+                                    if (Main.getJeu().getListeJoueur().getJoueur().getArgent() >= 1) {
+                                        PouvoirBeta.pouvoirSchool(Main.getJeu().getListeJoueur().getJoueur(), carte.getCarte());
+                                        /*La carte va dans l'étalage*/
+                                        carte.setPosition("etalage");
+                                        // ajout de la carte dans l'etalage
+                                        Main.getJeu().getEtalage().addCarte(carte.getCarte());
+                                        // on rafrachit l'etalage
+                                        Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
+                                        // on enleve la carte de la main du joueur ( graphiquement )
+                                        Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(((JBCarte) e.getComponent()).getCarte());
+
+                                        //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
+                                        // refresh
+                                        Main.getJeu().getSouth().repaint();
+                                        Main.getJeu().getSouth().revalidate();
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent");
+                                    }
+
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
@@ -104,7 +122,7 @@ public class JBCarteControl implements MouseListener {
                     }
                     break;
 
-                case "etalage": // on met la carte de l'etalage dans la main
+                case "etalage": // on met la carte de l'etalage dans la main OU chantier
                     //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
                     JBCarte carte = ((JBCarte) e.getComponent());
 
@@ -124,25 +142,38 @@ public class JBCarteControl implements MouseListener {
                         /*Pouvoir Coffee Shop : ajout de la carte de l'étalage sur un chantier*/
                     } else if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Coffee") >= 1) {
 
-                        /*Ajout visuel de la carte*/
-                        for (int i = 0; i < Main.getJeu().getListeJoueur().getJoueur().getListeChantier().size(); i++) {
-                            if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().get(i).peekFirst().getNom().equals("Coffee House")) {
-                                Main.getJeu().getJpChantier().getChantiers()[i].removeAll();
-                                Main.getJeu().getJpChantier().getChantiers()[i].ajoutCarte(carte.getCarte());
+                        if (carte.getCarte().getClass() == Constructible.class) {
+                            /*Ajout visuel de la carte*/
+                            int i = 0;
+                            boolean pose = false; /*Boolean qui devient vrai si la carte de l'étalage est posée*/
+
+                            while (i < Main.getJeu().getListeJoueur().getJoueur().getListeChantier().size() && !pose) {
+                                if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().get(i).peekFirst().getNom().equals("Coffee House")) {
+                                    Main.getJeu().getJpChantier().getChantiers()[i].removeAll();
+                                    Main.getJeu().getJpChantier().getChantiers()[i].ajoutCarte(carte.getCarte());
+                                }
+                                i++;
                             }
+
+                            /*Ajout dans le modèle de la carte*/
+                            Main.getJeu().getListeJoueur().getJoueur().getMain().add(carte.getCarte());
+
+                            // suppresssion de la carte dans l'etalage
+                            Main.getJeu().getEtalage().piocherCarte(carte.getCarte());
+
+                            /*Rafraichissement de l'étalage*/
+                            Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
+
+                            /*Changer la position de la carte*/
+                            carte.setPosition("construction");
+
+                            // change onglet sur le chantier
+                            Main.getJeu().getPanelOnglet().setSelectedIndex(2);
+
+                            Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Cette carte n'est pas constructible");
                         }
-
-                        /*Ajout dans le modèle de la carte*/
-                        Main.getJeu().getListeJoueur().getJoueur().getMain().add(carte.getCarte());
-
-                        // suppresssion de la carte dans l'etalage
-                        Main.getJeu().getEtalage().piocherCarte(carte.getCarte());
-
-                        /*Rafraichissement de l'étalage*/
-                        Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
-
-                        /*Changer la position de la carte*/
-                        carte.setPosition("construction");
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
