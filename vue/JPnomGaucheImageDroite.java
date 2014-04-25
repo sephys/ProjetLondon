@@ -1,9 +1,3 @@
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
-
 package vue;
 
 import java.awt.BorderLayout;
@@ -24,6 +18,7 @@ import model.Joueur;
 /**
  *
  * @author Anh-Djuy
+ * Panel en haut du menu de droite, contenant le label du joueur qui joue et son image
  */
 public class JPnomGaucheImageDroite extends JPanel{
     

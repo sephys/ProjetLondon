@@ -195,6 +195,13 @@ public class Constructible extends Carte {
                         case "Bridge" :
                             PouvoirBeta.pouvoirTowerBridge();
                             break;
+                        case "Milbank":
+                            PouvoirBeta.pouvoirMilbankPrison();
+                            break;
+                        case "Brixton":
+                            PouvoirBeta.pouvoirBrixtonPrison();
+                            break;
+                                
                             
                     }
 		}
