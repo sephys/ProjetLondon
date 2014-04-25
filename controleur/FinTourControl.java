@@ -23,7 +23,7 @@ public class FinTourControl implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         MenuDroiteControl m=new MenuDroiteControl();
-        
+
         if (Main.getJeu().getListeJoueur().getJoueur().isFinitTour()) {
             // check trop grand nombre de cartes dans la main
             if (Main.getJeu().getListeJoueur().getJoueur().getMain().size() > 9) {

@@ -12,22 +12,22 @@ import vue.Main;
 
 public class Joueur implements Serializable{
     
-    private String nom;
-    private ArrayList<Carte> main;
-    private HashMap<String, Integer> pouvoir;
-    private ArrayList<ArrayDeque<Constructible>> listeChantier;
-    private int pointVictoire;
-    private int pointPauvrete;
-    private int argent;
-    private int nbPret;
+    private String nom; //nom du joueur
+    private ArrayList<Carte> main; //main du joueur
+    private HashMap<String, Integer> pouvoir; // pouvoir du joueur
+    private ArrayList<ArrayDeque<Constructible>> listeChantier; //chantier du joueur
+    private int pointVictoire; //point victoire du joueur
+    private int pointPauvrete; //point Pauvrete du joueur
+    private int argent; //argent du joueur
+    private int nbPret; //nombre de pret contracter par le joueur
     private int placeJoueur; // la place du joueur dans le cycle
     private int defausse; // savoir combien de cartes le joueur doit se défausser
     private int pioche; // savoir combien de cartes le joueur peut piocher
     // private boolean finTourPiocheCarte; // savoir si le joueur a choisi l'action 3 cartes
     private boolean finitTour; // savoir si le joueur a le droit finit son tour
-    private Color color;
+    private Color color; //couleur du joueur
     //private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
-    private Carte lastCarte;
+    private Carte lastCarte; //derniere carte jouer sur un chantier
     private String derniereAction;  // Jouer des cartes | Investir | Restaurer la ville | Piocher 3 cartes
     MenuDroiteControl m;
     
@@ -49,8 +49,8 @@ public class Joueur implements Serializable{
         m=new MenuDroiteControl();
         this.derniereAction = "";
     }
-    
-    public void initialisePouvoir(){
+   //initialise le tableau de pouvoir du joueur 
+    public void initialisePouvoir(){ 
         pouvoir.put("Bank", 0);
         pouvoir.put("Brixton Prison", 0);
         pouvoir.put("School",0);
@@ -109,11 +109,12 @@ public class Joueur implements Serializable{
         return pioche;
     }
     
+    //envoie le nombre de carte que doit piocher le joueur après une action qui lui autorise a piocher
     public void setPioche(int pioche) {
         this.pioche = pioche;
-        London.dndListener.setDragEnable(false);
+        London.dndListener.setDragEnable(false); //desactivation de la possibilite de joueur
         m.disableAll();
-        if(Main.getJeu().getListeJoueur().getFinTour()<=0){
+        if(Main.getJeu().getListeJoueur().getFinTour()<=0){ // si le deck n'est pas vide 
             Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
         }
         else{
@@ -129,7 +130,7 @@ public class Joueur implements Serializable{
         Main.getJeu().getMenudroite().revalidate();
         
     }
-    
+    //decrement le nombre de carte a piocher par le joueur
     public void piocheMoins() {
         this.pioche--;
         if (this.pioche == 0) {
@@ -385,5 +386,28 @@ public class Joueur implements Serializable{
         }
         return res;
     }
-    
+
+	public int finPartie() {
+		// TODO Auto-generated method stub
+		
+		//remboursePret
+		int nbRemboursable=this.getArgent()%15;
+		while(nbRemboursable-nbPret>=0&&nbPret>0){
+			this.nbPret--;
+			nbRemboursable--;
+			this.argent-=15;
+		}
+		//si il reste des pret nom rembourse on prent 1PP par pret non rembourse
+		while(nbPret>0){
+			this.pointPauvrete+=7;
+			nbPret--;
+		}
+		//si il reste de l'argent
+		int rest=this.argent%3;
+		this.pointVictoire+=rest;
+		
+		//si il reste des carte en main
+		this.pointPauvrete+=this.getMain().size();
+		return this.pointPauvrete;
+	}
 }
