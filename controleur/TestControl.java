@@ -23,7 +23,7 @@ public class TestControl implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //System.out.println(Main.getJeu().getListeJoueur().getJoueur().carteChantierExiste("Coffee House"));
+        PouvoirBeta.pouvoirTownHouse();
     }
     
 }
