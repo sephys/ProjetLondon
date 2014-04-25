@@ -4,10 +4,10 @@ public class TourJoueur {
 	private static int nbJoueur=0;
 	private Joueur joueur;
 	private TourJoueur suivant;
-	
+	private int finTour=-1;
 	
 	public TourJoueur(Joueur joueur) {
-		nbJoueur++;
+		//nbJoueur++;
 		this.joueur = joueur;
 	}
 
@@ -23,6 +23,9 @@ public class TourJoueur {
 
 
 	public TourJoueur getSuivant() {
+		if(this.finTour>0){
+			this.finTour--;
+		}
 		return suivant;
 	}
 
@@ -39,6 +42,16 @@ public class TourJoueur {
 
 	public static void setNbJoueur(int nbJoueur) {
 		TourJoueur.nbJoueur = nbJoueur;
+	}
+
+
+	public void setFinTour(int nbJoueur2) {
+		// TODO Auto-generated method stub
+		this.finTour=nbJoueur2;	
+	}
+	public int getFinTour() {
+		// TODO Auto-generated method stub
+		return this.finTour;	
 	}
 	
 }

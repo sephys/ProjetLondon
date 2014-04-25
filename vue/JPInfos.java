@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import model.Joueur;
+import model.TourJoueur;
 
 /**
  *
@@ -29,8 +30,9 @@ public class JPInfos extends JPanel {
     private Image img;
 
     public JPInfos(Joueur listeJoueurs[]) {
-        aljpsi = new JPSousInfos[Joueur.getNbJoueur()];
-       
+
+        aljpsi = new JPSousInfos[TourJoueur.getNbJoueur()];
+
 
         this.setPreferredSize(new Dimension(280, 810));
         this.setLayout(new GridLayout(4, 1, 0, 20));

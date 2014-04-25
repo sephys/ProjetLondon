@@ -177,10 +177,19 @@ public class Constructible extends Carte {
                         case "Coffee":
                             PouvoirBeta.pouvoirCoffee(currJ, this);
                             break;
+                        case "Police":
+                            PouvoirBeta.pouvoirPoliceForce();
+                            break;
+                        case "Boats":
+                            PouvoirBeta.pouvoirSteamBoats();
+                            break;
+                        case "Town":
+                            PouvoirBeta.pouvoirTownHouse();
+                        case "Train":
+                            PouvoirBeta.pouvoirNorthTrainStation();
+                            
+                            
                     }
-                        
-                        
-                        
 			if(this.aRetourne){
 				this.activable=false;
 			}

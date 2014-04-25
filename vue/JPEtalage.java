@@ -56,7 +56,7 @@ public class JPEtalage extends JPanel {
     
     public void initEtalage(int nbJoueur) {
         
-        int nbEtalage = Joueur.getNbJoueur() + 1;
+        int nbEtalage = TourJoueur.getNbJoueur() + 1;
         tab1 = new JPanel[nbEtalage];
         tab2 = new JPanel[nbEtalage];
         

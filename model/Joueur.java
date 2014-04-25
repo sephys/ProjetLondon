@@ -19,7 +19,6 @@ public class Joueur {
     private int pointPauvrete;
     private int argent;
     private int nbPret;
-    private static int nbJoueur;
     private int placeJoueur; // la place du joueur dans le cycle
     private int defausse; // savoir combien de cartes le joueur doit se défausser
     private int pioche; // savoir combien de cartes le joueur peut piocher
@@ -51,26 +50,19 @@ public class Joueur {
     }
     
     public void initialisePouvoir(){
-        pouvoir.put("Bank of England", 0);
+        pouvoir.put("Bank", 0);
         pouvoir.put("Brixton Prison", 0);
         pouvoir.put("School",0);
         pouvoir.put("Wren",0);
         pouvoir.put("Huguenots",0);
+        pouvoir.put("Coffee",0);
         //pouvoir.put(nom, argent);
     }
     
     public Color getColor() {
         return color;
     }
-    
-    public static int getNbJoueur() {
-        return nbJoueur;
-    }
-    
-    public static void setNbJoueur(int nbJoueur) {
-        Joueur.nbJoueur = nbJoueur;
-    }
-    
+
     public String getNom() {
         return nom;
     }
@@ -119,7 +111,9 @@ public class Joueur {
         this.pioche = pioche;
         London.dndListener.setDragEnable(false);
         m.disableAll();
-        Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
+        //if(Main.getJeu().getListeJoueur().getNbJoueur()==-1){
+        	Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
+    	//}
         //JBCarte.setDoubleClick(true);
         
         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");
@@ -233,12 +227,6 @@ public class Joueur {
         this.listeChantier.add(new ArrayDeque<Constructible>());
     }
     
-    public void emprunt(int i) {
-        // TODO Auto-generated method stub
-        this.setNbPret(i % 10);
-        this.setArgent(this.getArgent() + i);
-    }
-    
     public Carte getCarteMain(int index) {
         return this.main.get(index);
     }
@@ -284,7 +272,7 @@ public class Joueur {
     
     public void addPret(int nbPret){
         this.nbPret += nbPret;
-        if(pouvoir.get("Bank of England") == 1){
+        if(pouvoir.get("Bank") >= 1){
             this.addArgent(12*nbPret);
         }else{
             this.addArgent(10*nbPret);
@@ -375,4 +363,22 @@ public class Joueur {
             m.setFinTour();
         }
     }
+
+    /**
+     * Retourne l'index du chantier ou se trouve la carte recherchée ou -1 si la carte n'existe pas
+     * @param nomCarte
+     * @return 
+     */
+    public int indexCarte(String nomCarte) {
+        int i=0;
+        int res=-1;
+        while (i < Main.getJeu().getListeJoueur().getJoueur().getListeChantier().size()) {
+            if (Main.getJeu().getListeJoueur().getJoueur().getListeChantier().get(i).peekFirst().getNom().equals(nomCarte)) {
+                res=i;
+            }
+            i++;
+        }
+        return res;
+    }
+
 }

@@ -8,10 +8,8 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.ArrayDeque;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -88,7 +86,7 @@ public class PouvoirBeta {
     public static void pouvoirCoffee(Joueur J, Constructible carte) {
         JOptionPane.showMessageDialog(null, "Coffee House activé !");
         Main.getJeu().getMenudroite().getLabelInfo().setText("Choississez une carte de l'étalage");
-        
+
         /*On ajoute le pouvoir dans le tableau de pouvoirs du joueur (obligatoire car on doit faire des conditions dans JBCarte)*/
         if (J.getPouvoir().get("Coffee") != null) {
             Main.getJeu().getJpChantier().getChantiers();
@@ -199,29 +197,49 @@ public class PouvoirBeta {
     }
     
     public void pouvoirSteamBoats(Joueur j) {
+        JOptionPane.showMessageDialog(null, "Steamboats activé !");
         for (Zone n : Main.getJeu().getZones().values()) {
-            if (n != null && n.getProprietaire().equals(j) && n.isAdjacentTamise()) {
-                j.addArgent(2);
+            if (n != null) {
+                if (n.getProprietaire() != null) {
+                    if (n.getProprietaire().equals(Main.getJeu().getListeJoueur().getJoueur()) && n.isAdjacentTamise()) {
+
+                        Main.getJeu().getListeJoueur().getJoueur().addArgent(2);
+                    }
+                }
+            }
+
+        }
+        Main.getJeu().getInfos().maj_infos();
+    }
+    // Town
+    public static void pouvoirTownHouse() {
+        JOptionPane.showMessageDialog(null, "Town Houses activé !");
+        int vp = 0;
+        for (ArrayDeque<Constructible> c : Main.getJeu().getListeJoueur().getJoueur().getListeChantier()) {
+            if (!c.peek().getCouleur().equals("Brun")) {
+                vp++;
             }
         }
+        Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(vp);
+        Main.getJeu().getInfos().maj_infos();
+
     }
     
-    public void pouvoirTownHouse(Joueur j) {
-        int argent = 0;
-        for (Carte c : j.getMain()) {
-            if (!c.getCouleur().equals("marron")) {
-                argent++;
-            }
-        }
-        j.addArgent(argent);
-    }
-    
-    public static void pouvoirNorthTrainStation(Joueur j) {
+    // Train
+    public static void pouvoirNorthTrainStation() {
+        JOptionPane.showMessageDialog(null, "Train Station activé !");
         for (Zone n : Main.getJeu().getZones().values()) {
-            if (n != null && n.getProprietaire().equals(j) && (!n.isDessousTamise())) {
-                j.addArgent(2);
+            if (n != null) {
+                if (n.getProprietaire() != null) {
+                    if (n.getProprietaire().equals(Main.getJeu().getListeJoueur().getJoueur()) && (!n.isDessousTamise())) {
+                        Main.getJeu().getListeJoueur().getJoueur().addArgent(2);
+                    }
+                }
+
             }
+
         }
+        Main.getJeu().getInfos().maj_infos();
     }
     
     public static void pouvoirSouthTrainStation(Joueur j) {
@@ -231,7 +249,7 @@ public class PouvoirBeta {
             }
         }
     }
-    
+
     //contrôle
     public static boolean peutJouer(Joueur j,Carte ca){
         boolean res=false;
