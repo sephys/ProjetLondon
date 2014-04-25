@@ -297,17 +297,17 @@ public class Joueur {
         this.finitTour = true;
 
         carteJouer.jouerCarte(this, ind);
-        System.out.println(this.finitTour);
+        //System.out.println(this.finitTour);
         this.lastCarte = carteJouer;
-        System.out.println(carteJouer.getNom());//stock la dernière carte jouer
+        //System.out.println(carteJouer.getNom());//stock la dernière carte jouer
         if (carteJouer.getClass() == Constructible.class) { //si constructible
             if (PouvoirBeta.pouvoirWren(this) || "Coffee House".equals(carteJouer.getNom())) {
                 this.defausse = 0;
-                System.out.println("defausse = 0");
+                //System.out.println("defausse = 0");
 
             } else {				//besoin de dépenser une carte
                 this.defausse = 1;
-                System.out.println("defausse = 1");
+                //System.out.println("defausse = 1");
             }
         }
         this.getMain().remove(carteJouer);

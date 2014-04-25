@@ -79,7 +79,7 @@ public class MenuDroite extends JPanel {
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JButton test=new JButton("test");
-        test.addActionListener(new TestControl());
+        //test.addActionListener(new TestControl());
 
         jouer.setPreferredSize(new Dimension(149, 26));
         restaurer.setPreferredSize(new Dimension(149, 26));
