@@ -75,7 +75,8 @@ public class MenuDroite extends JPanel {
         finTour.setAlignmentX(Component.CENTER_ALIGNMENT);
         labelInfo = new JLabel("");
         labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.piocher = new JButton("          Piocher           ");
+        int nbCarteRestantes = Main.getJeu().getDeck().size();
+        this.piocher = new JButton("          Piocher ("+nbCarteRestantes+")      ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JButton test=new JButton("test");

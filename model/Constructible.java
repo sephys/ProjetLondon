@@ -188,9 +188,7 @@ public class Constructible extends Carte {
                             
                             
                     }
-                        
-                        
-                        
+
 			if(this.aRetourne){
 				this.activable=false;
 			}
