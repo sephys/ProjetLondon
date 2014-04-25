@@ -44,25 +44,12 @@ public class JBCarteControl implements MouseListener{
                         Main.getJeu().getListeJoueur().getJoueur().getMain().remove(carte.getCarte());
 
                         //on enlève la défausse
-<<<<<<< HEAD
-                        Main.getJeu().getListeJoueur().getJoueur().defausseMoins();
-=======
                         Main.getJeu().getListeJoueur().getJoueur().defausseMoins(carte.getCarte());
-
->>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
                         //London.getListeJoueur().getJoueur().payeConstruction(carte.carte);
                     } // cas defausse à cause d'une construction
                     else if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() != 0) {
-<<<<<<< HEAD
-=======
-
-                        /**/
-                        //London.getMenudroite().getFinTour().setEnabled(true);
-                        JBCarte carte = ((JBCarte) e.getComponent());
-
->>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                         //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
                         //London.getListeJoueur().getJoueur().defausseMoins();
                         // si carte ne respecte pas les contraintes de defausse
@@ -117,12 +104,8 @@ public class JBCarteControl implements MouseListener{
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
                     }
                     break;
-<<<<<<< HEAD
-                case "etalage": // on met la carte de l'etalage dans la main
-=======
 
                 case "etalage": // on met la carte de l'etalage dans la main OU chantier
->>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                     //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
                     JBCarte carte = ((JBCarte) e.getComponent());
 
@@ -138,8 +121,6 @@ public class JBCarteControl implements MouseListener{
                         Main.getJeu().getListeJoueur().getJoueur().piocheMoins();
 
                         ((JBCarte) e.getComponent()).setPosition("main");
-<<<<<<< HEAD
-=======
 
                         /*Pouvoir Coffee Shop : ajout de la carte de l'étalage sur un chantier*/
                     } else if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Coffee") >= 1) {
@@ -176,8 +157,6 @@ public class JBCarteControl implements MouseListener{
                         } else {
                             JOptionPane.showMessageDialog(null, "Cette carte n'est pas constructible");
                         }
-
->>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre de cette carte");
                     }

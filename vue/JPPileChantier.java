@@ -96,13 +96,6 @@ public class JPPileChantier extends JPanel{
     public void setCarte2(boolean carte2) {
         this.carte2 = carte2;
     }
-    
-<<<<<<< HEAD
-    public void ajoutCarte(JBCarte carte){
-        this.add(carte);
-        this.carte = carte;
-    }
-=======
         // ajout d'une carte dans la JPPileChantier du joueur
     public  void ajoutCarte(Carte e){
         JBCarte carte = new JBCarte(e);
@@ -111,5 +104,4 @@ public class JPPileChantier extends JPanel{
         this.revalidate();
     }
     
->>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
 }
