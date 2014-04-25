@@ -23,7 +23,7 @@ public class TestControl implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        PouvoirBeta.pouvoirTownHouse();
+        PouvoirBeta.MilbankPrison();
     }
     
 }
