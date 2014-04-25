@@ -7,6 +7,7 @@
 package controleur;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import model.Joueur;
 import vue.*;
 
 /**
@@ -65,6 +66,12 @@ public class MenuDroiteControl {
         Main.getJeu().getCentral().remove(Main.getJeu().getSouth());
         // on passe au joueur suivant
         Main.getJeu().setListeJoueur(Main.getJeu().getListeJoueur().getSuivant());
+        Joueur nouveauJoueur = Main.getJeu().getListeJoueur().getJoueur();
+        if(nouveauJoueur.getPouvoir().get("University") == 1){
+            Main.getJeu().getMenudroite().getRegarder3Cartes().setVisible(true);
+        }else{
+            Main.getJeu().getMenudroite().getRegarder3Cartes().setVisible(false);            
+        }
         // change le label nomJoeuur
         //labelJoueur.setText(London.getListeJoueur().getJoueur().getNom());
         control.actualiseJoueur();
@@ -104,6 +111,6 @@ public class MenuDroiteControl {
 
         // on peut pas d&d à la base
         DragDropControl.setDragEnable(false);
-
+        
     }
 }
