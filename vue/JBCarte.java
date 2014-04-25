@@ -159,25 +159,7 @@ public class JBCarte extends JButton {
     public boolean isDefausse() {
         return defausse;
     }
-
-    public void pouvoirBridge() {
-        int argent = 0;
-        if (this.carte.getNom().equals("Bridge")) {
-            ArrayList al = new ArrayList(Main.getJeu().getListeJoueur().getJoueur().getListeChantier());
-            for (Object o : al) {
-                ArrayDeque<Constructible> a = (ArrayDeque<Constructible>) o;
-                if (a.poll().getCouleur().equals("marron")) {
-                    argent++;
-                }
-            }
-        }
-        Main.getJeu().getListeJoueur().getJoueur().addArgent(argent);
-    }
-
-    public void pouvoirBrixtonPrison(int nombreCartes) {
-        Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-nombreCartes);
-    }
-
+    
     public void changerImage(String path) {
         URL uri = JBCarte.class.getResource(path);
         try {

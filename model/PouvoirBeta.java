@@ -4,6 +4,7 @@ import controleur.DeuxJoueurs;
 import controleur.QuatreJoueurs;
 import controleur.TroisJoueurs;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -116,9 +117,7 @@ public class PouvoirBeta {
         JOptionPane.showMessageDialog(null, "Fleet Street activé !");
         
         final JFrame choixJoueur = new JFrame();
-        choixJoueur.setLayout(new GridLayout(4, 1));
-        choixJoueur.setSize(300, 200);
-        choixJoueur.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     
         
         // premet de lier les radio boutons
         ButtonGroup bg = new ButtonGroup();
@@ -135,9 +134,10 @@ public class PouvoirBeta {
         bg.add(b2);
         bg.add(b3);
         
-        choixJoueur.add(b1);
-        choixJoueur.add(b2);
-        choixJoueur.add(b3);
+        JPanel jp=new JPanel(new FlowLayout());
+        jp.add(b1);
+        jp.add(b2);
+        jp.add(b3);
         
         JButton p = new JButton("Ok");
         
@@ -159,8 +159,11 @@ public class PouvoirBeta {
             }
         });
         choixJoueur.setUndecorated(true);
-        choixJoueur.add(p);
+        choixJoueur.add(new JLabel("Choisisser le joueur"),BorderLayout.NORTH);
+        choixJoueur.add(p,BorderLayout.SOUTH);
+        choixJoueur.add(jp);
         choixJoueur.setLocationRelativeTo(null);
+        choixJoueur.pack();
         choixJoueur.setVisible(true);
         
     }
@@ -195,9 +198,7 @@ public class PouvoirBeta {
         JOptionPane.showMessageDialog(null, "Police Force activé !");
 
         final JFrame choixJoueur = new JFrame();
-        choixJoueur.setLayout(new GridLayout(4, 1));
-        choixJoueur.setSize(300, 200);
-        choixJoueur.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
 
         // premet de lier les radio boutons
         ButtonGroup bg = new ButtonGroup();
@@ -214,9 +215,10 @@ public class PouvoirBeta {
         bg.add(b2);
         bg.add(b3);
 
-        choixJoueur.add(b1);
-        choixJoueur.add(b2);
-        choixJoueur.add(b3);
+        JPanel jp=new JPanel(new FlowLayout());
+        jp.add(b1);
+        jp.add(b2);
+        jp.add(b3);
 
         JButton p = new JButton("Ok");
 
@@ -241,9 +243,11 @@ public class PouvoirBeta {
 
         // enleve la possibilité de fermer la fenêtre        
         choixJoueur.setUndecorated(true);
-
-        choixJoueur.add(p);
+        choixJoueur.add(new JLabel("Choisisser le joueur"),BorderLayout.NORTH);
+        choixJoueur.add(jp);
+        choixJoueur.add(p,BorderLayout.SOUTH);
         choixJoueur.setLocationRelativeTo(null);
+        choixJoueur.pack();
         choixJoueur.setVisible(true);
     }
     
@@ -334,26 +338,30 @@ public class PouvoirBeta {
         JOptionPane.showMessageDialog(null, "Milbank Prison activé !");
         
         final JFrame choixDefausse = new JFrame();
-        choixDefausse.setLayout(new GridLayout(4, 1));
-        choixDefausse.setSize(300, 200);
-        choixDefausse.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+       
+        //choixDefausse.setLayout(new GridLayout(4, 1));
+        //choixDefausse.setSize(300, 200);
+        
 
         // premet de lier les radio boutons
         ButtonGroup bg = new ButtonGroup();
-
+        
 
         final JRadioButton b1 = new JRadioButton("1");
         final JRadioButton b2 = new JRadioButton("2");
         final JRadioButton b3 = new JRadioButton("3");
-
+        
         bg.add(b1);
         bg.add(b2);
         bg.add(b3);
+        
+        JPanel jp=new JPanel(new FlowLayout());
+        jp.add(b1);
+        jp.add(b2);
+        jp.add(b3);
 
-        choixDefausse.add(b1);
-        choixDefausse.add(b2);
-        choixDefausse.add(b3);
-
+       
         JButton p = new JButton("Ok");
 
         p.addActionListener(new ActionListener() {
@@ -384,8 +392,12 @@ public class PouvoirBeta {
         // enleve la possibilité de fermer la fenêtre        
         choixDefausse.setUndecorated(true);
 
-        choixDefausse.add(p);
+        choixDefausse.add(new JLabel("Choisissez le nombre de cartes à defausser"),BorderLayout.NORTH);
+        
+        choixDefausse.add(jp,BorderLayout.CENTER);
+        choixDefausse.add(p,BorderLayout.SOUTH);
         choixDefausse.setLocationRelativeTo(null);
+        choixDefausse.pack();
         choixDefausse.setVisible(true);
         
     }
