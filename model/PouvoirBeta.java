@@ -300,8 +300,16 @@ public class PouvoirBeta {
                 f.dispose();
             }
         });
-        f.add(jlab, BorderLayout.NORTH);
-        f.add(jcb, BorderLayout.EAST);
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        f.setLocation(
+                (screenSize.width-f.getWidth())/2,
+                (screenSize.height-f.getHeight())/2
+        );
+        jp.add(jlab, BorderLayout.NORTH);
+        jp.add(jcb, BorderLayout.EAST);
+        jp.add(ok, BorderLayout.SOUTH);
+        f.setVisible(true);
+        f.pack();
     }
     
     public void supprimePaupers(int nbASuppr){
