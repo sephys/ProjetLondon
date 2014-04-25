@@ -29,17 +29,12 @@ public class testInit {
 		j.nouveauChantier();
 		j.nouveauChantier();
 		while(!arret){
-			System.out.println(j.getMain());
-			System.out.println("Quelle carte Voulez vous jouer?");
 			Scanner sc=new Scanner(System.in);
 			int index=sc.nextInt();
 			Carte jouerC=j.getCarteMain(index);
 			if(jouerC.getClass()==Constructible.class){
-				System.out.println("Quelle carte voulez vous defausser");
 				index=sc.nextInt();
 				Carte defCarte=j.getCarteMain(index);
-				System.out.println(j.getListeChantier());
-				System.out.println("Chantier?");
 				index=sc.nextInt();
 				j.jouerCarte(defCarte,jouerC, index);
 			}else{

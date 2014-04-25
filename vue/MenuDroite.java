@@ -145,7 +145,6 @@ public class MenuDroite extends JPanel {
         finTour.setEnabled(false);
         restaurer.setEnabled(false);
         jouer.setEnabled(false);
-        System.out.println("fin de tour:" + Main.getJeu().getListeJoueur().getFinTour());
         
         
     }
