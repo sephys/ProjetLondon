@@ -315,6 +315,7 @@ public class PouvoirBeta {
     }
     
     public static void pouvoirTowerBridge(){
+        JOptionPane.showMessageDialog(null, "Bridge activé !");
         int fricPognonFlouzBleTunesPrunes = 0;
         Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         for(ArrayDeque<Constructible> c : j.getListeChantier()){
@@ -326,6 +327,7 @@ public class PouvoirBeta {
     }
     
     public static void pouvoirWorkHouse(){
+        JOptionPane.showMessageDialog(null, "WorkHouse activé !");
         int paupersEnMain = 0;
         Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         ArrayList<Carte> alc = j.getMain();
