@@ -315,7 +315,7 @@ public class PouvoirBeta {
     }
     
     public static void pouvoirTowerBridge(Joueur j){
-        JOptionPane.showMessageDialog(null, "Tower Bridge Station activé !");
+        JOptionPane.showMessageDialog(null, "Tower Bridge activé !");
         int fricPognonFlouzBleTunesPrunes = 0;
         for(ArrayDeque<Constructible> c : j.getListeChantier()){
             if(c.peek().getCouleur().equals("Brun")){
@@ -324,6 +324,68 @@ public class PouvoirBeta {
         }
         j.addArgent(fricPognonFlouzBleTunesPrunes);
     }
+    
+    public static void MilbankPrison()
+    {
+        JOptionPane.showMessageDialog(null, "Milbank Prison activé !");
+        
+        final JFrame choixDefausse = new JFrame();
+        choixDefausse.setLayout(new GridLayout(4, 1));
+        choixDefausse.setSize(300, 200);
+        choixDefausse.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        // premet de lier les radio boutons
+        ButtonGroup bg = new ButtonGroup();
+
+
+        final JRadioButton b1 = new JRadioButton("1");
+        final JRadioButton b2 = new JRadioButton("2");
+        final JRadioButton b3 = new JRadioButton("3");
+
+        bg.add(b1);
+        bg.add(b2);
+        bg.add(b3);
+
+        choixDefausse.add(b1);
+        choixDefausse.add(b2);
+        choixDefausse.add(b3);
+
+        JButton p = new JButton("Ok");
+
+        p.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (b1.isSelected()) {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(1);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-1);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(1);
+                } else if (b2.isSelected()) {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(2);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-2);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(2);
+                } else {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(3);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-3);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(2);
+
+                }
+                
+                Main.getJeu().getInfos().maj_infos();
+
+                choixDefausse.dispose();
+            }
+        });
+
+        // enleve la possibilité de fermer la fenêtre        
+        choixDefausse.setUndecorated(true);
+
+        choixDefausse.add(p);
+        choixDefausse.setLocationRelativeTo(null);
+        choixDefausse.setVisible(true);
+        
+    }
+    
     
     public static void pouvoirWorkHouse(Joueur j){
         JOptionPane.showMessageDialog(null, "WorkHouse activé !");
