@@ -3,23 +3,34 @@ package model;
 import controleur.DeuxJoueurs;
 import controleur.QuatreJoueurs;
 import controleur.TroisJoueurs;
+import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import vue.JPMain;
 import vue.London;
 import vue.Main;
 
 public class PouvoirBeta {
-
+    
     private static int specialDouble = 0; // Wren //huguenots Jewish
     private static int speChoix; //
-
+    
     //pouvoir illimité.
     public static boolean pouvoirSchool(Joueur j, Carte cD) {
         boolean res = false;
@@ -38,7 +49,7 @@ public class PouvoirBeta {
         }
         return res;
     }
-
+    
     public static boolean pouvoirHuguenots(Joueur j) {
         boolean res = false;
         System.out.println(j.isFinitTour());
@@ -50,7 +61,7 @@ public class PouvoirBeta {
         }
         return res;
     }
-
+    
     //pouvoir limité.
     public static boolean pouvoirWren(Joueur j) {
         boolean res = false;
@@ -58,14 +69,14 @@ public class PouvoirBeta {
         if (test != 0) {
             res = true;//possède le pouvoir wren
             if (specialDouble == 0) {
-                //si première carte 
+                //si première carte
                 specialDouble = 1;				//première utilisation						//on peut utiliser le pouvoir
             } else {
                 //sinon 2 carte on décremente le pouvoir wren
-
+                
                 j.getPouvoir().put("Wren", new Integer(j.getPouvoir().get("Wren").intValue()) - 1);
                 specialDouble = 0;
-
+                
             }
         } else {									// ne possède pas le pouvoir wren
             res = false;
@@ -73,7 +84,7 @@ public class PouvoirBeta {
         // TODO Auto-generated method stub
         return res;
     }
-
+    
     public static void pouvoirCoffee(Joueur J, Constructible carte) {
         JOptionPane.showMessageDialog(null, "Coffee House activé !");
         Main.getJeu().getMenudroite().getLabelInfo().setText("Choississez une carte de l'étalage");
@@ -86,7 +97,7 @@ public class PouvoirBeta {
         // change onglet sur etélage
         Main.getJeu().getPanelOnglet().setSelectedIndex(1);
     }
-
+    
     // done
     public static void pouvoirFireBrigade(Joueur j) {
         for (Zone n : Main.getJeu().getZones().values()) {
@@ -98,42 +109,42 @@ public class PouvoirBeta {
                 } else {
                     n.getProprietaire().addArgent(-1);
                 }
-
+                
             }
         }
     }
-
+    
     public static void pouvoirFleetStreet() {
         JOptionPane.showMessageDialog(null, "Fleet Street activé !");
-
+        
         final JFrame choixJoueur = new JFrame();
         choixJoueur.setLayout(new GridLayout(4, 1));
         choixJoueur.setSize(300, 200);
         choixJoueur.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
+        
         // premet de lier les radio boutons
         ButtonGroup bg = new ButtonGroup();
-
+        
         final String nomJ1 = Main.getJeu().getListeJoueur().getSuivant().getJoueur().getNom();
         final String nomJ2 = Main.getJeu().getListeJoueur().getSuivant().getSuivant().getJoueur().getNom();
         final String nomJ3 = Main.getJeu().getListeJoueur().getSuivant().getSuivant().getSuivant().getJoueur().getNom();
-
+        
         final JRadioButton b1 = new JRadioButton(nomJ1);
         final JRadioButton b2 = new JRadioButton(nomJ2);
         final JRadioButton b3 = new JRadioButton(nomJ3);
-
+        
         bg.add(b1);
         bg.add(b2);
         bg.add(b3);
-
+        
         choixJoueur.add(b1);
         choixJoueur.add(b2);
         choixJoueur.add(b3);
-
+        
         JButton p = new JButton("Ok");
-
+        
         p.addActionListener(new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (b1.isSelected()) {
@@ -142,10 +153,10 @@ public class PouvoirBeta {
                     Main.getJeu().getListeJoueur().getSuivant().getSuivant().getJoueur().addPointPauvrete(2);
                 } else {
                     Main.getJeu().getListeJoueur().getSuivant().getSuivant().getSuivant().getJoueur().addPointPauvrete(2);
-
+                    
                 }
                 Main.getJeu().getInfos().maj_infos();
-
+                
                 choixJoueur.dispose();
             }
         });
@@ -153,9 +164,9 @@ public class PouvoirBeta {
         choixJoueur.add(p);
         choixJoueur.setLocationRelativeTo(null);
         choixJoueur.setVisible(true);
-
+        
     }
-
+    
     public static void pouvoirLloydsOfLondon() {
         JOptionPane.showMessageDialog(null, "Lloyds of Lonfon activé !");
         for (int i = 0; i < Main.getJeu().getTabJoueur().length; i++) {
@@ -163,9 +174,9 @@ public class PouvoirBeta {
         }
         Main.getJeu().getListeJoueur().getJoueur().addArgent(Main.getJeu().getTabJoueur().length * 2);
         Main.getJeu().getInfos().maj_infos();
-
+        
     }
-
+    
     public static void pouvoirOmnibus() {
         JOptionPane.showMessageDialog(null, "Omnibus activé !");
         for (Zone n : Main.getJeu().getZones().values()) {
@@ -175,18 +186,18 @@ public class PouvoirBeta {
                         Main.getJeu().getListeJoueur().getJoueur().addArgent(1);
                     }
                 }
-
+                
             }
-
+            
         }
         Main.getJeu().getInfos().maj_infos();
     }
-
+    
     public void pouvoirPoliceForce(Joueur donneur, Joueur donne) {
         donneur.addPointPauvrete(-1);
         donne.addPointPauvrete(1);
     }
-
+    
     public void pouvoirSteamBoats(Joueur j) {
         for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && n.getProprietaire().equals(j) && n.isAdjacentTamise()) {
@@ -194,7 +205,7 @@ public class PouvoirBeta {
             }
         }
     }
-
+    
     public void pouvoirTownHouse(Joueur j) {
         int argent = 0;
         for (Carte c : j.getMain()) {
@@ -204,7 +215,7 @@ public class PouvoirBeta {
         }
         j.addArgent(argent);
     }
-
+    
     public static void pouvoirNorthTrainStation(Joueur j) {
         for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && n.getProprietaire().equals(j) && (!n.isDessousTamise())) {
@@ -212,7 +223,7 @@ public class PouvoirBeta {
             }
         }
     }
-
+    
     public static void pouvoirSouthTrainStation(Joueur j) {
         for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && n.getProprietaire().equals(j) && n.isDessousTamise()) {
@@ -223,15 +234,78 @@ public class PouvoirBeta {
     
     //contrôle
     public static boolean peutJouer(Joueur j,Carte ca){
-    	boolean res=false;
-    	if(j.getPouvoir().get("Wren")==1||j.getPouvoir().get("School")==1){
-    		res=true;
-    	}
-    	if(ca.getNom().compareTo("School")==0||ca.getNom().compareTo("Coffee")==0){
-    		res=true;
-    	}
-    	return res;
-    	
+        boolean res=false;
+        if(j.getPouvoir().get("Wren")==1||j.getPouvoir().get("School")==1){
+            res=true;
+        }
+        if(ca.getNom().compareTo("School")==0||ca.getNom().compareTo("Coffee")==0){
+            res=true;
+        }
+        return res;
+        
     }
     
+    public void pouvoirTowerBridge(Joueur j){
+        int fricPognonFlouzBleTunesPrunes = 0;
+        for(ArrayDeque<Constructible> c : j.getListeChantier()){
+            if(c.peek().getCouleur().equals("Brun")){
+                fricPognonFlouzBleTunesPrunes++;
+            }
+        }
+        j.addArgent(fricPognonFlouzBleTunesPrunes);
+    }
+    
+    public void pouvoirWorkHouse(Joueur j){
+        int paupersEnMain = 0;
+        ArrayList<Carte> alc = j.getMain();
+        for(Carte c : alc){
+            if(c.getNom().equals("Paupers")){
+                paupersEnMain++;
+            }
+        }
+        final Frame f = new Frame("Pouvoir WorkHouse");
+        JLabel jlab = new JLabel("Combien de Paupers voulez-vous défausser ?");
+        JPanel jp = new JPanel();
+        f.add(jp);
+        final JComboBox jcb = new JComboBox();
+        for(int i = 0; i < paupersEnMain; i++){
+            jcb.addItem("" + i);
+        }
+        jcb.setSelectedIndex(0);
+        JButton ok = new JButton("OK");
+        ok.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = jcb.getSelectedIndex();
+                supprimePaupers(i);
+                f.dispose();
+            }
+        });
+        f.add(jlab, BorderLayout.NORTH);
+        f.add(jcb, BorderLayout.EAST);
+    }
+    
+    public void supprimePaupers(int nbASuppr){
+        int[] indices = new int[nbASuppr];
+        int indice = 0;
+        int compteur = 0;
+        Joueur courrant = Main.getJeu().getListeJoueur().getJoueur();
+        ArrayList<Carte> m = courrant.getMain();
+        for(Carte c : m){
+            if(c.getNom().equals("Paupers")){
+                indices[indice] = compteur;
+                indice++;
+            }
+            compteur++;
+        }
+        
+        JPMain main = Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()];
+        for(int i = 0; i < indices.length; i++){
+            m.remove(indices[i]);
+            main.removeCarteNom("Paupers");
+        }
+        courrant.addArgent(nbASuppr);
+        courrant.addPointPauvrete(-nbASuppr);
+    }
 }

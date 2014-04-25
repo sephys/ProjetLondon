@@ -110,15 +110,30 @@ public class JPMain extends JPanel {
     public void removeCarte(Carte e)
     {
         JBCarte c=new JBCarte(e);
-        
-        for(int i=0;i<main.getComponentCount();i++)
+        boolean b = true;   // Pour qu'une seule carte soit supprimée et pas toutes la cartes similaires à la Carte e.
+        for(int i=0;i<main.getComponentCount()&&b == true;i++)
         {
             if(((JBCarte) main.getComponent(i)).equals(c))
             {
                 main.remove(main.getComponent(i));
+                b = false;
             }
         }
         
+        main.revalidate();
+        
+    }
+    
+    public void removeCarteNom(String s){
+        boolean b = true;   // Pour qu'une seule carte soit supprimée et pas toutes la cartes similaires à la Carte e.
+        for(int i=0;i<main.getComponentCount()&&b == true;i++)
+        {
+            if(((JBCarte) main.getComponent(i)).getCarte().getNom().equals(s))
+            {
+                main.remove(main.getComponent(i));
+                b = false;
+            }
+        }        
         main.revalidate();
         
     }
