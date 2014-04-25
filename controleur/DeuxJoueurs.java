@@ -8,7 +8,6 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.Joueur;
 import model.TourJoueur;
 
 /**

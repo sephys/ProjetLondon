@@ -29,12 +29,11 @@ import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
-                                        
 
 /**
  *
- * @author Joke
- * Classe permettant d'afficher le menu d'accueil et et d'afficher le jeu une fois la partie démarré
+ * @author Joke Classe permettant d'afficher le menu d'accueil et et d'afficher
+ * le jeu une fois la partie démarré
  */
 public class London implements Serializable {
 
@@ -47,7 +46,7 @@ public class London implements Serializable {
     private JPChantiers jpChantier; // panel des chantiers du joueur courant
     private JPMain south; // panel contenant la main des joueurs
     private JPanel central; // panel central du jeu ( contient la main du joueur et les onglet )
-    private MenuDroite menudroite; // panel à droite du jeu
+    private JPMenuDroite menudroite; // panel à droite du jeu
     private JPPlateau plateau; // plateau 
     private Thread sound; // thread pour la musique
     private JTabbedPane panelOnglet; // panel contenant les onglets
@@ -58,15 +57,14 @@ public class London implements Serializable {
     private JFrame frame; // fenêtre principal
     // pour le drag & drop
     public static DragDropControl dndListener;
-    static DragSource dragSource;  
+    static DragSource dragSource;
     // controleur
     JPnomGaucheImageDroiteControl controlJPGID;
-    
 
     public London() {
 
-        controlJPGID=new JPnomGaucheImageDroiteControl();
-        
+        controlJPGID = new JPnomGaucheImageDroiteControl();
+
         // D&D
         dndListener = new DragDropControl();
         dragSource = new DragSource();
@@ -76,7 +74,7 @@ public class London implements Serializable {
     }
 
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
-    public  void start() {
+    public void start() {
         // permet d'avoir le même affichage sous windows et mac
         try {
             UIManager.setLookAndFeel(new MetalLookAndFeel());
@@ -88,7 +86,7 @@ public class London implements Serializable {
         initTabJPChantier(); // initialisation des panel contenant les zones de construction des joueurs
 
         frame = new JFrame(); // frame contenant le jeu
-        
+
         // si on ferme la fenêtre
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -98,19 +96,16 @@ public class London implements Serializable {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     sound.stop();
-                    
 
                     System.exit(0);
-                }
-                else
-                {
+                } else {
                     // on fait rien
                 }
-                
+
             }
         });
 
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         // panel contenant les différents onglets
         panelOnglet = new JTabbedPane();
@@ -122,7 +117,7 @@ public class London implements Serializable {
         jpEtalage = new JPEtalage();
         panelOnglet.addTab("Etalage", jpEtalage);
         jpChantier = new JPChantiers();
-        tabJPChantiers[0]=jpChantier;
+        tabJPChantiers[0] = jpChantier;
         panelOnglet.addTab("Chantiers", jpChantier);
 
         // panel central contenant le plateau et la main du joueur
@@ -137,11 +132,9 @@ public class London implements Serializable {
 
         frame.add(central);
 
-        this.menudroite = new MenuDroite();
+        this.menudroite = new JPMenuDroite();
         controlJPGID.changeImage(this.getListeJoueur().getJoueur());
 
-    
-        
         frame.add(menudroite, BorderLayout.EAST);
 
         infos = new JPInfos(this.getTabJoueur());
@@ -160,7 +153,6 @@ public class London implements Serializable {
         // le premier joueur peut piocher
         this.getListeJoueur().getJoueur().setPioche(1);
 
-
     }
 
     // methode qui affiche le menu quand on lance l'application
@@ -174,7 +166,6 @@ public class London implements Serializable {
                 System.exit(0);
             }
         });
-
 
         acc.setTitle("London");
         acc.setSize(570, 810);
@@ -221,7 +212,7 @@ public class London implements Serializable {
         sound.start();
     }
 
-    public MenuDroite getMenudroite() {
+    public JPMenuDroite getMenudroite() {
         return menudroite;
     }
 
@@ -268,15 +259,11 @@ public class London implements Serializable {
     public void setZones(HashMap<String, Zone> zones) {
         this.zones = zones;
     }
-    
-    
-
 
     public void setJpChantier(JPChantiers jpChantier) {
         this.jpChantier = jpChantier;
     }
-    
-    
+
     public JPPlateau getPlateau() {
         return plateau;
     }
@@ -290,12 +277,12 @@ public class London implements Serializable {
     }
 
     public TourJoueur getListeJoueur() {
-      
+
         return lJoueur;
     }
 
     public void setListeJoueur(TourJoueur initialisationJoueur) {
-        
+
         this.lJoueur = initialisationJoueur;
     }
 
@@ -315,8 +302,6 @@ public class London implements Serializable {
     public void setInfos(JPInfos infos) {
         this.infos = infos;
     }
-    
-    
 
     public JPMain[] getTabJPMain() {
         return tabJPMain;
@@ -328,21 +313,19 @@ public class London implements Serializable {
 
     public void initTabJPMain() {
         tabJPMain = new JPMain[TourJoueur.getNbJoueur()];
-        for (int i = 0; i <TourJoueur.getNbJoueur(); i++) {
-           // System.out.println("moi"+this.getListeJoueur().getJoueur());
+        for (int i = 0; i < TourJoueur.getNbJoueur(); i++) {
+            // System.out.println("moi"+this.getListeJoueur().getJoueur());
             tabJPMain[i] = new JPMain(this.getListeJoueur().getJoueur());
             this.setListeJoueur(this.getListeJoueur().getSuivant());
         }
     }
-    
-    public void initTabJPChantier()
-    {
-       tabJPChantiers=new JPChantiers[TourJoueur.getNbJoueur()];
-       for(int i=0;i<TourJoueur.getNbJoueur();i++)
-       {
-           tabJPChantiers[i]=new JPChantiers();
-       }
-       
+
+    public void initTabJPChantier() {
+        tabJPChantiers = new JPChantiers[TourJoueur.getNbJoueur()];
+        for (int i = 0; i < TourJoueur.getNbJoueur(); i++) {
+            tabJPChantiers[i] = new JPChantiers();
+        }
+
     }
 
     public Joueur[] getTabJoueur() {
@@ -361,6 +344,7 @@ public class London implements Serializable {
         // TODO Auto-generated method stub
         return deck;
     }
+
     
     //Permet de sauvegarder l'�tat actuel du jeu dans un fichier texte de maniere serialiser
     public void sauvegarder() throws IOException{
@@ -422,5 +406,6 @@ public class London implements Serializable {
     	in.close();
 
     }
+
 
 }

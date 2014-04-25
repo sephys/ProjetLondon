@@ -8,10 +8,6 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.Carte;
-import model.Constructible;
-import model.Joueur;
-import model.PouvoirBeta;
 import vue.Main;
 
 /**
@@ -20,11 +16,15 @@ import vue.Main;
  */
 public class TestControl implements ActionListener{
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
+        /*
         PouvoirBeta.pouvoirFleetStreet();
-               
-                
+     */
+        for(int i=0; i<80; i++){
+            Main.getJeu().getDeck().poll();
+        }
     }
     
 }

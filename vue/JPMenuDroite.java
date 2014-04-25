@@ -13,7 +13,7 @@ import javax.swing.*;
  * @author Joke
  * Classe qui représente le panel à droite de l'écran
  */
-public class MenuDroite extends JPanel {
+public class JPMenuDroite extends JPanel {
 
     private JLabel labelInfo; // indique ce que doit faire l'utilisateur
     private JPanel menuBouton; // panel contenant tous les boutons
@@ -26,7 +26,7 @@ public class MenuDroite extends JPanel {
 
     private Frame3Cartes f; // frame pour le pouvoir Unversity of London
 
-    public MenuDroite() {
+    public JPMenuDroite() {
         super(new BorderLayout());
         m = new MenuDroiteControl();
         menuBouton = new JPanel();
@@ -71,8 +71,8 @@ public class MenuDroite extends JPanel {
         this.piocher = new JButton("          Piocher (" + nbCarteRestantes + ")      ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton test = new JButton("test");
-        test.addActionListener(new TestControl());
+        /*JButton test = new JButton("test");
+        test.addActionListener(new TestControl());*/
 
         jouer.setPreferredSize(new Dimension(149, 26));
         restaurer.setPreferredSize(new Dimension(149, 26));
@@ -83,7 +83,7 @@ public class MenuDroite extends JPanel {
         finTour.setPreferredSize(new Dimension(149, 26));
 
         // on les ajoute au menu
-        menuBouton.add(test);
+       // menuBouton.add(test);
         menuBouton.add(jpsij);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 6)));
         menuBouton.add(jouer);
@@ -145,7 +145,9 @@ public class MenuDroite extends JPanel {
         finTour.setEnabled(false);
         restaurer.setEnabled(false);
         jouer.setEnabled(false);
-        piocher.setEnabled(true);
+        System.out.println("fin de tour:" + Main.getJeu().getListeJoueur().getFinTour());
+        
+        
     }
 
     @Override
