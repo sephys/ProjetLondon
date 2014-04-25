@@ -265,6 +265,9 @@ public class Joueur {
     
     public void addPointPauvrete(int pointPauvrete){
         this.pointPauvrete += pointPauvrete;
+        if(this.pointPauvrete < 0){
+            this.pointPauvrete = 0;
+        }
     }
     
     public void addArgent(int argent){

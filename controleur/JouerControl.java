@@ -13,7 +13,8 @@ import vue.London;
 import vue.Main;
 
 /**
- *
+ *  Ce Listener permet de gérer l'appui sur le bouton Jouer des cartes
+ *  du menu à droite. 
  * @author Joke
  */
 public class JouerControl implements ActionListener {
@@ -27,13 +28,15 @@ public class JouerControl implements ActionListener {
                 JOptionPane.YES_NO_OPTION);
         if (rep == JOptionPane.YES_OPTION) {
             Main.getJeu().getListeJoueur().getJoueur().setDerniereAction("Jouer des cartes");
+            // Activaction du Drag & Drop
             London.dndListener.setDragEnable(true);
+            // Activation du double clic du bouton droit pour les cartes non-constructibles mais activables.
             JBCarte.setClicDroitJouer(true);
             Main.getJeu().getMenudroite().getLabelInfo().setText("Vous pouvez jouer des cartes");
 
             m.disableAll();
             Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
-            // change onglet
+            // Change d'onglet pour l'onglet d'affichage des Chantiers du Joueur.
             Main.getJeu().getPanelOnglet().setSelectedIndex(2);
         }
     }
