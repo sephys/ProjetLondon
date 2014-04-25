@@ -314,7 +314,8 @@ public class PouvoirBeta {
         
     }
     
-    public void pouvoirTowerBridge(Joueur j){
+    public static void pouvoirTowerBridge(Joueur j){
+        JOptionPane.showMessageDialog(null, "Tower Bridge Station activé !");
         int fricPognonFlouzBleTunesPrunes = 0;
         for(ArrayDeque<Constructible> c : j.getListeChantier()){
             if(c.peek().getCouleur().equals("Brun")){
@@ -324,7 +325,8 @@ public class PouvoirBeta {
         j.addArgent(fricPognonFlouzBleTunesPrunes);
     }
     
-    public void pouvoirWorkHouse(Joueur j){
+    public static void pouvoirWorkHouse(Joueur j){
+        JOptionPane.showMessageDialog(null, "WorkHouse activé !");
         int paupersEnMain = 0;
         ArrayList<Carte> alc = j.getMain();
         for(Carte c : alc){
@@ -363,7 +365,7 @@ public class PouvoirBeta {
         f.pack();
     }
     
-    public void supprimePaupers(int nbASuppr){
+    public static void supprimePaupers(int nbASuppr){
         int[] indices = new int[nbASuppr];
         int indice = 0;
         int compteur = 0;
