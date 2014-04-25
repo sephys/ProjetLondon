@@ -113,9 +113,9 @@ public class Joueur implements Serializable{
         this.pioche = pioche;
         London.dndListener.setDragEnable(false);
         m.disableAll();
-        //if(Main.getJeu().getListeJoueur().getNbJoueur()==-1){
+        if(Main.getJeu().getListeJoueur().getFinTour()==-1){
         	Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
-    	//}
+    	}
         //JBCarte.setDoubleClick(true);
         
         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");
@@ -266,6 +266,9 @@ public class Joueur implements Serializable{
     
     public void addPointPauvrete(int pointPauvrete){
         this.pointPauvrete += pointPauvrete;
+        if(this.pointPauvrete < 0){
+            this.pointPauvrete = 0;
+        }
     }
     
     public void addArgent(int argent){

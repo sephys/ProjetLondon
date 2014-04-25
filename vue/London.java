@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue;
 
 import controleur.DragDropControl;
@@ -11,7 +6,6 @@ import model.Carte;
 import model.Etalage;
 import model.Joueur;
 import model.TourJoueur;
-
 import java.awt.*;
 import java.awt.dnd.DragSource;
 import java.io.EOFException;
@@ -26,15 +20,11 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import model.Zone;
 import java.io.*;
-
 import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -44,33 +34,31 @@ import sun.audio.ContinuousAudioDataStream;
 /**
  *
  * @author Joke
+ * Classe permettant d'afficher le menu d'accueil et et d'afficher le jeu une fois la partie démarré
  */
 public class London implements Serializable {
 
-    private TourJoueur lJoueur;
-    private ArrayDeque<Carte> deck;
-    private Etalage etalage;
+    private TourJoueur lJoueur; // liste cyclique des joueurs
+    private ArrayDeque<Carte> deck; // deck des cartes de la pioche
+    private Etalage etalage; // etalage du jeu en version modele
     private JPMain[] tabJPMain; // tableau des étalages
     private JPChantiers[] tabJPChantiers; // tableau des chantiers
-    private JPEtalage jpEtalage;
-    private JPChantiers jpChantier;
+    private JPEtalage jpEtalage; // etalage du jeu en version graphique
+    private JPChantiers jpChantier; // panel des chantiers du joueur courant
     private JPMain south; // panel contenant la main des joueurs
-    private JPanel central;
-    private MenuDroite menudroite;
-    private JPPlateau plateau;
+    private JPanel central; // panel central du jeu ( contient la main du joueur et les onglet )
+    private MenuDroite menudroite; // panel à droite du jeu
+    private JPPlateau plateau; // plateau 
     private Thread sound; // thread pour la musique
     private JTabbedPane panelOnglet; // panel contenant les onglets
-    private JFrame acc;
-    private JPInfos infos;
+    private JFrame acc; // fenetre d'accueil
+    private JPInfos infos; // panel à gauche du jeu
     private HashMap<String, Zone> zones; // Structure contenant toutes les zones
-    private Joueur[] tabJoueur;
-    private JFrame frame; // fenêtre principale
-
+    private Joueur[] tabJoueur; // tableau contenant les joueurs
+    private JFrame frame; // fenêtre principal
     // pour le drag & drop
     public static DragDropControl dndListener;
-    static DragSource dragSource;
-
-    
+    static DragSource dragSource;  
     // controleur
     JPnomGaucheImageDroiteControl controlJPGID;
     
@@ -83,8 +71,8 @@ public class London implements Serializable {
         dndListener = new DragDropControl();
         dragSource = new DragSource();
 
-        music();
-        menu();
+        music(); // la musique se lance
+        menu(); // on affiche le menu
     }
 
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
@@ -101,6 +89,7 @@ public class London implements Serializable {
 
         frame = new JFrame(); // frame contenant le jeu
         
+        // si on ferme la fenêtre
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -110,24 +99,12 @@ public class London implements Serializable {
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     sound.stop();
                     
-                    /*FileOutputStream out=null;
-                    try {
-                        out = new FileOutputStream("temp.txt");
-                    } catch (FileNotFoundException ex) {
-                        Logger.getLogger(London.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try {
-                        ObjectOutputStream s = new ObjectOutputStream(out);
-                    } catch (IOException ex) {
-                        Logger.getLogger(London.class.getName()).log(Level.SEVERE, null, ex);
-                    }*/
-                   
-                    
+
                     System.exit(0);
                 }
                 else
                 {
-                    System.out.println("non fin de jeu");
+                    // on fait rien
                 }
                 
             }
@@ -180,6 +157,7 @@ public class London implements Serializable {
         // informe le joueur qui joue
         JOptionPane.showMessageDialog(null, "C'est au tour de " + this.getListeJoueur().getJoueur().getNom() + " de jouer");
 
+        // le premier joueur peut piocher
         this.getListeJoueur().getJoueur().setPioche(1);
 
 
@@ -214,6 +192,7 @@ public class London implements Serializable {
 
     }
 
+    // methode qui lance la musique en boucle : thread
     public void music() {
 
         sound = new Thread() {

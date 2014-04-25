@@ -122,7 +122,6 @@ public class TestConstructible {
 	@Test
 	public void testActivationVictoire(){
 		int expected=0;
-		System.out.println(j.getPointVictoire());
 		int i=0;
 		ArrayList<Carte> tmpM=(ArrayList<Carte>) j.getMain().clone();
 		for(Carte tmp :tmpM){
@@ -131,18 +130,17 @@ public class TestConstructible {
 		}
 		i=0;
 		ArrayList<ArrayDeque> tmpD=(ArrayList<ArrayDeque>) j.getListeChantier().clone();
-		System.out.println(tmpD); 
 		for(ArrayDeque tmp :tmpD){
 			Constructible tmpC=j.getListeChantier().get(i).peekFirst();
 			if(tmpC!=null){
 				if(tmpC.getNom().compareTo("Coffee House")!=0){
 					tmpC.activerCarte(j);
+					expected+=tmpC.getGainAcivation()[1];
 				}
-				expected+=tmpC.getGainAcivation()[1];
 			}
 			i++;
 		}
-		assertEquals(expected,j.getArgent());
+		assertEquals(expected,j.getPointVictoire());
 		
 	}
 }
