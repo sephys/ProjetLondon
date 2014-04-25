@@ -182,50 +182,56 @@ public class JBCarteControl implements MouseListener {
                     break;
 
                 case "construction": // on active une carte qui est dans la zone de construction
+                    if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) {
 
-                    if (JBCarte.isActiverCarte() && !carteCourante.getCarte().getNom().equals("Hospital")) {
+                        if (JBCarte.isActiverCarte() && !carteCourante.getCarte().getNom().equals("Hospital")) {
 
-                        int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
-                                "Êtes-vous sûr de vouloir activer cette carte ?",
-                                "Activer la carte",
-                                JOptionPane.YES_NO_OPTION);
-                        if (rep == JOptionPane.YES_OPTION) {
-                            Main.getJeu().getListeJoueur().getJoueur().activerCarte(((Constructible) carteCourante.getCarte()));
+                            int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                    "Êtes-vous sûr de vouloir activer cette carte ?",
+                                    "Activer la carte",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (rep == JOptionPane.YES_OPTION) {
+                                Main.getJeu().getListeJoueur().getJoueur().activerCarte(((Constructible) carteCourante.getCarte()));
 
-                            // on check si la carte doit être retourné et est activable
-                            System.out.println("a retourne : "+ ((Constructible) carteCourante.getCarte()).isARetourne());
-                            System.out.println("est activable : "+ ((Constructible) carteCourante.getCarte()).isActivable());
-                            if (((Constructible) carteCourante.getCarte()).isARetourne() && ((Constructible) carteCourante.getCarte()).isActivable()) {
+                                // on check si la carte doit être retourné et est activable
+                                if (((Constructible) carteCourante.getCarte()).isARetourne() && ((Constructible) carteCourante.getCarte()).isActivable()) {
 
-                                /*Récupère l'index du chantier contenant une carte hopital sinon -1*/
-                                int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Hospital");
-                                if (indexChantier != -1) {
-                                    /*Récupère la carte sur la JPPileChantier*/
-                                    JBCarte carteHospital = (JBCarte) Main.getJeu().getJpChantier().getChantiers()[indexChantier].getComponent(0);
+                                    /*Récupère l'index du chantier contenant une carte hopital sinon -1*/
+                                    int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Hospital");
+                                    if (indexChantier != -1) {
+                                        /*Récupère la carte sur la JPPileChantier*/
+                                        JBCarte carteHospital = (JBCarte) Main.getJeu().getJpChantier().getChantiers()[indexChantier].getComponent(0);
 
-                                    /*Vérifie que la carte hopital */
-                                    if (((Constructible) carteHospital.getCarte()).isActivable()) {
+                                        /*Vérifie que la carte hopital */
+                                        if (((Constructible) carteHospital.getCarte()).isActivable()) {
 
-                                        int rep2 = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
-                                                "Voulez vous retourner la carte Hospital à la place de celle-ci ?",
-                                                "Pouvoir Hospital",
-                                                JOptionPane.YES_NO_OPTION);
-                                        if (rep2 == JOptionPane.YES_OPTION) {
-                                            /*Retourne hospital*/
-                                            ((Constructible) carteHospital.getCarte()).setActivable(false);
+                                            int rep2 = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                                    "Voulez vous retourner la carte Hospital à la place de celle-ci ?",
+                                                    "Pouvoir Hospital",
+                                                    JOptionPane.YES_NO_OPTION);
+                                            if (rep2 == JOptionPane.YES_OPTION) {
+                                                /*Retourne hospital*/
+                                                ((Constructible) carteHospital.getCarte()).setActivable(false);
 
-                                            carteHospital.changerImage("../img/cartes/Background.png");
+                                                carteHospital.changerImage("../img/cartes/Background.png");
 
-                                            Main.getJeu().getInfos().maj_infos();
-                                            Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
+                                                Main.getJeu().getInfos().maj_infos();
+                                                Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
 
+                                            } else {
+                                                /*Retourne la carte*/
+                                                ((Constructible) carteCourante.getCarte()).setActivable(false);
+                                                ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
+                                                Main.getJeu().getInfos().maj_infos();
+                                                Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
+
+                                            }
                                         } else {
                                             /*Retourne la carte*/
                                             ((Constructible) carteCourante.getCarte()).setActivable(false);
                                             ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
                                             Main.getJeu().getInfos().maj_infos();
                                             Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
-
                                         }
                                     } else {
                                         /*Retourne la carte*/
@@ -233,17 +239,14 @@ public class JBCarteControl implements MouseListener {
                                         ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
                                         Main.getJeu().getInfos().maj_infos();
                                         Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
+
                                     }
-                                } else {
-                                    /*Retourne la carte*/
-                                    ((Constructible) carteCourante.getCarte()).setActivable(false);
-                                    ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
-                                    Main.getJeu().getInfos().maj_infos();
-                                    Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
-
                                 }
-                            }
 
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Vous devez vous défausser");
                         }
                         break;
 
