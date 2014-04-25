@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public abstract class Carte {
+public abstract class Carte implements Serializable {
 
     private String nom; //nom de la carte
     private String couleur; //couleur de la carte {bleue, marron,rose ou grise}
@@ -93,7 +94,7 @@ public abstract class Carte {
 
     public String toString() {
         StringBuffer tmpStr = new StringBuffer("\n Nom : " + this.getNom());
-		//tmpStr.append("\n Categorie : "+this.getCategorie());
+        //tmpStr.append("\n Categorie : "+this.getCategorie());
         //tmpStr.append("\n Couleur : "+this.getCouleur());
         return new String(tmpStr);
     }

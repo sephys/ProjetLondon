@@ -19,6 +19,6 @@ public class QuatreJoueurs implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        TourJoueur.setNbJoueur(3);
+    	TourJoueur.setNbJoueur(4);
     }
 }

@@ -77,8 +77,9 @@ public class MenuDroiteControl {
         Main.getJeu().getCentral().remove(Main.getJeu().getSouth());
         // On passe au joueur suivant
         Main.getJeu().setListeJoueur(Main.getJeu().getListeJoueur().getSuivant());
-        // On vérifie s'il a le pouvoir University of London 
+        Main.getJeu().getListeJoueur().getJoueur().setPioche(1);
         Joueur nouveauJoueur = Main.getJeu().getListeJoueur().getJoueur();
+        // On vérifie s'il a le pouvoir University of London 
         if(nouveauJoueur.getPouvoir().get("University") == 1){
             Main.getJeu().getMenudroite().getRegarder3Cartes().setVisible(true);
         }else{
@@ -118,6 +119,10 @@ public class MenuDroiteControl {
 
         // Désactivation du Drag & Drop
         DragDropControl.setDragEnable(false);
-        
+        if(Main.getJeu().getListeJoueur().getFinTour()==0){
+            this.disableAll();
+            Main.getJeu().getMenudroite().getLabelInfo().setText("La partie est finie");
+            System.out.println("La partie est finie");
+        }
     }
 }

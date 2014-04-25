@@ -1,6 +1,8 @@
 package model;
 
-public class NonConstructible extends Carte {
+import java.io.Serializable;
+
+public class NonConstructible extends Carte implements Serializable {
 	
 	private String pouvoir;
 

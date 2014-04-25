@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue;
-
 import controleur.*;
 import java.awt.*;
 import java.io.IOException;
@@ -12,26 +6,25 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
 import javax.swing.*;
 
 /**
  *
  * @author Joke
+ * Classe qui représente le panel à droite de l'écran
  */
 public class MenuDroite extends JPanel {
 
-    //private JLabel labelJoueur; // indique quel joueur joue
     private JLabel labelInfo; // indique ce que doit faire l'utilisateur
     private JPanel menuBouton; // panel contenant tous les boutons
     private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, regarder3Cartes, finTour; // les différents boutons du menu
-    
+
     private JPnomGaucheImageDroite jpsij;
-    MenuDroiteControl m;
+    MenuDroiteControl m; // controleur de la vue
 
     private Image img;
 
-    private Frame3Cartes f;
+    private Frame3Cartes f; // frame pour le pouvoir Unversity of London
 
     public MenuDroite() {
         super(new BorderLayout());
@@ -41,11 +34,11 @@ public class MenuDroite extends JPanel {
 
         // position le menuBouton
         Dimension d = new Dimension(310, 260);
-        
+
         // panel contenant image + nom du joueur
         jpsij = new JPnomGaucheImageDroite();
         this.add(jpsij);
-        
+
         // transparance
         menuBouton.setOpaque(false);
 
@@ -56,7 +49,6 @@ public class MenuDroite extends JPanel {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    
         // intancie tous les boutons
         jouer = new JButton("    Jouer des cartes    ");
         jouer.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -66,7 +58,7 @@ public class MenuDroite extends JPanel {
         investir.setAlignmentX(Component.CENTER_ALIGNMENT);
         emprunter = new JButton("    Emprunter (10£)   ");
         emprunter.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
+
         piocher3 = new JButton(" Prendre trois cartes ");
         piocher3.setAlignmentX(Component.CENTER_ALIGNMENT);
         regarder3Cartes = new JButton("Regarder les 3 premières cartes");
@@ -76,10 +68,10 @@ public class MenuDroite extends JPanel {
         labelInfo = new JLabel("");
         labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         int nbCarteRestantes = Main.getJeu().getDeck().size();
-        this.piocher = new JButton("          Piocher ("+nbCarteRestantes+")      ");
+        this.piocher = new JButton("          Piocher (" + nbCarteRestantes + ")      ");
         piocher.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
-        JButton test=new JButton("test");
+
+        JButton test = new JButton("test");
         test.addActionListener(new TestControl());
 
         jouer.setPreferredSize(new Dimension(149, 26));
@@ -89,9 +81,9 @@ public class MenuDroite extends JPanel {
         piocher.setPreferredSize(new Dimension(149, 26));
         piocher3.setPreferredSize(new Dimension(149, 26));
         finTour.setPreferredSize(new Dimension(149, 26));
-        
+
         // on les ajoute au menu
-         menuBouton.add(test);
+        menuBouton.add(test);
         menuBouton.add(jpsij);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 6)));
         menuBouton.add(jouer);
@@ -112,7 +104,6 @@ public class MenuDroite extends JPanel {
         menuBouton.add(Box.createRigidArea(new Dimension(0, 30)));
         menuBouton.add(labelInfo);
         menuBouton.add(Box.createRigidArea(new Dimension(0, 30)));
-        
 
         // ACTION BOUTON JOUERCARTES
         jouer.addActionListener(new JouerControl());
@@ -144,7 +135,7 @@ public class MenuDroite extends JPanel {
         // Panel conteant le zoom de la carte
         JPZoom zoom = new JPZoom();
         zoom.setPreferredSize(new Dimension(300, 400));
-        // zoom.setBackground(Color.red);
+       
         this.add(zoom, BorderLayout.SOUTH);
         regarder3Cartes.setVisible(false);
 
@@ -154,7 +145,9 @@ public class MenuDroite extends JPanel {
         finTour.setEnabled(false);
         restaurer.setEnabled(false);
         jouer.setEnabled(false);
-        piocher.setEnabled(true);
+        System.out.println("fin de tour:" + Main.getJeu().getListeJoueur().getFinTour());
+        
+        
     }
 
     @Override
@@ -162,7 +155,6 @@ public class MenuDroite extends JPanel {
         super.paintComponent(g);
         g.drawImage(img, 0, 0, 310, 810, this);
     }
-
 
     public JPnomGaucheImageDroite getJpsij() {
         return jpsij;
@@ -212,7 +204,7 @@ public class MenuDroite extends JPanel {
         this.f = f;
     }
 
-    public JButton getRegarder3Cartes(){
+    public JButton getRegarder3Cartes() {
         return this.regarder3Cartes;
     }
 }

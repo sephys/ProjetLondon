@@ -321,9 +321,13 @@ public class JPPlateau extends JPanel implements MouseListener {
     public int nbArrondissements(Joueur j) {
         int retour = 0;
         for(JBZone z : tableauZone){
-            if(z.getZone().getProprietaire().equals(j)){
+            if(z.getZone().getProprietaire()!=null)
+            {
+                if(z.getZone().getProprietaire().equals(j)){
                 retour++;
             }
+            }
+            
         }
         return retour;
     }

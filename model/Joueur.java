@@ -2,6 +2,7 @@ package model;
 
 import controleur.MenuDroiteControl;
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import vue.JBCarte;
 import vue.London;
 import vue.Main;
 
-public class Joueur {
+public class Joueur implements Serializable{
     
     private String nom;
     private ArrayList<Carte> main;
@@ -112,9 +113,14 @@ public class Joueur {
         this.pioche = pioche;
         London.dndListener.setDragEnable(false);
         m.disableAll();
-        if(Main.getJeu().getListeJoueur().getFinTour()==-1){
+        System.out.println("fin de tour:"+Main.getJeu().getListeJoueur().getFinTour());
+        if(Main.getJeu().getListeJoueur().getFinTour()<=0){
         	Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
     	}
+        else{
+            Main.getJeu().getMenudroite().getPiocher().setEnabled(false);
+            Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
+        }
         //JBCarte.setDoubleClick(true);
         
         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");

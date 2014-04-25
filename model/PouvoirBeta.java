@@ -333,7 +333,7 @@ public class PouvoirBeta {
     }
     
 
-    public static void MilbankPrison()
+    public static void pouvoirMilbankPrison()
     {
         JOptionPane.showMessageDialog(null, "Milbank Prison activé !");
         
@@ -380,6 +380,75 @@ public class PouvoirBeta {
                     Main.getJeu().getListeJoueur().getJoueur().setDefausse(3);
                     Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-3);
                     Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(2);
+
+                }
+                
+                Main.getJeu().getInfos().maj_infos();
+
+                choixDefausse.dispose();
+            }
+        });
+
+        // enleve la possibilité de fermer la fenêtre        
+        choixDefausse.setUndecorated(true);
+
+        choixDefausse.add(new JLabel("Choisissez le nombre de cartes à defausser"),BorderLayout.NORTH);
+        
+        choixDefausse.add(jp,BorderLayout.CENTER);
+        choixDefausse.add(p,BorderLayout.SOUTH);
+        choixDefausse.setLocationRelativeTo(null);
+        choixDefausse.pack();
+        choixDefausse.setVisible(true);
+        
+    }
+    
+    public static void pouvoirBrixtonPrison()
+    {
+        JOptionPane.showMessageDialog(null, "Brixton Prison activé !");
+        
+        final JFrame choixDefausse = new JFrame();
+        
+       
+        //choixDefausse.setLayout(new GridLayout(4, 1));
+        //choixDefausse.setSize(300, 200);
+        
+
+        // premet de lier les radio boutons
+        ButtonGroup bg = new ButtonGroup();
+        
+
+        final JRadioButton b1 = new JRadioButton("1");
+        final JRadioButton b2 = new JRadioButton("2");
+        final JRadioButton b3 = new JRadioButton("3");
+        
+        bg.add(b1);
+        bg.add(b2);
+        bg.add(b3);
+        
+        JPanel jp=new JPanel(new FlowLayout());
+        jp.add(b1);
+        jp.add(b2);
+        jp.add(b3);
+
+       
+        JButton p = new JButton("Ok");
+
+        p.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (b1.isSelected()) {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(1);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-1);
+                    
+                } else if (b2.isSelected()) {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(2);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-2);
+                   
+                } else {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(3);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-3);
+                    
 
                 }
                 
