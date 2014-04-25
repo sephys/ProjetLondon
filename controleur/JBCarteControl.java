@@ -11,17 +11,18 @@ import vue.JBCarte;
 import vue.JPZoom;
 import vue.London;
 import vue.Main;
+
 /**
  *
  * @author Anh-Djuy
  */
-public class JBCarteControl implements MouseListener{
-    
+public class JBCarteControl implements MouseListener {
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+
         if (e.getClickCount() == 2) {
-            
+
             Joueur courrant = Main.getJeu().getListeJoueur().getJoueur();
             switch (((JBCarte) e.getComponent()).getPosition()) {
                 case "main": // on met la carte de la main sur l'étalage
@@ -194,8 +195,16 @@ public class JBCarteControl implements MouseListener{
                             if (((Constructible) ((JBCarte) e.getComponent()).getCarte()).isARetourne()) {
 
                                 int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Hospital");
-                                System.out.println(indexChantier);
-                                
+                                if (indexChantier != -1) {
+                                    int rep2 = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                            "Voulez vous retourner la carte Hospital à la place de celle-ci ?",
+                                            "Pouvoir Hospital",
+                                            JOptionPane.YES_NO_OPTION);
+                                    if (rep2 == JOptionPane.YES_OPTION) {
+                                        
+                                    }
+                                }
+
                                 /*Retourne la carte*/
                                 ((Constructible) ((JBCarte) e.getComponent()).getCarte()).setARetourne(false);
 
@@ -265,24 +274,26 @@ public class JBCarteControl implements MouseListener{
 
     }
 
-   
-
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e
+    ) {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e
+    ) {
         JPZoom.setImg(((JBCarte) e.getComponent()).getCarte().getPath());
     }
-    
+
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e
+    ) {
         JPZoom.setImg("../img/cartes/Background.png");
 
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e
+    ) {
     }
 }
