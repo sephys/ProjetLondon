@@ -26,6 +26,7 @@ public class JPPileChantier extends JPanel{
     private boolean posable;
     private boolean carte2;
     private Image img; // image du chantier
+    private JBCarte carte;
     
     public JPPileChantier(int index){
          try {
@@ -95,5 +96,8 @@ public class JPPileChantier extends JPanel{
         this.carte2 = carte2;
     }
     
-    
+    public void ajoutCarte(JBCarte carte){
+        this.add(carte);
+        this.carte = carte;
+    }
 }

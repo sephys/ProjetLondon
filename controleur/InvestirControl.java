@@ -27,6 +27,7 @@ public class InvestirControl implements ActionListener{
                         "Investir",
                         JOptionPane.YES_NO_OPTION);
                 if (rep == JOptionPane.YES_OPTION) {
+                    Main.getJeu().getListeJoueur().getJoueur().setDerniereAction("Investir");
                     m.disableAll();
                     Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez choisir une zone à investir");
                     Main.getJeu().getPlateau().activerZonesInvestissables();

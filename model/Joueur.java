@@ -29,7 +29,7 @@ public class Joueur {
 	private Color color;
 	//private static String piocheDefausse="pioche";   // Permet de savoir si le joueur est en train de piocher ou de defausser
 	private Carte lastCarte;
-        
+        private String derniereAction;  // Jouer des cartes | Investir | Restaurer la ville | Piocher 3 cartes
         MenuDroiteControl m;
 
 
@@ -48,6 +48,7 @@ public class Joueur {
 		this.listeChantier = new ArrayList(new ArrayDeque<Constructible>());
 		initialisePouvoir();
                 m=new MenuDroiteControl();
+                this.derniereAction = "";
 	}
 
 	public void initialisePouvoir(){
@@ -364,5 +365,11 @@ public class Joueur {
 	}
 
 
-
+        public void setDerniereAction(String s){
+            this.derniereAction = s;
+        }
+        
+        public String getDerniereAction(){
+            return this.derniereAction;
+        }
 }
