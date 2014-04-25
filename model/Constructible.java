@@ -146,7 +146,6 @@ public class Constructible extends Carte {
 
 	public void activerCarte(Joueur currJ){
 		if(this.activable){
-                    // MODIFIER CODE POUR LES POUVOIRS DANDHUY IF ELSE
 			currJ.setArgent(currJ.getArgent()-Integer.parseInt(this.coutActivation[0]));
 			String coutCarte=this.coutActivation[1];
 			if(coutCarte.compareTo("aucun")!=0){
@@ -185,14 +184,19 @@ public class Constructible extends Carte {
                             break;
                         case "Town":
                             PouvoirBeta.pouvoirTownHouse();
+                            break;
                         case "Train":
                             PouvoirBeta.pouvoirNorthTrainStation();
-                            
+                            break;
+                        case "Workhouse":
+                            PouvoirBeta.pouvoirWorkHouse();
+                            break;
+                        case "TowerBridge":                     // Pas un bug. Le pouvoir est le même pour les deux cartes.
+                        case "Bridge" :
+                            PouvoirBeta.pouvoirTowerBridge();
+                            break;
                             
                     }
-			if(this.aRetourne){
-				this.activable=false;
-			}
 		}
                 
                 

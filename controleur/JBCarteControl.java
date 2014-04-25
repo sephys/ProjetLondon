@@ -28,32 +28,23 @@ public class JBCarteControl implements MouseListener {
 
             switch (((JBCarte) e.getComponent()).getPosition()) {
                 case "main": // on met la carte de la main sur l'étalage
-                    //if(doubleClick&&courrant.getPiocheDefausse().equals("defausse")&&((JBCarte) e.getComponent()).isDefausse())
                     // cas ou defausse car trop de cartes dans la main
                     if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() != 0 && Main.getJeu().getListeJoueur().getJoueur().getLastCarte() == null) {
-                        /**/
                         //London.getMenudroite().getFinTour().setEnabled(true);
                         carteCourante.setPosition("etalage");
                         // ajout de la carte dans l'etalage
                         Main.getJeu().getEtalage().addCarte(carteCourante.getCarte());
-                        // on rafrachit l'etalage
+                        // on rafraichit l'etalage
                         Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
                         // on enleve la carte de la main du joueur ( graphiquement )
                         Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(carteCourante.getCarte());
-
-                        //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
                         // suppression de la carte de la main du joueur
                         Main.getJeu().getListeJoueur().getJoueur().getMain().remove(carteCourante.getCarte());
 
                         //on enlève la défausse
                         Main.getJeu().getListeJoueur().getJoueur().defausseMoins(carteCourante.getCarte());
-                        //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
-                        //London.getListeJoueur().getJoueur().defausseMoins();
-                        //London.getListeJoueur().getJoueur().payeConstruction(carte.carte);
                     } // cas defausse à cause d'une construction
                     else if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() != 0) {
-                        //System.out.println("apres :"+London.getListeJoueur().getJoueur().getMain().size());
-                        //London.getListeJoueur().getJoueur().defausseMoins();
                         // si carte ne respecte pas les contraintes de defausse
                         if (Main.getJeu().getListeJoueur().getJoueur().payeConstruction(carteCourante.getCarte()) == false) {
                             if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1) {
@@ -94,8 +85,6 @@ public class JBCarteControl implements MouseListener {
                             Main.getJeu().getJpEtalage().actualiser(Main.getJeu().getEtalage().getLigne1(), Main.getJeu().getEtalage().getLigne2());
                             // on enleve la carte de la main du joueur ( graphiquement )
                             Main.getJeu().getTabJPMain()[Main.getJeu().getListeJoueur().getJoueur().getPlaceJoueur()].removeCarte(carteCourante.getCarte());
-
-                            //System.out.println("avant :"+London.getListeJoueur().getJoueur().getMain().size());
                             // refresh
                             Main.getJeu().getSouth().repaint();
                             Main.getJeu().getSouth().revalidate();
@@ -107,7 +96,6 @@ public class JBCarteControl implements MouseListener {
                     break;
 
                 case "etalage": // on met la carte de l'etalage dans la main OU chantier
-                    //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
 
                     if (Main.getJeu().getListeJoueur().getJoueur().getPioche() != 0) {
                         // ajout de la carte dans la main du joueur graphiquement
@@ -159,9 +147,8 @@ public class JBCarteControl implements MouseListener {
                     break;
 
                 case "fenetre": // on met la carte de la fenetre dans la main
-                    //if(doubleClick&&courrant.getPiocheDefausse().equals("pioche"))
                     if (JBCarte.getDoubleClick()) {
-
+                        
                         int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
                                 "Êtes-vous sûr de vouloir choisir \"" + ((JBCarte) e.getComponent()).getCarte().getNom() + "\" ?",
                                 "Piocher",
@@ -175,6 +162,7 @@ public class JBCarteControl implements MouseListener {
                             // ajout de la carte das la main du joueur
                             Main.getJeu().getListeJoueur().getJoueur().getMain().add(carteCourante.getCarte());
                             Main.getJeu().getListeJoueur().getJoueur().piocheMoins();
+                            Main.getJeu().getMenudroite().getRegarder3Cartes().setVisible(false);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Vous ne pouvez pas vous défausser de cette carte");
@@ -182,48 +170,56 @@ public class JBCarteControl implements MouseListener {
                     break;
 
                 case "construction": // on active une carte qui est dans la zone de construction
+                    if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) {
 
-                    if (JBCarte.isActiverCarte() && !carteCourante.getCarte().getNom().equals("Hospital")) {
+                        if (JBCarte.isActiverCarte() && !carteCourante.getCarte().getNom().equals("Hospital")) {
 
-                        int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
-                                "Êtes-vous sûr de vouloir activer cette carte ?",
-                                "Activer la carte",
-                                JOptionPane.YES_NO_OPTION);
-                        if (rep == JOptionPane.YES_OPTION) {
-                            Main.getJeu().getListeJoueur().getJoueur().activerCarte(((Constructible) carteCourante.getCarte()));
+                            int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                    "Êtes-vous sûr de vouloir activer cette carte ?",
+                                    "Activer la carte",
+                                    JOptionPane.YES_NO_OPTION);
+                            if (rep == JOptionPane.YES_OPTION) {
+                                Main.getJeu().getListeJoueur().getJoueur().activerCarte(((Constructible) carteCourante.getCarte()));
 
-                            // on check si la carte doit être retourné et est activable
-                            if (((Constructible) carteCourante.getCarte()).isARetourne() && ((Constructible) carteCourante.getCarte()).isActivable()) {
+                                // on check si la carte doit être retourné et est activable
+                                if (((Constructible) carteCourante.getCarte()).isARetourne() && ((Constructible) carteCourante.getCarte()).isActivable()) {
 
-                                /*Récupère l'index du chantier contenant une carte hopital sinon -1*/
-                                int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Hospital");
-                                if (indexChantier != -1) {
-                                    /*Récupère la carte sur la JPPileChantier*/
-                                    JBCarte carteHospital = (JBCarte) Main.getJeu().getJpChantier().getChantiers()[indexChantier].getComponent(0);
+                                    /*Récupère l'index du chantier contenant une carte hopital sinon -1*/
+                                    int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Hospital");
+                                    if (indexChantier != -1) {
+                                        /*Récupère la carte sur la JPPileChantier*/
+                                        JBCarte carteHospital = (JBCarte) Main.getJeu().getJpChantier().getChantiers()[indexChantier].getComponent(0);
 
-                                    /*Vérifie que la carte hopital */
-                                    if (((Constructible) carteHospital.getCarte()).isActivable()) {
+                                        /*Vérifie que la carte hopital */
+                                        if (((Constructible) carteHospital.getCarte()).isActivable()) {
 
-                                        int rep2 = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
-                                                "Voulez vous retourner la carte Hospital à la place de celle-ci ?",
-                                                "Pouvoir Hospital",
-                                                JOptionPane.YES_NO_OPTION);
-                                        if (rep2 == JOptionPane.YES_OPTION) {
-                                            /*Retourne hospital*/
-                                            ((Constructible) carteHospital.getCarte()).setActivable(false);
+                                            int rep2 = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
+                                                    "Voulez vous retourner la carte Hospital à la place de celle-ci ?",
+                                                    "Pouvoir Hospital",
+                                                    JOptionPane.YES_NO_OPTION);
+                                            if (rep2 == JOptionPane.YES_OPTION) {
+                                                /*Retourne hospital*/
+                                                ((Constructible) carteHospital.getCarte()).setActivable(false);
 
-                                            carteHospital.changerImage("../img/cartes/Background.png");
+                                                carteHospital.changerImage("../img/cartes/Background.png");
 
-                                            Main.getJeu().getInfos().maj_infos();
-                                            Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
+                                                Main.getJeu().getInfos().maj_infos();
+                                                Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
 
+                                            } else {
+                                                /*Retourne la carte*/
+                                                ((Constructible) carteCourante.getCarte()).setActivable(false);
+                                                ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
+                                                Main.getJeu().getInfos().maj_infos();
+                                                Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
+
+                                            }
                                         } else {
                                             /*Retourne la carte*/
                                             ((Constructible) carteCourante.getCarte()).setActivable(false);
                                             ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
                                             Main.getJeu().getInfos().maj_infos();
                                             Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
-
                                         }
                                     } else {
                                         /*Retourne la carte*/
@@ -231,17 +227,14 @@ public class JBCarteControl implements MouseListener {
                                         ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
                                         Main.getJeu().getInfos().maj_infos();
                                         Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
+
                                     }
-                                } else {
-                                    /*Retourne la carte*/
-                                    ((Constructible) carteCourante.getCarte()).setActivable(false);
-                                    ((JBCarte) e.getComponent()).changerImage("../img/cartes/Background.png");
-                                    Main.getJeu().getInfos().maj_infos();
-                                    Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true);
-
                                 }
-                            }
 
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Vous devez vous défausser");
                         }
                         break;
 
@@ -249,8 +242,7 @@ public class JBCarteControl implements MouseListener {
             }
         }
 
-        if (e.getButton()
-                == MouseEvent.BUTTON3) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
             if (JBCarte.isClicDroitJouer()) {
                 if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) {
                     System.out.println("Deffause JBCarte : " + Main.getJeu().getListeJoueur().getJoueur().getDefausse());

@@ -4,6 +4,7 @@ import controleur.DeuxJoueurs;
 import controleur.QuatreJoueurs;
 import controleur.TroisJoueurs;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -116,9 +117,7 @@ public class PouvoirBeta {
         JOptionPane.showMessageDialog(null, "Fleet Street activé !");
         
         final JFrame choixJoueur = new JFrame();
-        choixJoueur.setLayout(new GridLayout(4, 1));
-        choixJoueur.setSize(300, 200);
-        choixJoueur.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     
         
         // premet de lier les radio boutons
         ButtonGroup bg = new ButtonGroup();
@@ -135,9 +134,10 @@ public class PouvoirBeta {
         bg.add(b2);
         bg.add(b3);
         
-        choixJoueur.add(b1);
-        choixJoueur.add(b2);
-        choixJoueur.add(b3);
+        JPanel jp=new JPanel(new FlowLayout());
+        jp.add(b1);
+        jp.add(b2);
+        jp.add(b3);
         
         JButton p = new JButton("Ok");
         
@@ -159,8 +159,11 @@ public class PouvoirBeta {
             }
         });
         choixJoueur.setUndecorated(true);
-        choixJoueur.add(p);
+        choixJoueur.add(new JLabel("Choisisser le joueur"),BorderLayout.NORTH);
+        choixJoueur.add(p,BorderLayout.SOUTH);
+        choixJoueur.add(jp);
         choixJoueur.setLocationRelativeTo(null);
+        choixJoueur.pack();
         choixJoueur.setVisible(true);
         
     }
@@ -195,9 +198,7 @@ public class PouvoirBeta {
         JOptionPane.showMessageDialog(null, "Police Force activé !");
 
         final JFrame choixJoueur = new JFrame();
-        choixJoueur.setLayout(new GridLayout(4, 1));
-        choixJoueur.setSize(300, 200);
-        choixJoueur.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
 
         // premet de lier les radio boutons
         ButtonGroup bg = new ButtonGroup();
@@ -214,9 +215,10 @@ public class PouvoirBeta {
         bg.add(b2);
         bg.add(b3);
 
-        choixJoueur.add(b1);
-        choixJoueur.add(b2);
-        choixJoueur.add(b3);
+        JPanel jp=new JPanel(new FlowLayout());
+        jp.add(b1);
+        jp.add(b2);
+        jp.add(b3);
 
         JButton p = new JButton("Ok");
 
@@ -241,9 +243,11 @@ public class PouvoirBeta {
 
         // enleve la possibilité de fermer la fenêtre        
         choixJoueur.setUndecorated(true);
-
-        choixJoueur.add(p);
+        choixJoueur.add(new JLabel("Choisisser le joueur"),BorderLayout.NORTH);
+        choixJoueur.add(jp);
+        choixJoueur.add(p,BorderLayout.SOUTH);
         choixJoueur.setLocationRelativeTo(null);
+        choixJoueur.pack();
         choixJoueur.setVisible(true);
     }
     
@@ -314,8 +318,12 @@ public class PouvoirBeta {
         
     }
     
-    public void pouvoirTowerBridge(Joueur j){
+
+    public static void pouvoirTowerBridge(){
+        JOptionPane.showMessageDialog(null, "Tower Bridge activé !");
+
         int fricPognonFlouzBleTunesPrunes = 0;
+        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         for(ArrayDeque<Constructible> c : j.getListeChantier()){
             if(c.peek().getCouleur().equals("Brun")){
                 fricPognonFlouzBleTunesPrunes++;
@@ -324,8 +332,82 @@ public class PouvoirBeta {
         j.addArgent(fricPognonFlouzBleTunesPrunes);
     }
     
-    public void pouvoirWorkHouse(Joueur j){
+
+    public static void MilbankPrison()
+    {
+        JOptionPane.showMessageDialog(null, "Milbank Prison activé !");
+        
+        final JFrame choixDefausse = new JFrame();
+        
+       
+        //choixDefausse.setLayout(new GridLayout(4, 1));
+        //choixDefausse.setSize(300, 200);
+        
+
+        // premet de lier les radio boutons
+        ButtonGroup bg = new ButtonGroup();
+        
+
+        final JRadioButton b1 = new JRadioButton("1");
+        final JRadioButton b2 = new JRadioButton("2");
+        final JRadioButton b3 = new JRadioButton("3");
+        
+        bg.add(b1);
+        bg.add(b2);
+        bg.add(b3);
+        
+        JPanel jp=new JPanel(new FlowLayout());
+        jp.add(b1);
+        jp.add(b2);
+        jp.add(b3);
+
+       
+        JButton p = new JButton("Ok");
+
+        p.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (b1.isSelected()) {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(1);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-1);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(1);
+                } else if (b2.isSelected()) {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(2);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-2);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(2);
+                } else {
+                    Main.getJeu().getListeJoueur().getJoueur().setDefausse(3);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-3);
+                    Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(2);
+
+                }
+                
+                Main.getJeu().getInfos().maj_infos();
+
+                choixDefausse.dispose();
+            }
+        });
+
+        // enleve la possibilité de fermer la fenêtre        
+        choixDefausse.setUndecorated(true);
+
+        choixDefausse.add(new JLabel("Choisissez le nombre de cartes à defausser"),BorderLayout.NORTH);
+        
+        choixDefausse.add(jp,BorderLayout.CENTER);
+        choixDefausse.add(p,BorderLayout.SOUTH);
+        choixDefausse.setLocationRelativeTo(null);
+        choixDefausse.pack();
+        choixDefausse.setVisible(true);
+        
+    }
+    
+    
+
+    public static void pouvoirWorkHouse(){
+        JOptionPane.showMessageDialog(null, "WorkHouse activé !");
         int paupersEnMain = 0;
+        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         ArrayList<Carte> alc = j.getMain();
         for(Carte c : alc){
             if(c.getNom().equals("Paupers")){
@@ -363,7 +445,7 @@ public class PouvoirBeta {
         f.pack();
     }
     
-    public void supprimePaupers(int nbASuppr){
+    public static void supprimePaupers(int nbASuppr){
         int[] indices = new int[nbASuppr];
         int indice = 0;
         int compteur = 0;

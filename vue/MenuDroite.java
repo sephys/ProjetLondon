@@ -212,4 +212,7 @@ public class MenuDroite extends JPanel {
         this.f = f;
     }
 
+    public JButton getRegarder3Cartes(){
+        return this.regarder3Cartes;
+    }
 }
