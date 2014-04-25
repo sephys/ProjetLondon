@@ -362,15 +362,18 @@ public class London implements Serializable {
         return deck;
     }
     
+    //Permet de sauvegarder l'état actuel du jeu dans un fichier texte de maniere serialiser
     public void sauvegarder() throws IOException{
     	FileOutputStream out = new FileOutputStream("temps");
 		ObjectOutputStream s = new ObjectOutputStream(out);
 		
+		//On ecrit nos information dans le fichier
     	s.writeObject(this.getDeck());
     	s.writeObject(this.getEtalage());
     	s.writeObject(this.getPlateau());
     	s.writeObject(this.getZones());
     	
+    	//Ici on va boucler jusqu'a obtenir l'intégralité de nos TourJoueur
     	TourJoueur tmp = this.getListeJoueur();
     	TourJoueur next = this.getListeJoueur();
     	s.writeObject(tmp.getJoueur());
@@ -384,18 +387,20 @@ public class London implements Serializable {
     	out.close();
     }
     
+    //Permet de charger un état sauvegarder du jeu depuis un fichier texte serialiser
     public void charger() throws IOException{
     	FileInputStream in = new FileInputStream("temps");
     	ObjectInputStream t = new ObjectInputStream(in);
 
     	try {
     		
+    		// On recupere les object dans l'ordre dans lequel ils ont était rentré
     		this.setDeck((ArrayDeque<Carte>)t.readObject());
 			this.setEtalage((Etalage)t.readObject());
 			this.plateau = (JPPlateau)t.readObject();
 			this.setZones((HashMap<String,Zone>)t.readObject());
 			
-			
+			//Pour les TourJoueur c'est un peu plus compliqué, il faut reconstruire l'intégralité des structure TourJoueur dans le bon ordre
 			TourJoueur first = new TourJoueur((Joueur)t.readObject());
 			TourJoueur tmp = first;
 			tmp.setSuivant(tmp);
@@ -405,11 +410,16 @@ public class London implements Serializable {
     			tmp.setSuivant(current);
     			tmp = current;
     		}
+    		//On fini la boucle ici
     		tmp.setSuivant(first);
+    		
     	} catch (ClassNotFoundException e) {
     		
     		//EOF
     	}
+    	
+    	t.close();
+    	in.close();
 
     }
 
