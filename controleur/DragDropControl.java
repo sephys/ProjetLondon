@@ -131,8 +131,10 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
                         if (jbCarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
                             Constructible carte = (Constructible) jbCarte.getCarte();
                             // check 2 carte de la même couleur pour la defausse ou pouvoir school et wren
-                            if (Main.getJeu().getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") >= 1) {
-                                
+
+                            //Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") >= 1
+                            if (Main.getJeu().getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || PouvoirBeta.peutJouer(Main.getJeu().getListeJoueur().getJoueur(), carte)) {
+
                                 int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
                                         "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
                                         "Construire",
