@@ -1,10 +1,10 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
-
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package vue;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -23,42 +23,49 @@ import model.Joueur;
  *
  * @author Anh-Djuy
  */
-public class JPInfos extends JPanel{
-    
+public class JPInfos extends JPanel {
+
     JPSousInfos[] aljpsi; // faudra mettre les getter et setter
     private Image img;
-    public JPInfos(Joueur listeJoueurs[]){
+
+    public JPInfos(Joueur listeJoueurs[]) {
         aljpsi = new JPSousInfos[Joueur.getNbJoueur()];
        
-        this.setPreferredSize(new Dimension(280,810));
-        this.setLayout(new GridLayout(4,1,0,20));
-        for(int i = 0; i < listeJoueurs.length; i++){
+
+        this.setPreferredSize(new Dimension(280, 810));
+        this.setLayout(new GridLayout(4, 1, 0, 20));
+        for (int i = 0; i < listeJoueurs.length; i++) {
             JPSousInfos jps = new JPSousInfos(listeJoueurs[i]);
             aljpsi[i] = jps;
             this.add(jps);
         }
-        
+
         try {
-            URL uri = JPEtalage.class.getResource("../img/lfbord.png");            
+            URL uri = JPEtalage.class.getResource("../img/lfbord.png");
             img = ImageIO.read(uri);
         } catch (IOException ex) {
             Logger.getLogger(JPEtalage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void maj_infos(){
-        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
-        for(int i = 0; i < aljpsi.length; i++){
-            if(aljpsi[i].joueur.getNomJoueur().equals(j.getNom())){
-                aljpsi[i].setEmprunt(j.getNbPret());
-                aljpsi[i].setPieces(j.getArgent());
-                aljpsi[i].setPauvrete(j.getPointPauvrete());
-                aljpsi[i].setVictoire(j.getPointVictoire());
-                //LE NOMBRE DE METRO NE SE MET PAS A JOUR DANS CETTE FONCTION CAR INEXISTANT DANS LA CLASSE JOUEUR
+
+    /**
+     * Méthode de mise a jour du panel d'infos pour tous les joueurs
+     */
+    public void maj_infos() {
+        for (int j = 0; j<Main.getJeu().getTabJoueur().length; j++) {
+            Joueur joueur = Main.getJeu().getTabJoueur()[j];
+            for (int i = 0; i < aljpsi.length; i++) {
+                if (aljpsi[i].joueur.getNomJoueur().equals(joueur.getNom())) {
+                    aljpsi[i].setEmprunt(joueur.getNbPret());
+                    aljpsi[i].setPieces(joueur.getArgent());
+                    aljpsi[i].setPauvrete(joueur.getPointPauvrete());
+                    aljpsi[i].setVictoire(joueur.getPointVictoire());
+                    //LE NOMBRE DE METRO NE SE MET PAS A JOUR DANS CETTE FONCTION CAR INEXISTANT DANS LA CLASSE JOUEUR
+                }
             }
         }
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

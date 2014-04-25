@@ -29,11 +29,19 @@ import vue.Main;
 
 public class DragDropControl implements DragGestureListener, DragSourceListener,
         DropTargetListener, Transferable {
+<<<<<<< HEAD
     
     static final DataFlavor[] supportedFlavors = {null};
     private static boolean dragEnable = false;
     MenuDroiteControl m=new MenuDroiteControl();
     
+=======
+
+    static final DataFlavor[] supportedFlavors = {null};
+    private static boolean dragEnable = false;
+    MenuDroiteControl menu = new MenuDroiteControl();
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
     static {
         try {
             supportedFlavors[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
@@ -42,7 +50,11 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
         }
     }
     Object object;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
     // Transferable methods.
     public Object getTransferData(DataFlavor flavor) {
         if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
@@ -51,6 +63,7 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
             return null;
         }
     }
+<<<<<<< HEAD
     
     public static boolean isDragEnable() {
         return dragEnable;
@@ -68,10 +81,30 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
         return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
     }
     
+=======
+
+    public static boolean isDragEnable() {
+        return dragEnable;
+    }
+
+    public static void setDragEnable(boolean dragEnable) {
+        DragDropControl.dragEnable = dragEnable;
+    }
+
+    public DataFlavor[] getTransferDataFlavors() {
+        return supportedFlavors;
+    }
+
+    public boolean isDataFlavorSupported(DataFlavor flavor) {
+        return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
+    }
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
     // DragGestureListener method.
     public void dragGestureRecognized(DragGestureEvent ev) {
         ev.startDrag(null, this, this);
     }
+<<<<<<< HEAD
     
     // DragSourceListener methods.
     public void dragDropEnd(DragSourceDropEvent ev) {
@@ -109,6 +142,51 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
         ev.acceptDrag(ev.getDropAction());
     }
     
+=======
+
+    // DragSourceListener methods.
+    public void dragDropEnd(DragSourceDropEvent ev) {
+    }
+
+    public void dragEnter(DragSourceDragEvent ev) {
+    }
+
+    public void dragExit(DragSourceEvent ev) {
+    }
+
+    public void dragOver(DragSourceDragEvent ev) {
+        object = ev.getSource();
+    }
+
+    public void dropActionChanged(DragSourceDragEvent ev) {
+    }
+
+    // DropTargetListener methods.
+    public void dragEnter(DropTargetDragEvent ev) {
+    }
+
+    public void dragExit(DropTargetEvent ev) {
+    }
+
+    public void dragOver(DropTargetDragEvent ev) {
+        dropTargetDrag(ev);
+    }
+
+    public void dropActionChanged(DropTargetDragEvent ev) {
+        dropTargetDrag(ev);
+    }
+
+    void dropTargetDrag(DropTargetDragEvent ev) {
+        ev.acceptDrag(ev.getDropAction());
+    }
+
+    /**
+     * Fonction drop appelée lorsqu'une carte est déposée Contient les tests sur
+     * la carte déposée et les messages d'erreurs
+     *
+     * @param ev
+     */
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
     public void drop(DropTargetDropEvent ev) {
         ev.acceptDrop(ev.getDropAction());
         try {
@@ -117,7 +195,11 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
             Component component = ((DragSourceContext) source).getComponent();
             Container oldContainer = component.getParent();
             Container container = (Container) ((DropTarget) target).getComponent();
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
             if (((DropTarget) target).getComponent() instanceof JPPileChantier) {
                 if (this.dragEnable) { // test si on a clicker sur l'action jouer des cartes
                     if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) { // check si je le joueur doit pas de défausser
@@ -126,9 +208,15 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
                         // check si carte constructible - check si chantier constructible - check si pose 2 carte sur le même chantier même tour
                         if (jbCarte.getCarte().getClass() == Constructible.class && chantier.isPosable() && !chantier.isCarte2()) {
                             Constructible carte = (Constructible) jbCarte.getCarte();
+<<<<<<< HEAD
                             // check 2 carte de la même couleur pour la defausse
                             if (Main.getJeu().getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") >= 1) {
                                 
+=======
+                            // check 2 carte de la même couleur pour la defausse ou pouvoir school et wren
+                            if (Main.getJeu().getListeJoueur().getJoueur().nb_carte_couleur(carte.getCouleur()) > 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("School") >= 1 || Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") >= 1) {
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                                 int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
                                         "Êtes-vous sûr de vouloir construire cette carte ? Cela vous coutera " + carte.getCoutPose() + " pièces",
                                         "Construire",
@@ -146,15 +234,24 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
                                             container.validate();
                                             container.repaint();
                                         }
+<<<<<<< HEAD
                                         
                                         chantier.setCarte2(true);
                                         /*Ajout de la carte visuellement*/
                                         jbCarte.changeTailleBoutonImage(new Dimension(122, 168));
                                         chantier.add(jbCarte);
+=======
+
+                                        chantier.setCarte2(true);
+                                        /*Ajout de la carte visuellement*/
+                                        jbCarte.changeTailleBoutonImage(new Dimension(122, 168));
+                                        container.add(jbCarte);
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                                         oldContainer.validate();
                                         oldContainer.repaint();
                                         container.validate();
                                         container.repaint();
+<<<<<<< HEAD
                                         
                                         // change le statut de la carte
                                         jbCarte.setPosition("construction");
@@ -184,12 +281,40 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
                                         /*Passer le chantier suivant a posable=true*/
                                         Main.getJeu().getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
                                         
+=======
+
+                                        // change le statut de la carte
+                                        jbCarte.setPosition("construction");
+                                        
+                                        menu.disableAll();
+                                        //London.getMenudroite().setTrueDefausseColor(carte.getCouleur());
+                                        //London.getListeJoueur().getJoueur().setPiocheDefausse("defausse");
+                                        //JBCarte.setDoubleClick(true);
+                                        if (Main.getJeu().getListeJoueur().getJoueur().getPouvoir().get("Wren") >= 1 || "Coffee House".equals(carte.getNom())) {
+                                            menu.setFinTour();
+                                        } else {
+                                            Main.getJeu().getMenudroite().getLabelInfo().setText("Défaussez une carte de la même couleur");
+                                        }
+
+                                        /*appel de jouerCarte*/
+                                        Main.getJeu().getListeJoueur().getJoueur().jouerCarte2(jbCarte.getCarte(), chantier.getIndex());
+                                        //System.out.println(Main.getJeu().getListeJoueur().getJoueur().getDefausse());
+
+
+                                        /*Passer le chantier suivant a posable=true*/
+                                        Main.getJeu().getJpChantier().getChantiers()[chantier.getIndex() + 1].setPosable(true);
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                                         /*Mise a jour du panel d'information*/
                                         Main.getJeu().getInfos().maj_infos();
                                         // refresh
                                         Main.getJeu().getSouth().repaint();
                                         Main.getJeu().getSouth().revalidate();
+<<<<<<< HEAD
                                         
+=======
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Vous n'avez pas assez d'argent pour poser cette carte");
                                     }
@@ -197,7 +322,11 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
                             } else {
                                 JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte car vous n'avez aucune autre carte de la même couleur");
                             }
+<<<<<<< HEAD
                             
+=======
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                         } else {
                             // informe le joueur qui joue
                             JOptionPane.showMessageDialog(null, "Vous ne pouvez pas jouer cette carte");
@@ -206,9 +335,15 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
                         JOptionPane.showMessageDialog(null, "Vous devez vous défaussez d'une carte de la même couleur");
                     }
                 } else {
+<<<<<<< HEAD
                     if(Main.getJeu().getListeJoueur().getJoueur().getPioche()==0){
                         JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
                     }else{
+=======
+                    if (Main.getJeu().getListeJoueur().getJoueur().getPioche() == 0) {
+                        JOptionPane.showMessageDialog(null, "Vous devez choisir l'action 'Jouer des cartes'");
+                    } else {
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
                         JOptionPane.showMessageDialog(null, "Vous devez piocher");
                     }
                 }
@@ -217,8 +352,14 @@ public class DragDropControl implements DragGestureListener, DragSourceListener,
             ex.printStackTrace();
         }
         ev.dropComplete(true);
+<<<<<<< HEAD
         
     }
     
     
+=======
+
+    }
+
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
 }

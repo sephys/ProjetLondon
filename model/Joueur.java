@@ -11,7 +11,6 @@ import vue.Main;
 
 public class Joueur {
 
-
 	private String nom;
 	private ArrayList<Carte> main;
 	private HashMap<String, Integer> pouvoir;
@@ -364,6 +363,15 @@ public class Joueur {
 		return this.lastCarte;
 	}
 
+
+    public void addPret(int nbPret) {
+        this.nbPret += nbPret;
+        if (pouvoir.get("Bank") == 1) {
+            this.addArgent(12 * nbPret);
+        } else {
+            this.addArgent(10 * nbPret);
+        }
+    }
 
         public void setDerniereAction(String s){
             this.derniereAction = s;

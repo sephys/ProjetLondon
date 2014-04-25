@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+import model.Carte;
 
 /**
  *
@@ -96,8 +97,19 @@ public class JPPileChantier extends JPanel{
         this.carte2 = carte2;
     }
     
+<<<<<<< HEAD
     public void ajoutCarte(JBCarte carte){
         this.add(carte);
         this.carte = carte;
     }
+=======
+        // ajout d'une carte dans la JPPileChantier du joueur
+    public  void ajoutCarte(Carte e){
+        JBCarte carte = new JBCarte(e);
+        carte.changeTailleBoutonImage(new Dimension(122, 168));
+        this.add(carte);
+        this.revalidate();
+    }
+    
+>>>>>>> 2ccf9a68acad1f4f0365c2ed56ba770360ebcbf2
 }
