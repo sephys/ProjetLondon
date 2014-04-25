@@ -13,6 +13,10 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+/**
+ *  Cette classe permet de représenter une Carte
+ * @author Anh-Djuy
+ */
 public abstract class Carte implements Serializable {
 
     private String nom; //nom de la carte

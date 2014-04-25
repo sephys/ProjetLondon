@@ -26,8 +26,6 @@ public class Constructible extends Carte implements Serializable{
     
     public Constructible(String nom, String couleur, String categorie) {
         super(nom, couleur, categorie,"");
-        
-        // TODO Auto-generated constructor stub
     }
     
     public Constructible(String nom, String couleur, String categorie,String path,
@@ -112,14 +110,15 @@ public class Constructible extends Carte implements Serializable{
     
     public String toString(){
         StringBuffer tmpStr=new StringBuffer(super.toString());
-        //tmpStr.append("\n Cout : "+this.getCoutPose());
-        //tmpStr.append("\n Pouvoir : "+this.getPouvoirIlli()+"\n");
         return new String(tmpStr);
     }
     
-    @Override
+    /**
+     * 
+     * @param currJ
+     * @param ind 
+     */
     public void jouerCarte(Joueur currJ,int ind) {
-        // TODO Auto-generated method stub
         String pouv = this.getPouvoirIlli();
         if(pouv.compareTo("vide")!=0){
             if(currJ.getPouvoir().get(pouv)!=null){
@@ -146,6 +145,10 @@ public class Constructible extends Carte implements Serializable{
         currJ.getMain().remove(this);
     }
     
+    /**
+     * Cette méthode permet de connaître le pouvoir de la carte qui vient d'être activée.
+     * @param currJ 
+     */
     public void activerCarte(Joueur currJ){
         if(this.activable){
             currJ.setArgent(currJ.getArgent()-Integer.parseInt(this.coutActivation[0]));
