@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import vue.JBCarte;
-import vue.London;
 import vue.Main;
 
 /**
@@ -31,6 +30,7 @@ public class RestaurerControl implements ActionListener {
                             "Restaurer la ville",
                             JOptionPane.YES_NO_OPTION);
                     if (rep == JOptionPane.YES_OPTION) {
+                        Main.getJeu().getListeJoueur().getJoueur().setDerniereAction("Restaurer la ville");
                         m.disableAll();
                         Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
                         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous pouvez activer des cartes");
@@ -41,5 +41,4 @@ public class RestaurerControl implements ActionListener {
                     }
                 }
     }
-    
 }

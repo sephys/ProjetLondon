@@ -71,5 +71,20 @@ public class JPChantiers extends JPanel{
         this.chantiers = chantiers;
     }
   
-    
+    /**
+     * Cette fonction calcule et retourne le nombre de points de pauvrete
+     * qu'un joueur obtient lorsqu'il finit son tour apres l'action restaurer
+     * @return (Son nombre de cartes en main + son nombre de chantiers utilisés)
+     */
+    public int nbChantiers(){
+        int compteur = 0;
+        boolean fin = false;
+        while(!fin && compteur < this.chantiers.length){
+            compteur++;
+            if(!this.chantiers[compteur].isPosable()){
+                fin = true;
+            }
+        }
+        return compteur-1;
+    }
 }

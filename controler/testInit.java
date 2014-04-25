@@ -23,7 +23,7 @@ public class testInit {
 		Joueur j=new Joueur("toto",Color.RED);
 		Carte.initDeck();
 		for(int i=0;i<30;i++){
-			j.piocheCarte(London.getDeck().poll());
+			//j.piocheCarte(London.getDeck().poll());
 		}
 		boolean arret=false;
 		j.nouveauChantier();
