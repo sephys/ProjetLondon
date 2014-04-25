@@ -45,6 +45,8 @@ public class TestConstructible {
 
 	@After
 	public void tearDown() throws Exception {
+		j=null;
+		d=null;
 	}
 
 
@@ -67,7 +69,6 @@ public class TestConstructible {
 		ArrayList<Carte> tmpM=(ArrayList<Carte>) j.getMain().clone();
 		for(Carte tmp :tmpM){
 			if((expected-((Constructible)tmp).getCoutPose())<0){
-				System.out.println("pret");
 				j.addPret(1);
 				expected+=10;
 			}
@@ -91,6 +92,57 @@ public class TestConstructible {
 		j.getPouvoir().put("Bank",new Integer(1));
 		j.addPret(1);
 		assertEquals(expected,j.getArgent());
+	}
 
+	@Test
+	public void testActivationArgent(){
+		int expected=5;
+		int i=0;
+		ArrayList<Carte> tmpM=(ArrayList<Carte>) j.getMain().clone();
+		for(Carte tmp :tmpM){
+			j.getListeChantier().get(i).add((Constructible)tmp);
+			i++;
+		}
+		i=0;
+		ArrayList<ArrayDeque> tmpD=(ArrayList<ArrayDeque>) j.getListeChantier().clone();
+		for(ArrayDeque tmp :tmpD){
+			Constructible tmpC=j.getListeChantier().get(i).peekFirst();
+			if(tmpC!=null){
+				if(tmpC.getNom().compareTo("Coffee House")!=0){
+					tmpC.activerCarte(j);
+				}
+				expected-=Integer.parseInt(tmpC.getCoutActivation()[0]);
+				expected+=tmpC.getGainAcivation()[0];
+			}
+			i++;
+		}
+		assertEquals(expected,j.getArgent());
+	}
+
+	@Test
+	public void testActivationVictoire(){
+		int expected=0;
+		System.out.println(j.getPointVictoire());
+		int i=0;
+		ArrayList<Carte> tmpM=(ArrayList<Carte>) j.getMain().clone();
+		for(Carte tmp :tmpM){
+			j.getListeChantier().get(i).add((Constructible)tmp);
+			i++;
+		}
+		i=0;
+		ArrayList<ArrayDeque> tmpD=(ArrayList<ArrayDeque>) j.getListeChantier().clone();
+		System.out.println(tmpD); 
+		for(ArrayDeque tmp :tmpD){
+			Constructible tmpC=j.getListeChantier().get(i).peekFirst();
+			if(tmpC!=null){
+				if(tmpC.getNom().compareTo("Coffee House")!=0){
+					tmpC.activerCarte(j);
+				}
+				expected+=tmpC.getGainAcivation()[1];
+			}
+			i++;
+		}
+		assertEquals(expected,j.getArgent());
+		
 	}
 }
