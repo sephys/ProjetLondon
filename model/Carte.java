@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import vue.Main;
 
-public abstract class Carte {
+public abstract class Carte implements Serializable {
 
 
 	private String nom; //nom de la carte

@@ -14,7 +14,13 @@ import model.TourJoueur;
 
 import java.awt.*;
 import java.awt.dnd.DragSource;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -39,7 +45,7 @@ import sun.audio.ContinuousAudioDataStream;
  *
  * @author Joke
  */
-public class London {
+public class London implements Serializable {
 
     private TourJoueur lJoueur;
     private ArrayDeque<Carte> deck;
@@ -377,6 +383,55 @@ public class London {
         return deck;
     }
     
+    public void sauvegarder() throws IOException{
+    	FileOutputStream out = new FileOutputStream("temps");
+		ObjectOutputStream s = new ObjectOutputStream(out);
+		
+    	s.writeObject(this.getDeck());
+    	s.writeObject(this.getEtalage());
+    	s.writeObject(this.getPlateau());
+    	s.writeObject(this.getZones());
+    	
+    	TourJoueur tmp = this.getListeJoueur();
+    	TourJoueur next = this.getListeJoueur();
+    	s.writeObject(tmp.getJoueur());
+    	while(tmp != next.getSuivant()){
+    		next = next.getSuivant();
+    		s.writeObject(next.getJoueur());
+    	}
+    	s.flush();
+    	
+    	s.close();
+    	out.close();
+    }
     
+    public void charger() throws IOException{
+    	FileInputStream in = new FileInputStream("temps");
+    	ObjectInputStream t = new ObjectInputStream(in);
+
+    	try {
+    		
+    		this.setDeck((ArrayDeque<Carte>)t.readObject());
+			this.setEtalage((Etalage)t.readObject());
+			this.plateau = (JPPlateau)t.readObject();
+			this.setZones((HashMap<String,Zone>)t.readObject());
+			
+			
+			TourJoueur first = new TourJoueur((Joueur)t.readObject());
+			TourJoueur tmp = first;
+			tmp.setSuivant(tmp);
+			Joueur j;
+    		while((j =(Joueur)t.readObject()) != null){
+    			TourJoueur current = new TourJoueur(j);
+    			tmp.setSuivant(current);
+    			tmp = current;
+    		}
+    		tmp.setSuivant(first);
+    	} catch (ClassNotFoundException e) {
+    		
+    		//EOF
+    	}
+
+    }
 
 }

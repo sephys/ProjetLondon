@@ -1,6 +1,8 @@
 package model;
 
-public class Constructible extends Carte {
+import java.io.Serializable;
+
+public class Constructible extends Carte implements Serializable{
 	//attributs
 	private int coutPose; //cout de la carte pour la poser >=0
 
