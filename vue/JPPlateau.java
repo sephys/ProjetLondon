@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import model.Joueur;
 import model.Zone;
 
 /**
@@ -315,5 +316,19 @@ public class JPPlateau extends JPanel implements MouseListener {
                 tableauZone[i].setEnabled(false);
             }
         }
+    }
+
+    public int nbArrondissements(Joueur j) {
+        int retour = 0;
+        for(JBZone z : tableauZone){
+            if(z.getZone().getProprietaire()!=null)
+            {
+                if(z.getZone().getProprietaire().equals(j)){
+                retour++;
+            }
+            }
+            
+        }
+        return retour;
     }
 }

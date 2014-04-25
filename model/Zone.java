@@ -9,6 +9,7 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +28,7 @@ import vue.Main;
  *
  * @author FT
  */
-public class Zone {
+public class Zone implements Serializable {
     
     private String nom;
     private int prix;

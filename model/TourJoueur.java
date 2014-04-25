@@ -1,6 +1,8 @@
 package model;
 
-public class TourJoueur {
+import java.io.Serializable;
+
+public class TourJoueur implements Serializable {
 	private static int nbJoueur=0;
 	private Joueur joueur;
 	private TourJoueur suivant;

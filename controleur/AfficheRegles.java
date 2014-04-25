@@ -17,7 +17,8 @@ import java.util.logging.Logger;
 import vue.JPAccueil;
 
 /**
- *
+ *  Ce listener permet, à l'appui du bouton "Regles" dans la fenêtre d'accueil
+ *  d'afficher le fichier PDF des règles.
  * @author Anh-Djuy
  */
 public class AfficheRegles implements ActionListener{

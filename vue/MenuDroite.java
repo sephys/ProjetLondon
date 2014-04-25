@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue;
-
 import controleur.*;
 import java.awt.*;
 import java.io.IOException;
@@ -12,26 +6,25 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
 import javax.swing.*;
 
 /**
  *
  * @author Joke
+ * Classe qui représente le panel à droite de l'écran
  */
 public class MenuDroite extends JPanel {
 
-    //private JLabel labelJoueur; // indique quel joueur joue
     private JLabel labelInfo; // indique ce que doit faire l'utilisateur
     private JPanel menuBouton; // panel contenant tous les boutons
     private JButton jouer, restaurer, investir, emprunter, piocher3, piocher, regarder3Cartes, finTour; // les différents boutons du menu
 
     private JPnomGaucheImageDroite jpsij;
-    MenuDroiteControl m;
+    MenuDroiteControl m; // controleur de la vue
 
     private Image img;
 
-    private Frame3Cartes f;
+    private Frame3Cartes f; // frame pour le pouvoir Unversity of London
 
     public MenuDroite() {
         super(new BorderLayout());
@@ -142,7 +135,7 @@ public class MenuDroite extends JPanel {
         // Panel conteant le zoom de la carte
         JPZoom zoom = new JPZoom();
         zoom.setPreferredSize(new Dimension(300, 400));
-        // zoom.setBackground(Color.red);
+       
         this.add(zoom, BorderLayout.SOUTH);
         regarder3Cartes.setVisible(false);
 

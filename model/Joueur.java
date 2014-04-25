@@ -2,6 +2,7 @@ package model;
 
 import controleur.MenuDroiteControl;
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import vue.JBCarte;
 import vue.London;
 import vue.Main;
 
-public class Joueur {
+public class Joueur implements Serializable{
     
     private String nom;
     private ArrayList<Carte> main;
@@ -270,6 +271,9 @@ public class Joueur {
     
     public void addPointPauvrete(int pointPauvrete){
         this.pointPauvrete += pointPauvrete;
+        if(this.pointPauvrete < 0){
+            this.pointPauvrete = 0;
+        }
     }
     
     public void addArgent(int argent){

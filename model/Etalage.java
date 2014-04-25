@@ -6,12 +6,14 @@
 
 package model;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author FT
  */
-public class Etalage {
+public class Etalage implements Serializable {
 	private Carte[] ligne1;
 	private Carte[] ligne2;
 
