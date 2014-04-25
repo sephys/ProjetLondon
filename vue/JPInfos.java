@@ -5,9 +5,7 @@
  */
 package vue;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -21,19 +19,17 @@ import model.Joueur;
 import model.TourJoueur;
 
 /**
- *
+ *  Ce conteneur contient les éléments graphiques des informations affichées à gauche.
  * @author Anh-Djuy
  */
 public class JPInfos extends JPanel {
-
-    JPSousInfos[] aljpsi; // faudra mettre les getter et setter
+    // Tableau de Sous-Infos correspondant aux informations pour chaque joueur
+    JPSousInfos[] aljpsi; 
     private Image img;
 
     public JPInfos(Joueur listeJoueurs[]) {
 
         aljpsi = new JPSousInfos[TourJoueur.getNbJoueur()];
-
-
         this.setPreferredSize(new Dimension(280, 810));
         this.setLayout(new GridLayout(4, 1, 0, 20));
         for (int i = 0; i < listeJoueurs.length; i++) {

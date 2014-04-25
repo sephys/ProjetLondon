@@ -38,7 +38,6 @@ public class JPMain extends JPanel {
     
     private JScrollPane JSPMain;
     private JPanel main;
-    private boolean goEtalage; // est-ce que le joueur peut poser une carte sur l'etalage
     private Image img;
     
     public JPMain(){
@@ -51,13 +50,12 @@ public class JPMain extends JPanel {
         
         
         
-        //// D&D
+        // Drag & Drop
         DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
                 London.dndListener);
     }
     
-    public JPMain(Joueur j)
-    {
+    public JPMain(Joueur j){
         super(new BorderLayout());
         
         try {
@@ -74,14 +72,13 @@ public class JPMain extends JPanel {
                 g.drawImage(img, 0, 0, 855, 147, this);
             }
         };
-        // main.setBackground(Color.red);
         JSPMain = new JScrollPane(main);
         JSPMain.setPreferredSize(new Dimension(675,150));
         JSPMain.setWheelScrollingEnabled(true);
         
         
         this.add(JSPMain, BorderLayout.NORTH);
-        //// D&D
+        // Drag & Drop
         DropTarget dropTarget1 = new DropTarget(main, DnDConstants.ACTION_MOVE,
                 London.dndListener);
         
@@ -94,7 +91,10 @@ public class JPMain extends JPanel {
     
     
     
-    // ajout d'une carte dans le panel main du joueur
+    /**
+     * Cette méthode ajoute une carte dans le panel de la Main.
+     * @param e 
+     */
     public  void ajoutCarte(Carte e){
         JBCarte carte = new JBCarte(e);
         carte.changeTailleBoutonImage(new Dimension(79, 121));
@@ -102,28 +102,33 @@ public class JPMain extends JPanel {
         main.revalidate();
     }
     
-    public JPanel getMain()
-    {
+    public JPanel getMain(){
         return this.main;
     }
     
+    /**
+     * Cette méthode permet de supprimer une carte dans la main du joueur à partir
+     * d'une carte.
+     * @param e Carte à supprimer
+     */
     public void removeCarte(Carte e)
     {
         JBCarte c=new JBCarte(e);
         boolean b = true;   // Pour qu'une seule carte soit supprimée et pas toutes la cartes similaires à la Carte e.
-        for(int i=0;i<main.getComponentCount()&&b == true;i++)
-        {
-            if(((JBCarte) main.getComponent(i)).equals(c))
-            {
+        for(int i=0;i<main.getComponentCount()&&b == true;i++){
+            if(((JBCarte) main.getComponent(i)).equals(c)){
                 main.remove(main.getComponent(i));
                 b = false;
             }
-        }
-        
-        main.revalidate();
-        
+        }       
+        main.revalidate();        
     }
     
+    /**
+     * Cette méthode permet de supprimer une carte dans la main du joueur à partir 
+     * de son nom.
+     * @param s Nom de la carte à supprimer
+     */
     public void removeCarteNom(String s){
         boolean b = true;   // Pour qu'une seule carte soit supprimée et pas toutes la cartes similaires à la Carte e.
         for(int i=0;i<main.getComponentCount()&&b == true;i++)

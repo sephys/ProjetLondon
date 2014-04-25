@@ -19,7 +19,7 @@ import javax.swing.border.Border;
 import model.Carte;
 
 /**
- *
+ *  Ce conteneur contient un chantier
  * @author FT
  */
 public class JPPileChantier extends JPanel{
@@ -77,10 +77,14 @@ public class JPPileChantier extends JPanel{
         return posable;
     }
 
+    /**
+     * Quand on met que le posable à vrai, on active en même temps le Drag & Drop
+     * @param posable   La nouvelle valeur de posable
+     */
     public void setPosable(boolean posable) {
         this.posable = posable;
         if(posable==true){
-            /*Ajout Drag n Drop*/
+            // Ajout Drag & Drop
             DropTarget dropChantier = new DropTarget(this, DnDConstants.ACTION_MOVE, 
             London.dndListener);
             Border greenline = BorderFactory.createLineBorder(Color.green);
@@ -96,7 +100,12 @@ public class JPPileChantier extends JPanel{
     public void setCarte2(boolean carte2) {
         this.carte2 = carte2;
     }
-        // ajout d'une carte dans la JPPileChantier du joueur
+    
+    /**
+     * Cette méthode permet d'ajouter une carte sur le chantier.
+     * On la retient pour gérer si on peut Restaurer la ville ou pas.
+     * @param e 
+     */
     public  void ajoutCarte(Carte e){
         JBCarte carte = new JBCarte(e);
         carte.changeTailleBoutonImage(new Dimension(122, 168));

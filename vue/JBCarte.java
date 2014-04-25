@@ -23,8 +23,8 @@ import javax.swing.*;
 import model.*;
 
 /**
- *
- * @author Anh-Djuy Bouton représentant une carte
+ *  Ce bouton représente une carte
+ * @author Anh-Djuy 
  */
 public class JBCarte extends JButton {
 
@@ -46,27 +46,23 @@ public class JBCarte extends JButton {
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.position = "main";
-
-        // this.retournee = false;
         this.setIcon(new ImageIcon(scaleImage(image, 79, 121)));
         this.setPreferredSize(new Dimension(79, 121));
-        // D&D
+        // Drag & Drop
         DragGestureRecognizer dragRecognizer1 = London.dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, London.dndListener);
 
         this.addMouseListener(new JBCarteControl());
     }
 
+    /**
+     * Cette méthode permet de changer la taille du bouton ainsi que de l'image
+     * contenue dans le bouton.
+     * @param d 
+     */
     public void changeTailleBoutonImage(Dimension d) {
         this.setPreferredSize(d);
-
         this.setIcon(new ImageIcon(scaleImage(image, (int) d.getWidth(), (int) d.getHeight())));
 
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
     }
 
     @Override
@@ -88,10 +84,10 @@ public class JBCarte extends JButton {
      * Code repris de http://www.developpez.net permettant de redimensionner une
      * image.
      *
-     * @param source
-     * @param width
-     * @param height
-     * @return
+     * @param source    L'image source
+     * @param width     La nouvelle largeur
+     * @param height    La nouvelle hauteur
+     * @return          Une image redimensionnée avec la largeur et hauteur en paramètre
      */
     public Image scaleImage(Image source, int width, int height) {
 
@@ -151,6 +147,10 @@ public class JBCarte extends JButton {
         return defausse;
     }
     
+    /**
+     * Cette méthode permet de changer l'image contenue dans le bouton
+     * @param path  Le chemin vers la nouvelle image
+     */
     public void changerImage(String path) {
         URL uri = JBCarte.class.getResource(path);
         try {

@@ -18,15 +18,15 @@ import javax.swing.*;
 import model.Constructible;
 
 /**
- *
+ *  Ce conteneur contient les chantiers des joueurs
  * @author FT
  */
 public class JPChantiers extends JPanel{
-    private JPPileChantier[] chantiers;
+    private JPPileChantier[] chantiers; // Chantiers
     private Image img; // image du chantier
     
     public JPChantiers(){
-        
+        // Ajout de l'image des chantiers
         try {
             URL uri = JPEtalage.class.getResource("../img/chantier.jpg");
             img = ImageIO.read(uri);
@@ -37,10 +37,10 @@ public class JPChantiers extends JPanel{
         
         chantiers = new JPPileChantier[15];
         
-        /* On ajoute un gridbagLauout au panel */
+        /* On ajoute un gridBagLayout au panel */
         this.setLayout(new GridBagLayout());
         
-        /* Le gridBagConstraints va définir la position et la taille des éléments */
+        /* Le GridBagConstraints va définir la position et la taille des éléments */
         GridBagConstraints gc = new GridBagConstraints();
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.gridy = 0;
@@ -88,6 +88,11 @@ public class JPChantiers extends JPanel{
         return compteur-1;
     }
     
+    /**
+     * Cette méthode regarde si des cartes sont activables sur tous les chantiers.
+     * Si ce n'est pas le cas, elle retourne faux.
+     * @return  cartes activables ?
+     */
     public boolean isRestaurable(){
         boolean restaurable = false;
         for(JPPileChantier ch : chantiers){

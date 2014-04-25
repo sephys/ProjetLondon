@@ -5,13 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Image;
-import java.io.IOException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Joueur;
@@ -29,7 +22,7 @@ public class JPnomGaucheImageDroite extends JPanel{
     public JPnomGaucheImageDroite(){
         Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         this.setLayout(new FlowLayout());
-        this.setOpaque(false); // transparance
+        this.setOpaque(false); // transparence
         gauche = new JLabel();
         gauche.setText(j.getNom());
         gauche.setFont(gauche.getFont ().deriveFont (14.0f));
@@ -37,7 +30,6 @@ public class JPnomGaucheImageDroite extends JPanel{
         
         droite.setHorizontalAlignment(JLabel.CENTER);
         gauche.setHorizontalAlignment(JLabel.CENTER);
-        //  this.centrerTexte();
         this.add(gauche, BorderLayout.CENTER);
         this.add(droite, BorderLayout.NORTH);
         droite.setPreferredSize(new Dimension(60,50));

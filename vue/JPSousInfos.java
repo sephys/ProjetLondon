@@ -6,7 +6,6 @@
 
 package vue;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -25,7 +23,8 @@ import javax.swing.text.StyledDocument;
 import model.Joueur;
 
 /**
- *  Penser à ajouter un gridlayout
+ *  Ce conteneur contient les éléments graphiques permettant d'accéder 
+ *  aux informations relatives à un joueur.
  * @author Anh-Djuy
  */
 public class JPSousInfos extends JPanel{
@@ -92,26 +91,4 @@ public class JPSousInfos extends JPanel{
     public void setMetro(int metro){
         this.metro.setNombre(metro);
     }
-    
-    
-    /**
-     * Fonction pour insérer une image dans un JTextPane avec du texte
-     * reprise de developpez.net
-     * @param textpane
-     */    
-    private static void initialiseLigneTexte(JTextPane textpane, String filePath, String valeur) {
-        try {
-            StyledDocument document = (StyledDocument)textpane.getDocument();
-            Style imageStyle = document.addStyle("ImageStyle", null);
-            URL uri = JPMain.class.getResource(filePath);
-            Image image = ImageIO.read(uri);
-            StyleConstants.setIcon(imageStyle, new ImageIcon(image)); // exemple de path d'image
-            document.insertString(document.getLength(), "\uFFFC", imageStyle);  // insertion de l'image dans le texte, ici j'utilise un caractère de remplacement qui est \uFFFC, mais tu peux utiliser n'importe quelle chaîne, si tu as besoin de reconnaître l'image dans le texte (par exemple [IMG=note.png]) )
-            document.insertString(document.getLength(), " : " + valeur, null); // texte normal dans le style de base
-        } catch (BadLocationException e){
-            e.printStackTrace();
-        } catch (IOException ex) {
-            Logger.getLogger(JPInfos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }    
 }
