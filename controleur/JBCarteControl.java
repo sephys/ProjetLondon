@@ -234,6 +234,7 @@ public class JBCarteControl implements MouseListener{
 
         if (e.getButton() == MouseEvent.BUTTON3) {
             if (JBCarte.isClicDroitJouer()) {
+                if(Main.getJeu().getListeJoueur().getJoueur().getDefausse()!=0){
                 if (((JBCarte) e.getComponent()).getCarte().getClass() == NonConstructible.class) {
                     if (!"Paupers".equals(((JBCarte) e.getComponent()).getCarte().getNom())) {
 
@@ -265,7 +266,11 @@ public class JBCarteControl implements MouseListener{
                 } else {
                     JOptionPane.showMessageDialog(null, "Cette carte est constructible'");
                 }
-            } else {
+                }else{
+                    JOptionPane.showMessageDialog(null, "Vous devez d'abord défausser une carte");
+                }
+            
+                } else {
 
                 if (Main.getJeu().getListeJoueur().getJoueur().getPioche() == 0) {
 

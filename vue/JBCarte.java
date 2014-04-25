@@ -48,10 +48,10 @@ public class JBCarte extends JButton {
         this.carte = carte;
         URL uri = JBCarte.class.getResource(carte.getPath());
         try {
-            System.out.println(carte.getPath());
+            //System.out.println(carte.getPath());
             image = ImageIO.read(uri);
         } catch (IOException ex) {
-            System.out.println(carte.getPath());
+            //System.out.println(carte.getPath());
             Logger.getLogger(JBCarte.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.position = "main";

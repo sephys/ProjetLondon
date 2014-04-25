@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] arg) {
      jeu=new London();
      jeu.setDeck(Carte.initDeck());
-     Zone.initZone();
+     jeu.setZones(Zone.initZone());
     }
 
     public static London getJeu() {

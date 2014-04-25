@@ -144,8 +144,8 @@ public class Zone {
         
     }
     
-    public static void initZone(){
-        Main.getJeu().setZones(new HashMap<String,Zone>());
+    public static HashMap<String,Zone> initZone(){
+       HashMap tmp=new HashMap<String,Zone>();
         try {
             /* R�cup�ration du classeur Excel (en lecture) */
             URL uri = Joueur.class.getResource("../fichier/ZonePlateau.xls");
@@ -173,7 +173,7 @@ public class Zone {
                         Boolean.parseBoolean(sheet.getCell(5,i).getContents()),
                         Boolean.parseBoolean(sheet.getCell(6,i).getContents()),
                         tmpL);
-                Main.getJeu().getZones().put(sheet.getCell(0,i).getContents(),tmpZ);
+                tmp.put(sheet.getCell(0,i).getContents(),tmpZ);
             }
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -185,6 +185,7 @@ public class Zone {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return tmp;
     }
     
     public HashSet<String> zoneInvest(){
