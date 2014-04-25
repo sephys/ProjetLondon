@@ -46,7 +46,7 @@ public class London implements Serializable {
     private JPChantiers jpChantier; // panel des chantiers du joueur courant
     private JPMain south; // panel contenant la main des joueurs
     private JPanel central; // panel central du jeu ( contient la main du joueur et les onglet )
-    private MenuDroite menudroite; // panel à droite du jeu
+    private JPMenuDroite menudroite; // panel à droite du jeu
     private JPPlateau plateau; // plateau 
     private Thread sound; // thread pour la musique
     private JTabbedPane panelOnglet; // panel contenant les onglets
@@ -132,7 +132,7 @@ public class London implements Serializable {
 
         frame.add(central);
 
-        this.menudroite = new MenuDroite();
+        this.menudroite = new JPMenuDroite();
         controlJPGID.changeImage(this.getListeJoueur().getJoueur());
 
         frame.add(menudroite, BorderLayout.EAST);
@@ -212,7 +212,7 @@ public class London implements Serializable {
         sound.start();
     }
 
-    public MenuDroite getMenudroite() {
+    public JPMenuDroite getMenudroite() {
         return menudroite;
     }
 
