@@ -6,7 +6,7 @@ public class TourJoueur implements Serializable {
 	private static int nbJoueur=0;
 	private Joueur joueur;
 	private TourJoueur suivant;
-	private int finTour=-1;
+	private static int finTour=-1;
 	
 	public TourJoueur(Joueur joueur) {
 		//nbJoueur++;

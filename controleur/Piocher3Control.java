@@ -9,11 +9,10 @@ package controleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import vue.London;
 import vue.Main;
 
 /**
- *
+ *  Ce Listener permet de gérer l'appui sur le bouton Piocher 3 cartes du menu de droite.
  * @author Joke
  */
 public class Piocher3Control implements ActionListener {
@@ -26,10 +25,10 @@ public class Piocher3Control implements ActionListener {
                 JOptionPane.YES_NO_OPTION);
         if (rep == JOptionPane.YES_OPTION) {
             Main.getJeu().getListeJoueur().getJoueur().setDerniereAction("Piocher 3 cartes");
-            
-            Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true); // le joueur a finit son tour apres avoir piocher 3 cartes
+            // La fin de tour est mis à vraie lorsqu'il finit de piocher
+            Main.getJeu().getListeJoueur().getJoueur().setFinitTour(true); 
+            // Il doit piocher 3 cartes
             Main.getJeu().getListeJoueur().getJoueur().setPioche(3);
-            //London.getListeJoueur().getJoueur().setFinTourPiocheCarte(true);
             
         }
     }

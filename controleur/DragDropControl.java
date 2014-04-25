@@ -9,18 +9,10 @@ package controleur;
  *
  * @author Joke
  */
-import controleur.MenuDroiteControl;
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import model.Constructible;
 import model.Constructible;
 import model.PouvoirBeta;
 import vue.JBCarte;

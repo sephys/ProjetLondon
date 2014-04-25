@@ -3,14 +3,12 @@ package controleur;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
-import model.Carte;
 import model.Constructible;
 import model.Joueur;
 import model.NonConstructible;
 import model.PouvoirBeta;
 import vue.JBCarte;
 import vue.JPZoom;
-import vue.London;
 import vue.Main;
 
 /**
@@ -172,7 +170,7 @@ public class JBCarteControl implements MouseListener {
                 case "construction": // on active une carte qui est dans la zone de construction
                     if (Main.getJeu().getListeJoueur().getJoueur().getDefausse() == 0) {
 
-                        if (JBCarte.isActiverCarte() && !carteCourante.getCarte().getNom().equals("Hospital")) {
+                        if (JBCarte.isActiverCarte() && !carteCourante.getCarte().getNom().equals("Hospital") && ((Constructible) carteCourante.getCarte()).isActivable()) {
 
                             int rep = JOptionPane.showConfirmDialog(Main.getJeu().getFrame(),
                                     "Êtes-vous sûr de vouloir activer cette carte ?",
@@ -182,7 +180,7 @@ public class JBCarteControl implements MouseListener {
                                 Main.getJeu().getListeJoueur().getJoueur().activerCarte(((Constructible) carteCourante.getCarte()));
 
                                 // on check si la carte doit être retourné et est activable
-                                if (((Constructible) carteCourante.getCarte()).isARetourne() && ((Constructible) carteCourante.getCarte()).isActivable()) {
+                                if (((Constructible) carteCourante.getCarte()).isARetourne()) {
 
                                     /*Récupère l'index du chantier contenant une carte hopital sinon -1*/
                                     int indexChantier = Main.getJeu().getListeJoueur().getJoueur().indexCarte("Hospital");
@@ -234,7 +232,7 @@ public class JBCarteControl implements MouseListener {
                             }
                         }
                         else{
-                            JOptionPane.showMessageDialog(null, "Vous devez vous défausser");
+                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas activer cette carte");
                         }
                         break;
 

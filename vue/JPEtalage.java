@@ -51,7 +51,7 @@ public class JPEtalage extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, 855, 432, this);
+        g.drawImage(img, 0, 0, 855, 663, this);
     }
     
     public void initEtalage(int nbJoueur) {

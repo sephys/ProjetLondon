@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import model.Joueur;
 import vue.JBCarte;
 import vue.JPnomGaucheImageDroite;
-import vue.London;
 import vue.Main;
 
 /**

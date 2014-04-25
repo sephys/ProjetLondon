@@ -113,9 +113,14 @@ public class Joueur implements Serializable{
         this.pioche = pioche;
         London.dndListener.setDragEnable(false);
         m.disableAll();
-        if(Main.getJeu().getListeJoueur().getFinTour()==-1){
+        System.out.println("fin de tour:"+Main.getJeu().getListeJoueur().getFinTour());
+        if(Main.getJeu().getListeJoueur().getFinTour()<=0){
         	Main.getJeu().getMenudroite().getPiocher().setEnabled(true);
     	}
+        else{
+            Main.getJeu().getMenudroite().getPiocher().setEnabled(false);
+            Main.getJeu().getMenudroite().getFinTour().setEnabled(true);
+        }
         //JBCarte.setDoubleClick(true);
         
         Main.getJeu().getMenudroite().getLabelInfo().setText("Vous devez piocher "+pioche+" cartes");
