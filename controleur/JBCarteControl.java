@@ -234,7 +234,7 @@ public class JBCarteControl implements MouseListener {
                             }
                         }
                         else{
-                            JOptionPane.showMessageDialog(null, "Vous devez vous défausser");
+                            JOptionPane.showMessageDialog(null, "Vous ne pouvez pas activer cette carte");
                         }
                         break;
 
