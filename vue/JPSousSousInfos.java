@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
+ *  Ce conteneur contient les éléments graphiques permettant d'afficher les jetons
+ *  (points de victoire, de pauvreté, ...) et en dessous le nombre associé à ces
+ *  jetons.
  * @author Anh-Djuy
  */
 public class JPSousSousInfos extends JPanel{
@@ -24,11 +26,10 @@ public class JPSousSousInfos extends JPanel{
     int nombre;
     
     public JPSousSousInfos(String imagePath, int nombre){
-       // this.setPreferredSize(new Dimension(50,50));
         
         this.nombre = nombre;
         this.setLayout(new BorderLayout());
-        this.setOpaque(false); // transparance
+        this.setOpaque(false); // transparence
         URL uri = JBCarte.class.getResource(imagePath);
         bas = new JLabel();
         bas.setText(""+nombre);
@@ -38,7 +39,6 @@ public class JPSousSousInfos extends JPanel{
             haut = new JLabel(new ImageIcon(image));
             haut.setHorizontalAlignment(JLabel.CENTER);
             bas.setHorizontalAlignment(JLabel.CENTER);
-            //  this.centrerTexte();
             this.add(haut, BorderLayout.NORTH);
             this.add(bas, BorderLayout.CENTER);            
         } catch (IOException ex) {
@@ -48,24 +48,15 @@ public class JPSousSousInfos extends JPanel{
         this.setBackground(Color.LIGHT_GRAY);
     }
     
-    /**public void centrerTexte(){
-        StyledDocument doc = bas.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-    }*/
-    
     
     
     public void ajoutNombre(int nombre){
         this.nombre += nombre;
         bas.setText(String.valueOf(nombre));
-        //bas.setText(new String(new StringBuilder(nombre)));
     }
     
     public void setNombre(int nombre){
         this.nombre = nombre;
         bas.setText(String.valueOf(nombre));
-        //bas.setText(new String(new StringBuilder(nombre)));
     }
 }

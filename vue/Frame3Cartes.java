@@ -15,7 +15,8 @@ import javax.swing.JPanel;
 
 
 /**
- *
+ *  Cette fenêtre permet d'afficher les 3 premières cartes du deck pour qu'il 
+ *  puisse en choisir une des 3. (Pouvoir University of London)
  * @author Anh-Djuy
  */
 public class Frame3Cartes extends JFrame{
@@ -33,9 +34,11 @@ public class Frame3Cartes extends JFrame{
         jtp.setText("Veuillez double-cliquer la carte de votre choix, ou fermer la fenêtre pour piocher dans l'étalage.");
         panel.add(jtp, BorderLayout.NORTH);
         panel.add(panelBas, BorderLayout.SOUTH);
+        // Changement des taille des cartes dans la fenêtre
         c1.changeTailleBoutonImage(new Dimension(211, 325));
         c2.changeTailleBoutonImage(new Dimension(211, 325));
         c3.changeTailleBoutonImage(new Dimension(211, 325));
+        // On indique que les cartes proviennent de la fenêtre
         c1.setPosition("fenetre");
         c2.setPosition("fenetre");
         c3.setPosition("fenetre");
@@ -45,6 +48,7 @@ public class Frame3Cartes extends JFrame{
         this.add(panel);
         this.pack();
         this.setVisible(true);
+        // On centre la fenêtre
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(
                 (screenSize.width-this.getWidth())/2,
@@ -52,6 +56,11 @@ public class Frame3Cartes extends JFrame{
         );
     }
     
+    /**
+     * Cette méthode permet de remettre dans le deck les cartes qui n'ont pas 
+     * été choisies par le joueur.
+     * @param aThis La carte choisie par le joueur
+     */
     public void remetCartes(JBCarte aThis) {
         if(aThis == this.c1){
             Main.getJeu().getDeck().addFirst(c2.getCarte());

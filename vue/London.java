@@ -8,9 +8,7 @@ import model.Joueur;
 import model.TourJoueur;
 import java.awt.*;
 import java.awt.dnd.DragSource;
-import java.io.EOFException;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -36,7 +34,7 @@ import sun.audio.ContinuousAudioDataStream;
  * le jeu une fois la partie démarré
  */
 public class London implements Serializable {
-
+    
     private TourJoueur lJoueur; // liste cyclique des joueurs
     private ArrayDeque<Carte> deck; // deck des cartes de la pioche
     private Etalage etalage; // etalage du jeu en version modele
@@ -47,7 +45,7 @@ public class London implements Serializable {
     private JPMain south; // panel contenant la main des joueurs
     private JPanel central; // panel central du jeu ( contient la main du joueur et les onglet )
     private JPMenuDroite menudroite; // panel à droite du jeu
-    private JPPlateau plateau; // plateau 
+    private JPPlateau plateau; // plateau
     private Thread sound; // thread pour la musique
     private JTabbedPane panelOnglet; // panel contenant les onglets
     private JFrame acc; // fenetre d'accueil
@@ -60,19 +58,19 @@ public class London implements Serializable {
     static DragSource dragSource;
     // controleur
     JPnomGaucheImageDroiteControl controlJPGID;
-
+    
     public London() {
-
+        
         controlJPGID = new JPnomGaucheImageDroiteControl();
-
+        
         // D&D
         dndListener = new DragDropControl();
         dragSource = new DragSource();
-
+        
         music(); // la musique se lance
         menu(); // on affiche le menu
     }
-
+    
     // méthode qui initialise la fenêtre lorsqu'on lance une partie
     public void start() {
         // permet d'avoir le même affichage sous windows et mac
@@ -81,12 +79,12 @@ public class London implements Serializable {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(London.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         initTabJPMain(); // initialisation des panel contenant les mains des joueurs
         initTabJPChantier(); // initialisation des panel contenant les zones de construction des joueurs
-
+        
         frame = new JFrame(); // frame contenant le jeu
-
+        
         // si on ferme la fenêtre
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -96,22 +94,22 @@ public class London implements Serializable {
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     sound.stop();
-
+                    
                     System.exit(0);
                 } else {
                     // on fait rien
                 }
-
+                
             }
         });
-
+        
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
+        
         // panel contenant les différents onglets
         panelOnglet = new JTabbedPane();
-
+        
         plateau = new JPPlateau();
-
+        
         // ajout des onglet :
         panelOnglet.addTab("Plateau", new JScrollPane(plateau));
         jpEtalage = new JPEtalage();
@@ -119,198 +117,196 @@ public class London implements Serializable {
         jpChantier = new JPChantiers();
         tabJPChantiers[0] = jpChantier;
         panelOnglet.addTab("Chantiers", jpChantier);
-
+        
         // panel central contenant le plateau et la main du joueur
         central = new JPanel(new BorderLayout());
-
+        
         // south contient la main du Joueur et contient celle du premier joueur en premier
         south = tabJPMain[0];
-        //tabJPMain[0] = south;
-
+        
         central.add(panelOnglet, BorderLayout.CENTER);
         central.add(south, BorderLayout.SOUTH);
-
+        
         frame.add(central);
-
+        
         this.menudroite = new JPMenuDroite();
         controlJPGID.changeImage(this.getListeJoueur().getJoueur());
-
+        
         frame.add(menudroite, BorderLayout.EAST);
-
+        
         infos = new JPInfos(this.getTabJoueur());
         frame.add(infos, BorderLayout.WEST);
-
+        
         frame.setSize(1444, 810);
-
+        
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         // on supprime la page d'accueil
         acc.dispose();
-
+        
         // informe le joueur qui joue
         JOptionPane.showMessageDialog(null, "C'est au tour de " + this.getListeJoueur().getJoueur().getNom() + " de jouer");
-
+        
         // le premier joueur peut piocher
         this.getListeJoueur().getJoueur().setPioche(1);
-
+        
     }
-
+    
     // methode qui affiche le menu quand on lance l'application
     public void menu() {
         acc = new JFrame(); // JFrame d'accueil
         acc.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-
+                
                 sound.stop();
                 System.exit(0);
             }
         });
-
+        
         acc.setTitle("London");
         acc.setSize(570, 810);
         acc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         acc.setLayout(new BorderLayout());
-
+        
         // intialisation de tous les elements
         acc.setContentPane(new JPAccueil());
-
+        
         acc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         acc.dispose();
         acc.setLocationRelativeTo(null);
         acc.setVisible(true);
-
+        
     }
-
+    
     // methode qui lance la musique en boucle : thread
     public void music() {
-
+        
         sound = new Thread() {
             URL uri = London.class.getResource("../fichier/music.wav");
-
+            
             public void run() {
-
+                
                 AudioPlayer MGP = AudioPlayer.player;
                 AudioStream BGM;
                 AudioData MD;
                 ContinuousAudioDataStream loop = null;
                 for (;;) {
-
+                    
                     try {
                         BGM = new AudioStream(new FileInputStream(uri.getPath()));//enter the sound directory and name here
                         AudioPlayer.player.start(BGM);
                         sleep(160000);// temps de la musique
                     } catch (Exception e) {
-
+                        
                         JOptionPane.showMessageDialog(null, e);
                     }
-
+                    
                 }
             }
         };
         sound.start();
     }
-
+    
     public JPMenuDroite getMenudroite() {
         return menudroite;
     }
-
+    
     public JTabbedPane getPanelOnglet() {
         return panelOnglet;
     }
-
+    
     public JPChantiers[] getTabJPChantiers() {
         return tabJPChantiers;
     }
-
+    
     public JPChantiers getJpChantier() {
         return jpChantier;
     }
-
+    
     public JPMain getSouth() {
         return south;
     }
-
+    
     public void setSouth(JPMain south) {
         this.south = south;
     }
-
+    
     public JFrame getFrame() {
         return frame;
     }
-
+    
     public void setFrame(JFrame frame) {
         this.frame = frame;
     }
-
+    
     public JPanel getCentral() {
         return central;
     }
-
+    
     public void setCentral(JPanel central) {
         this.central = central;
     }
-
+    
     public HashMap<String, Zone> getZones() {
         return zones;
     }
-
+    
     public void setZones(HashMap<String, Zone> zones) {
         this.zones = zones;
     }
-
+    
     public void setJpChantier(JPChantiers jpChantier) {
         this.jpChantier = jpChantier;
     }
-
+    
     public JPPlateau getPlateau() {
         return plateau;
     }
-
+    
     public JPEtalage getJpEtalage() {
         return jpEtalage;
     }
-
+    
     public void setJpEtalage(JPEtalage jpEtalage) {
         this.jpEtalage = jpEtalage;
     }
-
+    
     public TourJoueur getListeJoueur() {
-
+        
         return lJoueur;
     }
-
+    
     public void setListeJoueur(TourJoueur initialisationJoueur) {
-
+        
         this.lJoueur = initialisationJoueur;
     }
-
+    
     public void setEtalage(Etalage etalage) {
-        // TODO Auto-generated method stub
         this.etalage = etalage;
     }
-
+    
     public Etalage getEtalage() {
         return etalage;
     }
-
+    
     public JPInfos getInfos() {
         return infos;
     }
-
+    
     public void setInfos(JPInfos infos) {
         this.infos = infos;
     }
-
+    
     public JPMain[] getTabJPMain() {
         return tabJPMain;
     }
-
+    
     public void setTabJPMain(JPMain[] tabJPMain) {
         this.tabJPMain = tabJPMain;
     }
-
+    
     public void initTabJPMain() {
         tabJPMain = new JPMain[TourJoueur.getNbJoueur()];
         for (int i = 0; i < TourJoueur.getNbJoueur(); i++) {
@@ -318,93 +314,92 @@ public class London implements Serializable {
             this.setListeJoueur(this.getListeJoueur().getSuivant());
         }
     }
-
+    
     public void initTabJPChantier() {
         tabJPChantiers = new JPChantiers[TourJoueur.getNbJoueur()];
         for (int i = 0; i < TourJoueur.getNbJoueur(); i++) {
             tabJPChantiers[i] = new JPChantiers();
         }
-
+        
     }
-
+    
     public Joueur[] getTabJoueur() {
         return tabJoueur;
     }
-
+    
     public void setTabJoueur(Joueur[] tabJoueur) {
         this.tabJoueur = tabJoueur;
     }
-
+    
     public void setDeck(ArrayDeque<Carte> deck) {
         this.deck = deck;
     }
-
+    
     public ArrayDeque<Carte> getDeck() {
-        // TODO Auto-generated method stub
         return deck;
     }
-
     
-    //Permet de sauvegarder l'�tat actuel du jeu dans un fichier texte de maniere serialiser
+    
+    //Permet de sauvegarder l'état actuel du jeu dans un fichier texte de maniere serialiser
     public void sauvegarder() throws IOException{
-    	FileOutputStream out = new FileOutputStream("temps");
-		ObjectOutputStream s = new ObjectOutputStream(out);
-		
-		//On ecrit nos information dans le fichier
-    	s.writeObject(this.getDeck());
-    	s.writeObject(this.getEtalage());
-    	s.writeObject(this.getPlateau());
-    	s.writeObject(this.getZones());
-    	
-    	//Ici on va boucler jusqu'a obtenir l'int�gralit� de nos TourJoueur
-    	TourJoueur tmp = this.getListeJoueur();
-    	TourJoueur next = this.getListeJoueur();
-    	s.writeObject(tmp.getJoueur());
-    	while(tmp != next.getSuivant()){
-    		next = next.getSuivant();
-    		s.writeObject(next.getJoueur());
-    	}
-    	s.flush();
-    	
-    	s.close();
-    	out.close();
+        FileOutputStream out = new FileOutputStream("temps");
+        ObjectOutputStream s = new ObjectOutputStream(out);
+        
+        //On écrit nos information dans le fichier
+        s.writeObject(this.getDeck());
+        s.writeObject(this.getEtalage());
+        s.writeObject(this.getPlateau());
+        s.writeObject(this.getZones());
+        
+        //Ici on va boucler jusqu'à obtenir l'intégralité de nos TourJoueur
+        TourJoueur tmp = this.getListeJoueur();
+        TourJoueur next = this.getListeJoueur();
+        s.writeObject(tmp.getJoueur());
+        while(tmp != next.getSuivant()){
+            next = next.getSuivant();
+            s.writeObject(next.getJoueur());
+        }
+        s.flush();
+        
+        s.close();
+        out.close();
     }
     
-    //Permet de charger un �tat sauvegarder du jeu depuis un fichier texte serialiser
+    //Permet de charger un état sauvegardé du jeu depuis un fichier texte serialisé
     public void charger() throws IOException{
-    	FileInputStream in = new FileInputStream("temps");
-    	ObjectInputStream t = new ObjectInputStream(in);
-
-    	try {
-    		
-    		// On recupere les object dans l'ordre dans lequel ils ont �tait rentr�
-    		this.setDeck((ArrayDeque<Carte>)t.readObject());
-			this.setEtalage((Etalage)t.readObject());
-			this.plateau = (JPPlateau)t.readObject();
-			this.setZones((HashMap<String,Zone>)t.readObject());
-			
-			//Pour les TourJoueur c'est un peu plus compliqu�, il faut reconstruire l'int�gralit� des structure TourJoueur dans le bon ordre
-			TourJoueur first = new TourJoueur((Joueur)t.readObject());
-			TourJoueur tmp = first;
-			tmp.setSuivant(tmp);
-			Joueur j;
-    		while((j =(Joueur)t.readObject()) != null){
-    			TourJoueur current = new TourJoueur(j);
-    			tmp.setSuivant(current);
-    			tmp = current;
-    		}
-    		//On fini la boucle ici
-    		tmp.setSuivant(first);
-    		
-    	} catch (ClassNotFoundException e) {
-    		
-    		//EOF
-    	}
-    	
-    	t.close();
-    	in.close();
-
+        FileInputStream in = new FileInputStream("temps");
+        ObjectInputStream t = new ObjectInputStream(in);
+        
+        try {
+            
+            // On récupère les objets dans l'ordre dans lequel ils ont été rentrés
+            this.setDeck((ArrayDeque<Carte>)t.readObject());
+            this.setEtalage((Etalage)t.readObject());
+            this.plateau = (JPPlateau)t.readObject();
+            this.setZones((HashMap<String,Zone>)t.readObject());
+            
+            //Pour les TourJoueur c'est un peu plus compliqué, il faut reconstruire l'intégralité des structure TourJoueur dans le bon ordre
+            TourJoueur first = new TourJoueur((Joueur)t.readObject());
+            TourJoueur tmp = first;
+            tmp.setSuivant(tmp);
+            Joueur j;
+            while((j =(Joueur)t.readObject()) != null){
+                TourJoueur current = new TourJoueur(j);
+                tmp.setSuivant(current);
+                tmp = current;
+            }
+            //On finit la boucle ici
+            tmp.setSuivant(first);
+            
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            //EOF
+        }
+        
+        t.close();
+        in.close();
+        
     }
-
-
+    
+    
 }

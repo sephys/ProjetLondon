@@ -15,9 +15,8 @@ import model.Joueur;
 import model.Zone;
 
 /**
- *
- * @author Joke
  * Boutton disponible sur le plateau pour chaque zone.
+ * @author Joke
  */
 public class JBZone extends JButton {
     
@@ -43,19 +42,7 @@ public class JBZone extends JButton {
     
     public void setZone(Zone zone) {
         this.zone = zone;
-    }
-    
-    /**
-     * actionPerformed gère le comportement de l'appui sur le bouton.
-     * 2 principaux cas sont gérés :
-     *  Le joueur voulant investir sur la zone possède l'argent nécessaire et investit donc la zone.
-     *  Le joueur voulant investir sur la zone ne possède pas l'argent nécessaire, il lui est alors
-     *  proposé de faire un emprunt.
-     *
-     * A chaque opération, une fenêtre de confirmation apparaît pour que le joueur ne puisse pas se
-     * tromper.
-     * @param e
-     */
+    }    
     
     /**
      * Cette méthode permet au nom de la zone d'être centré dans son bouton, en utilisant du HTML.

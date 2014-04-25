@@ -1,12 +1,7 @@
 package model;
-
-import controleur.DeuxJoueurs;
-import controleur.QuatreJoueurs;
-import controleur.TroisJoueurs;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,10 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import vue.JPMain;
-import vue.London;
 import vue.Main;
 
 public class PouvoirBeta {

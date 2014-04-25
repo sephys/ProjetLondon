@@ -7,19 +7,10 @@ package vue;
 
 import controleur.AfficheRegles;
 import controleur.DebugControl;
-import controleur.DeuxJoueurs;
 import controleur.JPAccueilControl;
-import controleur.QuatreJoueurs;
-
-import controleur.TroisJoueurs;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayDeque;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,14 +18,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import model.Carte;
-import model.Etalage;
-import model.Joueur;
-import model.TourJoueur;
-import model.Zone;
 
 /**
- *
+ *  Ce conteneur contient la page d'accueil du jeu
  * @author Joke
  */
 public class JPAccueil extends JPanel {
@@ -45,10 +31,7 @@ public class JPAccueil extends JPanel {
     
     public JPAccueil() {
         super();
-        this.setLayout(null);
-        
-        
-        
+        this.setLayout(null);       
         // image de fond
         try {
             URL uri = JPZoom.class.getResource("../img/accueil.png");

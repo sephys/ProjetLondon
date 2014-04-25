@@ -6,20 +6,16 @@
 package vue;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.Joueur;
-import model.Zone;
 
 /**
- *
+ *  Cette classe 
  * @author Joke
  */
 public class JPPlateau extends JPanel implements MouseListener {
@@ -207,7 +203,7 @@ public class JPPlateau extends JPanel implements MouseListener {
     
     /**
      * La méthode activerZonesInvestissables active toutes les zones investissables
-     * (les zones adjacentes aux zones qui ont déjà été investies)
+     * (les zones adjacentes aux zones qui ont déjà été investies).
      */
     public void activerZonesInvestissables() {
         for(int i = 0; i < tableauZone.length; i++){
@@ -234,12 +230,11 @@ public class JPPlateau extends JPanel implements MouseListener {
         }
         return z;
     }
-    
     public void setZoom() {
-        if(!estZoome)
-        {
+        if(!estZoome) {
             updateImageSizeZoom();
             estZoome=true;
+            // Affichage de tous les boutons
             for(int i = 0; i < this.tableauZone.length; i++){
                 tableauZone[i].setVisible(true);
             }
@@ -247,7 +242,7 @@ public class JPPlateau extends JPanel implements MouseListener {
         else{
             updateImageSizeDezoom();
             estZoome=false;
-            //enlever boutons
+            // On cache tous les boutons
             for(int i = 0; i < this.tableauZone.length; i++){
                 tableauZone[i].setVisible(false);
             }
@@ -302,7 +297,7 @@ public class JPPlateau extends JPanel implements MouseListener {
     }
     
     /**
-     * Cette méthode désactive toutes les boutons associés aux zones
+     * Cette méthode désactive toutes les boutons associés aux zones.
      */
     public  void desactiveZones(){
         for(int i = 0; i < tableauZone.length; i++){
@@ -310,6 +305,9 @@ public class JPPlateau extends JPanel implements MouseListener {
         }
     }
     
+    /**
+     * Cette méthode désactive toutes les zones qui ont déjà été investies.
+     */
     public void desactiveZonesInvesties(){
         for(int i = 0; i < tableauZone.length; i++){
             if(tableauZone[i].getZone().getProprietaire() != null){

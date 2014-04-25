@@ -21,7 +21,8 @@ import javax.swing.JPanel;
 import model.Joueur;
 
 /**
- *
+ *  Ce conteneur contient les éléments graphiques permettant d'afficher l'image du joueur
+ * ainsi que le pseudo du joueur.
  * @author Anh-Djuy
  */
 public class JPSousInfosJoueur extends JPanel{
@@ -62,6 +63,12 @@ public class JPSousInfosJoueur extends JPanel{
         this.nomJoueur = nomJoueur;
     }   
     
+    /**
+     * Cette méthode permet de compléter le chemin vers l'image
+     * du joueur, dépendant de sa couleur.
+     * @param j Le joueur 
+     * @return  L'image du joueur suivant sa couleur
+     */
     public String image(Joueur j){        
         StringBuilder sb = new StringBuilder("../img/");
         Color c = j.getColor();
