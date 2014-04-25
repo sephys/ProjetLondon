@@ -220,5 +220,18 @@ public class PouvoirBeta {
             }
         }
     }
-
+    
+    //contrôle
+    public static boolean peutJouer(Joueur j,Carte ca){
+    	boolean res=false;
+    	if(j.getPouvoir().get("Wren")==1){
+    		res=true;
+    	}
+    	if(ca.getNom().compareTo("School")==0||ca.getNom().compareTo("Coffee")==0){
+    		res=true;
+    	}
+    	return res;
+    	
+    }
+    
 }
