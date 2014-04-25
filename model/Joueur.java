@@ -50,7 +50,7 @@ public class Joueur {
     }
     
     public void initialisePouvoir(){
-        pouvoir.put("Bank of England", 0);
+        pouvoir.put("Bank", 0);
         pouvoir.put("Brixton Prison", 0);
         pouvoir.put("School",0);
         pouvoir.put("Wren",0);
@@ -271,7 +271,7 @@ public class Joueur {
     
     public void addPret(int nbPret){
         this.nbPret += nbPret;
-        if(pouvoir.get("Bank of England") == 1){
+        if(pouvoir.get("Bank") >= 1){
             this.addArgent(12*nbPret);
         }else{
             this.addArgent(10*nbPret);
