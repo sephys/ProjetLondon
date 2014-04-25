@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import vue.Main;
 
 public class Constructible extends Carte implements Serializable{
     //attributs
@@ -203,11 +204,99 @@ public class Constructible extends Carte implements Serializable{
                 case "Brixton":
                     PouvoirBeta.pouvoirBrixtonPrison();
                     break;
-                    
+            }
+        }
+    }
+}
+   
+                    /*
+<<<<<<< HEAD
+			String pouvoir=sousCarte.getPouvoirIlli();
+			if(currJ.getPouvoir().get(pouvoir)!=null){
+				currJ.getPouvoir().put(pouvoir,new Integer(currJ.getPouvoir().get(pouvoir).intValue()-1));
+			}
+		}else{
+			currJ.getListeChantier().get(ind).add(this);
+		}
+
+		currJ.getListeChantier().get(ind).add(this);
+		currJ.getMain().remove(this);
+	}
+
+	public void activerCarte(Joueur currJ){
+		if(this.activable){
+			currJ.setArgent(currJ.getArgent()-Integer.parseInt(this.coutActivation[0]));
+			String coutCarte=this.coutActivation[1];
+			if(coutCarte.compareTo("aucun")!=0){
+				if(coutCarte.compareTo("choix")==0){
+                                    System.out.println("carte a defausser");
+					currJ.setDefausse(1);
+                                        Main.getJeu().getListeJoueur().getJoueur().setFinitTour(false);
+                                        Main.getJeu().getMenudroite().getLabelInfo().setText("Défaussez une carte");
+				}else{
+					currJ.setLastCarte(this);
+					currJ.setDefausse(1);
+				}
+			}
+			currJ.setArgent(currJ.getArgent()+this.gainAcivation[0]);
+			currJ.setPointVictoire(currJ.getPointVictoire()+this.gainAcivation[1]);
+			currJ.setPointPauvrete(currJ.getPointPauvrete()+this.gainAcivation[2]);
+                    // Pouvoirs
+                    switch (this.pouvoirActiv) {
+                        case "Fire":
+                            PouvoirBeta.pouvoirFireBrigade(currJ);
+                            break;
+                        case "Street":
+                            PouvoirBeta.pouvoirFleetStreet();
+                            break;
+                        case "Omnibus":
+                            PouvoirBeta.pouvoirOmnibus();
+                            break;
+                        case "Lloyds":
+                            PouvoirBeta.pouvoirLloydsOfLondon();
+                            break;
+                        case "Coffee":
+                            PouvoirBeta.pouvoirCoffee(currJ, this);
+                            break;
+                        case "Police":
+                            PouvoirBeta.pouvoirPoliceForce();
+                            break;
+                        case "Boats":
+                            PouvoirBeta.pouvoirSteamBoats();
+                            break;
+                        case "Town":
+                            PouvoirBeta.pouvoirTownHouse();
+                            break;
+                        case "Train":
+                            PouvoirBeta.pouvoirNorthTrainStation();
+                            break;
+                        case "Workhouse":
+                            PouvoirBeta.pouvoirWorkHouse();
+                            break;
+                        case "TowerBridge":                     // Pas un bug. Le pouvoir est le même pour les deux cartes.
+                        case "Bridge" :
+                            PouvoirBeta.pouvoirTowerBridge();
+                            break;
+                        case "Milbank":
+                            PouvoirBeta.pouvoirMilbankPrison();
+                            break;
+                        case "Brixton":
+                            PouvoirBeta.pouvoirBrixtonPrison();
+                            break;
+                                
+                            
+                    }
+		}
+                
+                
+	}
+=======
                     
             }
         }
         
         
     }
+>>>>>>> 7bbf5c8e2a1d178b7129931240de53ed626f7801
 }
+*/
