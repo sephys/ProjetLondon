@@ -314,8 +314,9 @@ public class PouvoirBeta {
         
     }
     
-    public void pouvoirTowerBridge(Joueur j){
+    public static void pouvoirTowerBridge(){
         int fricPognonFlouzBleTunesPrunes = 0;
+        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         for(ArrayDeque<Constructible> c : j.getListeChantier()){
             if(c.peek().getCouleur().equals("Brun")){
                 fricPognonFlouzBleTunesPrunes++;
@@ -324,8 +325,9 @@ public class PouvoirBeta {
         j.addArgent(fricPognonFlouzBleTunesPrunes);
     }
     
-    public void pouvoirWorkHouse(Joueur j){
+    public static void pouvoirWorkHouse(){
         int paupersEnMain = 0;
+        Joueur j = Main.getJeu().getListeJoueur().getJoueur();
         ArrayList<Carte> alc = j.getMain();
         for(Carte c : alc){
             if(c.getNom().equals("Paupers")){
@@ -363,7 +365,7 @@ public class PouvoirBeta {
         f.pack();
     }
     
-    public void supprimePaupers(int nbASuppr){
+    public static void supprimePaupers(int nbASuppr){
         int[] indices = new int[nbASuppr];
         int indice = 0;
         int compteur = 0;
