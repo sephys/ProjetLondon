@@ -6,6 +6,7 @@ import controleur.TroisJoueurs;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayDeque;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -182,29 +183,99 @@ public class PouvoirBeta {
         Main.getJeu().getInfos().maj_infos();
     }
 
-    public void pouvoirPoliceForce(Joueur donneur, Joueur donne) {
-        donneur.addPointPauvrete(-1);
-        donne.addPointPauvrete(1);
-    }
+    // Police
+    public static void pouvoirPoliceForce() {
+        JOptionPane.showMessageDialog(null, "Police Force activé !");
+        
+        final JFrame choixJoueur = new JFrame();
+        choixJoueur.setLayout(new GridLayout(4, 1));
+        choixJoueur.setSize(300, 200);
+        choixJoueur.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-    public void pouvoirSteamBoats(Joueur j) {
+        // premet de lier les radio boutons
+        ButtonGroup bg = new ButtonGroup();
+
+        final String nomJ1 = Main.getJeu().getListeJoueur().getSuivant().getJoueur().getNom();
+        final String nomJ2 = Main.getJeu().getListeJoueur().getSuivant().getSuivant().getJoueur().getNom();
+        final String nomJ3 = Main.getJeu().getListeJoueur().getSuivant().getSuivant().getSuivant().getJoueur().getNom();
+
+        final JRadioButton b1 = new JRadioButton(nomJ1);
+        final JRadioButton b2 = new JRadioButton(nomJ2);
+        final JRadioButton b3 = new JRadioButton(nomJ3);
+
+        bg.add(b1);
+        bg.add(b2);
+        bg.add(b3);
+
+        choixJoueur.add(b1);
+        choixJoueur.add(b2);
+        choixJoueur.add(b3);
+
+        JButton p = new JButton("Ok");
+
+        p.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (b1.isSelected()) {
+                    Main.getJeu().getListeJoueur().getSuivant().getJoueur().addPointPauvrete(1);
+                } else if (b2.isSelected()) {
+                    Main.getJeu().getListeJoueur().getSuivant().getSuivant().getJoueur().addPointPauvrete(1);
+                } else {
+                    Main.getJeu().getListeJoueur().getSuivant().getSuivant().getSuivant().getJoueur().addPointPauvrete(1);
+
+                }
+                Main.getJeu().getListeJoueur().getJoueur().addPointPauvrete(-1);
+                Main.getJeu().getInfos().maj_infos();
+
+                choixJoueur.dispose();
+            }
+        });
+        
+        // enleve la possibilité de fermer la fenêtre        
+        choixJoueur.setUndecorated(true);
+        
+        choixJoueur.add(p);
+        choixJoueur.setLocationRelativeTo(null);
+        choixJoueur.setVisible(true);
+        
+        
+    }
+    
+    // Boats
+    public static void pouvoirSteamBoats() {
+        JOptionPane.showMessageDialog(null, "Steamboats activé !");
         for (Zone n : Main.getJeu().getZones().values()) {
-            if (n != null && n.getProprietaire().equals(j) && n.isAdjacentTamise()) {
-                j.addArgent(2);
+            if(n!=null)
+            {
+                if(n.getProprietaire()!=null)
+                {
+                if (n.getProprietaire().equals(Main.getJeu().getListeJoueur().getJoueur()) && n.isAdjacentTamise()) {
+                   
+                    Main.getJeu().getListeJoueur().getJoueur().addArgent(2);
+                }
+            }
+            }
+            
+        }
+        Main.getJeu().getInfos().maj_infos();
+    }
+    
+    // Town
+    public static void pouvoirTownHouse() {
+       JOptionPane.showMessageDialog(null, "Town Houses activé !");
+        int vp = 0;
+        for(ArrayDeque<Constructible> c : Main.getJeu().getListeJoueur().getJoueur().getListeChantier()){
+            if(!c.peek().getCouleur().equals("Brun")){
+                vp++;
             }
         }
+        Main.getJeu().getListeJoueur().getJoueur().addPointVictoire(vp);
+        Main.getJeu().getInfos().maj_infos();
+    
     }
 
-    public void pouvoirTownHouse(Joueur j) {
-        int argent = 0;
-        for (Carte c : j.getMain()) {
-            if (!c.getCouleur().equals("marron")) {
-                argent++;
-            }
-        }
-        j.addArgent(argent);
-    }
-
+    // Train
     public static void pouvoirNorthTrainStation(Joueur j) {
         for (Zone n : Main.getJeu().getZones().values()) {
             if (n != null && n.getProprietaire().equals(j) && (!n.isDessousTamise())) {

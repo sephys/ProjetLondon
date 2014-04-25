@@ -9,6 +9,7 @@ package controleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.Joueur;
+import model.TourJoueur;
 
 /**
  *
@@ -20,7 +21,7 @@ public class DeuxJoueurs implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        Joueur.setNbJoueur(2);
+    	TourJoueur.setNbJoueur(2);
     }
     
 }

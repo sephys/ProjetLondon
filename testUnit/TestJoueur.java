@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 
 import model.Carte;
 import model.Joueur;
+import model.TourJoueur;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -41,23 +42,31 @@ public class TestJoueur {
 	@Test
 	//Test qu'il n'est pas possible d'avoir 2 joueur de la mï¿½me couleur
 	public void testDoublonColor() {
-		Joueur tmpJ2=new Joueur("J2",Color.blue);
-		//assertNotEquals(test.getColor(),tmpJ2.getColor());
+		try{
+			Joueur tmpJ2=new Joueur("J2",Color.blue);
+			fail("Impossible d'avoir 2 joueurs de la même couleur");
+		}catch(Exception e){
+			assertTrue(true);
+		}
 	}
 	
 	@Test
 	//Test que le nombre de joueur est bien une variable global
 	public void testNbJoueur() {
 		Joueur tmpJ2=new Joueur("J2",Color.blue);
-		assertEquals(this.test.getNbJoueur(),tmpJ2.getNbJoueur());
+		TourJoueur tj = new TourJoueur(test);
+		tj.setSuivant(new TourJoueur(tmpJ2));
+		assertEquals(TourJoueur.getNbJoueur(),TourJoueur.getNbJoueur());
 	}
 	
 	@Test
 	//Test que le nombre de joueur est bien incrementï¿½ lors de l'ajout d'un nouveau joueur
 	public void testNbJoueur2() {
-		int nb1 = this.test.getNbJoueur();
+		TourJoueur tj = new TourJoueur(test);
+		int nb1 = TourJoueur.getNbJoueur();
 		Joueur tmpJ2=new Joueur("J2",Color.blue);
-		int nb2 = tmpJ2.getNbJoueur();
+		tj.setSuivant(new TourJoueur(tmpJ2));
+		int nb2 = TourJoueur.getNbJoueur();
 		assertEquals(nb1,nb2-1);
 	}
 	

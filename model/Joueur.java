@@ -19,7 +19,6 @@ public class Joueur {
     private int pointPauvrete;
     private int argent;
     private int nbPret;
-    private static int nbJoueur;
     private int placeJoueur; // la place du joueur dans le cycle
     private int defausse; // savoir combien de cartes le joueur doit se défausser
     private int pioche; // savoir combien de cartes le joueur peut piocher
@@ -62,15 +61,7 @@ public class Joueur {
     public Color getColor() {
         return color;
     }
-    
-    public static int getNbJoueur() {
-        return nbJoueur;
-    }
-    
-    public static void setNbJoueur(int nbJoueur) {
-        Joueur.nbJoueur = nbJoueur;
-    }
-    
+
     public String getNom() {
         return nom;
     }
