@@ -280,7 +280,7 @@ public class Joueur {
 
     public void addPret(int nbPret) {
         this.nbPret += nbPret;
-        if (pouvoir.get("Bank of England") == 1) {
+        if (pouvoir.get("Bank") == 1) {
             this.addArgent(12 * nbPret);
         } else {
             this.addArgent(10 * nbPret);
